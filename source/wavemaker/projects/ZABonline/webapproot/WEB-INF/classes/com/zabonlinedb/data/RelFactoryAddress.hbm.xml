@@ -1,0 +1,31 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.RelFactoryAddress" table="V_REL_FACTORY_ADDRESS" dynamic-insert="false" dynamic-update="false">
+        <composite-id name="id" class="com.zabonlinedb.data.RelFactoryAddressId">
+            <key-property name="addressId" type="integer">
+                <column name="ADDRESS_ID"/>
+            </key-property>
+            <key-property name="factoryId" type="integer">
+                <column name="FACTORY_ID"/>
+            </key-property>
+        </composite-id>
+        <many-to-one
+            name="address"
+            class="com.zabonlinedb.data.Address"
+            update="false"
+            insert="false"
+            fetch="select"
+            cascade="none">
+            <column name="ADDRESS_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one
+            name="factory"
+            class="com.zabonlinedb.data.Factory"
+            update="false"
+            insert="false"
+            fetch="select"
+            cascade="none">
+            <column name="FACTORY_ID" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.RelPersonCategory" table="V_REL_PERSON_CATEGORY" dynamic-insert="false" dynamic-update="false">
+        <composite-id name="id" class="com.zabonlinedb.data.RelPersonCategoryId">
+            <key-property name="personId" type="integer">
+                <column name="PERSON_ID"/>
+            </key-property>
+            <key-property name="categoryId" type="integer">
+                <column name="CATEGORY_ID"/>
+            </key-property>
+        </composite-id>
+        <many-to-one
+            name="person"
+            class="com.zabonlinedb.data.Person"
+            update="false"
+            insert="false"
+            fetch="select"
+            cascade="none">
+            <column name="PERSON_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one
+            name="category"
+            class="com.zabonlinedb.data.Category"
+            update="false"
+            insert="false"
+            fetch="select"
+            cascade="none">
+            <column name="CATEGORY_ID" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

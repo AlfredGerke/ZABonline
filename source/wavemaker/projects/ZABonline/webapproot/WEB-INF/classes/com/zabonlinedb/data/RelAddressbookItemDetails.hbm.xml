@@ -1,0 +1,24 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.RelAddressbookItemDetails" table="V_REL_ADDRESSBOOKITEM_DETAILS" dynamic-insert="false" dynamic-update="false">
+        <id name="personId" type="integer">
+            <column name="PERSON_ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="tenantId" type="integer">
+            <column name="TENANT_ID"/>
+        </property>
+        <property name="firstName" type="string">
+            <column name="FIRSTNAME" length="126"/>
+        </property>
+        <property name="name1" type="string">
+            <column name="NAME1" length="126"/>
+        </property>
+        <property name="phoneFmt" type="string">
+            <column name="PHONE_FMT" length="127"/>
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="254"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,10 @@
+########################
+## ZABonline (Wavemaker)
+########################
+
+source/wavemaker/projects/ZABonline/webapproot/WEB-INF/lib/
+*.class
+*.a.js
+timestamp.txt
+wm.log
+log4j.properties

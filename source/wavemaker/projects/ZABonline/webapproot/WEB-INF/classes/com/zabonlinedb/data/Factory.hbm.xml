@@ -1,0 +1,81 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Factory" table="V_FACTORY" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="factoryNumber" type="string">
+            <column name="FACTORY_NUMBER" length="64"/>
+        </property>
+        <property name="caption" type="string">
+            <column name="CAPTION" length="254"/>
+        </property>
+        <property name="description1" type="string">
+            <column name="DESCRIPTION1" length="2000"/>
+        </property>
+        <property name="description2" type="string">
+            <column name="DESCRIPTION2" length="2000"/>
+        </property>
+        <property name="description3" type="string">
+            <column name="DESCRIPTION3" length="2000"/>
+        </property>
+        <property name="contactPersonName" type="string">
+            <column name="CONTACT_PERSON_NAME" length="126"/>
+        </property>
+        <property name="contactPersonFirstname" type="string">
+            <column name="CONTACT_PERSON_FIRSTNAME" length="126"/>
+        </property>
+        <property name="contactPhone" type="integer">
+            <column name="CONTACT_PHONE"/>
+        </property>
+        <property name="contactPhoneFmt" type="string">
+            <column name="CONTACT_PHONE_FMT" length="126"/>
+        </property>
+        <property name="contactEmail" type="string">
+            <column name="CONTACT_EMAIL" length="254"/>
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="8"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="date">
+            <column name="CRE_DATE" length="8" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="date">
+            <column name="CHG_DATE" length="8"/>
+        </property>
+        <many-to-one name="tenant" class="com.zabonlinedb.data.Tenant" cascade="none">
+            <column name="TENANT_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="tag" class="com.zabonlinedb.data.Tag" cascade="none">
+            <column name="TAG_ID"/>
+        </many-to-one>
+        <many-to-one name="datasheet" class="com.zabonlinedb.data.Datasheet" cascade="none">
+            <column name="DATASHEET_ID"/>
+        </many-to-one>
+        <many-to-one name="person" class="com.zabonlinedb.data.Person" cascade="none">
+            <column name="CONTACT_PERSON_ID"/>
+        </many-to-one>
+        <set name="relfactoryaddresss" inverse="true" cascade="">
+            <key>
+                <column name="FACTORY_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelFactoryAddress"/>
+        </set>
+        <set name="relfactorybanks" inverse="true" cascade="">
+            <key>
+                <column name="FACTORY_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelFactoryBank"/>
+        </set>
+    </class>
+</hibernate-mapping>
