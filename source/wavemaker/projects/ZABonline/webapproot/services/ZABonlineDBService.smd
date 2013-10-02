@@ -1,0 +1,10 @@
+{
+	"methods": [{
+		"name": "getZABonlineDBService",
+		"operationType": null,
+		"parameters": null,
+		"returnType": "com.zabonlinedb.ZABonlineDB"
+	}],
+	"serviceType": "JSON-RPC",
+	"serviceURL": "ZABonlineDBService.json"
+}

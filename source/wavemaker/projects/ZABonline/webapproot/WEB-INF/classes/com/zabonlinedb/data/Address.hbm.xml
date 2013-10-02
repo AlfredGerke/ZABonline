@@ -1,0 +1,72 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Address" table="V_ADDRESS" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="street" type="string">
+            <column name="STREET" length="254"/>
+        </property>
+        <property name="streetAddressFrom" type="string">
+            <column name="STREET_ADDRESS_FROM" length="127"/>
+        </property>
+        <property name="streetAddressTo" type="string">
+            <column name="STREET_ADDRESS_TO" length="127"/>
+        </property>
+        <property name="city" type="string">
+            <column name="CITY" length="254" not-null="true"/>
+        </property>
+        <property name="district" type="string">
+            <column name="DISTRICT" length="254"/>
+        </property>
+        <property name="zipcode" type="integer">
+            <column name="ZIPCODE"/>
+        </property>
+        <property name="postOfficeBox" type="string">
+            <column name="POST_OFFICE_BOX" length="254"/>
+        </property>
+        <property name="ispostaddress" type="short">
+            <column name="ISPOSTADDRESS" not-null="true"/>
+        </property>
+        <property name="isprivate" type="short">
+            <column name="ISPRIVATE" not-null="true"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL" not-null="true"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="timestamp">
+            <column name="CRE_DATE" length="19" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="timestamp">
+            <column name="CHG_DATE" length="19"/>
+        </property>
+        <many-to-one name="tenant" class="com.zabonlinedb.data.Tenant" cascade="none">
+            <column name="TENANT_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="addressType" class="com.zabonlinedb.data.AddressType" cascade="none">
+            <column name="ADDRESS_TYPE_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="tag" class="com.zabonlinedb.data.Tag" cascade="none">
+            <column name="TAG_ID"/>
+        </many-to-one>
+        <set name="relPersonAddresses" inverse="true" cascade="">
+            <key>
+                <column name="PERSON_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelPersonAddress"/>
+        </set>
+        <set name="relfactoryaddresss" inverse="true" cascade="">
+            <key>
+                <column name="ADDRESS_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelFactoryAddress"/>
+        </set>
+    </class>
+</hibernate-mapping>

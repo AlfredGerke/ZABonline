@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="ZABonlineDB" class="com.zabonlinedb.ZABonlineDB" CRUDService="true" type="DataService" springFile="ZABonlineDB.spring.xml">
+    <operation operationType="hqlquery" name="getLookupAreaCode">
+        <return typeRef="com.zabonlinedb.data.output.GetLookupAreaCodeRtnType" isList="true"/>
+    </operation>
+    <operation operationType="hqlquery" name="getLookupContactPartnerByTenant">
+        <parameter name="TenantId" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="com.zabonlinedb.data.output.GetLookupContactPartnerByTenantRtnType" isList="true"/>
+    </operation>
+    <operation operationType="hqlquery" name="getCountryByCode">
+        <parameter name="Code" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="com.zabonlinedb.data.Country" isList="true"/>
+    </operation>
+    <operation operationType="hqlquery" name="getLookupAddressTypeByCountry">
+        <parameter name="CountryId" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="com.zabonlinedb.data.output.GetLookupAddressTypeByCountryRtnType" isList="true"/>
+    </operation>
+    <operation operationType="hqlquery" name="getLookupContactTypeByCountry">
+        <parameter name="CountryId" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="com.zabonlinedb.data.output.GetLookupContactTypeByCountryRtnType" isList="true"/>
+    </operation>
+    <operation operationType="hqlquery" name="getLookupTitelByCountry">
+        <parameter name="CountryId" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType" isList="true"/>
+    </operation>
+    <operation operationType="hqlquery" name="getLookupRole">
+        <return typeRef="com.zabonlinedb.data.output.GetLookupRoleRtnType" isList="true"/>
+    </operation>
+    <operation operationType="hqlquery" name="getInfoByUserName">
+        <parameter name="Username" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="com.zabonlinedb.data.Users" isList="true"/>
+    </operation>
+    <operation operationType="hqlquery" name="getLookupPersonByTenant">
+        <parameter name="TenantId" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="com.zabonlinedb.data.output.GetLookupPersonByTenantRtnType" isList="true"/>
+    </operation>
+    <operation operationType="hqlquery" name="getLookupPersonByMarriage">
+        <parameter name="TenantId" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType" isList="true"/>
+    </operation>
+    <operation operationType="hqlquery" name="getLookupSalutationByCountry">
+        <parameter name="CountryId" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="com.zabonlinedb.data.output.GetLookupSalutationByCountryRtnType" isList="true"/>
+    </operation>
+    <operation operationType="hqlquery" name="getLookupTenant">
+        <return typeRef="com.zabonlinedb.data.output.GetLookupTenantRtnType" isList="true"/>
+    </operation>
+    <operation operationType="hqlquery" name="getAddressById">
+        <parameter name="id" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="com.zabonlinedb.data.Address" isList="false"/>
+    </operation>
+    <dataobjects>
+        <dataobject javaType="com.zabonlinedb.data.Address" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="street" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="streetAddressFrom" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="streetAddressTo" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="city" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="district" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="zipcode" typeRef="java.lang.Integer" isList="false" allowNull="true"/>
+            <element name="postOfficeBox" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="ispostaddress" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="isprivate" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="tenant" typeRef="com.zabonlinedb.data.Tenant" isList="false" allowNull="false"/>
+            <element name="addressType" typeRef="com.zabonlinedb.data.AddressType" isList="false" allowNull="false"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="relPersonAddresses" typeRef="com.zabonlinedb.data.RelPersonAddress" isList="true" allowNull="true"/>
+            <element name="relfactoryaddresss" typeRef="com.zabonlinedb.data.RelFactoryAddress" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.AddressType" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="donotdelete" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="country" typeRef="com.zabonlinedb.data.Country" isList="false" allowNull="true"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="addresses" typeRef="com.zabonlinedb.data.Address" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Bank" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="blz" typeRef="java.lang.Integer" isList="false" allowNull="true"/>
+            <element name="kto" typeRef="java.lang.Integer" isList="false" allowNull="true"/>
+            <element name="iban" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="bic" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="tenant" typeRef="com.zabonlinedb.data.Tenant" isList="false" allowNull="false"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="relPersonBanks" typeRef="com.zabonlinedb.data.RelPersonBank" isList="true" allowNull="true"/>
+            <element name="relfactorybanks" typeRef="com.zabonlinedb.data.RelFactoryBank" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Category" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="label" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="donotdelete" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="country" typeRef="com.zabonlinedb.data.Country" isList="false" allowNull="true"/>
+            <element name="fieldstores" typeRef="com.zabonlinedb.data.FieldStore" isList="true" allowNull="true"/>
+            <element name="relpersoncategories" typeRef="com.zabonlinedb.data.RelPersonCategory" isList="true" allowNull="true"/>
+            <element name="tablestores" typeRef="com.zabonlinedb.data.TableStore" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Contact" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="areaCode" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="phone" typeRef="java.lang.Integer" isList="false" allowNull="true"/>
+            <element name="phoneFmt" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="fax" typeRef="java.lang.Integer" isList="false" allowNull="true"/>
+            <element name="faxFmt" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="www" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="email" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="skype" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="messangername" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="tenant" typeRef="com.zabonlinedb.data.Tenant" isList="false" allowNull="false"/>
+            <element name="contactType" typeRef="com.zabonlinedb.data.ContactType" isList="false" allowNull="false"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="relPersonContacts" typeRef="com.zabonlinedb.data.RelPersonContact" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.ContactType" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="donotdelete" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="country" typeRef="com.zabonlinedb.data.Country" isList="false" allowNull="true"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="contacts" typeRef="com.zabonlinedb.data.Contact" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Country" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="countryCode" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="countryCaption" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="currencyCode" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="CURRENCY_CAPTION" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="areaCode" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="donotdelete" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="titels" typeRef="com.zabonlinedb.data.Titel" isList="true" allowNull="true"/>
+            <element name="addressTypes" typeRef="com.zabonlinedb.data.AddressType" isList="true" allowNull="true"/>
+            <element name="contactTypes" typeRef="com.zabonlinedb.data.ContactType" isList="true" allowNull="true"/>
+            <element name="salutations" typeRef="com.zabonlinedb.data.Salutation" isList="true" allowNull="true"/>
+            <element name="tenants" typeRef="com.zabonlinedb.data.Tenant" isList="true" allowNull="true"/>
+            <element name="categories" typeRef="com.zabonlinedb.data.Category" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Datasheet" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="tenant" typeRef="com.zabonlinedb.data.Tenant" isList="false" allowNull="false"/>
+            <element name="tableStore" typeRef="com.zabonlinedb.data.TableStore" isList="false" allowNull="true"/>
+            <element name="factories" typeRef="com.zabonlinedb.data.Factory" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Factory" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="factoryNumber" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="description1" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="description2" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="description3" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="contactPersonName" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="contactPersonFirstname" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="contactPhone" typeRef="java.lang.Integer" isList="false" allowNull="true"/>
+            <element name="contactPhoneFmt" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="contactEmail" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="tenant" typeRef="com.zabonlinedb.data.Tenant" isList="false" allowNull="false"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="datasheet" typeRef="com.zabonlinedb.data.Datasheet" isList="false" allowNull="true"/>
+            <element name="person" typeRef="com.zabonlinedb.data.Person" isList="false" allowNull="true"/>
+            <element name="relfactoryaddresss" typeRef="com.zabonlinedb.data.RelFactoryAddress" isList="true" allowNull="true"/>
+            <element name="relfactorybanks" typeRef="com.zabonlinedb.data.RelFactoryBank" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.FieldStore" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="label" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="code" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="name" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="dataType" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="typeLength" typeRef="java.lang.Integer" isList="false" allowNull="true"/>
+            <element name="typeScale" typeRef="java.lang.Integer" isList="false" allowNull="true"/>
+            <element name="mandatory" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="isForeignKey" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="isLookup" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="referenceTable" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="lookupCaptionField" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="lookupRefIdField" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="uniqueIdxName" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="isCalculated" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="calcSpName" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="isVisible" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="donotdelete" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="reltablestorefieldstores" typeRef="com.zabonlinedb.data.RelTableStoreFieldStore" isList="true" allowNull="true"/>
+            <element name="tenant" typeRef="com.zabonlinedb.data.Tenant" isList="false" allowNull="false"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="fieldStore" typeRef="com.zabonlinedb.data.FieldStore" isList="false" allowNull="true"/>
+            <element name="fieldstores" typeRef="com.zabonlinedb.data.FieldStore" isList="true" allowNull="true"/>
+            <element name="category" typeRef="com.zabonlinedb.data.Category" isList="false" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Person" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="firstname" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="name1" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="name2" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="name3" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="married" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="marriedSince" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="marriagePartnerFirstname" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="marriagePartnerName1" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="salutation1" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="salutation2" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="dayOfBirth" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="isprivate" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="picture" typeRef="byte" isList="true" allowNull="true"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="tenant" typeRef="com.zabonlinedb.data.Tenant" isList="false" allowNull="false"/>
+            <element name="titel" typeRef="com.zabonlinedb.data.Titel" isList="false" allowNull="true"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="salutation" typeRef="com.zabonlinedb.data.Salutation" isList="false" allowNull="true"/>
+            <element name="person" typeRef="com.zabonlinedb.data.Person" isList="false" allowNull="true"/>
+            <element name="relPersonBanks" typeRef="com.zabonlinedb.data.RelPersonBank" isList="true" allowNull="true"/>
+            <element name="persons" typeRef="com.zabonlinedb.data.Person" isList="true" allowNull="true"/>
+            <element name="relPersonAddresses" typeRef="com.zabonlinedb.data.RelPersonAddress" isList="true" allowNull="true"/>
+            <element name="relPersonContacts" typeRef="com.zabonlinedb.data.RelPersonContact" isList="true" allowNull="true"/>
+            <element name="factories" typeRef="com.zabonlinedb.data.Factory" isList="true" allowNull="true"/>
+            <element name="userss" typeRef="com.zabonlinedb.data.Users" isList="true" allowNull="true"/>
+            <element name="relpersoncategories" typeRef="com.zabonlinedb.data.RelPersonCategory" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Registry" supportsQuickData="true">
+            <element name="id" typeRef="com.zabonlinedb.data.RegistryId" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelAddressbookItemDetails" supportsQuickData="true">
+            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="tenantId" typeRef="java.lang.Integer" isList="false" allowNull="true"/>
+            <element name="firstName" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="name1" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="phoneFmt" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="email" typeRef="java.lang.String" isList="false" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelFactoryAddress" supportsQuickData="true">
+            <element name="id" typeRef="com.zabonlinedb.data.RelFactoryAddressId" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="address" typeRef="com.zabonlinedb.data.Address" isList="false" allowNull="false"/>
+            <element name="factory" typeRef="com.zabonlinedb.data.Factory" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelFactoryBank" supportsQuickData="true">
+            <element name="id" typeRef="com.zabonlinedb.data.RelFactoryBankId" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="factory" typeRef="com.zabonlinedb.data.Factory" isList="false" allowNull="false"/>
+            <element name="bank" typeRef="com.zabonlinedb.data.Bank" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelPersonAddress" supportsQuickData="true">
+            <element name="id" typeRef="com.zabonlinedb.data.RelPersonAddressId" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="person" typeRef="com.zabonlinedb.data.Person" isList="false" allowNull="false"/>
+            <element name="address" typeRef="com.zabonlinedb.data.Address" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelPersonBank" supportsQuickData="true">
+            <element name="id" typeRef="com.zabonlinedb.data.RelPersonBankId" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="person" typeRef="com.zabonlinedb.data.Person" isList="false" allowNull="false"/>
+            <element name="bank" typeRef="com.zabonlinedb.data.Bank" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelPersonCategory" supportsQuickData="true">
+            <element name="id" typeRef="com.zabonlinedb.data.RelPersonCategoryId" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="person" typeRef="com.zabonlinedb.data.Person" isList="false" allowNull="false"/>
+            <element name="category" typeRef="com.zabonlinedb.data.Category" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelPersonContact" supportsQuickData="true">
+            <element name="id" typeRef="com.zabonlinedb.data.RelPersonContactId" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="contact" typeRef="com.zabonlinedb.data.Contact" isList="false" allowNull="false"/>
+            <element name="person" typeRef="com.zabonlinedb.data.Person" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelTableStoreFieldStore" supportsQuickData="true">
+            <element name="id" typeRef="com.zabonlinedb.data.RelTableStoreFieldStoreId" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="tableStore" typeRef="com.zabonlinedb.data.TableStore" isList="false" allowNull="false"/>
+            <element name="fieldStore" typeRef="com.zabonlinedb.data.FieldStore" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Roles" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="isAdmin" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="setup" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="members" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="activityRecording" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="dtaus" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="billing" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="importRl" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="referenceData" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="reporting" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="donotdelete" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="MISC" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="FILERESOURCE" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="CLOSESESSION" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="EXPORT" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="userses" typeRef="com.zabonlinedb.data.Users" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Salutation" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="tagId" typeRef="java.lang.Integer" isList="false" allowNull="true"/>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="donotdelete" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="country" typeRef="com.zabonlinedb.data.Country" isList="false" allowNull="true"/>
+            <element name="persons" typeRef="com.zabonlinedb.data.Person" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Session" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="sessionId" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="expiryDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="lastReviewed" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="IP" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="CLOSED" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="user" typeRef="com.zabonlinedb.data.Users" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.TableStore" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="label" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="tableName" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="donotdelete" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="true"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="reltablestorefieldstores" typeRef="com.zabonlinedb.data.RelTableStoreFieldStore" isList="true" allowNull="true"/>
+            <element name="tenant" typeRef="com.zabonlinedb.data.Tenant" isList="false" allowNull="false"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="category" typeRef="com.zabonlinedb.data.Category" isList="false" allowNull="true"/>
+            <element name="datasheets" typeRef="com.zabonlinedb.data.Datasheet" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Tag" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="tag" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="addressTypes" typeRef="com.zabonlinedb.data.AddressType" isList="true" allowNull="true"/>
+            <element name="banks" typeRef="com.zabonlinedb.data.Bank" isList="true" allowNull="true"/>
+            <element name="contacts" typeRef="com.zabonlinedb.data.Contact" isList="true" allowNull="true"/>
+            <element name="contactTypes" typeRef="com.zabonlinedb.data.ContactType" isList="true" allowNull="true"/>
+            <element name="countries" typeRef="com.zabonlinedb.data.Country" isList="true" allowNull="true"/>
+            <element name="persons" typeRef="com.zabonlinedb.data.Person" isList="true" allowNull="true"/>
+            <element name="sessions" typeRef="com.zabonlinedb.data.Session" isList="true" allowNull="true"/>
+            <element name="tenants" typeRef="com.zabonlinedb.data.Tenant" isList="true" allowNull="true"/>
+            <element name="categories" typeRef="com.zabonlinedb.data.Category" isList="true" allowNull="true"/>
+            <element name="fieldstores" typeRef="com.zabonlinedb.data.FieldStore" isList="true" allowNull="true"/>
+            <element name="factories" typeRef="com.zabonlinedb.data.Factory" isList="true" allowNull="true"/>
+            <element name="addresses" typeRef="com.zabonlinedb.data.Address" isList="true" allowNull="true"/>
+            <element name="userses" typeRef="com.zabonlinedb.data.Users" isList="true" allowNull="true"/>
+            <element name="roleses" typeRef="com.zabonlinedb.data.Roles" isList="true" allowNull="true"/>
+            <element name="datasheets" typeRef="com.zabonlinedb.data.Datasheet" isList="true" allowNull="true"/>
+            <element name="tablestores" typeRef="com.zabonlinedb.data.TableStore" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Tenant" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="donotdelete" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="country" typeRef="com.zabonlinedb.data.Country" isList="false" allowNull="true"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="banks" typeRef="com.zabonlinedb.data.Bank" isList="true" allowNull="true"/>
+            <element name="contacts" typeRef="com.zabonlinedb.data.Contact" isList="true" allowNull="true"/>
+            <element name="persons" typeRef="com.zabonlinedb.data.Person" isList="true" allowNull="true"/>
+            <element name="fieldstores" typeRef="com.zabonlinedb.data.FieldStore" isList="true" allowNull="true"/>
+            <element name="factories" typeRef="com.zabonlinedb.data.Factory" isList="true" allowNull="true"/>
+            <element name="addresses" typeRef="com.zabonlinedb.data.Address" isList="true" allowNull="true"/>
+            <element name="userses" typeRef="com.zabonlinedb.data.Users" isList="true" allowNull="true"/>
+            <element name="datasheets" typeRef="com.zabonlinedb.data.Datasheet" isList="true" allowNull="true"/>
+            <element name="tablestores" typeRef="com.zabonlinedb.data.TableStore" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Titel" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="tagId" typeRef="java.lang.Integer" isList="false" allowNull="true"/>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="donotdelete" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="country" typeRef="com.zabonlinedb.data.Country" isList="false" allowNull="true"/>
+            <element name="persons" typeRef="com.zabonlinedb.data.Person" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Updatehistory" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="number" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+            <element name="subitem" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+            <element name="script" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.Users" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="username" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="password" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="firstName" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="name" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="email" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="allowLogin" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="donotdelete" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="softdel" typeRef="java.lang.Short" isList="false" allowNull="false"/>
+            <element name="creUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="creDate" typeRef="java.util.Date" isList="false" allowNull="false"/>
+            <element name="chgUser" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="chgDate" typeRef="java.util.Date" isList="false" allowNull="true"/>
+            <element name="tenant" typeRef="com.zabonlinedb.data.Tenant" isList="false" allowNull="false"/>
+            <element name="roles" typeRef="com.zabonlinedb.data.Roles" isList="false" allowNull="false"/>
+            <element name="tag" typeRef="com.zabonlinedb.data.Tag" isList="false" allowNull="true"/>
+            <element name="sessions" typeRef="com.zabonlinedb.data.Session" isList="true" allowNull="true"/>
+            <element name="person" typeRef="com.zabonlinedb.data.Person" isList="false" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelPersonCategoryId" name="id" supportsQuickData="false">
+            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="categoryId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelTableStoreFieldStoreId" name="id" supportsQuickData="false">
+            <element name="tableId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="fieldId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelPersonBankId" name="id" supportsQuickData="false">
+            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="bankId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelPersonAddressId" name="id" supportsQuickData="false">
+            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="addressId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RegistryId" name="id" supportsQuickData="false">
+            <element name="keyname" typeRef="java.lang.String" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="section" typeRef="java.lang.String" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="ident" typeRef="java.lang.String" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="value" typeRef="java.lang.String" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelPersonContactId" name="id" supportsQuickData="false">
+            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="contactId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelFactoryBankId" name="id" supportsQuickData="false">
+            <element name="factoryId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="bankId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelFactoryAddressId" name="id" supportsQuickData="false">
+            <element name="addressId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="factoryId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupRoleRtnType" supportsQuickData="false">
+            <element name="pk" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupSalutationByCountryRtnType" supportsQuickData="false">
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupTenantRtnType" supportsQuickData="false">
+            <element name="pk" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="description" typeRef="java.lang.String" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType" supportsQuickData="false">
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupContactTypeByCountryRtnType" supportsQuickData="false">
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupContactPartnerByTenantRtnType" supportsQuickData="false">
+            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+            <element name="contactPartner" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="firstName" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="name1" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="phoneFmt" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="email" typeRef="java.lang.String" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupAddressTypeByCountryRtnType" supportsQuickData="false">
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupAreaCodeRtnType" supportsQuickData="false">
+            <element name="areacode" typeRef="java.lang.String" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType" supportsQuickData="false">
+            <element name="marriage_partner" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="name1" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="firstname" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupPersonByTenantRtnType" supportsQuickData="false">
+            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+            <element name="nameFirstname" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="firstName" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="name1" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="email" typeRef="java.lang.String" isList="false" allowNull="false"/>
+        </dataobject>
+    </dataobjects>
+</service>

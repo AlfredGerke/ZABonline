@@ -1,0 +1,126 @@
+{
+	"methods": [{
+		"name": "readFloat",
+		"operationType": null,
+		"parameters": [{
+			"name": "aKey",
+			"type": "java.lang.String"
+		}, {
+			"name": "aSection",
+			"type": "java.lang.String"
+		}, {
+			"name": "aIdent",
+			"type": "java.lang.String"
+		}, {
+			"name": "aDefault",
+			"type": "java.lang.Float"
+		}],
+		"returnType": "[de.zabonline.srv.Results.ProcResults]"
+	}, {
+		"name": "readInteger",
+		"operationType": null,
+		"parameters": [{
+			"name": "aKey",
+			"type": "java.lang.String"
+		}, {
+			"name": "aSection",
+			"type": "java.lang.String"
+		}, {
+			"name": "aIdent",
+			"type": "java.lang.String"
+		}, {
+			"name": "aDefault",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[de.zabonline.srv.Results.ProcResults]"
+	}, {
+		"name": "readSection",
+		"operationType": null,
+		"parameters": [{
+			"name": "aKey",
+			"type": "java.lang.String"
+		}, {
+			"name": "aSection",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[de.zabonline.srv.Results.ProcResults]"
+	}, {
+		"name": "readSections",
+		"operationType": null,
+		"parameters": [{
+			"name": "aKey",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[de.zabonline.srv.Results.ProcResults]"
+	}, {
+		"name": "readString",
+		"operationType": null,
+		"parameters": [{
+			"name": "aKey",
+			"type": "java.lang.String"
+		}, {
+			"name": "aSection",
+			"type": "java.lang.String"
+		}, {
+			"name": "aIdent",
+			"type": "java.lang.String"
+		}, {
+			"name": "aDefault",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[de.zabonline.srv.Results.ProcResults]"
+	}, {
+		"name": "writeFloat",
+		"operationType": null,
+		"parameters": [{
+			"name": "aKey",
+			"type": "java.lang.String"
+		}, {
+			"name": "aSection",
+			"type": "java.lang.String"
+		}, {
+			"name": "aIdent",
+			"type": "java.lang.String"
+		}, {
+			"name": "aValue",
+			"type": "java.lang.Float"
+		}],
+		"returnType": "[de.zabonline.srv.Results.SuccessInfo]"
+	}, {
+		"name": "writeInteger",
+		"operationType": null,
+		"parameters": [{
+			"name": "aKey",
+			"type": "java.lang.String"
+		}, {
+			"name": "aSection",
+			"type": "java.lang.String"
+		}, {
+			"name": "aIdent",
+			"type": "java.lang.String"
+		}, {
+			"name": "aValue",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[de.zabonline.srv.Results.SuccessInfo]"
+	}, {
+		"name": "writeString",
+		"operationType": null,
+		"parameters": [{
+			"name": "aKey",
+			"type": "java.lang.String"
+		}, {
+			"name": "aSection",
+			"type": "java.lang.String"
+		}, {
+			"name": "aIdent",
+			"type": "java.lang.String"
+		}, {
+			"name": "aValue",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[de.zabonline.srv.Results.SuccessInfo]"
+	}],
+	"serviceType": "JSON-RPC",
+	"serviceURL": "RegistryService.json"
+}

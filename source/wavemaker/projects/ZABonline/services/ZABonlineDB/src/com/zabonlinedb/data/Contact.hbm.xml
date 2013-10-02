@@ -1,0 +1,66 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Contact" table="V_CONTACT" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="areaCode" type="string">
+            <column name="AREA_CODE" length="5"/>
+        </property>
+        <property name="phone" type="integer">
+            <column name="PHONE"/>
+        </property>
+        <property name="phoneFmt" type="string">
+            <column name="PHONE_FMT" length="127"/>
+        </property>
+        <property name="fax" type="integer">
+            <column name="FAX"/>
+        </property>
+        <property name="faxFmt" type="string">
+            <column name="FAX_FMT" length="127"/>
+        </property>
+        <property name="www" type="string">
+            <column name="WWW" length="254"/>
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="254"/>
+        </property>
+        <property name="skype" type="string">
+            <column name="SKYPE" length="32"/>
+        </property>
+        <property name="messangername" type="string">
+            <column name="MESSANGERNAME" length="32"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL" not-null="true"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="timestamp">
+            <column name="CRE_DATE" length="19" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="timestamp">
+            <column name="CHG_DATE" length="19"/>
+        </property>
+        <many-to-one name="tenant" class="com.zabonlinedb.data.Tenant" cascade="none">
+            <column name="TENANT_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="contactType" class="com.zabonlinedb.data.ContactType" cascade="none">
+            <column name="CONTACT_TYPE_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="tag" class="com.zabonlinedb.data.Tag" cascade="none">
+            <column name="TAG_ID"/>
+        </many-to-one>
+        <set name="relPersonContacts" inverse="true" cascade="">
+            <key>
+                <column name="CONTACT_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelPersonContact"/>
+        </set>
+    </class>
+</hibernate-mapping>

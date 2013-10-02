@@ -1,0 +1,4 @@
+.lblByAccordion:hover { text-decoration:underline;  cursor:pointer; }
+
+.imgByAccording { border-width:5px; border-color: ButtonShadow; border-left-color: white; border-top-color: white;}
+.imgByAccording:hover { border-width:5px; cursor:pointer; border-color: white; border-left-color: ButtonShadow; border-top-color: ButtonShadow;}

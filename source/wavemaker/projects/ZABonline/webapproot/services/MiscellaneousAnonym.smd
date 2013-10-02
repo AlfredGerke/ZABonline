@@ -1,0 +1,10 @@
+{
+	"methods": [{
+		"name": "invalidateSession",
+		"operationType": null,
+		"parameters": null,
+		"returnType": null
+	}],
+	"serviceType": "JSON-RPC",
+	"serviceURL": "MiscellaneousAnonym.json"
+}

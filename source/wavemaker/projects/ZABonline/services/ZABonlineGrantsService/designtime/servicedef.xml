@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="ZABonlineGrantsService" class="de.zabonline.srv.db.ZABonlineGrants" CRUDService="false" type="JavaService" springFile="ZABonlineGrantsService.spring.xml">
+    <operation name="checkGrant">
+        <parameter name="aGrant" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.SuccessInfo" isList="true"/>
+    </operation>
+    <operation name="checkGrantAdmin">
+        <return typeRef="de.zabonline.srv.Results.SuccessInfo" isList="true"/>
+    </operation>
+    <dataobjects/>
+</service>

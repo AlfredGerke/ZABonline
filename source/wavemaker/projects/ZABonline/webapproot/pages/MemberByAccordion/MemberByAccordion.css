@@ -1,0 +1,21 @@
+html.WMApp body .imgByAccording {
+  border-width:5px; 
+  border-color: ButtonShadow; 
+  border-left-color: white; 
+  border-top-color: white;
+}
+
+html.WMApp body .imgByAccording:hover {     
+  border-width:5px; 
+  cursor:pointer; 
+  border-color: white; 
+  border-left-color: 
+  ButtonShadow; 
+  border-top-color: ButtonShadow;
+}
+
+html.WMApp body .lblByAccordion:hover { 
+  text-decoration:underline;  
+  cursor:pointer; 
+}
+

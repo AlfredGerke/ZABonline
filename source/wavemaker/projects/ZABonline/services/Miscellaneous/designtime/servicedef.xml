@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="Miscellaneous" class="de.zabonline.srv.Misc" CRUDService="false" type="JavaService" springFile="Miscellaneous.spring.xml">
+    <operation name="getUniqueNameByDb">
+        <parameter name="aTenantId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aExt" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
+    <operation name="startSearchByDb">
+        <parameter name="aTenantId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aParameterByJSON" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
+    <dataobjects/>
+</service>

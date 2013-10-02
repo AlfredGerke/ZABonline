@@ -1,0 +1,102 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.FieldStore" table="V_FIELD_STORE" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="label" type="string">
+            <column name="LABEL" length="64"/>
+        </property>
+        <property name="code" type="string">
+            <column name="CODE" length="32" not-null="true"/>
+        </property>
+        <property name="name" type="string">
+            <column name="NAME" length="64" not-null="true"/>
+        </property>
+        <property name="dataType" type="string">
+            <column name="DATA_TYPE" length="32"/>
+        </property>
+        <property name="typeLength" type="integer">
+            <column name="TYPE_LENGTH"/>
+        </property>
+        <property name="typeScale" type="integer">
+            <column name="TYPE_SCALE"/>
+        </property>
+        <property name="mandatory" type="short">
+            <column name="MANDATORY"/>
+        </property>
+        <property name="isForeignKey" type="short">
+            <column name="IS_FOREIGN_KEY"/>
+        </property>
+        <property name="isLookup" type="short">
+            <column name="IS_LOOKUP"/>
+        </property>
+        <property name="referenceTable" type="string">
+            <column name="REFERENCE_TABLE" length="32"/>
+        </property>
+        <property name="lookupCaptionField" type="string">
+            <column name="LOOKUP_CAPTION_FIELD" length="32"/>
+        </property>
+        <property name="lookupRefIdField" type="string">
+            <column name="LOOKUP_REF_ID_FIELD" length="32"/>
+        </property>
+        <property name="uniqueIdxName" type="string">
+            <column name="UNIQUE_IDX_NAME" length="24"/>
+        </property>
+        <property name="isCalculated" type="short">
+            <column name="IS_CALCULATED"/>
+        </property>
+        <property name="calcSpName" type="string">
+            <column name="CALC_SP_NAME" length="32"/>
+        </property>
+        <property name="isVisible" type="short">
+            <column name="IS_VISIBLE"/>
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="2000"/>
+        </property>
+        <property name="donotdelete" type="short">
+            <column name="DONOTDELETE"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="date">
+            <column name="CRE_DATE" length="8" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="date">
+            <column name="CHG_DATE" length="8"/>
+        </property>
+        <set name="reltablestorefieldstores" inverse="true" cascade="">
+            <key>
+                <column name="FIELD_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelTableStoreFieldStore"/>
+        </set>
+        <many-to-one name="tenant" class="com.zabonlinedb.data.Tenant" cascade="none">
+            <column name="TENANT_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="tag" class="com.zabonlinedb.data.Tag" cascade="none">
+            <column name="TAG_ID"/>
+        </many-to-one>
+        <many-to-one name="fieldStore" class="com.zabonlinedb.data.FieldStore" cascade="none">
+            <column name="PARENT_ID"/>
+        </many-to-one>
+        <set name="fieldstores" inverse="true" cascade="">
+            <key>
+                <column name="PARENT_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.FieldStore"/>
+        </set>
+        <many-to-one name="category" class="com.zabonlinedb.data.Category" cascade="none">
+            <column name="CATEGORY_ID"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

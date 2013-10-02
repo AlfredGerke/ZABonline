@@ -1,0 +1,19 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Registry" table="V_REGISTRY" dynamic-insert="false" dynamic-update="false">
+        <composite-id name="id" class="com.zabonlinedb.data.RegistryId">
+            <key-property name="keyname" type="string">
+                <column name="KEYNAME" length="256"/>
+            </key-property>
+            <key-property name="section" type="string">
+                <column name="SECTION" length="64"/>
+            </key-property>
+            <key-property name="ident" type="string">
+                <column name="IDENT" length="64"/>
+            </key-property>
+            <key-property name="value" type="string">
+                <column name="VALUE" length="2000"/>
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

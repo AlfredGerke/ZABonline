@@ -1,0 +1,60 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Category" table="V_CATEGORY" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="label" type="string">
+            <column name="LABEL" length="64"/>
+        </property>
+        <property name="caption" type="string">
+            <column name="CAPTION" length="254" not-null="true"/>
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="2000"/>
+        </property>
+        <property name="donotdelete" type="short">
+            <column name="DONOTDELETE"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="date">
+            <column name="CRE_DATE" length="8" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="date">
+            <column name="CHG_DATE" length="8"/>
+        </property>
+        <many-to-one name="tag" class="com.zabonlinedb.data.Tag" cascade="none">
+            <column name="TAG_ID"/>
+        </many-to-one>
+        <many-to-one name="country" class="com.zabonlinedb.data.Country" cascade="none">
+            <column name="COUNTRY_ID"/>
+        </many-to-one>
+        <set name="fieldstores" inverse="true" cascade="">
+            <key>
+                <column name="CATEGORY_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.FieldStore"/>
+        </set>
+        <set name="relpersoncategories" inverse="true" cascade="">
+            <key>
+                <column name="CATEGORY_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelPersonCategory"/>
+        </set>
+        <set name="tablestores" inverse="true" cascade="">
+            <key>
+                <column name="CATEGORY_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.TableStore"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,84 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Roles" table="V_ROLES" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="caption" type="string">
+            <column name="CAPTION" length="64"/>
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="2000"/>
+        </property>
+        <property name="isAdmin" type="short">
+            <column name="IS_ADMIN" not-null="true"/>
+        </property>
+        <property name="setup" type="short">
+            <column name="SETUP" not-null="true"/>
+        </property>
+        <property name="members" type="short">
+            <column name="MEMBERS" not-null="true"/>
+        </property>
+        <property name="activityRecording" type="short">
+            <column name="ACTIVITY_RECORDING" not-null="true"/>
+        </property>
+        <property name="dtaus" type="short">
+            <column name="DTAUS" not-null="true"/>
+        </property>
+        <property name="billing" type="short">
+            <column name="BILLING" not-null="true"/>
+        </property>
+        <property name="importRl" type="short">
+            <column name="IMPORT_RL" not-null="true"/>
+        </property>
+        <property name="referenceData" type="short">
+            <column name="REFERENCE_DATA" not-null="true"/>
+        </property>
+        <property name="reporting" type="short">
+            <column name="REPORTING" not-null="true"/>
+        </property>
+        <property name="donotdelete" type="short">
+            <column name="DONOTDELETE" not-null="true"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL" not-null="true"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="timestamp">
+            <column name="CRE_DATE" length="19" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="timestamp">
+            <column name="CHG_DATE" length="19"/>
+        </property>
+        <property name="MISC" type="short">
+            <column name="MISC" not-null="true"/>
+        </property>
+        <property name="FILERESOURCE" type="short">
+            <column name="FILERESOURCE" not-null="true"/>
+        </property>
+        <property name="CLOSESESSION" type="short">
+            <column name="CLOSESESSION" not-null="true"/>
+        </property>
+        <property name="EXPORT" type="short">
+            <column name="EXPORT" not-null="true"/>
+        </property>
+        <property name="FIND" type="short">
+            <column name="FIND" not-null="true"/>
+        </property>
+        <many-to-one name="tag" class="com.zabonlinedb.data.Tag" cascade="none">
+            <column name="TAG_ID"/>
+        </many-to-one>
+        <set name="userses" inverse="true" cascade="none">
+            <key>
+                <column name="ROLE_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Users"/>
+        </set>
+    </class>
+</hibernate-mapping>

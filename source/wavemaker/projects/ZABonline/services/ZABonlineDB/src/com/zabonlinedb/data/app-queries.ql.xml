@@ -1,0 +1,49 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <meta attribute="@design.default-queries"/>
+    <query name="getCountryByCode">
+        <query-param name="Code" type="java.lang.String"/>
+        from Country _c where _c.countryCode=:Code
+    </query>
+    <query name="getInfoByUserName">
+        <query-param name="Username" type="java.lang.String"/>
+        from Users _u where _u.username=:Username
+    </query>
+    <query name="getLookupSalutationByCountry">
+        <query-param name="CountryId" type="java.lang.Integer"/>
+        select s.caption as caption, s.id as id, s.description as description from Salutation s where s.country.id=:CountryId
+    </query>
+    <query name="getLookupTitelByCountry">
+        <query-param name="CountryId" type="java.lang.Integer"/>
+        select s.caption as caption, s.id as id from Titel s where s.country.id=:CountryId
+    </query>
+    <query name="getLookupPersonByMarriage">
+        <query-param name="TenantId" type="java.lang.Integer"/>
+        select (p.name1 || &apos;, &apos; || p.firstname) as marriage_partner, p.name1 as name1, p.firstname as firstname, p.id as id from Person p where p.married = 1 and p.tenant.id=:TenantId
+    </query>
+    <query name="getLookupAddressTypeByCountry">
+        <query-param name="CountryId" type="java.lang.Integer"/>
+        select a.caption as caption, a.id as id from AddressType a where a.country.id=:CountryId
+    </query>
+    <query name="getLookupContactTypeByCountry">
+        <query-param name="CountryId" type="java.lang.Integer"/>
+        select c.caption as caption, c.id as id from ContactType c where c.country.id=:CountryId
+    </query>
+    <query name="getLookupAreaCode">
+        select distinct c.areaCode as areacode from Country c
+    </query>
+    <query name="getLookupContactPartnerByTenant">
+        <query-param name="TenantId" type="java.lang.Integer"/>
+        select rad.personId as personId, (rad.name1 || &apos;,  &apos; || rad.firstName) as contactPartner, rad.firstName as firstName, rad.name1 as name1, rad.phoneFmt as phoneFmt, rad.email as email from RelAddressbookItemDetails rad where tenantId=:TenantId
+    </query>
+    <query name="getLookupTenant">
+        select t.id as pk, t.caption as caption, t.description as description from Tenant t
+    </query>
+    <query name="getLookupRole">
+        select r.id as pk, r.caption as caption, r.description as description from Roles r
+    </query>
+    <query name="getLookupPersonByTenant">
+        <query-param name="TenantId" type="java.lang.Integer"/>
+        select rad.personId as personId, (rad.name1 || &apos;,  &apos; || rad.firstName) as nameFirstname, rad.firstName as firstName, rad.name1 as name1, rad.email as email from RelAddressbookItemDetails rad where tenantId=:TenantId
+    </query>
+</hibernate-mapping>

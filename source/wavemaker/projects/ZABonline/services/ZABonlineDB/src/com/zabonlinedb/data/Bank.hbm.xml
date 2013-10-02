@@ -1,0 +1,60 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Bank" table="V_BANK" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="caption" type="string">
+            <column name="CAPTION" length="254"/>
+        </property>
+        <property name="blz" type="integer">
+            <column name="BLZ"/>
+        </property>
+        <property name="kto" type="integer">
+            <column name="KTO"/>
+        </property>
+        <property name="iban" type="string">
+            <column name="IBAN" length="30"/>
+        </property>
+        <property name="bic" type="string">
+            <column name="BIC" length="11"/>
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="2000"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL" not-null="true"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="timestamp">
+            <column name="CRE_DATE" length="19" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="timestamp">
+            <column name="CHG_DATE" length="19"/>
+        </property>
+        <many-to-one name="tenant" class="com.zabonlinedb.data.Tenant" cascade="none">
+            <column name="TENANT_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="tag" class="com.zabonlinedb.data.Tag" cascade="none">
+            <column name="TAG_ID"/>
+        </many-to-one>
+        <set name="relPersonBanks" inverse="true" cascade="">
+            <key>
+                <column name="PERSON_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelPersonBank"/>
+        </set>
+        <set name="relfactorybanks" inverse="true" cascade="">
+            <key>
+                <column name="BANK_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelFactoryBank"/>
+        </set>
+    </class>
+</hibernate-mapping>

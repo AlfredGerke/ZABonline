@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="ZABonlineDBService" class="de.zabonline.srv.db.ZABonlineDBService" CRUDService="false" type="JavaService" springFile="ZABonlineDBService.spring.xml">
+    <operation name="getZABonlineDBService">
+        <return typeRef="com.zabonlinedb.ZABonlineDB" isList="false"/>
+    </operation>
+    <dataobjects>
+        <dataobject javaType="com.zabonlinedb.ZABonlineDB" name="ZABonlineDB" supportsQuickData="false">
+            <element name="dataServiceManager" typeRef="com.wavemaker.runtime.data.DataServiceManager" isList="false" allowNull="false"/>
+        </dataobject>
+    </dataobjects>
+</service>

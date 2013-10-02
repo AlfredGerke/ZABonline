@@ -1,0 +1,45 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Salutation" table="V_SALUTATION" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="tagId" type="integer">
+            <column name="TAG_ID"/>
+        </property>
+        <property name="caption" type="string">
+            <column name="CAPTION" length="254" not-null="true"/>
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="2000"/>
+        </property>
+        <property name="donotdelete" type="short">
+            <column name="DONOTDELETE" not-null="true"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL" not-null="true"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="timestamp">
+            <column name="CRE_DATE" length="19" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="timestamp">
+            <column name="CHG_DATE" length="19"/>
+        </property>
+        <many-to-one name="country" class="com.zabonlinedb.data.Country" cascade="none">
+            <column name="COUNTRY_ID"/>
+        </many-to-one>
+        <set name="persons" inverse="true" cascade="">
+            <key>
+                <column name="SALUTATION_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Person"/>
+        </set>
+    </class>
+</hibernate-mapping>

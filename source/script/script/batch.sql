@@ -1,0 +1,51 @@
+/******************************************************************************/
+/* Author:  Alfred Gerke (AGE)                                                  
+/* Date:    2012-03-17                                                          
+/* Purpose: Dieses Script ruft alle vorhandenen Updatescripte auf                                                              
+/******************************************************************************/
+/* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.5.x  
+/* - Das Script ist ausschließlich für die Ausführung im IBExpert erstellt worden            
+/* - Ein möglicher Connect zur Produktionsdatenbank muss geschlossen werden
+/* - Das Datenbankfile muss vorhanden sein
+/******************************************************************************/
+/* History: 2012-03-17
+/*          Erstellung 
+/******************************************************************************/
+
+/******************************************************************************/
+/*                                  Create Users
+/******************************************************************************/
+
+/*
+   Userscript nur einmal einspielen.
+   User werden in der Sicherheitsdatenbank angelegt.
+   WICHTIG: Am Ende des Scriptes wird über einen Shell-Befehl eine bestehende
+            Datenbank gelöscht. Dieser Vorgang kann im weiteren Verlauf zu Fehlern
+            führen. In dem Fall die Datenbank von Hand löschen und erneut die
+            Datenbank aufbauen beginnent mit create_tools.sql.
+            Da im ersten Durchlauf die User über create_user.sql angelegt wurden,
+            braucht dieses Script nicht mehr gestartet zu werden
+
+input 'create_user.sql';
+
+*/
+/******************************************************************************/
+/*                                  Create Database
+/******************************************************************************/
+
+input 'create_tools.sql';
+/*
+ * bis auf weiteres zurückgestellt
+input 'create_json.sql';
+ *
+ */ 
+input 'create_db.sql';
+input 'create_person.sql';
+input 'create_testproc_env.sql';
+input 'create_factory.sql';
+input 'create_admin.sql';
+input 'create_find.sql';
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/

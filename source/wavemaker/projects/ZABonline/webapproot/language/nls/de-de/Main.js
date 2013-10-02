@@ -1,0 +1,20 @@
+{
+"ERROR_MSG_REGISTER_SESSION_FAILD": "Keine g&uuml;litge Sitzung f&uuml;r eine Anmeldung vorhanden!",
+"ERROR_MSG_SESSION_EXPIRED": "Der G&uuml;ltigkeitszeitraum der Sitzung wurde &uuml;berschritten, die Anwendung wird beendet!",
+"ERROR_MSG_NO_LOGIN_ALLOWED": "Kein Login erlaubt!",
+"ERROR_MSG_NO_VALID_AUTHENTIFICATION": "Keine g&uuml;ltige Authentifizierung vorhanden!", 
+"ERROR_MSG_UNKNOWN_USDERID": "Unbekannter Benutzer, kein Login erlaubt!",
+"ERROR_MSG_INVALID_SESSION_DATA": "Ung&uuml;ltige Sitzungsinformationen!",
+"ERROR_MSG_SESSION_IDLE_TIMEOUT": "Sitzungsruhezeit &uuml;berschritten!",
+"ERROR_MSG_SESSION_LIFETIME_TIMEOUT": "G&uuml;ltigkeitszeitraum der Sitzung abgelaufen!",
+"ERROR_MSG_ACCESS_DENIED": "Zugriff abgelehnt!",
+"ERROR_MSG_UNKNOWN_ERROR_BY_DBSERVICE": "Unbekannter Fehler!",
+"ERROR_MSG_BY_CONTROLLER_ENABLEGUI": "Fehler aus dem Controller!",
+"ERROR_MSG_CANCEL_BY_UNKNOWN_REASON": "Abbruch aus unbekanntem Grund!",
+"ERROR_MSG_EROOR_BY_CHECKGRANT_SERVICE": "Keine Autorisierung f&uuml;r diese Funktion!",
+"DLG_ERROR_ON_LOGOUT_TITEL": "Problem beim abmelden",
+"ERROR_MSG_ON_CLOSE_SESSION": "Fehler beim Schlie&szlig;en der Sitzung: ",
+"ERROR_MSG_ERROR_CLOSE_SESSION": "Wenn erneutes Abmelden wieder fehltschl&auml;gt, Abbruch und Browser schlie&szlig;en!",
+"ERROR_MSG_ERROR_ON_LOGOUT": "Problem beim abmelden! Zur Sicherheit Browser kompett schlie&szlig;en...",
+"ERROR_MSG_ERROR_ON_INVALIDATE_SESSION": "Problem beim schlie&szlig;en der Sitzung! Zur Sicherheit Browser kompett schlie&szlig;en..."
+}

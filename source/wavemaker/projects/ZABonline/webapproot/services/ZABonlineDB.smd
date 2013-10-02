@@ -1,0 +1,100 @@
+{
+	"methods": [{
+		"name": "getAddressById",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "id",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "com.zabonlinedb.data.Address"
+	}, {
+		"name": "getCountryByCode",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "Code",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[com.zabonlinedb.data.Country]"
+	}, {
+		"name": "getInfoByUserName",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "Username",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[com.zabonlinedb.data.Users]"
+	}, {
+		"name": "getLookupAddressTypeByCountry",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "CountryId",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.zabonlinedb.data.output.GetLookupAddressTypeByCountryRtnType]"
+	}, {
+		"name": "getLookupAreaCode",
+		"operationType": "hqlquery",
+		"parameters": null,
+		"returnType": "[com.zabonlinedb.data.output.GetLookupAreaCodeRtnType]"
+	}, {
+		"name": "getLookupContactPartnerByTenant",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "TenantId",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.zabonlinedb.data.output.GetLookupContactPartnerByTenantRtnType]"
+	}, {
+		"name": "getLookupContactTypeByCountry",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "CountryId",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.zabonlinedb.data.output.GetLookupContactTypeByCountryRtnType]"
+	}, {
+		"name": "getLookupPersonByMarriage",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "TenantId",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType]"
+	}, {
+		"name": "getLookupPersonByTenant",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "TenantId",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.zabonlinedb.data.output.GetLookupPersonByTenantRtnType]"
+	}, {
+		"name": "getLookupRole",
+		"operationType": "hqlquery",
+		"parameters": null,
+		"returnType": "[com.zabonlinedb.data.output.GetLookupRoleRtnType]"
+	}, {
+		"name": "getLookupSalutationByCountry",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "CountryId",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.zabonlinedb.data.output.GetLookupSalutationByCountryRtnType]"
+	}, {
+		"name": "getLookupTenant",
+		"operationType": "hqlquery",
+		"parameters": null,
+		"returnType": "[com.zabonlinedb.data.output.GetLookupTenantRtnType]"
+	}, {
+		"name": "getLookupTitelByCountry",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "CountryId",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType]"
+	}],
+	"serviceType": "JSON-RPC",
+	"serviceURL": "ZABonlineDB.json"
+}

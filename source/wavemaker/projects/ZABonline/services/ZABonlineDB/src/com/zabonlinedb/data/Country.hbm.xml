@@ -1,0 +1,84 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Country" table="V_COUNTRY" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="countryCode" type="string">
+            <column name="COUNTRY_CODE" length="3" not-null="true"/>
+        </property>
+        <property name="countryCaption" type="string">
+            <column name="COUNTRY_CAPTION" length="254"/>
+        </property>
+        <property name="currencyCode" type="string">
+            <column name="CURRENCY_CODE" length="3" not-null="true"/>
+        </property>
+        <property name="CURRENCY_CAPTION" type="string">
+            <column name="CURRENCY_CAPTION" length="254"/>
+        </property>
+        <property name="areaCode" type="string">
+            <column name="AREA_CODE" length="5" not-null="true"/>
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="2000"/>
+        </property>
+        <property name="donotdelete" type="short">
+            <column name="DONOTDELETE" not-null="true"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL" not-null="true"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="timestamp">
+            <column name="CRE_DATE" length="19" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="timestamp">
+            <column name="CHG_DATE" length="19"/>
+        </property>
+        <many-to-one name="tag" class="com.zabonlinedb.data.Tag" cascade="none">
+            <column name="TAG_ID"/>
+        </many-to-one>
+        <set name="titels" inverse="true" cascade="">
+            <key>
+                <column name="COUNTRY_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Titel"/>
+        </set>
+        <set name="addressTypes" inverse="true" cascade="">
+            <key>
+                <column name="COUNTRY_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.AddressType"/>
+        </set>
+        <set name="contactTypes" inverse="true" cascade="">
+            <key>
+                <column name="COUNTRY_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.ContactType"/>
+        </set>
+        <set name="salutations" inverse="true" cascade="">
+            <key>
+                <column name="COUNTRY_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Salutation"/>
+        </set>
+        <set name="tenants" inverse="true" cascade="">
+            <key>
+                <column name="COUNTRY_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Tenant"/>
+        </set>
+        <set name="categories" inverse="true" cascade="">
+            <key>
+                <column name="COUNTRY_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Category"/>
+        </set>
+    </class>
+</hibernate-mapping>

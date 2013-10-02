@@ -1,0 +1,87 @@
+ZABONLINEEMBEDDED = C:\Sourcen\db\firebird\zabonline\ZAB_EMBEDDED.FDB
+
+ZABonlineDB
+jdbc:firebirdsql:localhost/3050:ZABONLINEEMBEDDED
+oder
+jdbc:firebirdsql:localhost/3050:ZABONLINEEMBEDDED?roleName=R_WEBCONNECT -> wenn User WEBCONNECT gewählt 
+
+org.firebirdsql.jdbc.FBDriver
+org.hibernate.dialect.FirebirdDialect
+org.hibernate.dialect.InterbaseDialect
+
+SELECT USERS.ID, ROLES.CAPTION FROM USERS, ROLES WHERE ((USERS.ID = ?) and (USERS.ALLOW_LOGIN = 1) and (ROLES.ID = USERS.ROLE_ID))
+oder
+SELECT VU.ID, VR.CAPTION FROM V_USERS VU, V_ROLES VR WHERE ((VU.ID = ?) and (VU.ALLOW_LOGIN = 1) and (VR.ID = VU.ROLE_ID)) -> wenn User WEBCONNECT gewählt
+
+Hibernate-Dateien:
+- die folgenden Dateien müssen min. angepasst werden wenn neue Entitäten von Hand eingefügt werden (s. Problem Views)
+1. trunk/WaveMaker 6.4.5GA/projects/ZABonline/services/ZABonlineDB/designtime/servicedef.xml
+  Eintrag im Knoten: <dataobjects> als <dataobject> mit allen Eigenschaften der Entität (Java-Source) (s. Struktur für Details)
+ 
+2. trunk/WaveMaker 6.4.5GA/projects/ZABonline/services/ZABonlineDB/src/ZABonlineDB.spring.xml
+  Eintrag im Knoten <property name="mappingResources">: XML-Mapfile der Entität (Java-Source) angeben (s. Struktur für Details)
+  
+3. trunk/WaveMaker 6.4.5GA/projects/ZABonline/webapproot/types.js
+  Eintrag im JSON-Format: alle notwendigen Strukturinformationen zur Entität (Java-Source) (s. Struktur für Details)
+   
+4. trunk/WaveMaker 6.4.5GA/projects/ZABonline/webapproot/WEB-INF/classes/ZABonlineDB.spring.xml -> wird aus trunk/WaveMaker 6.4.5GA/projects/ZABonline/services/ZABonlineDB/src/ZABonlineDB.spring.xml gebildet
+  Eintrag im Knoten <property name="mappingResources">: XML-Mapfile angeben (s. Struktur für Details)
+  
+5. trunk/WaveMaker 6.4.5GA/projects/ZABonline/webapproot/WEB-INF/project-managers.xml
+  Eintrag im Knoten <entry key="ZABonlineDB">: Auflistung der Entitäten (Java-Sourcen mit Package) (s. Struktur für Details) 
+ 
+6. trunk\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\WEB-INF\classes\com\zabonlinedb\data\app-queries.ql.xml
+  Eintrag für Queries (Services) (s. Struktur für Details) kann über Wavemaker problemlos erstellt werden wenn Entität (Java-Source) korrekt von WaveMaker erkannt
+  
+  
+Notizen zum Code:
+1. RegExpression
+1.1 Password
+  ^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$
+  Password expresion that requires one lower case letter, one upper case letter, one digit, 6-13 length, and no spaces. This is merely an extension of a previously posted expression by Steven Smith (ssmith@aspalliance.com) . The no spaces is new.
+ 
+  ^(?=[^\d_].*?\d)\w(\w|[!@#$%]){7,20}
+  This regex can be used to restrict passwords to a length of 8 to 20 aplhanumeric characters and select special characters. The password also can not start with a digit, underscore or special character and must contain at least one digit.
+  8 bis 20 Zeichen; Buchstaben, Zahlen, Sonderzeichen; mind. 1 Zahl vorhanden; muss mit Buchstaben beginnen
+  
+  ^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%_]).{8,20}$ -> Stand 2013-05-05: wird angewendet
+  8 bis 20 Zeichen; Gro&szlig;-/Kleinbuchstaben, ganze Zahlen, Sonderzeichen (@#$%_); mind. ein Gro&szlig;buchstabe, mind. ein Kleinbuchstabe, mind. eine Zahl, mind. ein Sonderzeichen
+  Testpasswort: _1aAbdD@#$%_  
+  
+Servicevariable für Webservice einrichten:
+1. wm.ServiceVariable
+2. Name der Servicevariable gleich dem Namen des Webservice setzen
+3. In der Regel die Page als Eigentümer setzen
+4. Service auswählen
+5. Methode auswählen
+6. Behavior: 
+   - wenn autoUpdate=True wird der Service immer dann aufgefrufen wenn sich ein Eingabeparameter ändernt
+   - wenn startUpdate=True wird der Service direkt zum Start einer Page gestartet.
+7. Service starten:
+   !<--
+        try {
+            console.debug('Start <Servicecall>');
+
+            app.dlgLoading.setParameter(this.<ServiceVariable>, <Control to Block>);
+
+            if (this.<ServiceVariable>.canUpdate()) {
+                this.<ServiceVariable>.update();
+            } else {
+                app.toastError(this.getDictionaryItem("<ERROR_MSG_BY_LOCALISATION>"));
+            }
+
+            console.debug('End <Servicecall>');
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".<Servicecall> failed: " + e.toString(), e);
+        }    
+   -->
+
+Ergebnisstruktur für Service anlegen:
+1. wm.Variable
+2. Name z.B.: varResultByInsert
+3. in der Regel die Page als Eigentümer setzen
+4. aus RegistryServce.ProcResults oder RegistryService.SuccessInfo -> abhängig von der Resultstruktur des Webservice
+5. in der Regel immer isList=True
+6. Data:
+   - Bindings:
+     - dataSet=Name der ServiceVariable           

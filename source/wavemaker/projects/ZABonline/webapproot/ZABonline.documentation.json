@@ -1,0 +1,17 @@
+{
+	"__metaData": {
+		"service_invalid_FileUploadDownload": false, 
+		"service_invalid_addressBookService": false, 
+		"service_invalid_GeneralProcResult": true, 
+		"service_invalid_SessionManager": true, 
+		"service_invalid_ResultStructs": false, 
+		"service_invalid_ZABonlineDBService": false, 
+		"service_invalid_ZABonlineSessionMgrService": false, 
+		"service_invalid_RegistryService": false, 
+		"service_invalid_FactoryService": false, 
+		"service_invalid_MiscellaneousAnonym": false, 
+		"service_invalid_ZABonlineAdminService": false, 
+		"service_invalid_ZABonlineGrantsService": false, 
+		"service_invalid_Miscellaneous": false
+	}
+}

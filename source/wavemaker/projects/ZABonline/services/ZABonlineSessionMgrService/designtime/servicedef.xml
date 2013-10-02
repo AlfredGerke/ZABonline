@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="ZABonlineSessionMgrService" class="de.zabonline.srv.SessionManager" CRUDService="false" type="JavaService" springFile="ZABonlineSessionMgrService.spring.xml">
+    <operation name="closeSession">
+        <return typeRef="de.zabonline.srv.Results.SuccessInfo" isList="true"/>
+    </operation>
+    <operation name="getHttpServletRequest">
+        <return typeRef="javax.servlet.http.HttpServletRequest" isList="false"/>
+    </operation>
+    <operation name="getRemoteAddress">
+        <return typeRef="java.lang.String" isList="false"/>
+    </operation>
+    <operation name="getSecurityService">
+        <return typeRef="com.wavemaker.runtime.security.SecurityService" isList="false"/>
+    </operation>
+    <operation name="getSessionId">
+        <return typeRef="java.lang.String" isList="false"/>
+    </operation>
+    <operation name="getTenantId">
+        <return typeRef="java.lang.Integer" isList="false"/>
+    </operation>
+    <operation name="getUserId">
+        <return typeRef="java.lang.String" isList="false"/>
+    </operation>
+    <operation name="getUserName">
+        <return typeRef="java.lang.String" isList="false"/>
+    </operation>
+    <operation name="isAthenticated">
+        <return typeRef="java.lang.Boolean" isList="false"/>
+    </operation>
+    <operation name="registerSession">
+        <return typeRef="de.zabonline.srv.Results.SuccessInfo" isList="true"/>
+    </operation>
+    <operation name="touchSession">
+        <return typeRef="de.zabonline.srv.Results.SuccessInfo" isList="true"/>
+    </operation>
+    <dataobjects>
+        <dataobject javaType="javax.servlet.http.HttpServletRequest" name="HttpServletRequest" supportsQuickData="false">
+            <element name="authType" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="contextPath" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="cookies" typeRef="javax.servlet.http.Cookie" isList="true" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.wavemaker.runtime.security.SecurityService" name="SecurityService" supportsQuickData="false">
+            <element name="authenticatedAuthentication" typeRef="org.acegisecurity.Authentication" isList="false" allowNull="false"/>
+        </dataobject>
+    </dataobjects>
+</service>

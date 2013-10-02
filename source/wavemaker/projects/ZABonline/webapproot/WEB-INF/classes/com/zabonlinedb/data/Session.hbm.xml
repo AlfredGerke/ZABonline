@@ -1,0 +1,45 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Session" table="V_SESSION" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="sessionId" type="string">
+            <column name="SESSION_ID" length="36" not-null="true"/>
+        </property>
+        <property name="expiryDate" type="timestamp">
+            <column name="EXPIRY_DATE" length="19" not-null="true"/>
+        </property>
+        <property name="lastReviewed" type="timestamp">
+            <column name="LAST_REVIEWED" length="19" not-null="true"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL" not-null="true"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="timestamp">
+            <column name="CRE_DATE" length="19" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="timestamp">
+            <column name="CHG_DATE" length="19"/>
+        </property>
+        <property name="IP" type="string">
+            <column name="IP" length="64"/>
+        </property>
+        <property name="CLOSED" type="short">
+            <column name="CLOSED"/>
+        </property>
+        <many-to-one name="tag" class="com.zabonlinedb.data.Tag" cascade="none">
+            <column name="TAG_ID"/>
+        </many-to-one>
+        <many-to-one name="user" class="com.zabonlinedb.data.Users" cascade="none">
+            <column name="USER_ID" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

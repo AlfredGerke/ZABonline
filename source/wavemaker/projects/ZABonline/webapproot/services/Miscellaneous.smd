@@ -1,0 +1,27 @@
+{
+	"methods": [{
+		"name": "getUniqueNameByDb",
+		"operationType": null,
+		"parameters": [{
+			"name": "aTenantId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aExt",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[de.zabonline.srv.Results.ProcResults]"
+	}, {
+		"name": "startSearchByDb",
+		"operationType": null,
+		"parameters": [{
+			"name": "aTenantId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aParameterByJSON",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[de.zabonline.srv.Results.ProcResults]"
+	}],
+	"serviceType": "JSON-RPC",
+	"serviceURL": "Miscellaneous.json"
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Person" table="V_PERSON" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="firstname" type="string">
+            <column name="FIRSTNAME" length="126" not-null="true"/>
+        </property>
+        <property name="name1" type="string">
+            <column name="NAME1" length="126" not-null="true"/>
+        </property>
+        <property name="name2" type="string">
+            <column name="NAME2" length="126"/>
+        </property>
+        <property name="name3" type="string">
+            <column name="NAME3" length="126"/>
+        </property>
+        <property name="married" type="short">
+            <column name="IS_MARRIED" not-null="true"/>
+        </property>
+        <property name="marriedSince" type="date">
+            <column name="MARRIED_SINCE" length="10"/>
+        </property>
+        <property name="marriagePartnerFirstname" type="string">
+            <column name="MARRIAGE_PARTNER_FIRSTNAME" length="126"/>
+        </property>
+        <property name="marriagePartnerName1" type="string">
+            <column name="MARRIAGE_PARTNER_NAME1" length="126"/>
+        </property>
+        <property name="salutation1" type="string">
+            <column name="SALUTATION1" length="126"/>
+        </property>
+        <property name="salutation2" type="string">
+            <column name="SALUTATION2" length="126"/>
+        </property>
+        <property name="dayOfBirth" type="date">
+            <column name="DAY_OF_BIRTH" length="10"/>
+        </property>
+        <property name="isprivate" type="short">
+            <column name="ISPRIVATE" not-null="true"/>
+        </property>
+        <property name="picture" type="binary">
+            <column name="PICTURE"/>
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL" not-null="true"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="timestamp">
+            <column name="CRE_DATE" length="19" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="timestamp">
+            <column name="CHG_DATE" length="19"/>
+        </property>
+        <many-to-one name="tenant" class="com.zabonlinedb.data.Tenant" cascade="none">
+            <column name="TENANT_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="titel" class="com.zabonlinedb.data.Titel" cascade="none">
+            <column name="TITEL_ID"/>
+        </many-to-one>
+        <many-to-one name="tag" class="com.zabonlinedb.data.Tag" cascade="none">
+            <column name="TAG_ID"/>
+        </many-to-one>
+        <many-to-one name="salutation" class="com.zabonlinedb.data.Salutation" cascade="none">
+            <column name="SALUTATION_ID"/>
+        </many-to-one>
+        <many-to-one name="person" class="com.zabonlinedb.data.Person" cascade="none">
+            <column name="MARRIED_TO_ID"/>
+        </many-to-one>
+        <set name="relPersonBanks" inverse="true" cascade="">
+            <key>
+                <column name="PERSON_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelPersonBank"/>
+        </set>
+        <set name="persons" inverse="true" cascade="">
+            <key>
+                <column name="MARRIED_TO_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Person"/>
+        </set>
+        <set name="relPersonAddresses" inverse="true" cascade="">
+            <key>
+                <column name="PERSON_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelPersonAddress"/>
+        </set>
+        <set name="relPersonContacts" inverse="true" cascade="">
+            <key>
+                <column name="PERSON_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelPersonContact"/>
+        </set>
+        <set name="factories" inverse="true" cascade="">
+            <key>
+                <column name="CONTACT_PERSON_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Factory"/>
+        </set>
+        <set name="userss" inverse="true" cascade="">
+            <key>
+                <column name="PERSON_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Users"/>
+        </set>
+        <set name="relpersoncategories" inverse="true" cascade="">
+            <key>
+                <column name="PERSON_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.RelPersonCategory"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,63 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Users" table="V_USERS" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="username" type="string">
+            <column name="USERNAME" length="256" not-null="true"/>
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="512" not-null="true"/>
+        </property>
+        <property name="firstName" type="string">
+            <column name="FIRST_NAME" length="256"/>
+        </property>
+        <property name="name" type="string">
+            <column name="NAME" length="256"/>
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="127"/>
+        </property>
+        <property name="allowLogin" type="short">
+            <column name="ALLOW_LOGIN" not-null="true"/>
+        </property>
+        <property name="donotdelete" type="short">
+            <column name="DONOTDELETE" not-null="true"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL" not-null="true"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="timestamp">
+            <column name="CRE_DATE" length="19" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="timestamp">
+            <column name="CHG_DATE" length="19"/>
+        </property>
+        <many-to-one name="tenant" class="com.zabonlinedb.data.Tenant" cascade="none">
+            <column name="TENANT_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="roles" class="com.zabonlinedb.data.Roles" cascade="none">
+            <column name="ROLE_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="tag" class="com.zabonlinedb.data.Tag" cascade="none">
+            <column name="TAG_ID"/>
+        </many-to-one>
+        <set name="sessions" inverse="true" cascade="">
+            <key>
+                <column name="USER_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Session"/>
+        </set>
+        <many-to-one name="person" class="com.zabonlinedb.data.Person" cascade="none">
+            <column name="PERSON_ID"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

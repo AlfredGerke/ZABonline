@@ -1,0 +1,31 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.RelTableStoreFieldStore" table="V_REL_TABLE_STORE_FIELD_STORE" dynamic-insert="false" dynamic-update="false">
+        <composite-id name="id" class="com.zabonlinedb.data.RelTableStoreFieldStoreId">
+            <key-property name="tableId" type="integer">
+                <column name="TABLE_ID"/>
+            </key-property>
+            <key-property name="fieldId" type="integer">
+                <column name="FIELD_ID"/>
+            </key-property>
+        </composite-id>
+        <many-to-one
+            name="tableStore"
+            class="com.zabonlinedb.data.TableStore"
+            update="false"
+            insert="false"
+            fetch="select"
+            cascade="none">
+            <column name="TABLE_ID" not-null="true"/>
+        </many-to-one>
+        <many-to-one
+            name="fieldStore"
+            class="com.zabonlinedb.data.FieldStore"
+            update="false"
+            insert="false"
+            fetch="select"
+            cascade="none">
+            <column name="FIELD_ID" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

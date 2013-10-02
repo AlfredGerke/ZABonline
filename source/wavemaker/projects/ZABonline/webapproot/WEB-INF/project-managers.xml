@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<beans xsi:schemaLocation="http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.8.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:cloud="http://schema.cloudfoundry.org/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <bean class="com.wavemaker.runtime.service.TypeManager" parent="typeManagerBase" scope="singleton" id="typeManager">
+        <property name="types">
+            <map merge="true">
+                <entry key="FactoryService">
+                    <list/>
+                </entry>
+                <entry key="FileUploadDownload">
+                    <list>
+                        <value>com.wavemaker.runtime.server.DownloadResponse</value>
+                        <value>java.io.File</value>
+                        <value>FileUploadDownload.WMFile</value>
+                        <value>com.wavemaker.runtime.server.FileUploadResponse</value>
+                        <value>org.springframework.web.multipart.MultipartFile</value>
+                    </list>
+                </entry>
+                <entry key="Miscellaneous">
+                    <list/>
+                </entry>
+                <entry key="MiscellaneousAnonym">
+                    <list/>
+                </entry>
+                <entry key="RegistryService">
+                    <list>
+                        <value>de.zabonline.srv.Results.ProcResults</value>
+                        <value>de.zabonline.srv.Results.SuccessInfo</value>
+                    </list>
+                </entry>
+                <entry key="ResultStructs">
+                    <list/>
+                </entry>
+                <entry key="ZABonlineAdminService">
+                    <list/>
+                </entry>
+                <entry key="ZABonlineDB">
+                    <list>
+                        <value>com.zabonlinedb.data.Address</value>
+                        <value>com.zabonlinedb.data.AddressType</value>
+                        <value>com.zabonlinedb.data.Bank</value>
+                        <value>com.zabonlinedb.data.Category</value>
+                        <value>com.zabonlinedb.data.Contact</value>
+                        <value>com.zabonlinedb.data.ContactType</value>
+                        <value>com.zabonlinedb.data.Country</value>
+                        <value>com.zabonlinedb.data.Datasheet</value>
+                        <value>com.zabonlinedb.data.Factory</value>
+                        <value>com.zabonlinedb.data.FieldStore</value>
+                        <value>com.zabonlinedb.data.Person</value>
+                        <value>com.zabonlinedb.data.Registry</value>
+                        <value>com.zabonlinedb.data.RelAddressbookItemDetails</value>
+                        <value>com.zabonlinedb.data.RelFactoryAddress</value>
+                        <value>com.zabonlinedb.data.RelFactoryBank</value>
+                        <value>com.zabonlinedb.data.RelPersonAddress</value>
+                        <value>com.zabonlinedb.data.RelPersonBank</value>
+                        <value>com.zabonlinedb.data.RelPersonCategory</value>
+                        <value>com.zabonlinedb.data.RelPersonContact</value>
+                        <value>com.zabonlinedb.data.RelTableStoreFieldStore</value>
+                        <value>com.zabonlinedb.data.Roles</value>
+                        <value>com.zabonlinedb.data.Salutation</value>
+                        <value>com.zabonlinedb.data.Session</value>
+                        <value>com.zabonlinedb.data.TableStore</value>
+                        <value>com.zabonlinedb.data.Tag</value>
+                        <value>com.zabonlinedb.data.Tenant</value>
+                        <value>com.zabonlinedb.data.Titel</value>
+                        <value>com.zabonlinedb.data.Updatehistory</value>
+                        <value>com.zabonlinedb.data.Users</value>
+                        <value>com.zabonlinedb.data.RelFactoryBankId</value>
+                        <value>com.zabonlinedb.data.RelPersonContactId</value>
+                        <value>com.zabonlinedb.data.RelPersonCategoryId</value>
+                        <value>com.zabonlinedb.data.RelPersonBankId</value>
+                        <value>com.zabonlinedb.data.RelPersonAddressId</value>
+                        <value>com.zabonlinedb.data.RegistryId</value>
+                        <value>com.zabonlinedb.data.RelFactoryAddressId</value>
+                        <value>com.zabonlinedb.data.RelTableStoreFieldStoreId</value>
+                        <value>com.zabonlinedb.data.output.GetLookupRoleRtnType</value>
+                        <value>com.zabonlinedb.data.output.GetLookupSalutationByCountryRtnType</value>
+                        <value>com.zabonlinedb.data.output.GetLookupTenantRtnType</value>
+                        <value>com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType</value>
+                        <value>com.zabonlinedb.data.output.GetLookupContactTypeByCountryRtnType</value>
+                        <value>com.zabonlinedb.data.output.GetLookupContactPartnerByTenantRtnType</value>
+                        <value>com.zabonlinedb.data.output.GetLookupAddressTypeByCountryRtnType</value>
+                        <value>com.zabonlinedb.data.output.GetLookupAreaCodeRtnType</value>
+                        <value>com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType</value>
+                        <value>com.zabonlinedb.data.output.GetLookupPersonByTenantRtnType</value>
+                    </list>
+                </entry>
+                <entry key="ZABonlineDBService">
+                    <list>
+                        <value>com.zabonlinedb.ZABonlineDB</value>
+                    </list>
+                </entry>
+                <entry key="ZABonlineGrantsService">
+                    <list/>
+                </entry>
+                <entry key="ZABonlineSessionMgrService">
+                    <list>
+                        <value>javax.servlet.http.HttpServletRequest</value>
+                        <value>com.wavemaker.runtime.security.SecurityService</value>
+                    </list>
+                </entry>
+                <entry key="addressBookService">
+                    <list>
+                        <value>java.util.Date</value>
+                    </list>
+                </entry>
+                <entry key="securityService">
+                    <list/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>

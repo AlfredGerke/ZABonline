@@ -1,0 +1,2 @@
+move /-Y *.java "C:\Users\Alfred\Sourcen\Projekte\SaE\wavemaker\trunk\WaveMaker 6.4.5GA\projects\ZABonline\services\ZABonlineDB\src\com\zabonlinedb\data"
+move /-Y *.hbm.xml "C:\Users\Alfred\Sourcen\Projekte\SaE\wavemaker\trunk\WaveMaker 6.4.5GA\projects\ZABonline\services\ZABonlineDB\src\com\zabonlinedb\data" 

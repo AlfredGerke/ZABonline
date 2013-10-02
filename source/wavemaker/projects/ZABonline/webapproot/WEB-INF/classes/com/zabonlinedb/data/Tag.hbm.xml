@@ -1,0 +1,123 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zabonlinedb.data.Tag" table="V_TAG" dynamic-insert="false" dynamic-update="false">
+        <id name="id" type="integer">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="tag" type="string">
+            <column name="TAG" not-null="true"/>
+        </property>
+        <property name="softdel" type="short">
+            <column name="SOFTDEL" not-null="true"/>
+        </property>
+        <property name="creUser" type="string">
+            <column name="CRE_USER" length="32" not-null="true"/>
+        </property>
+        <property name="creDate" type="timestamp">
+            <column name="CRE_DATE" length="19" not-null="true"/>
+        </property>
+        <property name="chgUser" type="string">
+            <column name="CHG_USER" length="32"/>
+        </property>
+        <property name="chgDate" type="timestamp">
+            <column name="CHG_DATE" length="19"/>
+        </property>
+        <set name="addressTypes" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.AddressType"/>
+        </set>
+        <set name="banks" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Bank"/>
+        </set>
+        <set name="contacts" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Contact"/>
+        </set>
+        <set name="contactTypes" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.ContactType"/>
+        </set>
+        <set name="countries" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Country"/>
+        </set>
+        <set name="persons" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Person"/>
+        </set>
+        <set name="sessions" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Session"/>
+        </set>
+        <set name="tenants" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Tenant"/>
+        </set>
+        <set name="categories" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Category"/>
+        </set>
+        <set name="fieldstores" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.FieldStore"/>
+        </set>
+        <set name="factories" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Factory"/>
+        </set>
+        <set name="addresses" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Address"/>
+        </set>
+        <set name="userses" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Users"/>
+        </set>
+        <set name="datasheets" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Datasheet"/>
+        </set>
+        <set name="tablestores" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.TableStore"/>
+        </set>
+        <set name="roleses" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Roles"/>
+        </set>
+    </class>
+</hibernate-mapping>

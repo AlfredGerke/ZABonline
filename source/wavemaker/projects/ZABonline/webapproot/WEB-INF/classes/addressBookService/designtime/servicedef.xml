@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="addressBookService" class="de.zabonline.srv.db.AddressBook" CRUDService="false" type="JavaService" springFile="addressBookService.spring.xml">
+    <operation name="addAddressBookItem">
+        <parameter name="aTenantId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aSalutationId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aAltsalutation" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aTitelId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aFirstName" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aName" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aName2" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aDayOfBirth" typeRef="java.util.Date" isList="false"/>
+        <parameter name="aIsPrivatePerson" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aIsMarried" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aMarriedToId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aMarriedSince" typeRef="java.util.Date" isList="false"/>
+        <parameter name="aMarriagePartnerFirstName" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aMarriagePartnerName1" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aAddressDataPresent" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aAddressTypeId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aDistrict" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aZipcode" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aCity" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aPostOfficeBox" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aStreet" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aStreetAddressFrom" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aStreetAddressTo" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aIsPostAddress" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aIsPrivateAddress" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aContactDataPresent" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aContactTypeId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aAreaCode" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aPhoneFmt" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aFaxFmt" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aWWW" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aEmail" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aSkype" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aMessangerName" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aBankDataPresent" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aDepositor" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aBlzFmt" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aKtoFmt" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aIBAN" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aBIC" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aInfoDataPresent" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aInfo" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aPhotoPresent" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aPhotoUniqueName" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aPhotoRealName" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
+    <operation name="getUniqueName">
+        <parameter name="aTenantId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aExt" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="java.lang.String" isList="false"/>
+    </operation>
+    <operation name="getUniqueNameByDb">
+        <parameter name="aTenantId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aExt" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
+    <operation name="testProc">
+        <parameter name="aTenantId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aInteger" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aSmallInt" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aVarchar254" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aVarchar2000" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aDate" typeRef="java.util.Date" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
+    <dataobjects>
+        <dataobject javaType="java.util.Date" name="Date" supportsQuickData="false">
+            <element name="calendarDate" typeRef="sun.util.calendar.BaseCalendar.Date" isList="false" allowNull="false"/>
+        </dataobject>
+    </dataobjects>
+</service>

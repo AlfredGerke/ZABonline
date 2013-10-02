@@ -1,0 +1,18 @@
+{
+	"methods": [{
+		"name": "checkGrant",
+		"operationType": null,
+		"parameters": [{
+			"name": "aGrant",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[de.zabonline.srv.Results.SuccessInfo]"
+	}, {
+		"name": "checkGrantAdmin",
+		"operationType": null,
+		"parameters": null,
+		"returnType": "[de.zabonline.srv.Results.SuccessInfo]"
+	}],
+	"serviceType": "JSON-RPC",
+	"serviceURL": "ZABonlineGrantsService.json"
+}

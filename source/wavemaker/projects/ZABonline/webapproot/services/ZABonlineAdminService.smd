@@ -1,0 +1,37 @@
+{
+	"methods": [{
+		"name": "addUserData",
+		"operationType": null,
+		"parameters": [{
+			"name": "aRoleId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aTenantId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aPersonId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aUsername",
+			"type": "java.lang.String"
+		}, {
+			"name": "aPassword",
+			"type": "java.lang.String"
+		}, {
+			"name": "aFirstname",
+			"type": "java.lang.String"
+		}, {
+			"name": "aName",
+			"type": "java.lang.String"
+		}, {
+			"name": "aEmail",
+			"type": "java.lang.String"
+		}, {
+			"name": "aAllowLogin",
+			"type": "java.lang.Boolean"
+		}],
+		"returnType": "[de.zabonline.srv.Results.ProcResults]"
+	}],
+	"serviceType": "JSON-RPC",
+	"serviceURL": "ZABonlineAdminService.json"
+}

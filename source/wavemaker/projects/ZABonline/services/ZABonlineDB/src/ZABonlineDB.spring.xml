@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <bean lazy-init="true" scope="singleton" class="com.zabonlinedb.ZABonlineDB" id="ZABonlineDB">
+        <property name="dataServiceManager">
+            <ref bean="ZABonlineDBDataService"/>
+        </property>
+        <property name="taskManager">
+            <ref bean="ZABonlineDBTaskMgr"/>
+        </property>
+    </bean>
+    <bean class="com.wavemaker.runtime.data.spring.WMPropertyPlaceholderConfigurer">
+        <property value="true" name="ignoreUnresolvablePlaceholders"/>
+        <property name="locations">
+            <list>
+                <value>classpath:ZABonlineDB.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean lazy-init="true" class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="ZABonlineDBDataSource">
+        <property value="${ZABonlineDB.driverClassName}" name="driverClassName"/>
+        <property value="${ZABonlineDB.connectionUrl}" name="url"/>
+        <property value="${ZABonlineDB.username}" name="username"/>
+        <property value="${ZABonlineDB.password}" name="password"/>
+    </bean>
+    <bean lazy-init="true" class="org.springframework.orm.hibernate3.HibernateTransactionManager" id="ZABonlineDBTxMgr">
+        <property name="sessionFactory">
+            <ref bean="ZABonlineDBSessionFactory"/>
+        </property>
+    </bean>
+    <bean lazy-init="true" class="org.springframework.orm.hibernate3.HibernateTemplate" id="ZABonlineDBHibernateTemplate">
+        <property name="sessionFactory">
+            <ref bean="ZABonlineDBSessionFactory"/>
+        </property>
+    </bean>
+    <bean lazy-init="true" class="com.wavemaker.runtime.data.spring.ConfigurationAndSessionFactoryBean" id="ZABonlineDBSessionFactory">
+        <property value="ZABonlineDB" name="name"/>
+        <property ref="ZABonlineDBDataSource" name="dataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${ZABonlineDB.dialect}</prop>
+                <prop key="hibernate.transaction.factory_class">
+                    org.hibernate.transaction.JDBCTransactionFactory
+                </prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+            </props>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>com/zabonlinedb/data/Address.hbm.xml</value>
+                <value>com/zabonlinedb/data/Address.ql.xml</value>
+                <value>com/zabonlinedb/data/AddressType.hbm.xml</value>
+                <value>com/zabonlinedb/data/Bank.hbm.xml</value>     
+                <value>com/zabonlinedb/data/Category.hbm.xml</value>
+                <value>com/zabonlinedb/data/Contact.hbm.xml</value>
+                <value>com/zabonlinedb/data/ContactType.hbm.xml</value>
+                <value>com/zabonlinedb/data/Country.hbm.xml</value>
+                <value>com/zabonlinedb/data/Datasheet.hbm.xml</value>
+                <value>com/zabonlinedb/data/Factory.hbm.xml</value>
+                <value>com/zabonlinedb/data/FieldStore.hbm.xml</value>
+                <value>com/zabonlinedb/data/Person.hbm.xml</value>
+                <value>com/zabonlinedb/data/Registry.hbm.xml</value>
+                <value>com/zabonlinedb/data/RelAddressbookItemDetails.hbm.xml</value>
+                <value>com/zabonlinedb/data/RelFactoryAddress.hbm.xml</value>
+                <value>com/zabonlinedb/data/RelFactoryBank.hbm.xml</value>
+                <value>com/zabonlinedb/data/RelPersonAddress.hbm.xml</value>
+                <value>com/zabonlinedb/data/RelPersonBank.hbm.xml</value>
+                <value>com/zabonlinedb/data/RelPersonCategory.hbm.xml</value>
+                <value>com/zabonlinedb/data/RelPersonContact.hbm.xml</value>
+                <value>com/zabonlinedb/data/RelTableStoreFieldStore.hbm.xml</value>
+                <value>com/zabonlinedb/data/Roles.hbm.xml</value>
+                <value>com/zabonlinedb/data/Salutation.hbm.xml</value>
+                <value>com/zabonlinedb/data/Session.hbm.xml</value>
+                <value>com/zabonlinedb/data/Tag.hbm.xml</value>
+                <value>com/zabonlinedb/data/TableStore.hbm.xml</value>
+                <value>com/zabonlinedb/data/Tenant.hbm.xml</value>
+                <value>com/zabonlinedb/data/Titel.hbm.xml</value>
+                <value>com/zabonlinedb/data/Updatehistory.hbm.xml</value>
+                <value>com/zabonlinedb/data/Users.hbm.xml</value>
+                <value>com/zabonlinedb/data/app-queries.ql.xml</value>
+            </list>
+        </property>
+    </bean>
+    <bean lazy-init="true" class="com.wavemaker.runtime.data.spring.SpringDataServiceManager" id="ZABonlineDBDataService">
+        <constructor-arg>
+            <value>ZABonlineDB</value>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="ZABonlineDBHibernateTemplate"/>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="ZABonlineDBTxMgr"/>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="ZABonlineDBTaskMgr"/>
+        </constructor-arg>
+        <constructor-arg>
+            <map>
+                <entry value="false" key="useIndividualCRUDOperations"/>
+                <entry value="" key="refreshEntities"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    <bean lazy-init="true" class="com.wavemaker.runtime.data.DefaultTaskManager" id="ZABonlineDBTaskMgr"/>
+    <bean lazy-init="false" class="com.wavemaker.runtime.service.events.EventWire">
+        <property ref="ZABonlineDBServiceWire" name="serviceWire"/>
+        <property name="eventListener">
+            <bean class="com.wavemaker.runtime.data.DataServiceEventListener"/>
+        </property>
+    </bean>
+    <bean lazy-init="false" scope="singleton" class="com.wavemaker.runtime.service.reflect.ReflectServiceWire" id="ZABonlineDBServiceWire">
+        <property value="ZABonlineDB" name="serviceId"/>
+        <property ref="DataService" name="serviceType"/>
+    </bean>
+</beans>

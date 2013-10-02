@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="ResultStructs" class="de.zabonline.srv.Results" CRUDService="false" type="JavaService" springFile="ResultStructs.spring.xml">
+    <dataobjects/>
+</service>
