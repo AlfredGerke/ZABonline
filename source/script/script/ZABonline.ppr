@@ -13,125 +13,125 @@ ProjectFilesOnly=0
 ZABonline
 	+Ordner
 		+hibernate_xml_anpassen
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\services\ZABonlineDB\designtime\servicedef.xml
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\services\ZABonlineDB\src\ZABonlineDB.spring.xml
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\WEB-INF\project-managers.xml
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\types.js
+			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\designtime\servicedef.xml
+			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\src\ZABonlineDB.spring.xml
+			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\project-managers.xml
+			..\..\wavemaker\projects\ZABonline\webapproot\types.js
 		+doc
 			..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
 		+webapproot
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\lib_project.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\config.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\types.js
+			..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
+			..\..\wavemaker\projects\ZABonline\webapproot\config.js
+			..\..\wavemaker\projects\ZABonline\webapproot\types.js
 		-pages
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\AdminByAccordion\AdminByAccordion.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\FollowUp\FollowUp.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\GlobalSearch\GlobalSearch.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\Login\Login.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\Main\Main.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\MemberByAccordion\MemberByAccordion.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\NewFactory\NewFactory.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\NewMember\NewMember.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\NewTable\NewTable.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\NewField\NewField.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\NewUser\NewUser.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\NewTenant\NewTenant.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\NewDossier\NewDossier.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\NewProcess\NewProcess.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\NewTicket\NewTicket.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\ShowAbout\ShowAbout.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\ShowContact\ShowContact.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\ShowImpressum\ShowImpressum.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\pages\SearchPage\SearchPage.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\AdminByAccordion\AdminByAccordion.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\FollowUp\FollowUp.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\GlobalSearch\GlobalSearch.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\Login\Login.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\Main\Main.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\MemberByAccordion\MemberByAccordion.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewFactory\NewFactory.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewMember\NewMember.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewTable\NewTable.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewField\NewField.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewUser\NewUser.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewTenant\NewTenant.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewDossier\NewDossier.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewProcess\NewProcess.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewTicket\NewTicket.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\ShowAbout\ShowAbout.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\ShowContact\ShowContact.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\ShowImpressum\ShowImpressum.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\SearchPage\SearchPage.js
 		+WEB-INF
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\WEB-INF\user-web.xml
+			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 		-ressourcen
 			-javascript
 		-language
 			-de
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewAddress.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\Main.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\Login.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\app.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewMember.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewFactory.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewUser.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewTenant.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewTable.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewField.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\ShowImpressum.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\ShowContact.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\ShowAbout.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewTicket.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewRole.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewProcess.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewDossier.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\SearchPage.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewAddress.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\Main.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\Login.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\app.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewMember.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewFactory.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewUser.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewTenant.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewTable.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewField.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\ShowImpressum.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\ShowContact.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\ShowAbout.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewTicket.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewRole.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewProcess.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewDossier.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\SearchPage.js
 			+de-de
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\Main.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\Login.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\app.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewMember.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de\NewFactory.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\NewUser.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\NewTenant.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\NewTable.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\NewField.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\ShowImpressum.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\ShowContact.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\ShowAbout.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\NewTicket.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\NewProcess.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\NewDossier.js
-				..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\de-de\SearchPage.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\NewAddress.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\Main.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\Login.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\app.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\NewMember.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\NewFactory.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\NewUser.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\NewTenant.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\NewTable.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\NewField.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\ShowImpressum.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\ShowContact.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\ShowAbout.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\NewTicket.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\NewRole.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\NewProcess.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\NewDossier.js
-			..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\language\nls\SearchPage.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\Main.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\Login.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\app.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewMember.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewFactory.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewUser.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewTenant.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewTable.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewField.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\ShowImpressum.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\ShowContact.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\ShowAbout.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewTicket.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewProcess.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewDossier.js
+				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\SearchPage.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\NewAddress.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\Main.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\Login.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\app.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\NewMember.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\NewFactory.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\NewUser.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\NewTenant.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\NewTable.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\NewField.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\ShowImpressum.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\ShowContact.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\ShowAbout.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\NewTicket.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\NewRole.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\NewProcess.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\NewDossier.js
+			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\SearchPage.js
 		+common
 			-crypt
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\crypt\SHA512.js
+				..\..\wavemaker\common\packages\zabonline\crypt\SHA512.js
 			-extend
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\extend\ZabExtender.js
-			-mod
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\TitelLookup.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\SalutationLookup.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\GlobalData.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\ContactTypeLookup.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\AreaCodeLookup.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\AddressTypeLookup.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\DummyServiceVariable.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\Utils.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\ZabonlineCtrl.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\MainCtrl.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\Controller.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\NewAddressCtrl.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\NewFactoryCtrl.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\NewUserCtrl.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\NewTenantCtrl.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\NewTableCtrl.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\NewMemberCtrl.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\NewFieldCtrl.js
-				..\..\WaveMaker 6.4.5GA\common\packages\zabonline\mod\SearchPageCtrl.js
+				..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js
+			+mod
+				..\..\wavemaker\common\packages\zabonline\mod\TitelLookup.js
+				..\..\wavemaker\common\packages\zabonline\mod\SalutationLookup.js
+				..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js
+				..\..\wavemaker\common\packages\zabonline\mod\ContactTypeLookup.js
+				..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
+				..\..\wavemaker\common\packages\zabonline\mod\AddressTypeLookup.js
+				..\..\wavemaker\common\packages\zabonline\mod\DummyServiceVariable.js
+				..\..\wavemaker\common\packages\zabonline\mod\Utils.js
+				..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
+				..\..\wavemaker\common\packages\zabonline\mod\MainCtrl.js
+				..\..\wavemaker\common\packages\zabonline\mod\Controller.js
+				..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
+				..\..\wavemaker\common\packages\zabonline\mod\NewFactoryCtrl.js
+				..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js
+				..\..\wavemaker\common\packages\zabonline\mod\NewTenantCtrl.js
+				..\..\wavemaker\common\packages\zabonline\mod\NewTableCtrl.js
+				..\..\wavemaker\common\packages\zabonline\mod\NewMemberCtrl.js
+				..\..\wavemaker\common\packages\zabonline\mod\NewFieldCtrl.js
+				..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js
 		+SQL
-			-Data
+			+Data
 				data_0001.sql
 				data_0002.sql
 				data_0003.sql
@@ -151,42 +151,5 @@ ZABonline
 			create_find.sql
 			create_json.sql
 [Open project files]
-0=Neu1.txt
-1=..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\WEB-INF\user-web.xml
-2=..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\lib_project.js
-3=..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\config.js
-4=..\..\WaveMaker 6.4.5GA\projects\ZABonline\services\ZABonlineDB\designtime\servicedef.xml
-5=..\..\WaveMaker 6.4.5GA\projects\ZABonline\services\ZABonlineDB\src\ZABonlineDB.spring.xml
-6=..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\WEB-INF\project-managers.xml
-7=..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\types.js
-8=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
 [Selected Project Files]
 Main=
-Selected=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
-[Neu1.txt]
-TopLine=1
-Caret=1,1
-[..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\WEB-INF\user-web.xml]
-TopLine=1
-Caret=1,1
-[..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\lib_project.js]
-TopLine=1
-Caret=1,1
-[..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\config.js]
-TopLine=1
-Caret=1,1
-[..\..\WaveMaker 6.4.5GA\projects\ZABonline\services\ZABonlineDB\designtime\servicedef.xml]
-TopLine=1
-Caret=1,1
-[..\..\WaveMaker 6.4.5GA\projects\ZABonline\services\ZABonlineDB\src\ZABonlineDB.spring.xml]
-TopLine=1
-Caret=1,1
-[..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\WEB-INF\project-managers.xml]
-TopLine=1
-Caret=1,1
-[..\..\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\types.js]
-TopLine=1
-Caret=1,1
-[..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt]
-TopLine=2
-Caret=1,1

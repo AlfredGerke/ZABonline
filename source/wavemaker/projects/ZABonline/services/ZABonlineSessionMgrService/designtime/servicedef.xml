@@ -38,9 +38,55 @@
             <element name="authType" typeRef="java.lang.String" isList="false" allowNull="false"/>
             <element name="contextPath" typeRef="java.lang.String" isList="false" allowNull="false"/>
             <element name="cookies" typeRef="javax.servlet.http.Cookie" isList="true" allowNull="false"/>
+            <element name="headerNames" typeRef="java.util.Enumeration" isList="false" allowNull="false"/>
+            <element name="method" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="pathInfo" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="pathTranslated" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="queryString" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="remoteUser" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="requestURI" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="requestURL" typeRef="java.lang.StringBuffer" isList="false" allowNull="false"/>
+            <element name="requestedSessionId" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="servletPath" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="session" typeRef="javax.servlet.http.HttpSession" isList="false" allowNull="false"/>
+            <element name="userPrincipal" typeRef="java.security.Principal" isList="false" allowNull="false"/>
+            <element name="requestedSessionIdFromCookie" typeRef="boolean" isList="false" allowNull="false"/>
+            <element name="requestedSessionIdFromURL" typeRef="boolean" isList="false" allowNull="false"/>
+            <element name="requestedSessionIdFromUrl" typeRef="boolean" isList="false" allowNull="false"/>
+            <element name="requestedSessionIdValid" typeRef="boolean" isList="false" allowNull="false"/>
+            <element name="attributeNames" typeRef="java.util.Enumeration" isList="false" allowNull="false"/>
+            <element name="characterEncoding" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="contentLength" typeRef="int" isList="false" allowNull="false"/>
+            <element name="contentType" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="inputStream" typeRef="javax.servlet.ServletInputStream" isList="false" allowNull="false"/>
+            <element name="localAddr" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="localName" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="localPort" typeRef="int" isList="false" allowNull="false"/>
+            <element name="locale" typeRef="java.util.Locale" isList="false" allowNull="false"/>
+            <element name="locales" typeRef="java.util.Enumeration" isList="false" allowNull="false"/>
+            <element name="parameterMap" typeRef="java.util.Map" isList="false" allowNull="false"/>
+            <element name="parameterNames" typeRef="java.util.Enumeration" isList="false" allowNull="false"/>
+            <element name="protocol" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="reader" typeRef="java.io.BufferedReader" isList="false" allowNull="false"/>
+            <element name="remoteAddr" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="remoteHost" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="remotePort" typeRef="int" isList="false" allowNull="false"/>
+            <element name="scheme" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="serverName" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="serverPort" typeRef="int" isList="false" allowNull="false"/>
+            <element name="secure" typeRef="boolean" isList="false" allowNull="false"/>
         </dataobject>
         <dataobject javaType="com.wavemaker.runtime.security.SecurityService" name="SecurityService" supportsQuickData="false">
             <element name="authenticatedAuthentication" typeRef="org.acegisecurity.Authentication" isList="false" allowNull="false"/>
+            <element name="authenticationManager" typeRef="org.acegisecurity.AuthenticationManager" isList="false" allowNull="false"/>
+            <element name="noRolesMarkerRole" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="roleMap" typeRef="java.util.Map&lt;java.lang.String,java.util.List&lt;com.wavemaker.runtime.security.Rule&gt;&gt;" isList="false" allowNull="false"/>
+            <element name="rolePrefix" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="roles" typeRef="java.lang.String" isList="true" allowNull="false"/>
+            <element name="userId" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="userName" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="userRoles" typeRef="java.lang.String" isList="true" allowNull="false"/>
+            <element name="authenticated" typeRef="boolean" isList="false" allowNull="false"/>
         </dataobject>
     </dataobjects>
 </service>

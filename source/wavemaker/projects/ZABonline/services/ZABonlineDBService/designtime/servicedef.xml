@@ -6,6 +6,7 @@
     <dataobjects>
         <dataobject javaType="com.zabonlinedb.ZABonlineDB" name="ZABonlineDB" supportsQuickData="false">
             <element name="dataServiceManager" typeRef="com.wavemaker.runtime.data.DataServiceManager" isList="false" allowNull="false"/>
+            <element name="taskManager" typeRef="com.wavemaker.runtime.data.TaskManager" isList="false" allowNull="false"/>
         </dataobject>
     </dataobjects>
 </service>

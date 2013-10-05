@@ -61,6 +61,16 @@ wm.types = {
 		},
 		"com.wavemaker.runtime.security.SecurityService": {
 			"fields": {
+				"authenticated": {
+					"exclude": [],
+					"fieldOrder": 9,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "boolean"
+				},
 				"authenticatedAuthentication": {
 					"exclude": [],
 					"fieldOrder": 0,
@@ -70,6 +80,86 @@ wm.types = {
 					"noChange": [],
 					"required": true,
 					"type": "org.acegisecurity.Authentication"
+				},
+				"authenticationManager": {
+					"exclude": [],
+					"fieldOrder": 1,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "org.acegisecurity.AuthenticationManager"
+				},
+				"noRolesMarkerRole": {
+					"exclude": [],
+					"fieldOrder": 2,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"roleMap": {
+					"exclude": [],
+					"fieldOrder": 3,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.util.Map<java.lang.String,java.util.List<com.wavemaker.runtime.security.Rule>>"
+				},
+				"rolePrefix": {
+					"exclude": [],
+					"fieldOrder": 4,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"roles": {
+					"exclude": [],
+					"fieldOrder": 5,
+					"fieldSubType": null,
+					"include": [],
+					"isList": true,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"userId": {
+					"exclude": [],
+					"fieldOrder": 6,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"userName": {
+					"exclude": [],
+					"fieldOrder": 7,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"userRoles": {
+					"exclude": [],
+					"fieldOrder": 8,
+					"fieldSubType": null,
+					"include": [],
+					"isList": true,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
 				}
 			},
 			"internal": false,
@@ -181,6 +271,16 @@ wm.types = {
 					"noChange": [],
 					"required": true,
 					"type": "com.wavemaker.runtime.data.DataServiceManager"
+				},
+				"taskManager": {
+					"exclude": [],
+					"fieldOrder": 1,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "com.wavemaker.runtime.data.TaskManager"
 				}
 			},
 			"internal": false,
@@ -5205,9 +5305,49 @@ wm.types = {
 		},
 		"javax.servlet.http.HttpServletRequest": {
 			"fields": {
+				"attributeNames": {
+					"exclude": [],
+					"fieldOrder": 19,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.util.Enumeration"
+				},
 				"authType": {
 					"exclude": [],
 					"fieldOrder": 0,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"characterEncoding": {
+					"exclude": [],
+					"fieldOrder": 20,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"contentLength": {
+					"exclude": [],
+					"fieldOrder": 21,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "int"
+				},
+				"contentType": {
+					"exclude": [],
+					"fieldOrder": 22,
 					"fieldSubType": null,
 					"include": [],
 					"isList": false,
@@ -5234,6 +5374,336 @@ wm.types = {
 					"noChange": [],
 					"required": true,
 					"type": "javax.servlet.http.Cookie"
+				},
+				"headerNames": {
+					"exclude": [],
+					"fieldOrder": 3,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.util.Enumeration"
+				},
+				"inputStream": {
+					"exclude": [],
+					"fieldOrder": 23,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "javax.servlet.ServletInputStream"
+				},
+				"localAddr": {
+					"exclude": [],
+					"fieldOrder": 24,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"localName": {
+					"exclude": [],
+					"fieldOrder": 25,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"localPort": {
+					"exclude": [],
+					"fieldOrder": 26,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "int"
+				},
+				"locale": {
+					"exclude": [],
+					"fieldOrder": 27,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.util.Locale"
+				},
+				"locales": {
+					"exclude": [],
+					"fieldOrder": 28,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.util.Enumeration"
+				},
+				"method": {
+					"exclude": [],
+					"fieldOrder": 4,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"parameterMap": {
+					"exclude": [],
+					"fieldOrder": 29,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.util.Map"
+				},
+				"parameterNames": {
+					"exclude": [],
+					"fieldOrder": 30,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.util.Enumeration"
+				},
+				"pathInfo": {
+					"exclude": [],
+					"fieldOrder": 5,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"pathTranslated": {
+					"exclude": [],
+					"fieldOrder": 6,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"protocol": {
+					"exclude": [],
+					"fieldOrder": 31,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"queryString": {
+					"exclude": [],
+					"fieldOrder": 7,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"reader": {
+					"exclude": [],
+					"fieldOrder": 32,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.io.BufferedReader"
+				},
+				"remoteAddr": {
+					"exclude": [],
+					"fieldOrder": 33,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"remoteHost": {
+					"exclude": [],
+					"fieldOrder": 34,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"remotePort": {
+					"exclude": [],
+					"fieldOrder": 35,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "int"
+				},
+				"remoteUser": {
+					"exclude": [],
+					"fieldOrder": 8,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"requestURI": {
+					"exclude": [],
+					"fieldOrder": 9,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"requestURL": {
+					"exclude": [],
+					"fieldOrder": 10,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.StringBuffer"
+				},
+				"requestedSessionId": {
+					"exclude": [],
+					"fieldOrder": 11,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"requestedSessionIdFromCookie": {
+					"exclude": [],
+					"fieldOrder": 15,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "boolean"
+				},
+				"requestedSessionIdFromURL": {
+					"exclude": [],
+					"fieldOrder": 16,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "boolean"
+				},
+				"requestedSessionIdFromUrl": {
+					"exclude": [],
+					"fieldOrder": 17,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "boolean"
+				},
+				"requestedSessionIdValid": {
+					"exclude": [],
+					"fieldOrder": 18,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "boolean"
+				},
+				"scheme": {
+					"exclude": [],
+					"fieldOrder": 36,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"secure": {
+					"exclude": [],
+					"fieldOrder": 39,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "boolean"
+				},
+				"serverName": {
+					"exclude": [],
+					"fieldOrder": 37,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"serverPort": {
+					"exclude": [],
+					"fieldOrder": 38,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "int"
+				},
+				"servletPath": {
+					"exclude": [],
+					"fieldOrder": 12,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"session": {
+					"exclude": [],
+					"fieldOrder": 13,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "javax.servlet.http.HttpSession"
+				},
+				"userPrincipal": {
+					"exclude": [],
+					"fieldOrder": 14,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.security.Principal"
 				}
 			},
 			"internal": false,

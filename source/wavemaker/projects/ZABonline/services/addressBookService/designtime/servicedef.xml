@@ -70,6 +70,17 @@
     <dataobjects>
         <dataobject javaType="java.util.Date" name="Date" supportsQuickData="false">
             <element name="calendarDate" typeRef="sun.util.calendar.BaseCalendar.Date" isList="false" allowNull="false"/>
+            <element name="date" typeRef="int" isList="false" allowNull="false"/>
+            <element name="day" typeRef="int" isList="false" allowNull="false"/>
+            <element name="hours" typeRef="int" isList="false" allowNull="false"/>
+            <element name="julianCalendar" typeRef="sun.util.calendar.BaseCalendar" isList="false" allowNull="false"/>
+            <element name="minutes" typeRef="int" isList="false" allowNull="false"/>
+            <element name="month" typeRef="int" isList="false" allowNull="false"/>
+            <element name="seconds" typeRef="int" isList="false" allowNull="false"/>
+            <element name="time" typeRef="long" isList="false" allowNull="false"/>
+            <element name="timeImpl" typeRef="long" isList="false" allowNull="false"/>
+            <element name="timezoneOffset" typeRef="int" isList="false" allowNull="false"/>
+            <element name="year" typeRef="int" isList="false" allowNull="false"/>
         </dataobject>
     </dataobjects>
 </service>
