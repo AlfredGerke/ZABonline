@@ -151,5 +151,14 @@ ZABonline
 			create_find.sql
 			create_json.sql
 [Open project files]
+0=Neu1.txt
+1=..\..\wavemaker\logs\wm.log
 [Selected Project Files]
 Main=
+Selected=..\..\wavemaker\logs\wm.log
+[Neu1.txt]
+TopLine=1
+Caret=17,1
+[..\..\wavemaker\logs\wm.log]
+TopLine=1630
+Caret=92,1653

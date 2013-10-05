@@ -9,6 +9,7 @@ import java.io.Serializable;
  *  06/13/2013 22:11:58
  * 
  */
+@SuppressWarnings("serial")
 public class RelTableStoreFieldStoreId
     implements Serializable
 {

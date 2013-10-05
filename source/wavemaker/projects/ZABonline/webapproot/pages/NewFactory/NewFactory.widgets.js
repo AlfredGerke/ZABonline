@@ -100,7 +100,7 @@ NewFactory.widgets = {
 					pnlContactPerson: ["wm.FancyPanel", {"freeze":false,"title":"Ansprechpartner"}, {}, {
 						pnlBasisContactPersonData: ["wm.Panel", {"height":"100%","horizontalAlign":"left","verticalAlign":"top","width":"100%"}, {}, {
 							cboContactPartnerIdPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-								cboContactPartnerId: ["wm.SelectMenu", {"allowNone":true,"caption":"Ansprechpartner","captionSize":"110px","dataField":"c0","dataType":"com.zabonlinedb.data.output.GetLookupContactPartnerByTenantRtnType","dataValue":undefined,"displayField":"contactPartner","displayValue":"","emptyValue":"null"}, {"onchange":"cboContactPartnerIdChange"}, {
+								cboContactPartnerId: ["wm.SelectMenu", {"allowNone":true,"caption":"Ansprechpartner","captionSize":"110px","dataField":"c0","dataType":"com.zabonlinedb.data.output.GetLookupContactPartnerByTenantRtnType","displayField":"contactPartner","displayValue":"","emptyValue":"null"}, {"onchange":"cboContactPartnerIdChange"}, {
 									binding: ["wm.Binding", {}, {}, {
 										wire: ["wm.Wire", {"expression":undefined,"source":"srvVarContactPartnerLookUp","targetProperty":"dataSet"}, {}]
 									}]

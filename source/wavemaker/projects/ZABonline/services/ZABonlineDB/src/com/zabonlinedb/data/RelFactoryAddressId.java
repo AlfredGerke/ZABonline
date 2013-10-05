@@ -9,6 +9,7 @@ import java.io.Serializable;
  *  06/13/2013 22:11:54
  * 
  */
+@SuppressWarnings("serial")
 public class RelFactoryAddressId
     implements Serializable
 {

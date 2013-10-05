@@ -96,7 +96,7 @@ NewUser.widgets = {
 							btnAddTenant: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnAddMandantClick"}]
 						}],
 						edtPersonPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							edtPerson: ["wm.SelectMenu", {"caption":"Personendaten","captionSize":"110px","dataField":"personId","dataType":"com.zabonlinedb.data.output.GetLookupPersonByTenantRtnType","dataValue":undefined,"displayField":"nameFirstname","displayValue":"","emptyValue":"null"}, {}, {
+							edtPerson: ["wm.SelectMenu", {"caption":"Personendaten","captionSize":"110px","dataField":"personId","dataType":"com.zabonlinedb.data.output.GetLookupPersonByTenantRtnType","displayField":"nameFirstname","displayValue":"","emptyValue":"null"}, {}, {
 								binding: ["wm.Binding", {}, {}, {
 									wire: ["wm.Wire", {"expression":undefined,"source":"personLookupVar","targetProperty":"dataSet"}, {}]
 								}]

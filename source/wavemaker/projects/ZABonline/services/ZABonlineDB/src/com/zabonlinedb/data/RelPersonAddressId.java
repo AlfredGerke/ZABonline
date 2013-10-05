@@ -9,6 +9,7 @@ import java.io.Serializable;
  *  06/13/2013 22:11:55
  * 
  */
+@SuppressWarnings("serial")
 public class RelPersonAddressId
     implements Serializable
 {

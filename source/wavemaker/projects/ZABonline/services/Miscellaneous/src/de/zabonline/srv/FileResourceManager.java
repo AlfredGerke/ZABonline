@@ -32,6 +32,10 @@ import de.zabonline.srv.ZABonlineConstants;
 import de.zabonline.srv.RelationIdents;
 import de.zabonline.srv.ResourcePurpose;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+
 /**
  * Dateihändling der ZABonline
  * 
@@ -42,6 +46,7 @@ import de.zabonline.srv.ResourcePurpose;
  */
 public class FileResourceManager {
 
+  private static Logger logger = LogManager.getLogger("FileResourceManager");	
   private Session session = null;
   private RelationIdents relationIdent = RelationIdents.UNKNOWN;
 
@@ -439,6 +444,8 @@ public class FileResourceManager {
       AccessMode aAccessMode,
       ResourcePurpose aPurpose) {
 
+	logger.info("before doInsert");
+	
     Boolean result = false;
     String mimeTypeByFile = "";
     MimeTypeInfo typeInfo;
@@ -458,7 +465,7 @@ public class FileResourceManager {
     subType = typeInfo.getSubtype();
 
     doInsert = ((!mimeType.isEmpty()) && (!subType.isEmpty()));
-
+    
     if (doInsert) {
       result = deploy(aSessionId,
           aUsername,
