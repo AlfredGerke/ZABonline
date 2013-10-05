@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="RegistryService" class="de.zabonline.srv.db.RegistryAccess" CRUDService="false" type="JavaService" springFile="RegistryService.spring.xml">
+    <operation name="readFloat">
+        <parameter name="aKey" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aSection" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aIdent" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aDefault" typeRef="java.lang.Float" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
+    <operation name="readInteger">
+        <parameter name="aKey" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aSection" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aIdent" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aDefault" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
+    <operation name="readSection">
+        <parameter name="aKey" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aSection" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
+    <operation name="readSections">
+        <parameter name="aKey" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
+    <operation name="readString">
+        <parameter name="aKey" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aSection" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aIdent" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aDefault" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
+    <operation name="writeFloat">
+        <parameter name="aKey" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aSection" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aIdent" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aValue" typeRef="java.lang.Float" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.SuccessInfo" isList="true"/>
+    </operation>
+    <operation name="writeInteger">
+        <parameter name="aKey" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aSection" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aIdent" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aValue" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.SuccessInfo" isList="true"/>
+    </operation>
+    <operation name="writeString">
+        <parameter name="aKey" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aSection" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aIdent" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aValue" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.SuccessInfo" isList="true"/>
+    </operation>
+    <dataobjects>
+        <dataobject javaType="de.zabonline.srv.Results.ProcResults" name="ProcResults" supportsQuickData="false">
+            <element name="code" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+            <element name="info" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="success" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="de.zabonline.srv.Results.SuccessInfo" name="SuccessInfo" supportsQuickData="false">
+            <element name="success" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+    </dataobjects>
+</service>

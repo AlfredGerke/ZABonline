@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="FactoryService" class="de.zabonline.srv.db.FactoryManagement" CRUDService="false" type="JavaService" springFile="FactoryService.spring.xml">
+    <dataobjects/>
+</service>
