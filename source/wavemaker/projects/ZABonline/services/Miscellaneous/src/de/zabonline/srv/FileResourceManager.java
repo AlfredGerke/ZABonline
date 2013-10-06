@@ -211,8 +211,6 @@ public class FileResourceManager {
       String aSuptype,
       AccessMode aAccessMode) {
 
-	logger.warn("begin - insertIntoDb");  
-	  
     List<Results.ProcResults> result = null;
     String errorMsg = "";     
     
@@ -288,12 +286,10 @@ public class FileResourceManager {
       if (ex.getCause() == null) {
         errorMsg = ex.getMessage();
       } else {
-        errorMsg = ex.getCause()
-            .getMessage();
+        errorMsg = ex.getCause().getMessage();
       }
 
-      if (errorMsg.trim()
-          .isEmpty()) {
+      if (errorMsg.trim().isEmpty()) {
         errorMsg = ZABonlineConstants.ERROR_SAVE_FILE_TO_DB;
       }
 
@@ -401,7 +397,7 @@ public class FileResourceManager {
       ResourcePurpose aPurpose) {
     Boolean result = false;
     
-    logger.warn("begin - deploy");
+    logger.warn("deploy-MimeType: " + aMimetype + " / " + aSubtype);
     
     List<Results.ProcResults> resultByDb = insertIntoDb(aSessionId,
         aUsername,
@@ -457,9 +453,11 @@ public class FileResourceManager {
       String aRelSourceDir,
       AccessMode aAccessMode,
       ResourcePurpose aPurpose) {
-
-	logger.warn("begin - deployFileResource");
-	
+	  
+	logger.warn("deployFileResource - aShortFilename: " + aShortFilename);	  
+	logger.warn("deployFileResource - aUniquename: " + aUniquename);
+	logger.warn("deployFileResource - aRelSourceDir: " + aRelSourceDir);
+	  
     Boolean result = false;
     String mimeTypeByFile = "";
     MimeTypeInfo typeInfo;
@@ -470,24 +468,26 @@ public class FileResourceManager {
         .getSession()
         .getServletContext()
         .getRealPath(aRelSourceDir);
-    File upload_file = new File(uploadDir, aShortFilename);
+    File uploadFile = new File(uploadDir, aShortFilename);
 
-    logger.warn("before - getMimeTypeByFilename");
-    mimeTypeByFile = getMimeTypeByFilename(upload_file);
+    mimeTypeByFile = getMimeTypeByFilename(uploadFile);
 
     typeInfo = new MimeTypeInfo(mimeTypeByFile);
     mimeType = typeInfo.getMimetype();
     subType = typeInfo.getSubtype();
 
+    logger.warn("deployFileResource - upload_file: " + uploadFile);
+    logger.warn("deployFileResource - mimeType: " + mimeType);
+    logger.warn("deployFileResource - subType: " + subType);
+    
     doInsert = ((!mimeType.isEmpty()) && (!subType.isEmpty()));
     
     if (doInsert) {
-      logger.warn("before - deploy");
       result = deploy(aSessionId,
           aUsername,
           aIpByRequest,
           aTenantId,
-          upload_file,
+          uploadFile,
           aShortFilename,
           aUniquename,
           mimeType,

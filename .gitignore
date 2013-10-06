@@ -2,8 +2,8 @@
 ## ZABonline (Wavemaker)
 ########################
 
+source/wavemaker/projects/ZABonline/webapproot/resources/tmp/
 source/wavemaker/projects/ZABonline/webapproot/WEB-INF/lib/
-source/wavemaker/projects/ZABonline/webapproot/WEB-INF/lib/*.jar
 *.class
 *.a.js
 timestamp.txt
