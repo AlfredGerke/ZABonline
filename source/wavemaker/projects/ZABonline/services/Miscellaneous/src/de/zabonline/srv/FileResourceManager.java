@@ -32,7 +32,7 @@ import de.zabonline.srv.ZABonlineConstants;
 import de.zabonline.srv.RelationIdents;
 import de.zabonline.srv.ResourcePurpose;
 
-import org.apache.log4j.LogManager;
+//import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 
@@ -46,7 +46,7 @@ import org.apache.log4j.Logger;
  */
 public class FileResourceManager {
 
-  private static Logger logger = LogManager.getLogger("FileResourceManager");	
+  private static Logger logger = Logger.getLogger("FileResourceManager");	
   private Session session = null;
   private RelationIdents relationIdent = RelationIdents.UNKNOWN;
 
@@ -211,6 +211,8 @@ public class FileResourceManager {
       String aSuptype,
       AccessMode aAccessMode) {
 
+	logger.warn("begin - insertIntoDb");  
+	  
     List<Results.ProcResults> result = null;
     String errorMsg = "";     
     
@@ -261,6 +263,10 @@ public class FileResourceManager {
           .list();
 
       inStream.close();
+      
+      if (result.get(0).success == 0) {
+    	logger.warn("DBResult-Error - insertIntoDb: " + result.get(0).info);
+      }	
 
     } catch (IOException ex) {
       if (ex.getCause() == null) {
@@ -275,6 +281,8 @@ public class FileResourceManager {
         errorMsg = ZABonlineConstants.ERROR_SAVE_FILE_TO_DB;
       }
 
+      logger.warn("IO-Error - insertIntoDb: " + errorMsg);
+      
       throw new RuntimeException(errorMsg);
     } catch (HibernateException ex) {
       if (ex.getCause() == null) {
@@ -289,6 +297,8 @@ public class FileResourceManager {
         errorMsg = ZABonlineConstants.ERROR_SAVE_FILE_TO_DB;
       }
 
+      logger.warn("Hib-Error - insertIntoDb: " + errorMsg);
+      
       throw new RuntimeException(errorMsg);
     }
     
@@ -360,6 +370,8 @@ public class FileResourceManager {
         errorMsg = ZABonlineConstants.ERROR_COPY_FILERESOURCE;
       }
 
+      logger.warn("IO-Error - copyFileResouce:" + errorMsg);
+      
       throw new RuntimeException(errorMsg);
     }
 
@@ -387,8 +399,10 @@ public class FileResourceManager {
       String aSubtype,
       AccessMode aAccessMode,
       ResourcePurpose aPurpose) {
-
     Boolean result = false;
+    
+    logger.warn("begin - deploy");
+    
     List<Results.ProcResults> resultByDb = insertIntoDb(aSessionId,
         aUsername,
         aIpByRequest,
@@ -444,7 +458,7 @@ public class FileResourceManager {
       AccessMode aAccessMode,
       ResourcePurpose aPurpose) {
 
-	logger.info("before doInsert");
+	logger.warn("begin - deployFileResource");
 	
     Boolean result = false;
     String mimeTypeByFile = "";
@@ -458,6 +472,7 @@ public class FileResourceManager {
         .getRealPath(aRelSourceDir);
     File upload_file = new File(uploadDir, aShortFilename);
 
+    logger.warn("before - getMimeTypeByFilename");
     mimeTypeByFile = getMimeTypeByFilename(upload_file);
 
     typeInfo = new MimeTypeInfo(mimeTypeByFile);
@@ -467,6 +482,7 @@ public class FileResourceManager {
     doInsert = ((!mimeType.isEmpty()) && (!subType.isEmpty()));
     
     if (doInsert) {
+      logger.warn("before - deploy");
       result = deploy(aSessionId,
           aUsername,
           aIpByRequest,
