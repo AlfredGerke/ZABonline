@@ -2,6 +2,7 @@
 ## ZABonline (Wavemaker)
 ########################
 
+source/wavemaker/projects/ZABonline/webapproot/resources/member/
 source/wavemaker/projects/ZABonline/webapproot/resources/tmp/
 source/wavemaker/projects/ZABonline/webapproot/WEB-INF/lib/
 *.class
