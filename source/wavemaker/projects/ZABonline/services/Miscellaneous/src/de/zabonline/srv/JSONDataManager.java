@@ -32,6 +32,7 @@ public class JSONDataManager {
 	 * 
 	 */
   private JSONDataManager() {
+
     super();
   }
 
@@ -41,6 +42,7 @@ public class JSONDataManager {
    * @return
    */
   public static JSONDataManager getInstance() {
+
     if (jdm == null) {
       jdm = new JSONDataManager();
     }
@@ -56,11 +58,13 @@ public class JSONDataManager {
    * @return
    */
   public Integer getIntegerByIdent(Results.ProcResults aRes,
-      String aKey) {
+    String aKey) {
+
     Integer result = ZABonlineConstants.INIT_DEFAULT_INT_BY_JSON;
 
     if (aRes.getCode() == 1) {
-      result = getIntegerByIdent(aRes.getInfo(), aKey);
+      result = getIntegerByIdent(aRes.getInfo(),
+        aKey);
     }
 
     return result;
@@ -74,11 +78,13 @@ public class JSONDataManager {
    * @return
    */
   public Integer getIntegerByIdent(String aJSONString,
-      String aKey) {
+    String aKey) {
+
     Integer result = ZABonlineConstants.INIT_DEFAULT_INT_BY_JSON;
     String errorMsg = "";
 
-    if (!aJSONString.trim().isEmpty()) {
+    if (!aJSONString.trim()
+        .isEmpty()) {
       try {
         JSONObject json = new JSONObject(aJSONString);
         result = json.getInt(aKey);
@@ -88,10 +94,12 @@ public class JSONDataManager {
         if (ex.getCause() == null) {
           errorMsg = ex.getMessage();
         } else {
-          errorMsg = ex.getCause().getMessage();
+          errorMsg = ex.getCause()
+              .getMessage();
         }
 
-        if (errorMsg.trim().isEmpty()) {
+        if (errorMsg.trim()
+            .isEmpty()) {
           errorMsg = ZABonlineConstants.ERROR_GET_INT_BY_JSON_FAILD;
         }
 
@@ -109,11 +117,13 @@ public class JSONDataManager {
    * @return
    */
   public String getStringByIdent(String aJSONString,
-      String aKey) {
+    String aKey) {
+
     String result = "";
     String errorMsg = "";
 
-    if (!aJSONString.trim().isEmpty()) {
+    if (!aJSONString.trim()
+        .isEmpty()) {
       try {
         JSONObject json = new JSONObject(aJSONString);
         result = json.getString(aKey);
@@ -123,10 +133,12 @@ public class JSONDataManager {
         if (ex.getCause() == null) {
           errorMsg = ex.getMessage();
         } else {
-          errorMsg = ex.getCause().getMessage();
+          errorMsg = ex.getCause()
+              .getMessage();
         }
 
-        if (errorMsg.trim().isEmpty()) {
+        if (errorMsg.trim()
+            .isEmpty()) {
           errorMsg = ZABonlineConstants.ERROR_GET_STRING_BY_JSON_FAILD;
         }
 
@@ -144,11 +156,13 @@ public class JSONDataManager {
    * @return
    */
   public String getStringByIdent(Results.ProcResults aRes,
-      String aKey) {
+    String aKey) {
+
     String result = "";
 
     if (aRes.getCode() == 1) {
-      result = getStringByIdent(aRes.getInfo(), aKey);
+      result = getStringByIdent(aRes.getInfo(),
+        aKey);
     }
 
     return result;

@@ -35,7 +35,6 @@ import de.zabonline.srv.ResourcePurpose;
 //import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-
 /**
  * Dateihändling der ZABonline
  * 
@@ -46,7 +45,7 @@ import org.apache.log4j.Logger;
  */
 public class FileResourceManager {
 
-  private static Logger logger = Logger.getLogger("FileResourceManager");	
+  private static Logger logger = Logger.getLogger("FileResourceManager");
   private Session session = null;
   private RelationIdents relationIdent = RelationIdents.UNKNOWN;
 
@@ -99,7 +98,7 @@ public class FileResourceManager {
      * @return
      */
     private MimeTypeIdentInfo getMimeTypeInfoByIdent(String aMimetype,
-        MimeTypeIdents aIdent) {
+      MimeTypeIdents aIdent) {
 
       MimeTypeIdentInfo result = new MimeTypeIdentInfo();
       int idx = aMimetype.lastIndexOf("/");
@@ -113,7 +112,7 @@ public class FileResourceManager {
         case MIMETYPE:
           subStr = aMimetype.trim()
               .substring(0,
-                  idx);
+                idx);
           result.setIdent(subStr);
 
           break;
@@ -139,7 +138,7 @@ public class FileResourceManager {
     private void setMimetype(String aMimetype) {
 
       this.mimeType = getMimeTypeInfoByIdent(aMimetype,
-          MimeTypeIdents.MIMETYPE).getIdent();
+        MimeTypeIdents.MIMETYPE).getIdent();
     }
 
     /*----------------------------------------------------------------------------------------*/
@@ -160,7 +159,7 @@ public class FileResourceManager {
     private void setSubtype(String aMimetype) {
 
       this.subType = getMimeTypeInfoByIdent(aMimetype,
-          MimeTypeIdents.SUBTYPE).getIdent();
+        MimeTypeIdents.SUBTYPE).getIdent();
     }
 
     /*----------------------------------------------------------------------------------------*/
@@ -201,70 +200,78 @@ public class FileResourceManager {
    */
   @SuppressWarnings("unchecked")
   private List<Results.ProcResults> insertIntoDb(String aSessionId,
-      String aUsername,
-      String aIpByRequest,
-      Integer aTenantId,
-      File aUploadFile,
-      String aShortFilename,
-      String aUniquename,
-      String aMimetype,
-      String aSuptype,
-      AccessMode aAccessMode) {
+    String aUsername,
+    String aIpByRequest,
+    Integer aTenantId,
+    File aUploadFile,
+    String aShortFilename,
+    String aUniquename,
+    String aMimetype,
+    String aSuptype,
+    AccessMode aAccessMode) {
 
     List<Results.ProcResults> result = null;
-    String errorMsg = "";     
-    
+    String errorMsg = "";
+
     try {
-      
-      InputStream inStream = new FileInputStream(aUploadFile);   
+
+      InputStream inStream = new FileInputStream(aUploadFile);
       int expected = inStream.available();
       byte[] bytes = new byte[expected];
-         
+
       int streamLength = inStream.read(bytes);
-      
+
       if (expected != streamLength) {
         inStream.close();
         throw new RuntimeException(ZABonlineConstants.ERROR_SAVE_FILE_TO_DB);
       }
-      
+
       result = session.createSQLQuery("select * from SP_UPDATE_DOC_BY_FILE_BY_SRV(:SESSIONID, " + ":USERNAME, "
-          + ":IP, " + ":TENANTID, " + ":FILE_UNIQUE_NAME, " + ":FILE_REAL_NAME, " + ":MIMETYPE, " + ":SUBTYPE, "
-          + ":RELATION_TYPE, " + ":ACCESS_MODE, " + ":DATA_OBJECT)")
+                                      + ":IP, "
+                                      + ":TENANTID, "
+                                      + ":FILE_UNIQUE_NAME, "
+                                      + ":FILE_REAL_NAME, "
+                                      + ":MIMETYPE, "
+                                      + ":SUBTYPE, "
+                                      + ":RELATION_TYPE, "
+                                      + ":ACCESS_MODE, "
+                                      + ":DATA_OBJECT)")
           .addScalar("success",
-              Hibernate.INTEGER)
+            Hibernate.INTEGER)
           .addScalar("code",
-              Hibernate.INTEGER)
+            Hibernate.INTEGER)
           .addScalar("info",
-              Hibernate.STRING)
+            Hibernate.STRING)
           .setParameter("SESSIONID",
-              aSessionId)
+            aSessionId)
           .setParameter("USERNAME",
-              aUsername)
+            aUsername)
           .setParameter("IP",
-              aIpByRequest)
+            aIpByRequest)
           .setParameter("TENANTID",
-              aTenantId)
+            aTenantId)
           .setParameter("FILE_UNIQUE_NAME",
-              aUniquename)
+            aUniquename)
           .setParameter("FILE_REAL_NAME",
-              aShortFilename)
+            aShortFilename)
           .setParameter("MIMETYPE",
-              aMimetype)
+            aMimetype)
           .setParameter("SUBTYPE",
-              aSuptype)
+            aSuptype)
           .setParameter("RELATION_TYPE",
-              relationIdent.toString())
+            relationIdent.toString())
           .setParameter("ACCESS_MODE",
-              aAccessMode.toString())
-          .setBinary("DATA_OBJECT", bytes)  
+            aAccessMode.toString())
+          .setBinary("DATA_OBJECT",
+            bytes)
           .setResultTransformer(Transformers.aliasToBean(Results.ProcResults.class))
           .list();
 
       inStream.close();
-      
+
       if (result.get(0).success == 0) {
-    	logger.warn("DBResult-Error - insertIntoDb: " + result.get(0).info);
-      }	
+        logger.warn("DBResult-Error - insertIntoDb: " + result.get(0).info);
+      }
 
     } catch (IOException ex) {
       if (ex.getCause() == null) {
@@ -280,24 +287,26 @@ public class FileResourceManager {
       }
 
       logger.warn("IO-Error - insertIntoDb: " + errorMsg);
-      
+
       throw new RuntimeException(errorMsg);
     } catch (HibernateException ex) {
       if (ex.getCause() == null) {
         errorMsg = ex.getMessage();
       } else {
-        errorMsg = ex.getCause().getMessage();
+        errorMsg = ex.getCause()
+            .getMessage();
       }
 
-      if (errorMsg.trim().isEmpty()) {
+      if (errorMsg.trim()
+          .isEmpty()) {
         errorMsg = ZABonlineConstants.ERROR_SAVE_FILE_TO_DB;
       }
 
       logger.warn("Hib-Error - insertIntoDb: " + errorMsg);
-      
+
       throw new RuntimeException(errorMsg);
     }
-    
+
     return result;
   }
 
@@ -310,8 +319,8 @@ public class FileResourceManager {
    * @return
    */
   private Boolean copyFileResouce(File aUploadFile,
-      String aUniqueFilename,
-      String aResourceDataDir) {
+    String aUniqueFilename,
+    String aResourceDataDir) {
 
     Boolean result = false;
     String errorMsg = "";
@@ -342,8 +351,8 @@ public class FileResourceManager {
 
       while ((length = inStream.read(buffer)) > 0) {
         outStream.write(buffer,
-            0,
-            length);
+          0,
+          length);
       }
 
       inStream.close();
@@ -367,7 +376,7 @@ public class FileResourceManager {
       }
 
       logger.warn("IO-Error - copyFileResouce:" + errorMsg);
-      
+
       throw new RuntimeException(errorMsg);
     }
 
@@ -385,30 +394,31 @@ public class FileResourceManager {
    * @return
    */
   private Boolean deploy(String aSessionId,
-      String aUsername,
-      String aIpByRequest,
-      Integer aTenantId,
-      File aUploadFile,
-      String aShortFilename,
-      String aUniquename,
-      String aMimetype,
-      String aSubtype,
-      AccessMode aAccessMode,
-      ResourcePurpose aPurpose) {
+    String aUsername,
+    String aIpByRequest,
+    Integer aTenantId,
+    File aUploadFile,
+    String aShortFilename,
+    String aUniquename,
+    String aMimetype,
+    String aSubtype,
+    AccessMode aAccessMode,
+    ResourcePurpose aPurpose) {
+
     Boolean result = false;
-    
+
     logger.warn("deploy-MimeType: " + aMimetype + " / " + aSubtype);
-    
+
     List<Results.ProcResults> resultByDb = insertIntoDb(aSessionId,
-        aUsername,
-        aIpByRequest,
-        aTenantId,
-        aUploadFile,
-        aShortFilename,
-        aUniquename,
-        aMimetype,
-        aSubtype,
-        aAccessMode);
+      aUsername,
+      aIpByRequest,
+      aTenantId,
+      aUploadFile,
+      aShortFilename,
+      aUniquename,
+      aMimetype,
+      aSubtype,
+      aAccessMode);
 
     if (resultByDb.size() > 0) {
       if (resultByDb.get(0)
@@ -416,7 +426,7 @@ public class FileResourceManager {
         switch (relationIdent) {
           case BY_PERSON:
             if (aPurpose == ResourcePurpose.MEMBERPHOTO) {
-            result = copyFileResouce(aUploadFile,
+              result = copyFileResouce(aUploadFile,
                 aUniquename,
                 ZABonlineConstants.RESOURCE_MEMBERDATA_DIR);
             } else {
@@ -445,19 +455,19 @@ public class FileResourceManager {
    * @return
    */
   public Boolean deployFileResource(String aSessionId,
-      String aUsername,
-      String aIpByRequest,
-      Integer aTenantId,
-      String aShortFilename,
-      String aUniquename,
-      String aRelSourceDir,
-      AccessMode aAccessMode,
-      ResourcePurpose aPurpose) {
-	  
-	logger.warn("deployFileResource - aShortFilename: " + aShortFilename);	  
-	logger.warn("deployFileResource - aUniquename: " + aUniquename);
-	logger.warn("deployFileResource - aRelSourceDir: " + aRelSourceDir);
-	  
+    String aUsername,
+    String aIpByRequest,
+    Integer aTenantId,
+    String aShortFilename,
+    String aUniquename,
+    String aRelSourceDir,
+    AccessMode aAccessMode,
+    ResourcePurpose aPurpose) {
+
+    logger.warn("deployFileResource - aShortFilename: " + aShortFilename);
+    logger.warn("deployFileResource - aUniquename: " + aUniquename);
+    logger.warn("deployFileResource - aRelSourceDir: " + aRelSourceDir);
+
     Boolean result = false;
     String mimeTypeByFile = "";
     MimeTypeInfo typeInfo;
@@ -479,21 +489,21 @@ public class FileResourceManager {
     logger.warn("deployFileResource - upload_file: " + uploadFile);
     logger.warn("deployFileResource - mimeType: " + mimeType);
     logger.warn("deployFileResource - subType: " + subType);
-    
+
     doInsert = ((!mimeType.isEmpty()) && (!subType.isEmpty()));
-    
+
     if (doInsert) {
       result = deploy(aSessionId,
-          aUsername,
-          aIpByRequest,
-          aTenantId,
-          uploadFile,
-          aShortFilename,
-          aUniquename,
-          mimeType,
-          subType,
-          aAccessMode,
-          aPurpose);
+        aUsername,
+        aIpByRequest,
+        aTenantId,
+        uploadFile,
+        aShortFilename,
+        aUniquename,
+        mimeType,
+        subType,
+        aAccessMode,
+        aPurpose);
     }
 
     return result;

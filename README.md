@@ -7,11 +7,11 @@ Einarbeitung in die Erstellung von Web-Anwendungen am Beispiel einer Mitgliederv
 
 **Inhaltsübersicht:**
 
-- 1 Zielvorgabe
-- 2 Wavemaker
-- 3 Firebird
-- 4 Versionen
-- 5 Funktionsumfang von ZABonline
+- Zielvorgabe
+- Wavemaker
+- Firebird
+- Versionen
+- Funktionsumfang von ZABonline
 
 
 Zielvorgabe
@@ -23,10 +23,10 @@ Aufbau einer Web-Anwendung zu sammeln.
 Folgende Punkte sind dabei besonders zu beachten:
 
 * ZABonline solle eine klassische J2EE-Anwendung werden 
-* Client-Code soll browser-zentirert ablaufen 
+* Client-Code soll browser-zentriert ablaufen 
 * Der Browser ist immer Plattform für die Anwendung
 * Es sollen hosted Code und packaged Code zum Einsatz kommen
-* Es soll ein Mobiles-Interface geben (7- und 10-Zoll)
+* Es soll ein Mobile-Interface geben (7- und 10-Zoll)
 * Am Ende soll eine funktionsfähige Mitgliederverwaltung stehen   
 
 Da dieses Projekt zum erlernen von neuen Techniken dient, ist ein Termin für ein
@@ -49,21 +49,99 @@ Hauptgründe warum Wavemaker gewählt wurde:
 * Drag und Drop für die Erstellung des Clients
 * Weitestgehende automatisierung der Kommunikation zwischen Client und Browser
 * Dojo wird als JavaScript-Library eingesetzt
-* Unterstützt sehr gut Browser-Zentrierten Code
+* Unterstützt sehr gut browser-zentrierten Code
  
 
 Firebird
 --------
+Als Datenbank wird Firebird eingesetzt. Da Wavemaker sehr flexibel ist, was den 
+Einsatz von Datenbanken angeht, wurde sich für Firebird entschieden. Sehr gute Erfahrungen 
+aus mehreren Projekten der letzten Jahre haben zur Wahl dieser Datenbank als Back-End geführt.
+Die Verbindung zur Datenbank wird über die JDBC-Treiber JayBird von Firebird hergestellt.    
 
+Die Verbindungsparameter lauten wie folgt: 
+
+        Username=WEBCONNECT
+        Password=WEBCONNECT
+        RDBMS=Other
+        Connection URL=jdbc:firebirdsql:localhost/3050:ZABONLINEEMBEDDED?roleName=R_WEBCONNECT
+        Table Filter=.*
+        Schema Filter=.*
+        Driver Class=org.firebirdsql.jdbc.FBDriver
+        Dialect=org.hibernate.dialect.FirebirdDialect
+        Revese Naming Strategy=com.wavemaker.tools.data.reveng.DefaultRevengNamingStrategy
+
+Der Server meldet sich nicht mit einem Admin-Account an der DB an. Der Benutzer `WEBCONNECT`
+ist in seinen Rechten stark eingeschränkt. 
+
+Folgende primäre Einschränkungen sind zu beachten:
+
+* Kein Zugriff auf Tabellen
+* Kein Löschrecht
+* Keinen Zugriff auf DDL
+ 
+Daten werden über speziellen Views, Standard-Views genannt, bearbeitet. Standardviews 
+bieten die Möglichkeit auf ein Select, Update und Insert. Es wird kein Delete
+zugelassen, vielmehr besitzt jedes Schema ein Deleteflag.         
+  
 
 Versionen
 ---------
 
 * Wavemaker 6.5.3
 * Firebird 2.5
+* JayBird 2.2.3 (jdbc)
 * Java 1.6 (von Wavemaker vorgegeben)
 * Dojo 1.6 (von Wavemaker vorgegeben)
-
+* Eclipse (JUNO) (Entwicklung des Servers)
 
 Funktionsumfang von ZABonline
 -----------------------------
+
+Administration:    
+
+* Benutzer
+* Benutzerrollen
+* Mandanten 
+* Benutzerdefinierte Felder
+* Benutzerdefinierte Tabellen
+
+Mitgliederverwaltung:    
+
+* Adressen
+    * Personendaten
+    * Adressdaten
+    * Kontaktdaten
+    * Bankinformationen
+    * Allgemeine Informationen
+    * Foto
+* Betrieb
+    * Betrieb
+    * Betriebsdaten
+    * Adressdaten
+    * Kontaktdaten
+    * Bankinformationen
+    * Allgemeine Informationen
+    * Foto
+* Mitglied
+* Akte
+
+Controlling:    
+
+* Mandantenverwaltung
+* Vorgangsverwaltung
+* Wiedervorlagen (automatisch)
+* Suchen (über alle Aspekte eines Mandanten)
+
+Allgemein:    
+
+* Notizen
+
+Module:    
+
+* Stammdaten
+* Buchhaltung
+* Abrechnung
+* Online-banking
+* Leistungsdaten
+* Vorgangsverwaltung
