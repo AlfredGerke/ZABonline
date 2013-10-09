@@ -17,70 +17,77 @@ import de.zabonline.srv.ZABonlineConstants;
 @ExposeToClient
 public class ZABonlineGrants extends JavaServiceSuperClass {
 
-    private Session session;
-  
-    public ZABonlineGrants() {
-       super(INFO);
-    }
+  private Session session;
 
-    @SuppressWarnings("unchecked")
-    public List<Results.SuccessInfo> checkGrant(String aGrant) {
-      List<Results.SuccessInfo> result = null;
+  public ZABonlineGrants() {
 
-      String errorMsg; 
+    super(INFO);
+  }
 
-      Boolean isAuthentic = SessionManager.isAthenticated();
-      String sessionId = SessionManager.getSessionId();
-      String userName = SessionManager.getUserName();
-      String ipByRequest = SessionManager.getRemoteAddress();   
-      
-      ZABonlineDB dbService = ZABonlineDBService.getZABonlineDBService();
+  @SuppressWarnings("unchecked")
+  public List<Results.SuccessInfo> checkGrant(String aGrant) {
 
-      dbService.getDataServiceManager().begin();
+    List<Results.SuccessInfo> result = null;
 
-      session = dbService.getDataServiceManager().getSession();
-      try {
-        if (isAuthentic) {
-          result = session
-              .createSQLQuery(
-                  "select * from SP_CHECKGRANT_BY_SVR(:SESSIONID, :USERNAME, :IP, :GRANT)")
-              .addScalar("success", Hibernate.INTEGER)
-              .setParameter("SESSIONID", sessionId)
-              .setParameter("USERNAME", userName)
-              .setParameter("IP", ipByRequest)
-              .setParameter("GRANT", aGrant)
-              .setResultTransformer(
-                  Transformers
-                      .aliasToBean(Results.SuccessInfo.class))
-              .list();
+    String errorMsg;
 
-          dbService.commit();
-        } else {
-          throw new RuntimeException(
-              ZABonlineConstants.NO_VALID_AUTHENTIFICATION);
-        }
+    Boolean isAuthentic = SessionManager.isAthenticated();
+    String sessionId = SessionManager.getSessionId();
+    String userName = SessionManager.getUserName();
+    String ipByRequest = SessionManager.getRemoteAddress();
 
-        return result;
-      } catch (RuntimeException ex) {
-        dbService.rollback();
+    ZABonlineDB dbService = ZABonlineDBService.getZABonlineDBService();
 
-        if (ex.getCause() == null) {
-          errorMsg = ex.getMessage();
-        } else {
-            errorMsg = ex.getCause().getMessage();  
-        }
-        
-        if (errorMsg.trim().isEmpty()) {
-          errorMsg = ZABonlineConstants.UNKNOWN_ERROR_BY_DBSERVICE;
-        }
-        
-        throw new RuntimeException(errorMsg);     
-        //Alt: WM 6.4.x 
-        //throw ex;
+    dbService.getDataServiceManager()
+        .begin();
+
+    session = dbService.getDataServiceManager()
+        .getSession();
+    try {
+      if (isAuthentic) {
+        result = session.createSQLQuery("select * from SP_CHECKGRANT_BY_SVR(:SESSIONID, :USERNAME, :IP, :GRANT)")
+            .addScalar("success",
+              Hibernate.INTEGER)
+            .setParameter("SESSIONID",
+              sessionId)
+            .setParameter("USERNAME",
+              userName)
+            .setParameter("IP",
+              ipByRequest)
+            .setParameter("GRANT",
+              aGrant)
+            .setResultTransformer(Transformers.aliasToBean(Results.SuccessInfo.class))
+            .list();
+
+        dbService.commit();
+      } else {
+        throw new RuntimeException(ZABonlineConstants.NO_VALID_AUTHENTIFICATION);
       }
+
+      return result;
+    } catch (RuntimeException ex) {
+      dbService.rollback();
+
+      if (ex.getCause() == null) {
+        errorMsg = ex.getMessage();
+      } else {
+        errorMsg = ex.getCause()
+            .getMessage();
+      }
+
+      if (errorMsg.trim()
+          .isEmpty()) {
+        errorMsg = ZABonlineConstants.UNKNOWN_ERROR_BY_DBSERVICE;
+      }
+
+      throw new RuntimeException(errorMsg);
+      // Alt: WM 6.4.x
+      // throw ex;
     }
-    
-    public List<Results.SuccessInfo> checkGrantAdmin() {
-       return checkGrant("IS_ADMIN");     
-    }    
+  }
+
+  public List<Results.SuccessInfo> checkGrantAdmin() {
+
+    return checkGrant("IS_ADMIN");
+  }
 }

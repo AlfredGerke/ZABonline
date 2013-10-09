@@ -1,4 +1,4 @@
-***(in Progress)***
+***(in Progress...)***
 
 ZABonline
 =========
@@ -12,6 +12,7 @@ Einarbeitung in die Erstellung von Web-Anwendungen am Beispiel einer Mitgliederv
 - Firebird
 - Versionen
 - Funktionsumfang von ZABonline
+- zusätzliche Entwicklungsumgebungen
 
 
 Zielvorgabe
@@ -37,7 +38,7 @@ definiert, welche einen kleinen Ausblick auf die Entwicklungsrichtung geben soll
 Wavemaker
 ---------
 Als zentrales Werkzeug für die Entwicklung des Clients und der Einbindung von 
-Webservices sowie dem Aufbau des Servers wird Wavemaker verwendet. Beim Server handelt es sich 
+Webservices sowie dem Aufbau des Servers wird [Wavemaker](http://http://www.wavemaker.com/ "WaveMaker") verwendet. Beim Server handelt es sich 
 um einen Tomcat-Server. Allerdings unterstützt Wavemaker auch andere Server. 
 Anwendung welche mit Wavemaker erstellt werden sind grundsätzlich in jeder Standard J2EE-Umgebung lauffähig.
 Um die Entwicklung des Servers zu vereinfachen wird Eclipse (JUNO) eingesetzt.   
@@ -145,3 +146,34 @@ Module:
 * Online-banking
 * Leistungsdaten
 * Vorgangsverwaltung
+
+
+zusätzliche Entwicklungsumgebungen
+----------------------------------
+
+* [Eclipse](http://www.eclipse.org/webtools/ "Eclipse - Java EE IDE for Web Developers")
+* [PSPad](http://http://www.pspad.com/de/ "PSPad – der ultimative Editor für Softwareentwickler")
+* [IBExpert](http://ibexpert.net/ibe/ "IBExpert - the database experts")
+
+## Eclipse
+Die Java-Sourcen können in einem eigenen Editor von Wavemaker bearbeitet werden. Je 
+umfangreicher sich allerdings der Servercode gestaltet, um so mühseliger ist die 
+Verwendung dieses Editors. Als gute Alternative hat sich Eclipse (Juno) erwiesen.
+Das Projekt ließ sich problemlos anlegen, bearbeiten und kompilieren. Es ist allerdings
+darauf zu achten, das mit dem JRE 6 gearbeitet wird, da diese Runtime von Wavemaker
+verlangt wird. Sicherlich lassen sich auch andere Entwicklungstool wie z. B. NetBeans
+verwenden.
+
+## PSPad
+Die JavaScript-Sourcen können wie die Java-Sourcen in einem eigenen Editor von Wavemaker 
+bearbeitet werden. Allerdings hat es sich gezeigt das die Anwendung eines externen 
+Editors für JavaScript-Sourcen von Vorteil ist. Dabei hat sich der PSPad als eine 
+gute Alternative angeboten. Der Texteditor ist speziell für Softwareentwickler 
+geeignet und unterstützt diverse Programmiersprachen. Natürlich kann jeder andere 
+Editor ebenfalls zur Anwendung kommen.   
+
+## IBExpert
+IBExpert ist ein ideales Entwicklungswerkzeug für die Firebird-Datenbank. Der Editor
+bietet ausnahmslos alle notwendigen Werkzeuge zur Bearbeitung der Datenbank und zur 
+Entwicklung von SQL und PSQL an. So nutzt zum Beispiel der WorkAround für Hibernate-Entities
+den IBExpert um Ergebnismengen in eine separate Textdatei zu sichern.  

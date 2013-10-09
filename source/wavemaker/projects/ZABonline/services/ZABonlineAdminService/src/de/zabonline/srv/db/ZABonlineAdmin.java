@@ -17,7 +17,7 @@ import de.zabonline.srv.db.ZABonlineDBService;
 
 @ExposeToClient
 public class ZABonlineAdmin extends JavaServiceSuperClass {
-  
+
   private Session session;
 
   public ZABonlineAdmin() {
@@ -27,64 +27,81 @@ public class ZABonlineAdmin extends JavaServiceSuperClass {
 
   @SuppressWarnings("unchecked")
   public List<Results.ProcResults> addUserData(Integer aRoleId,
-      Integer aTenantId, Integer aPersonId, String aUsername, String aPassword, 
-      String aFirstname, String aName, String aEmail, Boolean aAllowLogin) {
+    Integer aTenantId,
+    Integer aPersonId,
+    String aUsername,
+    String aPassword,
+    String aFirstname,
+    String aName,
+    String aEmail,
+    Boolean aAllowLogin) {
 
     List<Results.ProcResults> result = null;
-    
+
     String errorMsg = "";
-    
+
     Short aAllowLogin_smallint = (short) ((aAllowLogin) ? 1 : 0);
-    
+
     Boolean isAuthentic = SessionManager.isAthenticated();
     String sessionId = SessionManager.getSessionId();
     String userName = SessionManager.getUserName();
-    String ipByRequest = SessionManager.getRemoteAddress();   
-    
+    String ipByRequest = SessionManager.getRemoteAddress();
+
     ZABonlineDB dbService = ZABonlineDBService.getZABonlineDBService();
-    dbService.getDataServiceManager().begin();
-    session = dbService.getDataServiceManager().getSession();
-    
+    dbService.getDataServiceManager()
+        .begin();
+    session = dbService.getDataServiceManager()
+        .getSession();
+
     try {
       if (isAuthentic) {
-        result = session
-            .createSQLQuery(
-                "select * from SP_ADD_USER_BY_SRV(:SESSIONID, "
-                    + ":USERNAME, " 
-                    + ":IP, "
-                    + ":ROLE_ID, " 
-                    + ":TENANT_ID, "
-                    + ":PERSON_ID, " 
-                    + ":USER, "
-                    + ":PASS, " 
-                    + ":FIRSTNAME, "
-                    + ":NAME, " 
-                    + ":EMAIL, "
-                    + ":ALLOW_LOGIN)")
-            .addScalar("success", Hibernate.INTEGER)
-            .addScalar("code", Hibernate.INTEGER)
-            .addScalar("info", Hibernate.STRING)
-            .setParameter("SESSIONID", sessionId)
-            .setParameter("USERNAME", userName)
-            .setParameter("IP", ipByRequest)
-            .setParameter("ROLE_ID", aRoleId)
-            .setParameter("TENANT_ID", aTenantId)
-            .setParameter("PERSON_ID", aPersonId)
-            .setParameter("USER", aUsername)
-            .setParameter("PASS", aPassword)
-            .setParameter("FIRSTNAME", aFirstname)
-            .setParameter("NAME", aName)
-            .setParameter("EMAIL", aEmail)
-            .setParameter("ALLOW_LOGIN", aAllowLogin_smallint)
-            .setResultTransformer(
-                Transformers
-                    .aliasToBean(Results.ProcResults.class))
+        result = session.createSQLQuery("select * from SP_ADD_USER_BY_SRV(:SESSIONID, " + ":USERNAME, "
+                                        + ":IP, "
+                                        + ":ROLE_ID, "
+                                        + ":TENANT_ID, "
+                                        + ":PERSON_ID, "
+                                        + ":USER, "
+                                        + ":PASS, "
+                                        + ":FIRSTNAME, "
+                                        + ":NAME, "
+                                        + ":EMAIL, "
+                                        + ":ALLOW_LOGIN)")
+            .addScalar("success",
+              Hibernate.INTEGER)
+            .addScalar("code",
+              Hibernate.INTEGER)
+            .addScalar("info",
+              Hibernate.STRING)
+            .setParameter("SESSIONID",
+              sessionId)
+            .setParameter("USERNAME",
+              userName)
+            .setParameter("IP",
+              ipByRequest)
+            .setParameter("ROLE_ID",
+              aRoleId)
+            .setParameter("TENANT_ID",
+              aTenantId)
+            .setParameter("PERSON_ID",
+              aPersonId)
+            .setParameter("USER",
+              aUsername)
+            .setParameter("PASS",
+              aPassword)
+            .setParameter("FIRSTNAME",
+              aFirstname)
+            .setParameter("NAME",
+              aName)
+            .setParameter("EMAIL",
+              aEmail)
+            .setParameter("ALLOW_LOGIN",
+              aAllowLogin_smallint)
+            .setResultTransformer(Transformers.aliasToBean(Results.ProcResults.class))
             .list();
 
         dbService.commit();
       } else {
-        throw new RuntimeException(
-            ZABonlineConstants.NO_VALID_AUTHENTIFICATION);
+        throw new RuntimeException(ZABonlineConstants.NO_VALID_AUTHENTIFICATION);
       }
 
       return result;
@@ -96,10 +113,12 @@ public class ZABonlineAdmin extends JavaServiceSuperClass {
       if (ex.getCause() == null) {
         errorMsg = ex.getMessage();
       } else {
-        errorMsg = ex.getCause().getMessage();
+        errorMsg = ex.getCause()
+            .getMessage();
       }
 
-      if (errorMsg.trim().isEmpty()) {
+      if (errorMsg.trim()
+          .isEmpty()) {
         errorMsg = ZABonlineConstants.UNKNOWN_ERROR_BY_DBSERVICE;
       }
 
@@ -107,5 +126,5 @@ public class ZABonlineAdmin extends JavaServiceSuperClass {
       // Alt: WM 6.4.x
       // throw ex;
     }
-  }    
+  }
 }
