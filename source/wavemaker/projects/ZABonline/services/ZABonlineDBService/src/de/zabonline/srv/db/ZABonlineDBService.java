@@ -5,16 +5,14 @@ import com.zabonlinedb.ZABonlineDB;
 
 public class ZABonlineDBService extends com.wavemaker.runtime.javaservice.JavaServiceSuperClass {
 
-  public ZABonlineDBService() {
+    public ZABonlineDBService() {
+       super(INFO);
+    }
 
-    super(INFO);
-  }
-
-  public static ZABonlineDB getZABonlineDBService() {
-
-    @SuppressWarnings("deprecation")
-    ZABonlineDB dbService = (ZABonlineDB) RuntimeAccess.getInstance()
-        .getService(ZABonlineDB.class);
-    return dbService;
-  }
+    public static ZABonlineDB getZABonlineDBService() {
+		@SuppressWarnings("deprecation")		
+		ZABonlineDB dbService = (ZABonlineDB) RuntimeAccess.getInstance()
+				.getService(ZABonlineDB.class);
+		return dbService;
+	}
 }

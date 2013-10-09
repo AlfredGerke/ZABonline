@@ -15,205 +15,185 @@ import com.wavemaker.runtime.security.SecurityService;
 
 import de.zabonline.srv.db.ZABonlineDBService;
 
-public class SessionManager extends com.wavemaker.runtime.javaservice.JavaServiceSuperClass {
+public class SessionManager extends
+		com.wavemaker.runtime.javaservice.JavaServiceSuperClass {
 
-  private Session session;
+	private Session session;
 
-  public SessionManager() {
+	public SessionManager() {
+		super(INFO);
+	}
+	
+	private static HttpServletRequest getHttpServletRequest() {
+		HttpServletRequest req = RuntimeAccess.getInstance().getRequest();
 
-    super(INFO);
-  }
+		return req;
+	}
 
-  private static HttpServletRequest getHttpServletRequest() {
+	private static SecurityService getSecurityService() {
+		SecurityService service = (SecurityService) RuntimeAccess.getInstance()
+				.getServiceBean("securityService");
 
-    HttpServletRequest req = RuntimeAccess.getInstance()
-        .getRequest();
+		return service;
+	}
 
-    return req;
-  }
+	public static String getRemoteAddress() {
+		HttpServletRequest req = getHttpServletRequest();
 
-  private static SecurityService getSecurityService() {
+		return req.getRemoteAddr();
+	}
 
-    SecurityService service = (SecurityService) RuntimeAccess.getInstance()
-        .getServiceBean("securityService");
+	public static Boolean isAthenticated() {
+		SecurityService service = getSecurityService();
+		Boolean isAuthentic = service.isAuthenticated();
 
-    return service;
-  }
+		return isAuthentic;
+	}
 
-  public static String getRemoteAddress() {
+	public static Integer getTenantId() {
+		Integer tenantId = RuntimeAccess.getInstance().getTenantId();
 
-    HttpServletRequest req = getHttpServletRequest();
+		return tenantId;
+	}
 
-    return req.getRemoteAddr();
-  }
+	public static String getUserName() {
+		SecurityService service = getSecurityService();
+		String userName = service.getUserName();
 
-  public static Boolean isAthenticated() {
+		return userName;
+	}
 
-    SecurityService service = getSecurityService();
-    Boolean isAuthentic = service.isAuthenticated();
+	public static String getUserId() {
+		SecurityService service = getSecurityService();
+		String userId = service.getUserId();
 
-    return isAuthentic;
-  }
+		return userId;
+	}
 
-  public static Integer getTenantId() {
+	public static String getSessionId() {
+		HttpSession sess = RuntimeAccess.getInstance().getSession();
 
-    Integer tenantId = RuntimeAccess.getInstance()
-        .getTenantId();
+		return sess.getId();
+	}
 
-    return tenantId;
-  }
+	@SuppressWarnings("unchecked")
+	public List<Results.SuccessInfo> registerSession() {
+		List<Results.SuccessInfo> result = null;
 
-  public static String getUserName() {
+		String errorMsg;
+		
+		String userName = getUserName();
+		String sessionId = getSessionId();
+		Boolean isAuthentic = isAthenticated();
+		String ipByRequest = getRemoteAddress();
 
-    SecurityService service = getSecurityService();
-    String userName = service.getUserName();
+		ZABonlineDB dbService = ZABonlineDBService.getZABonlineDBService();
 
-    return userName;
-  }
+		dbService.getDataServiceManager().begin();
 
-  public static String getUserId() {
+		session = dbService.getDataServiceManager().getSession();
+		try {
+			if (isAuthentic) {
+				result = session
+						.createSQLQuery(
+								"select * from SP_REGISTERSESSION(:SESSIONID, :USERNAME, :IP)")
+						.addScalar("success", Hibernate.INTEGER)
+						.setParameter("SESSIONID", sessionId)
+						.setParameter("USERNAME", userName)
+						.setParameter("IP", ipByRequest)
+						.setResultTransformer(
+								Transformers
+										.aliasToBean(Results.SuccessInfo.class))
+						.list();
 
-    SecurityService service = getSecurityService();
-    String userId = service.getUserId();
+				dbService.commit();
+			} else {
+				throw new RuntimeException(
+						ZABonlineConstants.NO_VALID_AUTHENTIFICATION);
+			}
 
-    return userId;
-  }
+			return result;
+		} catch (RuntimeException ex) {
+			dbService.rollback();
 
-  public static String getSessionId() {
+			if (ex.getCause() == null) {
+				errorMsg = ex.getMessage();
+			} else {
+		     	errorMsg = ex.getCause().getMessage();	
+			}
+			
+			if (errorMsg.trim().isEmpty()) {
+				errorMsg = ZABonlineConstants.UNKNOWN_ERROR_BY_DBSERVICE;
+			}
+			
+			throw new RuntimeException(errorMsg);			
+			//Alt: WM 6.4.x 
+			//throw ex;
+		}
+	}
 
-    HttpSession sess = RuntimeAccess.getInstance()
-        .getSession();
+	@SuppressWarnings("unchecked")
+	public List<Results.SuccessInfo> touchSession() {
+		List<Results.SuccessInfo> result = null;
 
-    return sess.getId();
-  }
+		String errorMsg;
+		
+		String userName = getUserName();
+		String sessionId = getSessionId();
+		Boolean isAuthentic = isAthenticated();
+		String ipByRequest = getRemoteAddress();
 
-  @SuppressWarnings("unchecked")
-  public List<Results.SuccessInfo> registerSession() {
+		ZABonlineDB dbService = ZABonlineDBService.getZABonlineDBService();
 
-    List<Results.SuccessInfo> result = null;
+		dbService.getDataServiceManager().begin();
 
-    String errorMsg;
+		session = dbService.getDataServiceManager().getSession();
+		try {
+			if (isAuthentic) {
+				result = session
+						.createSQLQuery(
+								"select * from SP_TOUCHSESSION(:SESSIONID, :USERNAME, :IP)")
+						.addScalar("success", Hibernate.INTEGER)
+						.setParameter("SESSIONID", sessionId)
+						.setParameter("USERNAME", userName)
+						.setParameter("IP", ipByRequest)
+						.setResultTransformer(
+								Transformers
+										.aliasToBean(Results.SuccessInfo.class))
+						.list();
 
-    String userName = getUserName();
-    String sessionId = getSessionId();
-    Boolean isAuthentic = isAthenticated();
-    String ipByRequest = getRemoteAddress();
+				dbService.commit();
+			} else {
+				throw new RuntimeException(
+						ZABonlineConstants.NO_VALID_AUTHENTIFICATION);
+			}
 
-    ZABonlineDB dbService = ZABonlineDBService.getZABonlineDBService();
+			return result;
+		} catch (RuntimeException ex) {
+			dbService.rollback();
 
-    dbService.getDataServiceManager()
-        .begin();
-
-    session = dbService.getDataServiceManager()
-        .getSession();
-    try {
-      if (isAuthentic) {
-        result = session.createSQLQuery("select * from SP_REGISTERSESSION(:SESSIONID, :USERNAME, :IP)")
-            .addScalar("success",
-              Hibernate.INTEGER)
-            .setParameter("SESSIONID",
-              sessionId)
-            .setParameter("USERNAME",
-              userName)
-            .setParameter("IP",
-              ipByRequest)
-            .setResultTransformer(Transformers.aliasToBean(Results.SuccessInfo.class))
-            .list();
-
-        dbService.commit();
-      } else {
-        throw new RuntimeException(ZABonlineConstants.NO_VALID_AUTHENTIFICATION);
-      }
-
-      return result;
-    } catch (RuntimeException ex) {
-      dbService.rollback();
-
-      if (ex.getCause() == null) {
-        errorMsg = ex.getMessage();
-      } else {
-        errorMsg = ex.getCause()
-            .getMessage();
-      }
-
-      if (errorMsg.trim()
-          .isEmpty()) {
-        errorMsg = ZABonlineConstants.UNKNOWN_ERROR_BY_DBSERVICE;
-      }
-
-      throw new RuntimeException(errorMsg);
-      // Alt: WM 6.4.x
-      // throw ex;
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  public List<Results.SuccessInfo> touchSession() {
-
-    List<Results.SuccessInfo> result = null;
-
-    String errorMsg;
-
-    String userName = getUserName();
-    String sessionId = getSessionId();
-    Boolean isAuthentic = isAthenticated();
-    String ipByRequest = getRemoteAddress();
-
-    ZABonlineDB dbService = ZABonlineDBService.getZABonlineDBService();
-
-    dbService.getDataServiceManager()
-        .begin();
-
-    session = dbService.getDataServiceManager()
-        .getSession();
-    try {
-      if (isAuthentic) {
-        result = session.createSQLQuery("select * from SP_TOUCHSESSION(:SESSIONID, :USERNAME, :IP)")
-            .addScalar("success",
-              Hibernate.INTEGER)
-            .setParameter("SESSIONID",
-              sessionId)
-            .setParameter("USERNAME",
-              userName)
-            .setParameter("IP",
-              ipByRequest)
-            .setResultTransformer(Transformers.aliasToBean(Results.SuccessInfo.class))
-            .list();
-
-        dbService.commit();
-      } else {
-        throw new RuntimeException(ZABonlineConstants.NO_VALID_AUTHENTIFICATION);
-      }
-
-      return result;
-    } catch (RuntimeException ex) {
-      dbService.rollback();
-
-      if (ex.getCause() == null) {
-        errorMsg = ex.getMessage();
-      } else {
-        errorMsg = ex.getCause()
-            .getMessage();
-      }
-
-      if (errorMsg.trim()
-          .isEmpty()) {
-        errorMsg = ZABonlineConstants.UNKNOWN_ERROR_BY_DBSERVICE;
-      }
-
-      throw new RuntimeException(errorMsg);
-      // Alt: WM 6.4.x
-      // throw ex;
-    }
-  }
-
+			if (ex.getCause() == null) {
+				errorMsg = ex.getMessage();
+			} else {
+		     	errorMsg = ex.getCause().getMessage();	
+			}
+			
+			if (errorMsg.trim().isEmpty()) {
+				errorMsg = ZABonlineConstants.UNKNOWN_ERROR_BY_DBSERVICE;
+			}
+			
+			throw new RuntimeException(errorMsg);			
+			//Alt: WM 6.4.x 
+			//throw ex;
+		}
+	}
+	
   @SuppressWarnings("unchecked")
   public List<Results.SuccessInfo> closeSession() {
-
     List<Results.SuccessInfo> result = null;
 
     String errorMsg;
-
+    
     String userName = getUserName();
     String sessionId = getSessionId();
     Boolean isAuthentic = isAthenticated();
@@ -221,28 +201,27 @@ public class SessionManager extends com.wavemaker.runtime.javaservice.JavaServic
 
     ZABonlineDB dbService = ZABonlineDBService.getZABonlineDBService();
 
-    dbService.getDataServiceManager()
-        .begin();
+    dbService.getDataServiceManager().begin();
 
-    session = dbService.getDataServiceManager()
-        .getSession();
+    session = dbService.getDataServiceManager().getSession();
     try {
       if (isAuthentic) {
-        result = session.createSQLQuery("select * from SP_CLOSESESSION(:SESSIONID, :USERNAME, :IP)")
-            .addScalar("success",
-              Hibernate.INTEGER)
-            .setParameter("SESSIONID",
-              sessionId)
-            .setParameter("USERNAME",
-              userName)
-            .setParameter("IP",
-              ipByRequest)
-            .setResultTransformer(Transformers.aliasToBean(Results.SuccessInfo.class))
+        result = session
+            .createSQLQuery(
+                "select * from SP_CLOSESESSION(:SESSIONID, :USERNAME, :IP)")
+            .addScalar("success", Hibernate.INTEGER)
+            .setParameter("SESSIONID", sessionId)
+            .setParameter("USERNAME", userName)
+            .setParameter("IP", ipByRequest)
+            .setResultTransformer(
+                Transformers
+                    .aliasToBean(Results.SuccessInfo.class))
             .list();
 
         dbService.commit();
       } else {
-        throw new RuntimeException(ZABonlineConstants.NO_VALID_AUTHENTIFICATION);
+        throw new RuntimeException(
+            ZABonlineConstants.NO_VALID_AUTHENTIFICATION);
       }
 
       return result;
@@ -252,18 +231,16 @@ public class SessionManager extends com.wavemaker.runtime.javaservice.JavaServic
       if (ex.getCause() == null) {
         errorMsg = ex.getMessage();
       } else {
-        errorMsg = ex.getCause()
-            .getMessage();
+          errorMsg = ex.getCause().getMessage();  
       }
-
-      if (errorMsg.trim()
-          .isEmpty()) {
+      
+      if (errorMsg.trim().isEmpty()) {
         errorMsg = ZABonlineConstants.UNKNOWN_ERROR_BY_DBSERVICE;
       }
-
-      throw new RuntimeException(errorMsg);
-      // Alt: WM 6.4.x
-      // throw ex;
+      
+      throw new RuntimeException(errorMsg);     
+      //Alt: WM 6.4.x 
+      //throw ex;
     }
   }
 }
