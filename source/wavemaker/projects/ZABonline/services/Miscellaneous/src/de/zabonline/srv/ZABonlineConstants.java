@@ -15,26 +15,26 @@ package de.zabonline.srv;
  * @author Alfred
  * 
  * @version 1.0.0 Build 1
- *
+ * 
  */
 public class ZABonlineConstants {
-	
-	/*-------------------------- Verzeichnis Konstanten --------------------------------------*/
-	/**
+
+  /*-------------------------- Verzeichnis Konstanten --------------------------------------*/
+  /**
 	 */
-	public final static String REL_RESOURCE_TEMP_DIR = "resources/tmp";
-	public final static String RESOURCE_MEMBERDATA_DIR = "resources/member";
-	
-	/*-------------------------- Error Konstanten --------------------------------------------*/
-	/**
+  public final static String REL_RESOURCE_TEMP_DIR = "resources/tmp";
+  public final static String RESOURCE_MEMBERDATA_DIR = "resources/member";
+
+  /*-------------------------- Error Konstanten --------------------------------------------*/
+  /**
 	 */
-	public final static String ERROR_GET_STRING_BY_JSON_FAILD = "ERROR_GET_STRING_BY_JSON_FAILD";
-	/**
+  public final static String ERROR_GET_STRING_BY_JSON_FAILD = "ERROR_GET_STRING_BY_JSON_FAILD";
+  /**
 	 */
-	public final static String ERROR_GET_INT_BY_JSON_FAILD = "ERROR_GET_INT_BY_JSON_FAILD";	
-	/**
+  public final static String ERROR_GET_INT_BY_JSON_FAILD = "ERROR_GET_INT_BY_JSON_FAILD";
+  /**
 	 */
-	public final static String ERROR_COPY_FILERESOURCE = "ERROR_COPY_FILERESOURCE";
+  public final static String ERROR_COPY_FILERESOURCE = "ERROR_COPY_FILERESOURCE";
   /**
    */
   public final static String ERROR_SAVE_FILE_TO_DB = "ERROR_SAVE_FILE_TO_DB";
@@ -50,8 +50,8 @@ public class ZABonlineConstants {
   /**
    */
   public final static String NO_VALID_PROCESSING_BY_FILERESOURCE = "NO_VALID_PROCESSING_BY_FILERESOURCE";
-	/*-------------------------- Default Konstanten ------------------------------------------*/
-	/**
+  /*-------------------------- Default Konstanten ------------------------------------------*/
+  /**
 	 */
-	public final static Integer INIT_DEFAULT_INT_BY_JSON = -1;	
+  public final static Integer INIT_DEFAULT_INT_BY_JSON = -1;
 }
