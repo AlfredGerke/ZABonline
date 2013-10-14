@@ -10,3 +10,4 @@ source/wavemaker/projects/ZABonline/webapproot/WEB-INF/lib/
 timestamp.txt
 wm.log
 log4j.properties
+*.jar
