@@ -110,7 +110,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\crypt\SHA512.js
 			-extend
 				..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js
-			+mod
+			-mod
 				..\..\wavemaker\common\packages\zabonline\mod\TitelLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\SalutationLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js
@@ -151,14 +151,18 @@ ZABonline
 			create_find.sql
 			create_json.sql
 [Open project files]
-0=data_0002.sql
-1=create_person.sql
+0=create_person.sql
+1=data_0001.sql
+2=data_0002.sql
 [Selected Project Files]
 Main=
 Selected=data_0002.sql
-[data_0002.sql]
+[create_person.sql]
 TopLine=1
 Caret=1,1
-[create_person.sql]
-TopLine=3568
-Caret=5,3558
+[data_0001.sql]
+TopLine=35
+Caret=1,1
+[data_0002.sql]
+TopLine=1
+Caret=3,50

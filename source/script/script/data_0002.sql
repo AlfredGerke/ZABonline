@@ -41,7 +41,13 @@ BEGIN
   section = 'MIMETYPE';
   ident = 'image/rnd';
   value_for_ident = 'TRUE';
-  execute procedure SP_WRITESTRING :key_section, :section, :ident, :value_for_ident;    
+  execute procedure SP_WRITESTRING :key_section, :section, :ident, :value_for_ident;   
+  
+  key_section = 'ADDRESSBOOK';
+  section = 'MIMETYPE';
+  ident = 'application/octet-stream';
+  value_for_ident = 'TRUE'; 
+  execute procedure SP_WRITESTRING :key_section, :section, :ident, :value_for_ident;  
 
 END^        
 SET TERM ; ^ /* definiert das Ende eines Ausführungsblockes */
