@@ -150,19 +150,24 @@ ZABonline
 			create_admin.sql
 			create_find.sql
 			create_json.sql
+			create_simple_indexe.sql
 [Open project files]
 0=create_person.sql
-1=data_0001.sql
-2=data_0002.sql
+1=create_db.sql
+2=create_simple_indexe.sql
+3=data_0001.sql
 [Selected Project Files]
 Main=
-Selected=data_0002.sql
+Selected=data_0001.sql
 [create_person.sql]
-TopLine=1
+TopLine=87
 Caret=1,1
+[create_db.sql]
+TopLine=2202
+Caret=25,2221
+[create_simple_indexe.sql]
+TopLine=80
+Caret=74,109
 [data_0001.sql]
-TopLine=35
-Caret=1,1
-[data_0002.sql]
-TopLine=1
-Caret=3,50
+TopLine=223
+Caret=130,250

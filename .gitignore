@@ -11,3 +11,4 @@ timestamp.txt
 wm.log
 log4j.properties
 *.jar
+*.bak

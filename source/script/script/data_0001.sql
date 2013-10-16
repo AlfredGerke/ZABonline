@@ -245,7 +245,9 @@ BEGIN
   desc = 'count=4;; json={"kind": 1000,  "mode": 0, "find": "<?>", "callback": "<?>"}';
   INSERT INTO JSON_KIND (COUNTRY_ID, CAPTION, DESCRIPTION, DONOTDELETE) VALUES (:default_country_id, :code, :desc, 1);
   
-
+  code = 'SOFTDEL';
+  desc = 'Deleteflag für Tabellen';  
+  INSERT INTO COMMON_IDX_COLUMNS (COUNTRY_ID, CAPTION, DESCRIPTION, DONOTDELETE) VALUES (:default_country_id, :code, :desc, 1);  
 END^        
 SET TERM ; ^ /* definiert das Ende eines Ausführungsblockes */
 /******************************************************************************/

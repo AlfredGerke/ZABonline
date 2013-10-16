@@ -1945,6 +1945,12 @@ BEGIN
     
     sql_stmt = 'COMMENT ON INDEX ALT_' || :relation_name || ' IS ''(created by SP_CREATE_CATALOG_TABLE)''';
     execute statement sql_stmt;
+    
+    sql_stmt = 'CREATE INDEX IDX_' || :relation_name || '_SD ON ' || :relation_name || '(SOFTDEL)';
+    execute statement sql_stmt;  
+    
+    sql_stmt = 'COMMENT ON INDEX IDX_' || :relation_name || '_SD IS ''(created by SP_CREATE_CATALOG_TABLE)''';
+    execute statement sql_stmt;    
               
     success = 1;  
   end      
@@ -2142,6 +2148,93 @@ COMMENT ON PROCEDURE SP_CREATE_ZABRELATION IS
 'Legt eine Relation mit all seinen Datenbankobjekten an'^
 
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_CREATE_ZABRELATION'^
+
+CREATE OR ALTER PROCEDURE SP_CREATE_SIMPLE_INDEX (
+  AINDEXEDCOLUMN DBOBJECTNAME24,
+  ATABLENAME DBOBJECTNAME24)
+RETURNS (
+  success smallint)  
+AS
+declare variable index_name varchar(31);
+BEGIN
+  index_name = 'IDX_' || :ATABLENAME || '_SD';
+   
+  if (exists(select 1 from RDB$INDICES where RDB$INDEX_NAME=:index_name)) then
+  begin
+    success = 0;
+  end
+  else
+  begin
+    sql_stmt = 'CREATE INDEX ' || :index_name || ' ON ' || :ATABLENAME || '(' || :AINDEXEDCOLUMN || ')';
+    execute statement sql_stmt;  
+    
+    sql_stmt = 'COMMENT ON INDEX ' || :index_name || ' IS ''(created by SP_CREATE_SIMPLE_INDEX)''';
+    execute statement sql_stmt;    
+
+    success = 1;
+  end
+  
+  suspend;
+END^
+
+COMMENT ON PROCEDURE SP_CREATE_SIMPLE_INDEX IS
+'Erstellt einen einfachen Einspalten-Index erstellen'^
+
+/* keine automatischen Grants vergeben da SP_CREATE_SIMPLE_INDEX nur bei der Installation angewendet werden soll */
+
+/* Katalog: COMMON_IDX_COLUMNS komplett über SP erstellen */
+execute procedure SP_CREATE_ZABCATALOG 'COMMON_IDX_COLUMNS';
+
+CREATE OR ALTER PROCEDURE SP_CREATE_ALL_SIMPLE_INDEX(
+  AOWNERNAME varchar(31) =  'INSTALLER')
+RETURNS (
+  success smallint)
+AS
+declare variable table_name varchar(31);
+declare variable indexed_column varchar(31);
+declare variable count_columns integer;
+BEGIN
+  select count(1) from COMMON_IDX_COLUMNS into :count_columns;
+  
+  if ((count_columns is null) or (count_columns = 0)) then
+  begin
+    success = 0;
+    Exit;
+  end 
+
+  for 
+  select 
+    RDB$RELATION_NAME 
+  from 
+    RDB$RELATIONS
+  where
+    RDB$VIEW_SOURCE is null
+  and
+    RDB$OWNER_NAME=:AOWNERNAME
+  into
+    :table_name
+  begin
+    for 
+    select
+      CAPTION
+    from
+      COMMON_IDX_COLUMNS
+    into
+      :indexed_column
+    begin
+      if (exists(select 1 from RDB$RELATION_FIELDS where RDB$FIELD_NAME=:indexed_column and RDB$RELATION_NAME=:table_name)) then
+      begin
+        select success from SP_CREATE_SIMPLE_INDEX(:indexed_column, :table_name) into :success;
+        suspend; 
+      end 
+    end       
+  end      
+END^
+
+COMMENT ON PROCEDURE SP_CREATE_ALL_SIMPLE_INDEX IS
+'Erstellt alle Einspalten-Indexe'^
+
+/* keine automatischen Grants vergeben da SP_CREATE_ALL_SIMPLE_INDEX nur bei der Installation angewendet werden soll */ 
 
 SET TERM ; ^
 
