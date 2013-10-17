@@ -38,12 +38,50 @@ COMMIT WORK;
 
 SET TERM ^ ;
 
-CREATE OR ALTER PROCEDURE SP_GRANT_ROLE_TO_OBJECT(
-    AROLE varchar(254),
-    AROLETYPE varchar(32),
-    AOBJECT varchar(32))
+CREATE OR ALTER PROCEDURE SP_GET_COLUMNLIST(
+  ATABLENAME varchar(31),
+  ASEPARATOR varchar(1) = ',')
 returns(
-    success smallint)
+  columnlist varchar(2000))
+as
+declare variable field_name varchar(31);
+begin
+  columnlist = '';
+  
+  for
+  select 
+    Trim(RDB$FIELD_NAME)
+  from 
+    RDB$RELATION_FIELDS 
+  where 
+    UPPER(RDB$RELATION_NAME)=UPPER(:ATABLENAME)
+  order by
+    RDB$FIELD_POSITION   
+  into 
+    :field_name
+  do
+  begin
+    if (exists(select 1 from RDB$TYPES where RDB$TYPE_NAME=:field_name)) then
+      field_name = '"' || :field_name || '"';
+  
+    if (columnlist <> '') then
+      columnlist = columnlist || :ASEPARATOR || ' ';
+      
+    columnlist = columnlist || :field_name;  
+  end 
+  
+  suspend; 
+end^
+
+COMMENT ON PROCEDURE SP_GET_COLUMNLIST IS
+'Ermittelt eine Spaltenliste einer gegebenen Tabelle'^  
+
+CREATE OR ALTER PROCEDURE SP_GRANT_ROLE_TO_OBJECT(
+  AROLE varchar(254),
+  AROLETYPE varchar(32),
+  AOBJECT varchar(32))
+returns(
+  success smallint)
 as
 declare variable sql_stmt varchar(2000);
 begin
@@ -92,35 +130,53 @@ CREATE OR ALTER PROCEDURE SP_CREATE_USER_VIEW(
 RETURNS (
   success smallint)  
 AS
-declare variable sql_stmt varchar(254);
+declare variable sql_stmt varchar(2000);
 declare variable relation_name varchar(32);
 declare variable softdel_field varchar(32);
+declare variable columnlist varchar(2000);
+declare variable interfacelist varchar(2000);
+declare variable implementationlist varchar(2000);
 begin
   success = 0;
   relation_name = 'V_' || :ATABLENAME;
   softdel_field = 'SOFTDEL';
   sql_stmt = '';
+  interfacelist = '';
+  implementationlist = '';
+
+  select Trim(columnlist) from SP_GET_COLUMNLIST(:ATABLENAME) into :columnlist;
+  
+  if (Trim(columnlist) <> '') then
+  begin
+    interfacelist = '(' || :columnlist || ')';
+    implementationlist = :columnlist; 
+  end
+  else
+  begin
+    interfacelist = '';
+    implementationlist = '*';   
+  end  
   
   if (exists(select 1 from RDB$RELATIONS where RDB$RELATION_NAME=:relation_name)) then
   begin   
     if (exists(select 1 from RDB$RELATION_FIELDS where RDB$FIELD_NAME=:softdel_field and RDB$RELATION_NAME=:ATABLENAME)) then
     begin
-      sql_stmt = 'create or alter view ' || :relation_name || ' as select * from ' || :ATABLENAME || ' where SOFTDEL=0';
+      sql_stmt = 'create or alter view ' || :relation_name || :interfacelist || ' as select ' || :implementationlist || ' from ' || :ATABLENAME || ' where SOFTDEL=0';
     end
     else
     begin
-      sql_stmt = 'create or alter view ' || :relation_name || ' as select * from ' || :ATABLENAME;
+      sql_stmt = 'create or alter view ' || :relation_name || :interfacelist || ' as select ' || :implementationlist || ' from ' || :ATABLENAME;
     end
   end
   else
   begin
     if (exists(select 1 from RDB$RELATION_FIELDS where RDB$FIELD_NAME=:softdel_field and RDB$RELATION_NAME=:ATABLENAME)) then
     begin
-      sql_stmt = 'create or alter view ' || :relation_name || ' as select * from ' || :ATABLENAME || ' where SOFTDEL=0';
+      sql_stmt = 'create or alter view ' || :relation_name || :interfacelist || ' as select ' || :implementationlist || ' from ' || :ATABLENAME || ' where SOFTDEL=0';
     end
     else
     begin
-      sql_stmt = 'create or alter view ' || :relation_name || ' as select * from ' || :ATABLENAME;
+      sql_stmt = 'create or alter view ' || :relation_name || :interfacelist || ' as select ' || :implementationlist || ' from ' || :ATABLENAME;
     end
   end
   
@@ -192,10 +248,10 @@ COMMENT ON PROCEDURE SP_CREATE_SEQUNECE IS
 'Erstellt eine Sequence zu einem Tabellennamen'^
 
 CREATE OR ALTER PROCEDURE SP_CREATE_TRIGGER_BI (
-    ATABLENAME varchar(32),
-    ADOSTAMP smallint DEFAULT 1)
+  ATABLENAME varchar(32),
+  ADOSTAMP smallint DEFAULT 1)
 returns (
-    success smallint)
+  success smallint)
 as
 declare variable sql_stmt varchar(2000);
 declare variable relation_name varchar(32);
@@ -252,9 +308,9 @@ COMMENT ON PROCEDURE SP_CREATE_TRIGGER_BI IS
 'Erstellt einen Before-Insert-Trigger zu einem Tabellennamen'^
 
 CREATE OR ALTER PROCEDURE SP_CREATE_TRIGGER_BU (
-    ATABLENAME varchar(32))
+  ATABLENAME varchar(32))
 returns (
-    success smallint)
+  success smallint)
 as
 declare variable sql_stmt varchar(2000);
 declare variable relation_name varchar(32);
@@ -291,10 +347,10 @@ COMMENT ON PROCEDURE SP_CREATE_TRIGGER_BU IS
 'Erstellt einen Before-Update-Trigger zu einem Tabellennamen'^
 
 CREATE OR ALTER PROCEDURE SP_CREATE_TRIGGER_BD (
-    ATABLENAME varchar(32),
-    ADONOTDELETE_FIELD varchar(32))
+  ATABLENAME varchar(32),
+  ADONOTDELETE_FIELD varchar(32))
 returns (
-    success smallint)
+  success smallint)
 as
 declare variable sql_stmt varchar(2000);
 declare variable relation_name varchar(32);
@@ -379,12 +435,12 @@ COMMENT ON PROCEDURE SP_CAPITALIZE IS
 'Zeichen im String Groﬂ schreiben'^
 
 CREATE OR ALTER PROCEDURE SP_SET_ENTITYNAME (
-    AREPLACESTRING varchar(32),
-    ASTRING varchar(32),
-    ADOUPPER smallint,
-    ADUMMY varchar(32) DEFAULT NULL)
+  AREPLACESTRING varchar(32),
+  ASTRING varchar(32),
+  ADOUPPER smallint,
+  ADUMMY varchar(32) DEFAULT NULL)
 returns (
-    property varchar(32))
+  property varchar(32))
 as
 declare variable format_string varchar(32);
 declare variable sub_string varchar(32);
@@ -1703,6 +1759,7 @@ COMMIT WORK;
 /******************************************************************************/
 
 /* Users */
+GRANT EXECUTE ON PROCEDURE SP_GET_COLUMNLIST TO INSTALLER;
 GRANT EXECUTE ON PROCEDURE SP_GRANT_ROLE_TO_OBJECT TO INSTALLER;
 GRANT EXECUTE ON PROCEDURE SP_CREATE_USER_VIEW TO INSTALLER;
 GRANT EXECUTE ON PROCEDURE SP_CREATE_SEQUNECE TO INSTALLER;

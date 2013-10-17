@@ -53,33 +53,17 @@ COMMIT WORK;
 /******************************************************************************/
 /*                                  Einspalten-Indexe                                   
 /******************************************************************************/
+/* Wenn Log vorhanden, dann zurerst löschen */
+SHEll DEL C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\log\creidx.log;
 
-SET TERM ^ ; /* definiert den Begin eines Ausführungsblockes */
-EXECUTE BLOCK AS
-declare variable table_owner varchar(31);
-declare variable success smallint;
-declare variable table_name varchar(31);
-declare variable indexed_column varchar(31);
-BEGIN
-
-  table_owner = 'INSTALLER';
-  
-  for
+OUTPUT 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\log\creidx.log';
   select
     success, 
     tablename, 
     indexedcolumn 
   from
-    SP_CREATE_ALL_SIMPLE_INDEX(:table_owner)
-  into 
-    :success, 
-    :table_name, 
-    :indexed_column
-  do
-  begin
-  end  
-END^        
-SET TERM ; ^ /* definiert das Ende eines Ausführungsblockes */
+    SP_CREATE_ALL_SIMPLE_INDEX('INSTALLER');
+OUTPUT;   
 
 COMMIT WORK;
 /******************************************************************************/
