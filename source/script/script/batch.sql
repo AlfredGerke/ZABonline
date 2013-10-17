@@ -17,17 +17,20 @@
 /******************************************************************************/
 
 /*
-   Userscript nur einmal einspielen.
-   User werden in der Sicherheitsdatenbank angelegt.
-   WICHTIG: Am Ende des Scriptes wird über einen Shell-Befehl eine bestehende
-            Datenbank gelöscht. Dieser Vorgang kann im weiteren Verlauf zu Fehlern
-            führen. In dem Fall die Datenbank von Hand löschen und erneut die
-            Datenbank aufbauen beginnent mit create_tools.sql.
-            Da im ersten Durchlauf die User über create_user.sql angelegt wurden,
-            braucht dieses Script nicht mehr gestartet zu werden
+ *
+ * 
+  Userscript nur einmal einspielen.
+  User werden in der Sicherheitsdatenbank angelegt.
+  WICHTIG: Am Ende des Scriptes wird über einen Shell-Befehl eine bestehende
+           Datenbank gelöscht. Dieser Vorgang kann im weiteren Verlauf zu Fehlern
+           führen. In dem Fall die Datenbank von Hand löschen und erneut die
+           Datenbank aufbauen beginnent mit create_tools.sql.
+           Da im ersten Durchlauf die User über create_user.sql angelegt wurden,
+           braucht dieses Script nicht mehr gestartet zu werden
 
 input 'create_user.sql';
-
+*
+*
 */
 /******************************************************************************/
 /*                                  Create Database
@@ -35,16 +38,34 @@ input 'create_user.sql';
 
 input 'create_tools.sql';
 /*
+ * 
  * bis auf weiteres zurückgestellt
 input 'create_json.sql';
- *
- */ 
+*
+*
+*/ 
 input 'create_db.sql';
 input 'create_person.sql';
 input 'create_testproc_env.sql';
 input 'create_factory.sql';
 input 'create_admin.sql';
 input 'create_find.sql';
+
+/******************************************************************************/
+/*                                  Modify Schema
+/*                                  
+/******************************************************************************/
+
+/*
+ *
+ *
+  In diesem Abschnitt solle nur Scripte aufgeführt werden die Ändernung per
+  SP durchführen. z.B.: SP_CREATE_ALL_SIMPLE_INDEXE    
+*
+*  
+*/
+
+input 'create_simple_indexe.sql';
 
 /******************************************************************************/
 /******************************************************************************/

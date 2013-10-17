@@ -2156,8 +2156,14 @@ RETURNS (
   success smallint)  
 AS
 declare variable index_name varchar(31);
+declare variable sql_stmt varchar(2000);
+declare variable table_name varchar(31);
+declare variable indexed_column varchar(31);
 BEGIN
-  index_name = 'IDX_' || :ATABLENAME || '_SD';
+  table_name = Trim(ATABLENAME);
+  indexed_column = Trim(AINDEXEDCOLUMN);
+
+  index_name = 'IDX_' || :table_name || '_SD';
    
   if (exists(select 1 from RDB$INDICES where RDB$INDEX_NAME=:index_name)) then
   begin
@@ -2165,7 +2171,7 @@ BEGIN
   end
   else
   begin
-    sql_stmt = 'CREATE INDEX ' || :index_name || ' ON ' || :ATABLENAME || '(' || :AINDEXEDCOLUMN || ')';
+    sql_stmt = 'CREATE INDEX ' || :index_name || ' ON ' || :table_name || '(' || :indexed_column || ')';
     execute statement sql_stmt;  
     
     sql_stmt = 'COMMENT ON INDEX ' || :index_name || ' IS ''(created by SP_CREATE_SIMPLE_INDEX)''';
@@ -2183,18 +2189,18 @@ COMMENT ON PROCEDURE SP_CREATE_SIMPLE_INDEX IS
 /* keine automatischen Grants vergeben da SP_CREATE_SIMPLE_INDEX nur bei der Installation angewendet werden soll */
 
 /* Katalog: COMMON_IDX_COLUMNS komplett über SP erstellen */
-execute procedure SP_CREATE_ZABCATALOG 'COMMON_IDX_COLUMNS';
+execute procedure SP_CREATE_ZABCATALOG 'COMMON_IDX_COLUMNS'^
 
-CREATE OR ALTER PROCEDURE SP_CREATE_ALL_SIMPLE_INDEX(
-  AOWNERNAME varchar(31) =  'INSTALLER')
-RETURNS (
-  success smallint)
-AS
-declare variable table_name varchar(31);
-declare variable indexed_column varchar(31);
+CREATE OR ALTER PROCEDURE SP_CREATE_ALL_SIMPLE_INDEX (
+    aownername varchar(31) = 'INSTALLER')
+returns (
+    success smallint,
+    tablename varchar(31),
+    indexedcolumn varchar(31))
+as
 declare variable count_columns integer;
 BEGIN
-  select count(1) from COMMON_IDX_COLUMNS into :count_columns;
+  select count(1) from V_COMMON_IDX_COLUMNS into :count_columns;
   
   if ((count_columns is null) or (count_columns = 0)) then
   begin
@@ -2204,7 +2210,7 @@ BEGIN
 
   for 
   select 
-    RDB$RELATION_NAME 
+    Trim(RDB$RELATION_NAME) 
   from 
     RDB$RELATIONS
   where
@@ -2212,19 +2218,21 @@ BEGIN
   and
     RDB$OWNER_NAME=:AOWNERNAME
   into
-    :table_name
-  begin
+    :tablename
+  do
+  begin   
     for 
     select
-      CAPTION
+      Trim(CAPTION)
     from
-      COMMON_IDX_COLUMNS
+      V_COMMON_IDX_COLUMNS
     into
-      :indexed_column
+      :indexedcolumn
+    do
     begin
-      if (exists(select 1 from RDB$RELATION_FIELDS where RDB$FIELD_NAME=:indexed_column and RDB$RELATION_NAME=:table_name)) then
+      if (exists(select 1 from RDB$RELATION_FIELDS where RDB$FIELD_NAME=:indexedcolumn and RDB$RELATION_NAME=:tablename)) then
       begin
-        select success from SP_CREATE_SIMPLE_INDEX(:indexed_column, :table_name) into :success;
+        select success from SP_CREATE_SIMPLE_INDEX(:indexedcolumn, :tablename) into :success;
         suspend; 
       end 
     end       
