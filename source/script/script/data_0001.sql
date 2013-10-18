@@ -247,7 +247,7 @@ BEGIN
   
   code = 'SOFTDEL';
   desc = 'Deleteflag für Tabellen';  
-  INSERT INTO COMMON_IDX_COLUMNS (COUNTRY_ID, CAPTION, DESCRIPTION, DONOTDELETE) VALUES (:default_country_id, :code, :desc, 1);  
+  INSERT INTO V_COMMON_IDX_COLUMNS (CAPTION, DESCRIPTION) VALUES (:code, :desc);  
 END^        
 SET TERM ; ^ /* definiert das Ende eines Ausführungsblockes */
 /******************************************************************************/
