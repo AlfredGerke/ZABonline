@@ -1,8 +1,8 @@
 /*******************************************************************************
 /* Author:  Alfred Gerke (AGE)                                                  
-/* Date:    2013-10-16                                                          
-/* Purpose: Erstelle alle Einspalten-Indexe
-/*          Die notwendigen Spalten werde dem Admin-Katalog COMMON_IDX_COLUMNS 
+/* Date:    2013-10-19                                                          
+/* Purpose: Überarbeitet alle registrierten UserViews
+/*          Die registrierten UserViews werden dem Admin-Katalog USERVIEW_SOURCES 
 /*          entnommen  
 /*                                                                              
 /*******************************************************************************
@@ -11,8 +11,8 @@
 /* - Ein möglicher Connect zur Produktionsdatenbank sollte geschlossen werden 
 /* - Die Installationstools müssen installiert worden sein  
 /******************************************************************************/
-/* History: 2013-10-16
-/*          Einspalten-Indexe anlegen
+/* History: 2013-10-19
+/*          Überarbeitet alle registrierten UserViews
 /******************************************************************************/
 
 /******************************************************************************/
@@ -39,8 +39,8 @@ DECLARE description varchar(2000);
 BEGIN
   number = '0';
   subitem = '0';
-  script = 'create_simple_indexe.sql';
-  description = 'Einspalten-Indexe anlagen';
+  script = 'create_user_views.sql';
+  description = 'Überarbeitet alle registrierten UserViews';
   
   if (exists(select 1 from RDB$RELATIONS where RDB$RELATION_NAME='UPDATEHISTORY')) then
   begin   
@@ -55,15 +55,15 @@ COMMIT WORK;
 /*                                  Einspalten-Indexe                                   
 /******************************************************************************/
 /* Wenn Log vorhanden, dann zurerst löschen */
-SHEll DEL C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\log\creidx.log;
+SHEll DEL C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\log\alterusrviews.log;
 
-OUTPUT 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\log\creidx.log';
+OUTPUT 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\log\alterusrviews.log';
   select
     success, 
     tablename, 
-    indexedcolumn 
+    userview 
   from
-    SP_CREATE_ALL_SIMPLE_INDEX('INSTALLER');
+    SP_CREATE_ALL_USER_VIEWS(1);
 OUTPUT;   
 
 COMMIT WORK;

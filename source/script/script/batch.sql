@@ -53,19 +53,19 @@ input 'create_find.sql';
 
 /******************************************************************************/
 /*                                  Modify Schema
-/*                                  
 /******************************************************************************/
 
 /*
  *
  *
-  In diesem Abschnitt solle nur Scripte aufgeführt werden die Ändernung per
-  SP durchführen. z.B.: SP_CREATE_ALL_SIMPLE_INDEXE    
+  In diesem Abschnitt solle nur Scripte aufgeführt werden die Ändernung am
+  Datenmodell per SP durchführen. z.B.: SP_CREATE_ALL_SIMPLE_INDEXE
 *
 *  
 */
 
 input 'create_simple_indexe.sql';
+/*input 'create_user_views.sql';*/
 
 /******************************************************************************/
 /******************************************************************************/
