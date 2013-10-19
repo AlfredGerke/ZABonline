@@ -55,12 +55,12 @@ Jeder Abschnitt wird in der Regel mit einem `COMMIT WORK` abgeschlossen.
 
 Für alle Scripte die Datenbankobjekte für die Mitgliederverwaltung erstellen,
 wird der Benutzer `INSTALLER` für die Verbindungsparameter verwendet.      
-Neben den Scripts welche die Mitgliederverwaltung aufbauen, gibt es Scripts welche 
-Werkzeuge für die Codegenerierung zur Verfügung stellen. Diese Script werden immer 
+Neben den Scripten welche die Mitgliederverwaltung aufbauen, gibt es Scripte welche 
+Werkzeuge für die Codegenerierung zur Verfügung stellen. Diese Scripte werden immer 
 mit dem Benutzer `SYSDBA` initialisert. 
 
 ### Spezielle Scripte
-Folgende Scripts richten Werkzeuge für die Codegenerierng ein, unterstützen die 
+Folgende Scripte richten Werkzeuge für die Codegenerierng ein, unterstützen die 
 Installation, oder stellen grundsätzliche Funktionalitäten zur Verfügung:
 
 * `create_user.sql`: Erstellt alle notwendigen Benutzer
