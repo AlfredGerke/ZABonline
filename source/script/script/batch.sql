@@ -53,19 +53,34 @@ input 'create_find.sql';
 
 /******************************************************************************/
 /*                                  Modify Schema
+/*
+/* In diesem Abschnitt sollen nur Scripte aufgeführt werden die Ändernung am
+/* Datenmodell per SP durchführen. z.B.: SP_CREATE_ALL_SIMPLE_INDEXE
+/******************************************************************************/
+
+input 'create_simple_indexe.sql';
+/*
+ * 
+ * bis auf weiteres zurückgestellt
+input 'recreate_user_views.sql';
+*
+*
+*/
+
+/******************************************************************************/
+/*                                  Aufräumen
+/*
+/* In diesem Abschnitt sollen nur Scripte aufgeführt werden die alle temporären
+/* Datenbankobjekte, welche nur für die Installation verwendet werden, entfernen
 /******************************************************************************/
 
 /*
- *
- *
-  In diesem Abschnitt solle nur Scripte aufgeführt werden die Ändernung am
-  Datenmodell per SP durchführen. z.B.: SP_CREATE_ALL_SIMPLE_INDEXE
+ * 
+ * bis auf weiteres zurückgestellt*/
+input 'clean_up.sql';
+/*
 *
-*  
 */
-
-input 'create_simple_indexe.sql';
-/*input 'create_user_views.sql';*/
 
 /******************************************************************************/
 /******************************************************************************/

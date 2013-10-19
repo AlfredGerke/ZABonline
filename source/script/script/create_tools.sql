@@ -36,89 +36,7 @@ COMMIT WORK;
 /*                                  Tools                                   
 /******************************************************************************/
 
-
-
-/* SPs */
-
 SET TERM ^ ;
-
-CREATE OR ALTER PROCEDURE SP_CREATE_ADMIN_CATALOG_TABLE (
-  ATABLENAME varchar(24),
-  ACOMMENT VARCHAR(254) DEFAULT 'ZABonline')
-RETURNS (
-  success smallint)
-AS
-declare variable sql_stmt varchar(2000);
-declare variable relation_name varchar(24);
-declare variable cat_comment varchar(254);
-BEGIN
-  relation_name = Upper(ATABLENAME);
-  cat_comment = ACOMMENT;
-
-  if (exists(select 1 from RDB$RELATIONS where RDB$RELATION_NAME=:relation_name)) then
-  begin
-    success = 0;
-  end
-  else
-  begin
-    sql_stmt = 'CREATE TABLE ' || :relation_name || ' (
-    ID           INTEGER NOT NULL,
-    CAPTION      VARCHAR(254) NOT NULL,
-    DESCRIPTION  VARCHAR(2000),
-    CRE_USER     VARCHAR(32) NOT NULL,
-    CRE_DATE     TIMESTAMP NOT NULL,
-    CHG_USER     VARCHAR(32),
-    CHG_DATE     TIMESTAMP
-)';
-    execute statement sql_stmt;
-    
-    sql_stmt = 'COMMENT ON TABLE ' || :relation_name || ' IS ''Katalog: ' || :relation_name || ' für ' || :cat_comment || ' (created by SP_CREATE_CATALOG_TABLE)''';
-    execute statement sql_stmt;
-    
-    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.ID IS ''Primärschlüssel''';
-    execute statement sql_stmt;
-
-    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.CAPTION IS ''Bezeichnung''';
-    execute statement sql_stmt;
-
-    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.DESCRIPTION IS ''Beschreibung''';
-    execute statement sql_stmt;
-
-    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.CRE_USER IS ''Erstellt von''';
-    execute statement sql_stmt;
-
-    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.CRE_DATE IS ''Erstellt am''';
-    execute statement sql_stmt;
-
-    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.CHG_USER IS ''Geändert von''';
-    execute statement sql_stmt;
-
-    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.CHG_DATE IS ''Geändert am''';    
-    execute statement sql_stmt;    
-          
-    sql_stmt = 'ALTER TABLE ' || :relation_name || ' ADD CONSTRAINT PK_' || :relation_name ||' PRIMARY KEY (ID)';      
-    execute statement sql_stmt;
-       
-    sql_stmt = 'CREATE UNIQUE INDEX ALT_' || :relation_name || ' ON ' || :relation_name || '(CAPTION)';
-    execute statement sql_stmt;  
-    
-    sql_stmt = 'COMMENT ON INDEX ALT_' || :relation_name || ' IS ''(created by SP_CREATE_CATALOG_TABLE)''';
-    execute statement sql_stmt;
-    
-    sql_stmt = 'create or alter view ' || 'V_' || :relation_name || ' as select * from ' || :ATABLENAME;
-    execute statement sql_stmt; 
-    
-    sql_stmt = 'COMMENT ON VIEW ' || 'V_' || :relation_name || ' IS ''Userview für die Tabelle ' || :ATABLENAME || ' (created by SP_CREATE_ADMIN_CATALOG_TABLE)''';
-    execute statement sql_stmt; 
-                    
-    success = 1;  
-  end      
-
-  suspend;
-END^
-
-COMMENT ON PROCEDURE SP_CREATE_ADMIN_CATALOG_TABLE IS
-'Erstellt einen Admin-Katalog'^
 
 CREATE OR ALTER PROCEDURE SP_GET_COLUMNLIST(
   ATABLENAME varchar(31),
@@ -231,12 +149,109 @@ begin
 end^
 
 COMMENT ON PROCEDURE SP_GET_PRIMKEYLIST IS
-'Ermittelt eine Spaltenliste der Primärschlüssel'^  
+'Ermittelt eine Spaltenliste der Primärschlüssel'^
+
+CREATE OR ALTER PROCEDURE SP_CREATE_ADMIN_CATALOG_TABLE (
+  ATABLENAME varchar(24),
+  ACOMMENT VARCHAR(254) DEFAULT 'ZABonline')
+RETURNS (
+  success smallint)
+AS
+declare variable sql_stmt varchar(2000);
+declare variable relation_name varchar(24);
+declare variable cat_comment varchar(254);
+declare variable columnlist varchar(2000);
+declare variable interfacelist varchar(2000);
+declare variable implementationlist varchar(2000);
+BEGIN
+  relation_name = Upper(ATABLENAME);
+  cat_comment = ACOMMENT;
+  interfacelist = '';
+  implementationlist = '';
+
+  if (exists(select 1 from RDB$RELATIONS where RDB$RELATION_NAME=:relation_name)) then
+  begin
+    success = 0;
+  end
+  else
+  begin
+    sql_stmt = 'CREATE TABLE ' || :relation_name || ' (
+    ID           INTEGER NOT NULL,
+    CAPTION      VARCHAR(254) NOT NULL,
+    DESCRIPTION  VARCHAR(2000),
+    CRE_USER     VARCHAR(32) NOT NULL,
+    CRE_DATE     TIMESTAMP NOT NULL,
+    CHG_USER     VARCHAR(32),
+    CHG_DATE     TIMESTAMP
+)';
+    execute statement sql_stmt;
+    
+    sql_stmt = 'COMMENT ON TABLE ' || :relation_name || ' IS ''Katalog: ' || :relation_name || ' für ' || :cat_comment || ' (created by SP_CREATE_CATALOG_TABLE)''';
+    execute statement sql_stmt;
+    
+    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.ID IS ''Primärschlüssel''';
+    execute statement sql_stmt;
+
+    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.CAPTION IS ''Bezeichnung''';
+    execute statement sql_stmt;
+
+    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.DESCRIPTION IS ''Beschreibung''';
+    execute statement sql_stmt;
+
+    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.CRE_USER IS ''Erstellt von''';
+    execute statement sql_stmt;
+
+    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.CRE_DATE IS ''Erstellt am''';
+    execute statement sql_stmt;
+
+    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.CHG_USER IS ''Geändert von''';
+    execute statement sql_stmt;
+
+    sql_stmt = 'COMMENT ON COLUMN ' || :relation_name || '.CHG_DATE IS ''Geändert am''';    
+    execute statement sql_stmt;    
+          
+    sql_stmt = 'ALTER TABLE ' || :relation_name || ' ADD CONSTRAINT PK_' || :relation_name ||' PRIMARY KEY (ID)';      
+    execute statement sql_stmt;
+       
+    sql_stmt = 'CREATE UNIQUE INDEX ALT_' || :relation_name || ' ON ' || :relation_name || '(CAPTION)';
+    execute statement sql_stmt;  
+    
+    sql_stmt = 'COMMENT ON INDEX ALT_' || :relation_name || ' IS ''(created by SP_CREATE_CATALOG_TABLE)''';
+    execute statement sql_stmt;   
+
+    select Trim(columnlist) from SP_GET_COLUMNLIST(:ATABLENAME) into :columnlist;
+    
+    if (Trim(columnlist) <> '') then
+    begin
+      interfacelist = '(' || :columnlist || ')';
+      implementationlist = :columnlist; 
+    end
+    else
+    begin
+      interfacelist = '';
+      implementationlist = '*';   
+    end
+
+    sql_stmt = 'create or alter view ' || 'V_' || :relation_name || :interfacelist || ' as select ' || :implementationlist || ' from ' || :ATABLENAME;
+    execute statement sql_stmt; 
+    
+    sql_stmt = 'COMMENT ON VIEW ' || 'V_' || :relation_name || ' IS ''Userview für die Tabelle ' || :ATABLENAME || ' (created by SP_CREATE_ADMIN_CATALOG_TABLE)''';
+    execute statement sql_stmt; 
+                    
+    success = 1;  
+  end      
+
+  suspend;
+END^
+
+COMMENT ON PROCEDURE SP_CREATE_ADMIN_CATALOG_TABLE IS
+'Erstellt einen Admin-Katalog'^ 
 
 CREATE OR ALTER PROCEDURE SP_GRANT_ROLE_TO_OBJECT(
   AROLE varchar(254),
   AROLETYPE varchar(32),
-  AOBJECT varchar(32))
+  AOBJECT varchar(32),
+  ADOADMINOPT smallint = 0)
 returns(
   success smallint)
 as
@@ -256,6 +271,9 @@ begin
       sql_stmt = 'GRANT ' || AROLETYPE || ' ON ' || AOBJECT || ' TO ' || AROLE;
     end
     
+    if (ADOADMINOPT = 1) then
+      sql_stmt = sql_stmt || ' WITH GRANT OPTION';
+      
     execute statement sql_stmt;
       
     success = 1;  
@@ -268,6 +286,9 @@ begin
       begin
         sql_stmt = 'GRANT ' || AROLETYPE || ' ON PROCEDURE ' || AOBJECT || ' TO ' || AROLE;
         
+        if (ADOADMINOPT = 1) then
+          sql_stmt = sql_stmt || ' WITH GRANT OPTION';
+
         execute statement sql_stmt;
     
         success = 1;      
@@ -318,8 +339,8 @@ END^
 COMMENT ON PROCEDURE SP_CREATE_SIMPLE_INDEX IS
 'Erstellt einen einfachen Einspalten-Index erstellen'^
 
-/* Katalog: COMMON_IDX_COLUMNS komplett über SP erstellen */
-execute procedure SP_CREATE_ADMIN_CATALOG_TABLE 'COMMON_IDX_COLUMNS'^
+/* Katalog: ADM_COMMON_IDX_COLUMNS komplett über SP erstellen */
+execute procedure SP_CREATE_ADMIN_CATALOG_TABLE 'ADM_COMMON_IDX_COLUMNS'^
 
 CREATE OR ALTER PROCEDURE SP_CREATE_ALL_SIMPLE_INDEX (
     aownername varchar(31) = 'INSTALLER')
@@ -330,7 +351,7 @@ returns (
 as
 declare variable count_columns integer;
 BEGIN
-  select count(1) from V_COMMON_IDX_COLUMNS into :count_columns;
+  select count(1) from V_ADM_COMMON_IDX_COLUMNS into :count_columns;
   
   if ((count_columns is null) or (count_columns = 0)) then
   begin
@@ -355,7 +376,7 @@ BEGIN
     select
       Trim(CAPTION)
     from
-      V_COMMON_IDX_COLUMNS
+      V_ADM_COMMON_IDX_COLUMNS
     into
       :indexedcolumn
     do
@@ -372,14 +393,14 @@ END^
 COMMENT ON PROCEDURE SP_CREATE_ALL_SIMPLE_INDEX IS
 'Erstellt alle Einspalten-Indexe'^
 
-/* Katalog: USERVIEW_SOURCES komplett über SP erstellen */
-execute procedure SP_CREATE_ADMIN_CATALOG_TABLE 'USERVIEW_SOURCES'^
+/* Katalog: ADM_USERVIEW_SOURCES komplett über SP erstellen */
+execute procedure SP_CREATE_ADMIN_CATALOG_TABLE 'ADM_USERVIEW_SOURCES'^
                           
 CREATE OR ALTER PROCEDURE SP_CREATE_USER_VIEW(
   ATABLENAME VARCHAR(32),
   AREGISTRER_SOURCE smallint = 1,
   ADOGRANT_ZAB_ROLES smallint = 1,
-  AORDER_BY_PRIM smallint = 0)
+  AORDER_BY_PRIM smallint = 0) /* wenn 1 dann USER_VIEW nur ReadOnly */
 RETURNS (
   success smallint)  
 AS
@@ -454,8 +475,8 @@ begin
   
   if (AREGISTRER_SOURCE = 1) then
   begin
-    if (not exists(select 1 from V_USERVIEW_SOURCES where CAPTION=:ATABLENAME)) then
-      insert into V_USERVIEW_SOURCES(CAPTION, DESCRIPTION) VALUES (:ATABLENAME, :relation_name);
+    if (not exists(select 1 from V_ADM_USERVIEW_SOURCES where CAPTION=:ATABLENAME)) then
+      insert into V_ADM_USERVIEW_SOURCES(CAPTION, DESCRIPTION) VALUES (:ATABLENAME, :relation_name);
   end    
   
   sql_stmt = 'COMMENT ON VIEW ' || :relation_name || ' IS ''Userview für die Tabelle ' || :ATABLENAME || ' (created by SP_CREATE_USER_VIEW)''';
@@ -478,8 +499,7 @@ end^
 COMMENT ON PROCEDURE SP_CREATE_USER_VIEW IS
 'Erstellt eine Userview zu einem Tabellennamen'^
 
-CREATE OR ALTER PROCEDURE SP_CREATE_ALL_USER_VIEWS(
-  AORDER_BY_PRIM smallint = 1)
+CREATE OR ALTER PROCEDURE SP_CREATE_ALL_USER_VIEWS
 RETURNS (
   success smallint,
   tablename varchar(31),
@@ -491,7 +511,7 @@ begin
     TRIM(CAPTION),
     TRIM(DESCRIPTION)
   from
-    V_USERVIEW_SOURCES
+    V_ADM_USERVIEW_SOURCES
   into
     :tablename,
     :userview
@@ -503,7 +523,7 @@ begin
       SP_CREATE_USER_VIEW(:tablename,
         0,
         1,
-        :AORDER_BY_PRIM)
+        0)
      into
        :success;
        
@@ -2064,16 +2084,22 @@ COMMIT WORK;
 /******************************************************************************/
 
 /* Sequence anlegen */
-execute procedure SP_CREATE_SEQUNECE 'COMMON_IDX_COLUMNS';
+execute procedure SP_CREATE_SEQUNECE 'ADM_COMMON_IDX_COLUMNS';
 /* Trigger anlegen */
-execute procedure SP_CREATE_TRIGGER_BI 'COMMON_IDX_COLUMNS';
-execute procedure SP_CREATE_TRIGGER_BU 'COMMON_IDX_COLUMNS';
+execute procedure SP_CREATE_TRIGGER_BI 'ADM_COMMON_IDX_COLUMNS';
+execute procedure SP_CREATE_TRIGGER_BU 'ADM_COMMON_IDX_COLUMNS';
+/* Grants vergeben */
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'INSTALLER', 'ALL', 'ADM_COMMON_IDX_COLUMNS';
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'INSTALLER', 'ALL', 'V_ADM_COMMON_IDX_COLUMNS';
 
 /* Sequence anlegen */
-execute procedure SP_CREATE_SEQUNECE 'USERVIEW_SOURCES';
+execute procedure SP_CREATE_SEQUNECE 'ADM_USERVIEW_SOURCES';
 /* Trigger anlegen */
-execute procedure SP_CREATE_TRIGGER_BI 'USERVIEW_SOURCES';
-execute procedure SP_CREATE_TRIGGER_BU 'USERVIEW_SOURCES';
+execute procedure SP_CREATE_TRIGGER_BI 'ADM_USERVIEW_SOURCES';
+execute procedure SP_CREATE_TRIGGER_BU 'ADM_USERVIEW_SOURCES';
+/* Grants vergeben */
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'INSTALLER', 'ALL', 'ADM_USERVIEW_SOURCES';
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'INSTALLER', 'ALL', 'V_ADM_USERVIEW_SOURCES';
 
 COMMIT WORK;
 /******************************************************************************/
@@ -2101,8 +2127,12 @@ GRANT EXECUTE ON PROCEDURE SP_CREATE_HIBERNATE_SCRIPT TO INSTALLER;
 GRANT EXECUTE ON PROCEDURE SP_CREATE_ALL_SIMPLE_INDEX TO INSTALLER;
 GRANT EXECUTE ON PROCEDURE SP_CREATE_ALL_USER_VIEWS TO INSTALLER;
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON V_USERVIEW_SOURCES TO INSTALLER;
-GRANT SELECT, INSERT, UPDATE, DELETE ON V_COMMON_IDX_COLUMNS TO INSTALLER; 
+/*
+GRANT ALL ON V_ADM_USERVIEW_SOURCES TO INSTALLER;
+GRANT ALL ON V_ADM_COMMON_IDX_COLUMNS TO INSTALLER; 
+GRANT ALL ON V_ADM_USERVIEW_SOURCES TO INSTALLER;
+GRANT ALL ON V_ADM_COMMON_IDX_COLUMNS TO INSTALLER; 
+*/
 
 COMMIT WORK;
 /******************************************************************************/
