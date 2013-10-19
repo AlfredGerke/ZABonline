@@ -28,21 +28,21 @@ CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey';
 /*                                 Hibernate-Interface                                  
 /******************************************************************************/
 
-OUTPUT 'C:\Users\Alfred\Sourcen\Projekte\SaE\wavemaker\trunk\zabonline\model2hibernate\datasheet.java';
+OUTPUT 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\datasheet.java';
 select Trim(trailing from sourcecode) from SP_METADATA_TO_JAVA('DATASHEET', 0, 'INSTALLER', 'BEGIN');
 select Trim(trailing from sourcecode) from SP_METADATA_TO_JAVA('DATASHEET', 0, 'INSTALLER', 'PROPERTY');
 select Trim(trailing from sourcecode) from SP_METADATA_TO_JAVA('DATASHEET', 0, 'INSTALLER', 'METHOD');
 select Trim(trailing from sourcecode) from SP_METADATA_TO_JAVA('DATASHEET', 0, 'INSTALLER', 'END');
 OUTPUT;
 
-OUTPUT 'C:\Users\Alfred\Sourcen\Projekte\SaE\wavemaker\trunk\zabonline\model2hibernate\datasheet.hbm.xml';
+OUTPUT 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\datasheet.hbm.xml';
 select Trim(trailing from sourcecode) from SP_METADATA_TO_XML('DATASHEET', 0, 1, 'INSTALLER', 'BEGIN');
 select Trim(trailing from sourcecode) from SP_METADATA_TO_XML('DATASHEET', 0, 1, 'INSTALLER', 'PK_PROPERTY');
 select Trim(trailing from sourcecode) from SP_METADATA_TO_XML('DATASHEET', 0, 1, 'INSTALLER', 'PROPERTY');
 select Trim(trailing from sourcecode) from SP_METADATA_TO_XML('DATASHEET', 0, 1, 'INSTALLER', 'END');
 OUTPUT;
 
-OUTPUT 'C:\Users\Alfred\Sourcen\Projekte\SaE\wavemaker\trunk\zabonline\model2hibernate\datasheet.checklist.txt';
+OUTPUT 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\datasheet.checklist.txt';
 select Trim(trailing from sourcecode) from SP_METADATA_FOR_CHECKLIST('DATASHEET', 0, 1, 'INSTALLER', 'BEGIN');
 select Trim(trailing from sourcecode) from SP_METADATA_FOR_CHECKLIST('DATASHEET', 0, 1, 'INSTALLER', 'SERVICEDEF');
 select Trim(trailing from sourcecode) from SP_METADATA_FOR_CHECKLIST('DATASHEET', 0, 1, 'INSTALLER', 'DBSERVICE.SPRING');

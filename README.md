@@ -10,6 +10,7 @@ Einarbeitung in die Erstellung von Web-Anwendungen am Beispiel einer Mitgliederv
 - Zielvorgabe
 - Wavemaker
 - Firebird
+- Hibernate
 - Versionen
 - Funktionsumfang von ZABonline
 - zusätzliche Entwicklungsumgebungen
@@ -84,6 +85,24 @@ Folgende primäre Einschränkungen sind zu beachten:
 Daten werden über speziellen Views, Standard-Views genannt, bearbeitet. Standardviews 
 bieten die Möglichkeit auf ein Select, Update und Insert. Es wird kein Delete
 zugelassen, vielmehr besitzt jedes Schema ein Deleteflag.         
+  
+
+Hibernate
+---------
+In WaveMaker wird Hibernate als ORM-Layer eingesetzt. Tabellen werden in Java-Entitäten 
+übersetzt und mit einer *.hbm.xml-Beschreibungsdatei zusammen wird die Kommunikation 
+mit Daten in einer DB hergestellt. In WaveMaker kann über einen einfachen Assistenten
+das gesamte Datenmodell in Entitäten übersetzt werden. Allerdings lassen sich keine 
+einzelnen Tabellen separat übersetzt werden. Es gibt zwar die Möglichkeit eine
+Entität von Hand zu erstellen, dies kann aber je nach Umfang der Tabelle erheblich 
+an Zeit kosten.
+Um das Problem zu lösen wird eine Sammlung von SPs (StoredProcedures) eingeführt,
+die es ermöglichen über einen SQL-Script-Editor aus der Datenbank eine beliebige
+Tabelle in eine Java-Entität zu übersetzen.  
+
+Über folgendes Script kann eine Java-Entität erstellt werden:  
+
+* [Hibernate Script Interface](source/script/script/create_hibernate_script_interface.sql "Script-Inteface - Erstellt eine beliebige Java-Entität")   
   
 
 Versionen

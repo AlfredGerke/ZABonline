@@ -37,6 +37,7 @@ input 'create_user.sql';
 /******************************************************************************/
 
 input 'create_tools.sql';
+input 'create_hibernate_workaround.sql';
 /*
  * 
  * bis auf weiteres zurückgestellt
@@ -54,7 +55,7 @@ input 'create_find.sql';
 /******************************************************************************/
 /*                                  Modify Schema
 /*
-/* In diesem Abschnitt sollen nur Scripte aufgeführt werden die Ändernung am
+/* In diesem Abschnitt sollen nur Scripte aufgeführt werden die Ändernungen am
 /* Datenmodell per SP durchführen. z.B.: SP_CREATE_ALL_SIMPLE_INDEXE
 /******************************************************************************/
 
@@ -68,19 +69,13 @@ input 'recreate_user_views.sql';
 */
 
 /******************************************************************************/
-/*                                  Aufräumen
+/*                                  Clean up
 /*
 /* In diesem Abschnitt sollen nur Scripte aufgeführt werden die alle temporären
 /* Datenbankobjekte, welche nur für die Installation verwendet werden, entfernen
 /******************************************************************************/
 
-/*
- * 
- * bis auf weiteres zurückgestellt*/
 input 'clean_up.sql';
-/*
-*
-*/
 
 /******************************************************************************/
 /******************************************************************************/

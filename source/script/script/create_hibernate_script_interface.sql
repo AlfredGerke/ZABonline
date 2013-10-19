@@ -28,10 +28,10 @@ CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey';
 /*                                 Script-Interface                                  
 /******************************************************************************/
 /* Wenn Script-Interface vorhanden, zuerst löschen */
-SHEll DEL C:\Users\Alfred\Sourcen\Projekte\SaE\wavemaker\trunk\zabonline\model2hibernate\create_hibernate_interface.sql;
+SHEll DEL C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\create_hibernate_interface.sql;
 
-OUTPUT 'C:\Users\Alfred\Sourcen\Projekte\SaE\wavemaker\trunk\zabonline\model2hibernate\create_hibernate_interface.sql';
-select Trim(trailing from sourcecode) from SP_CREATE_HIBERNATE_SCRIPT('REL_PERSON_CATEGORY', 0, 1, 'INSTALLER', 'C:\Users\Alfred\Sourcen\Projekte\SaE\wavemaker\trunk\zabonline\model2hibernate\', 'masterkey');
+OUTPUT 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\create_hibernate_interface.sql';
+select Trim(trailing from sourcecode) from SP_CREATE_HIBERNATE_SCRIPT('person', 0, 1, 'INSTALLER', 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\', 'masterkey');
 OUTPUT; 
   
 COMMIT WORK;
@@ -39,7 +39,7 @@ COMMIT WORK;
 /*                                 Hibernate-Interface                                  
 /******************************************************************************/
 
-input 'C:\Users\Alfred\Sourcen\Projekte\SaE\wavemaker\trunk\zabonline\model2hibernate\create_hibernate_interface.sql';
+input 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\create_hibernate_interface.sql';
 
 COMMIT WORK;
 /******************************************************************************/
