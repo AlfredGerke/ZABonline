@@ -9,8 +9,8 @@ Aufbau des Datenmodelles über SQL-Scripte und dem IBExpert
 - IBExpert
 - Scripte
 - Hibernate
-- Zugriffrechte
-
+- Zugriffrechte     
+- Benutzer
 
 Firebird
 --------
@@ -22,7 +22,7 @@ eingeführt wurden. (z.B.: `CREATE USER`)
 IBExpert
 --------
 Die Scripte sind für das Script-Interface für IBExpert optimiert.      
-Folgende Befehle werden immer im Script aufgeführt:
+Folgende Befehle werden immer zu Anfang in jedem Script aufgeführt:
 
 * `SET SQL DIALECT 3`
 * `SET NAMES WIN1252`
@@ -83,10 +83,30 @@ Folgende DB-Objekte werden immer automatisch erstellt:
 * Standard Trigger (Before-Update, Before-Insert, Before-Delete)
 * Einspalten-Indexe (z.B. für die Spalte `SOFTDEL`)
 * Hibernate-Entities (Sorucen für die WaveMaker-Schnittstelle)
+
   
 Hibernate
 ---------
-
+???
 
 Zugriffrechte
 -------------     
+???
+
+
+Benutzer
+--------
+Für die Installation und den Betrieb der Mitgliederverwaltung werden zustätzlich
+zum `SYSDBA` zwei weitere Benutzer benötigt:
+
+* `INSTALLER`
+* `WEBCONNECT`
+
+Die Werkzeuge für die Codegenerierung, den grundsätzlichen Funktionalitäten und 
+des *Hibernate Script Interface* werden mit dem `SYSDBA` installiert.        
+Das gesamte Datenmodell für die Mitgliederverwaltung wird mit dem Benutzer `INSTALLER` 
+eingerichtet.    
+Der Benutzer `WEBCONNECT` wird vom Servlet-Container verwendet um eine Connect zur
+Datenbank herzustellen. `WEBCONNECT` ist in seinen Rechten stark eingeschränkt. So
+kann diese Benutzer keinen direkten Zugriff auf die Tabellen herstellen. Daten können
+nur über Update Views (User-Views) verwaltet werden.     
