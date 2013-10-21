@@ -14,7 +14,7 @@ dojo.declare("NewUser", wm.Page, {
         try {
             console.debug('start: start');
 
-            app.dlgLoading.setParameter(app.dummyServiceVar, this.wizNewAddress);
+            app.dlgLoading.setParameter(app.dummyServiceVar, this.wizNewUser);
 
             wm.require("zabonline.crypt.SHA512", true);
 
@@ -31,7 +31,7 @@ dojo.declare("NewUser", wm.Page, {
         try {
             app.closeWizard();
         } catch (e) {
-            this.controller.handleExceptionByCtrl(this.name + ".wizNewAddressCancelClick() failed: " + e.toString(), e);
+            this.controller.handleExceptionByCtrl(this.name + ".wizNewUserCancelClick() failed: " + e.toString(), e);
         }
     },
     onShow: function() {
@@ -91,14 +91,14 @@ dojo.declare("NewUser", wm.Page, {
                 break;
             }
         } catch (e) {
-            this.controller.handleExceptionByCtrl(this.name + ".wizNewAddressChange() failed: " + e.toString(), e);
+            this.controller.handleExceptionByCtrl(this.name + ".wizNewUserChange() failed: " + e.toString(), e);
         }
     },
     wizNewUserDoneClick: function(inSender) {
         try {
             app.closeWizard(this.getDictionaryItem("CONFIRMATION_DO_CLOSE_ADD_USER"), this.getDictionaryItem("CONFIRMATION_DLG_TITLE_FOR_CLOSE_ADDUSER"));
         } catch (e) {
-            this.controller.handleExceptionByCtrl(this.name + ".wizNewAddressDoneClick() failed: " + e.toString(), e);
+            this.controller.handleExceptionByCtrl(this.name + ".wizNewUserDoneClick() failed: " + e.toString(), e);
         }
     },
     refreshPerson: function() {

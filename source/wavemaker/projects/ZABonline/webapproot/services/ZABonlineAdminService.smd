@@ -1,5 +1,52 @@
 {
 	"methods": [{
+		"name": "addRoleData",
+		"operationType": null,
+		"parameters": [{
+			"name": "aCaption",
+			"type": "java.lang.String"
+		}, {
+			"name": "aDescription",
+			"type": "java.lang.String"
+		}, {
+			"name": "aIsAdmin",
+			"type": "java.lang.Boolean"
+		}, {
+			"name": "aSetup",
+			"type": "java.lang.Boolean"
+		}, {
+			"name": "aMembers",
+			"type": "java.lang.Boolean"
+		}, {
+			"name": "aActivityRecording",
+			"type": "java.lang.Boolean"
+		}, {
+			"name": "aSEPA",
+			"type": "java.lang.Boolean"
+		}, {
+			"name": "aBilling",
+			"type": "java.lang.Boolean"
+		}, {
+			"name": "aImport",
+			"type": "java.lang.Boolean"
+		}, {
+			"name": "aExport",
+			"type": "java.lang.Boolean"
+		}, {
+			"name": "aReferenceData",
+			"type": "java.lang.Boolean"
+		}, {
+			"name": "aReporting",
+			"type": "java.lang.Boolean"
+		}, {
+			"name": "aMisc",
+			"type": "java.lang.Boolean"
+		}, {
+			"name": "aFileresource",
+			"type": "java.lang.Boolean"
+		}],
+		"returnType": "[de.zabonline.srv.Results.ProcResults]"
+	}, {
 		"name": "addUserData",
 		"operationType": null,
 		"parameters": [{

@@ -1,6 +1,35 @@
 NewRole.widgets = {
+	addRole: ["wm.ServiceVariable", {"inFlightBehavior":"dontExecute","operation":"addRoleData","service":"ZABonlineAdminService"}, {"onResult":"addRoleResult","onError":"addRoleError","onSuccess":"addRoleSuccess"}, {
+		input: ["wm.ServiceInput", {"type":"addRoleDataInputs"}, {}]
+	}],
+	varResultByInsert: ["wm.Variable", {"isList":true,"type":"de.zabonline.srv.Results.ProcResults"}, {}, {
+		binding: ["wm.Binding", {}, {}, {
+			wire: ["wm.Wire", {"expression":undefined,"source":"addRole","targetProperty":"dataSet"}, {}]
+		}]
+	}],
+	navCallRole: ["wm.NavigationCall", {}, {}, {
+		input: ["wm.ServiceInput", {"type":"gotoLayerInputs"}, {}, {
+			binding: ["wm.Binding", {}, {}, {
+				wire: ["wm.Wire", {"expression":undefined,"source":"layRole","targetProperty":"layer"}, {}]
+			}]
+		}]
+	}],
+	navCallProperties: ["wm.NavigationCall", {}, {}, {
+		input: ["wm.ServiceInput", {"type":"gotoLayerInputs"}, {}, {
+			binding: ["wm.Binding", {}, {}, {
+				wire: ["wm.Wire", {"expression":undefined,"source":"layProperties","targetProperty":"layer"}, {}]
+			}]
+		}]
+	}],
+	navCallSummery: ["wm.NavigationCall", {}, {}, {
+		input: ["wm.ServiceInput", {"type":"gotoLayerInputs"}, {}, {
+			binding: ["wm.Binding", {}, {}, {
+				wire: ["wm.Wire", {"expression":undefined,"source":"laySummery","targetProperty":"layer"}, {}]
+			}]
+		}]
+	}],
 	bxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top"}, {}, {
-		wizNewRole: ["wm.WizardLayers", {}, {}, {
+		wizNewRole: ["wm.WizardLayers", {}, {"onCancelClick":"wizNewRoleCancelClick","oncanchange":"wizNewRoleCanchange","onchange":"wizNewRoleChange","onDoneClick":"wizNewRoleDoneClick"}, {
 			layRole: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Rolle","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 				pnlRoleLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlRoleData: ["wm.FancyPanel", {"title":"Bezeichnung"}, {}, {
