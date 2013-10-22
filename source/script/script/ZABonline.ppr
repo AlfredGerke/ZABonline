@@ -158,24 +158,16 @@ ZABonline
 [Open project files]
 0=..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js
 1=..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
-2=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js
-3=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewFactory.js
-4=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js
+2=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewFactory.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js
+Selected=..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js
 [..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js]
 TopLine=376
 Caret=34,388
 [..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js]
 TopLine=313
 Caret=52,331
-[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js]
-TopLine=1
-Caret=1,4
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewFactory.js]
 TopLine=70
 Caret=89,88
-[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js]
-TopLine=118
-Caret=78,154
