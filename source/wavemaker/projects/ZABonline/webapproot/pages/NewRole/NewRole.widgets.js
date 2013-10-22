@@ -1,6 +1,23 @@
 NewRole.widgets = {
-	addRole: ["wm.ServiceVariable", {"inFlightBehavior":"dontExecute","operation":"addRoleData","service":"ZABonlineAdminService"}, {"onResult":"addRoleResult","onError":"addRoleError","onSuccess":"addRoleSuccess"}, {
-		input: ["wm.ServiceInput", {"type":"addRoleDataInputs"}, {}]
+	addRole: ["wm.ServiceVariable", {"inFlightBehavior":"dontExecute","operation":"addRoleData","service":"ZABonlineAdminService"}, {"onError":"addRoleError","onResult":"addRoleResult","onSuccess":"addRoleSuccess"}, {
+		input: ["wm.ServiceInput", {"type":"addRoleDataInputs"}, {}, {
+			binding: ["wm.Binding", {}, {}, {
+				wire: ["wm.Wire", {"expression":undefined,"source":"edtRoleCaption.dataValue","targetProperty":"aCaption"}, {}],
+				wire1: ["wm.Wire", {"expression":undefined,"source":"edtRoleDesc.dataValue","targetProperty":"aDescription"}, {}],
+				wire2: ["wm.Wire", {"expression":undefined,"source":"cbxIsAdmin.dataValue","targetProperty":"aIsAdmin"}, {}],
+				wire3: ["wm.Wire", {"expression":undefined,"source":"cbxSetup.dataValue","targetProperty":"aSetup"}, {}],
+				wire4: ["wm.Wire", {"expression":undefined,"source":"cbxMembers.dataValue","targetProperty":"aMembers"}, {}],
+				wire5: ["wm.Wire", {"expression":undefined,"source":"cbxActivityRecording.dataValue","targetProperty":"aActivityRecording"}, {}],
+				wire6: ["wm.Wire", {"expression":undefined,"source":"cbxSEPA.dataValue","targetProperty":"aSEPA"}, {}],
+				wire7: ["wm.Wire", {"expression":undefined,"source":"cbxBilling.dataValue","targetProperty":"aBilling"}, {}],
+				wire8: ["wm.Wire", {"expression":undefined,"source":"cbxImport.dataValue","targetProperty":"aImport"}, {}],
+				wire9: ["wm.Wire", {"expression":undefined,"source":"cbxExport.dataValue","targetProperty":"aExport"}, {}],
+				wire10: ["wm.Wire", {"expression":undefined,"source":"cbxReferenceData.dataValue","targetProperty":"aReferenceData"}, {}],
+				wire11: ["wm.Wire", {"expression":undefined,"source":"cbxReporting.dataValue","targetProperty":"aReporting"}, {}],
+				wire12: ["wm.Wire", {"expression":undefined,"source":"cbxMisc.dataValue","targetProperty":"aMisc"}, {}],
+				wire13: ["wm.Wire", {"expression":undefined,"source":"cbxFileressource.dataValue","targetProperty":"aFileresource"}, {}]
+			}]
+		}]
 	}],
 	varResultByInsert: ["wm.Variable", {"isList":true,"type":"de.zabonline.srv.Results.ProcResults"}, {}, {
 		binding: ["wm.Binding", {}, {}, {
@@ -29,7 +46,7 @@ NewRole.widgets = {
 		}]
 	}],
 	bxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top"}, {}, {
-		wizNewRole: ["wm.WizardLayers", {}, {"onCancelClick":"wizNewRoleCancelClick","oncanchange":"wizNewRoleCanchange","onchange":"wizNewRoleChange","onDoneClick":"wizNewRoleDoneClick"}, {
+		wizNewRole: ["wm.WizardLayers", {}, {"onCancelClick":"wizNewRoleCancelClick","onDoneClick":"wizNewRoleDoneClick","oncanchange":"wizNewRoleCanchange","onchange":"wizNewRoleChange"}, {
 			layRole: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Rolle","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 				pnlRoleLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlRoleData: ["wm.FancyPanel", {"title":"Bezeichnung"}, {}, {
@@ -67,16 +84,24 @@ NewRole.widgets = {
 				pnlSummery: ["wm.Panel", {"height":"100%","horizontalAlign":"left","verticalAlign":"top","width":"100%"}, {}, {
 					pnlSummeryDetailTop: ["wm.Panel", {"height":"90%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 						pnlSummeryDetailRole: ["wm.FancyPanel", {"title":"Rolle","width":"50%"}, {}, {
-							btnGotoRole: ["wm.Button", {"caption":"Ändern","margin":"4","width":"100%"}, {"onclick":"navCallTenant"}],
-							lblSumInfoMandant: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							btnGotoRole: ["wm.Button", {"caption":"Ändern","margin":"4","width":"100%"}, {"onclick":"navCallRole"}],
+							lblSumInfoCaption: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
 							lblSumInfoDesc: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}]
 						}],
 						pnlSummeryDetailProperties: ["wm.FancyPanel", {"title":"Eigenschaften","width":"50%"}, {}, {
-							btnGotoProperties: ["wm.Button", {"caption":"Ändern","margin":"4","width":"100%"}, {"onclick":"navCallRelated"}],
-							lblSumInfoFactoryDatasheet: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
-							lblSumInfoPersonDatasheet: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
-							lblSumInfoContactDatasheet: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
-							lblSumInfoAddressDatasheet: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}]
+							btnGotoProperties: ["wm.Button", {"caption":"Ändern","margin":"4","width":"100%"}, {"onclick":"navCallProperties"}],
+							lblSumInfoIsAdmin: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							lblSumInfoMember: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							lblSumInfoActivityRecording: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							lblSumInfoSEPA: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							lblSumInfoBilling: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							lblSumInfoImport: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							lblSumInfoExport: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							lblSumInfoReferenceData: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							lblSumInfoReports: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							lblSumInfoMisc: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							lblSumInfoFileresources: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							lblSumInfoSetup: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}]
 						}]
 					}],
 					pnlSummeryDetailBottom: ["wm.Panel", {"height":"10%","horizontalAlign":"left","verticalAlign":"top","width":"100%"}, {}, {

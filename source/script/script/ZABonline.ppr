@@ -44,6 +44,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\ShowContact\ShowContact.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\ShowImpressum\ShowImpressum.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\SearchPage\SearchPage.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js
 		+WEB-INF
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 		-ressourcen
@@ -130,8 +131,8 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\NewMemberCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\NewFieldCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js
-		+SQL
-			+Data
+		-SQL
+			-Data
 				data_0001.sql
 				data_0002.sql
 				data_0003.sql
@@ -155,18 +156,22 @@ ZABonline
 			clean_up.sql
 			create_hibernate_workaround.sql
 [Open project files]
-0=create_db.sql
-1=data_0001.sql
-2=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewUser\NewUser.js
+0=..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js
+1=..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
+2=..\..\wavemaker\common\packages\zabonline\mod\Controller.js
+3=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewUser\NewUser.js
-[create_db.sql]
-TopLine=391
-Caret=31,409
-[data_0001.sql]
-TopLine=108
-Caret=111,126
-[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewUser\NewUser.js]
-TopLine=182
-Caret=55,206
+Selected=..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
+[..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js]
+TopLine=1
+Caret=55,482
+[..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js]
+TopLine=269
+Caret=17,311
+[..\..\wavemaker\common\packages\zabonline\mod\Controller.js]
+TopLine=1
+Caret=1,1
+[..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js]
+TopLine=387
+Caret=1,352
