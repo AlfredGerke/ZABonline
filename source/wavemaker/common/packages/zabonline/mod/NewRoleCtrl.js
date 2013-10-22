@@ -30,6 +30,7 @@ dojo.declare("NewRoleCtrl", Controller, {
     try {
       switch (target) {
         case "Role":  
+          this.localScope.edtRoleCaption.quickSetup(doRequire, this.localScope.getDictionaryItem("REG_EXPR_NO_EXPR"), doClear);
           //
           ret = true;          
           break;
@@ -49,30 +50,10 @@ dojo.declare("NewRoleCtrl", Controller, {
       return false;
     }
   },
-  loadRoleLookupData: function() {
-    var local = this.localScope;
-    var success = 0;
-    try {
-      if (local.roleLookupVar.canUpdate()) {
-          local.roleLookupVar.update();
-          success = 1;
-      } else {
-        success = 0;
-      }             
-            
-      return success;
-    } catch (e) {
-      this.handleExceptionByCtrl(this.localScope.name + ".loadRoleLookupData() failed: " + e.toString(), e, -1);      
-      return false;      
-    }  
-  },    
   loadLookupData: function(target) {
     var success = 0;
     var local = this.localScope;
-    try { 
-      
-      success = this.loadRoleLookupData();
-
+    try {      
       if (success == 1) {                              
         this.globalScope.globalData.tenantId(this.localScope.varTenantId);
       }
@@ -189,7 +170,7 @@ dojo.declare("NewRoleCtrl", Controller, {
       case 0:
         doChange = this.checkData("Role");
         if (!doChange) {
-          errorMsg = local.getDictionaryItem("ERROR_MSG_NO_VALID_USER_DATA");
+          errorMsg = local.getDictionaryItem("ERROR_MSG_NO_VALID_ROLE_DATA");
         }
         //
         break;
@@ -199,7 +180,7 @@ dojo.declare("NewRoleCtrl", Controller, {
         } else {
           doChange = this.checkData("Properties");
           if (!doChange) {
-            errorMsg = local.getDictionaryItem("ERROR_MSG_NO_VALID_RELATED_DATA");
+            errorMsg = local.getDictionaryItem("ERROR_MSG_NO_VALID_PROPERTIES_DATA");
           }
         }
         //
@@ -234,29 +215,44 @@ dojo.declare("NewRoleCtrl", Controller, {
     var global = this.globalScope;
     var local = this.localScope;
     var ret = false;
+    var no_info = local.getDictionaryItem("CAPTION_NO_INFO"); 
     try {
       switch (target) {
       case "Role":
-        var user = local.getDictionaryItem("CAPTION_USERNAME") + ": " + global.utils.setDefaultStr(local.edtUser.getDisplayValue(), local.getDictionaryItem("CAPTION_NO_INFO"));
-        var firstname = local.getDictionaryItem("CAPTION_FIRSTNAME") + ": " + global.utils.setDefaultStr(local.edtFirstname.getDisplayValue(), local.getDictionaryItem("CAPTION_NO_INFO"));
-        var name = local.getDictionaryItem("CAPTION_NAME") + ": " + global.utils.setDefaultStr(local.edtName.getDisplayValue(), local.getDictionaryItem("CAPTION_NO_INFO"));
-        var email = local.getDictionaryItem("CAPTION_EMAIL") + ": " + global.utils.setDefaultStr(local.edtEmail.getDisplayValue(), local.getDictionaryItem("CAPTION_NO_INFO"));
+        var rolecaption = local.getDictionaryItem("CAPTION_ROLENAME") + ": " + global.utils.setDefaultStr(local.edtRoleCaption.getDisplayValue(), no_info);
+        var roledesc = local.getDictionaryItem("CAPTION_ROLEDESC") + ": " + global.utils.setDefaultStr(local.edtRoleDesc.getDisplayValue(), no_info);
         //
-        local.lblSumInfoUser.setCaption(user);
-        local.lblSumInfoFirstname.setCaption(firstname);
-        local.lblSumInfoName.setCaption(name);
-        local.lblSumInfoEmail.setCaption(email);
+        local.lblSumInfoCaption.setCaption(rolecaption);
+        local.lblSumInfoDesc.setCaption(roledesc);
         //
         ret = true;  
         break;  	
       case "Properties":
-        var role = local.getDictionaryItem("CAPTION_ROLE") + ": " + global.utils.setDefaultStr(local.edtRole.getDisplayValue(), local.getDictionaryItem("CAPTION_NO_INFO"));
-        var tenant = local.getDictionaryItem("CAPTION_TENANT") + ": " + global.utils.setDefaultStr(local.edtTenant.getDisplayValue(), local.getDictionaryItem("CAPTION_NO_INFO"));
-        var person = local.getDictionaryItem("CAPTION_PERSON") + ": " + global.utils.setDefaultStr(local.edtPerson.getDisplayValue(), local.getDictionaryItem("CAPTION_NO_INFO"));
+        var is_admin = local.getDictionaryItem("CAPTION_IS_ADMIN") + ": " + global.utils.setDefaultStr(local.cbxIsAdmin.getDisplayValue(), no_info);
+        var member = local.getDictionaryItem("CAPTION_MEMBER") + ": " + global.utils.setDefaultStr(local.cbxMembers.getDisplayValue(), no_info);
+        var activity_recording = local.getDictionaryItem("CAPTION_ACTIVITY_RECORDING") + ": " + global.utils.setDefaultStr(local.cbxActivityRecording.getDisplayValue(), no_info);
+        var sepa = local.getDictionaryItem("CAPTION_SEPA") + ": " + global.utils.setDefaultStr(local.cbxSEPA.getDisplayValue(), no_info);
+        var billing = local.getDictionaryItem("CAPTION_BILLING") + ": " + global.utils.setDefaultStr(local.cbxBilling.getDisplayValue(), no_info);
+        var import_data = local.getDictionaryItem("CAPTION_IMPORT") + ": " + global.utils.setDefaultStr(local.cbxImport.getDisplayValue(), no_info);
+        var export_data = local.getDictionaryItem("CAPTION_EXPORT") + ": " + global.utils.setDefaultStr(local.cbxExport.getDisplayValue(), no_info);
+        var reference_data = local.getDictionaryItem("CAPTION_REFERNCE_DATA") + ": " + global.utils.setDefaultStr(local.cbxReferenceData.getDisplayValue(), no_info);
+        var reports = local.getDictionaryItem("CAPTION_REPORTS") + ": " + global.utils.setDefaultStr(local.cbxReporting.getDisplayValue(), no_info);
+        var misc = local.getDictionaryItem("CAPTION_MISC") + ": " + global.utils.setDefaultStr(local.cbxMisc.getDisplayValue(), no_info);
+        var file_resources = local.getDictionaryItem("CAPTION_FILE_RESOURCES") + ": " + global.utils.setDefaultStr(local.cbxFileressource.getDisplayValue(), no_info);
+        var setup = local.getDictionaryItem("CAPTION_SETUP") + ": " + global.utils.setDefaultStr(local.cbxSetup.getDisplayValue(), no_info);
         //
-        local.lblSumInfoRole.setCaption(role);
-        local.lblSumInfoTenant.setCaption(tenant);
-        local.lblSumInfoPerson.setCaption(person);
+        local.lblSumInfoIsAdmin.setCaption(is_admin);
+        local.lblSumInfoMember.setCaption(member);
+        local.lblSumInfoActivityRecording.setCaption(activity_recording);
+        local.lblSumInfoSEPA.setCaption(sepa);
+        local.lblSumInfoBilling.setCaption(billing);
+        local.lblSumInfoImport.setCaption(import_data);
+        local.lblSumInfoExport.setCaption(export_data);
+        local.lblSumInfoReferenceData.setCaption(reference_data);
+        local.lblSumInfoReports.setCaption(reports);
+        local.lblSumInfoMisc.setCaption(misc);
+        local.lblSumInfoFileresources.setCaption(file_resources);
+        local.lblSumInfoSetup.setCaption(setup);
         //
         ret = true;  
         break;
@@ -273,9 +269,8 @@ dojo.declare("NewRoleCtrl", Controller, {
     }
   },
   setSummeryInfo: function() {
-    this.setSummery("User");
-    this.setSummery("Related");
-    this.setSummery("Admin");
+    this.setSummery("Role");
+    this.setSummery("Properties");
   },
   getActiveLayer: function() {
     var local = this.localScope;
@@ -301,7 +296,7 @@ dojo.declare("NewRoleCtrl", Controller, {
             //
             break;
           default:
-            local.navCallUser.update();
+            local.navCallRole.update();
             //          
             break;
         }           
@@ -319,20 +314,8 @@ dojo.declare("NewRoleCtrl", Controller, {
     
     dojo.subscribe('init-user-as-subdialog', this, "initAsSubDialog");
     
-    this.handleSubscribeByResData("ADD_USER_SUCCEEDED");
-    this.handleSubscribeByResData("NO_MANDATORY_ROLE_ID_BY_NEWUSER");
-    this.handleSubscribeByResData("NO_VALID_ROLE_ID_BY_NEWUSER");   
-    this.handleSubscribeByResData("NO_MANDATORY_MANDANT_ID_BY_NEWUSER");
-    this.handleSubscribeByResData("NO_VALID_MANDANT_ID_BY_NEWUSER");
-    this.handleSubscribeByResData("NO_VALID_PERSON_ID_BY_NEWUSER");
-    this.handleSubscribeByResData("NO_MANDATORY_USERNAME_BY_NEWUSER");
-    this.handleSubscribeByResData("NO_MANDATORY_PASSWORD_BY_NEWUSER");
-    this.handleSubscribeByResData("NO_MANDATORY_FIRSTNAME_BY_NEWUSER");
-    this.handleSubscribeByResData("NO_MANDATORY_NAME_BY_NEWUSER");
-    this.handleSubscribeByResData("NO_MANDATORY_EMAIL_BY_NEWUSER");
-    this.handleSubscribeByResData("NO_VALID_ALLOW_LOGIN_BY_NEWUSER");
-    this.handleSubscribeByResData("DUPLICATE_USERNAME_NOT_ALLOWED_BY_NEWUSER");
-    this.handleSubscribeByResData("INSERT_BY_USER_FAILD_BY_NEWUSER");
+    this.handleSubscribeByResData("ADD_ROLE_SUCCEEDED");
+    this.handleSubscribeByResData("INSERT_BY_ROLE_FAILD_BY_NEWROLE");
     
     this.handleSubscribeByResData("FAILD_BY_OBSCURE_PROCESSING");
     
@@ -343,7 +326,7 @@ dojo.declare("NewRoleCtrl", Controller, {
     var local = this.localScope;
     
     if (success) {
-        global.toastSuccess(local.getDictionaryItem("ADD_USER_SUCCEEDED"));
+        global.toastSuccess(local.getDictionaryItem("ADD_ROLE_SUCCEEDED"));
     } else {
         global.toastWarning(local.getDictionaryItem("WARNING_BY_OBSCURE_PROCESSING"));
     }  

@@ -1,9 +1,6 @@
 dojo.declare("NewRole", wm.Page, {
-	"i18n": true,
-	start: function() {
-		
-	},
-	"preferredDevice": "desktop",
+    "i18n": true,
+    "preferredDevice": "desktop",
     onResultByNewRedording: function() {},
     onSuccessByNewRecording: function(success) {},
     start: function() {
@@ -19,14 +16,14 @@ dojo.declare("NewRole", wm.Page, {
             this.controller.handleExceptionByCtrl(this.name + ".start() failed: " + e.toString(), e);
         }
     },
-	wizNewRoleCancelClick: function(inSender) {
+    wizNewRoleCancelClick: function(inSender) {
         try {
             app.closeWizard();
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".wizNewRoleCancelClick() failed: " + e.toString(), e);
-        }		
-	},
-	onShow: function() {
+        }
+    },
+    onShow: function() {
         try {
             console.debug('onShow: start');
 
@@ -39,6 +36,10 @@ dojo.declare("NewRole", wm.Page, {
                     throw this.getDictionaryItem("ERROR_MSG_BY_CONTROLLER_CLEARWIZARD");
                 }
 
+                if (!this.controller.loadLookupData()) {
+                    throw this.getDictionaryItem("ERROR_MSG_BY_CONTROLLER_LOOUPDATA");
+                }
+
                 app.dummyServiceVar.doResult();
             }
 
@@ -47,28 +48,28 @@ dojo.declare("NewRole", wm.Page, {
             app.dummyServiceVar.doResult();
             this.controller.handleExceptionByCtrl(this.name + ".onShow() failed: " + e.toString(), e, 1);
             app.closeWizard();
-        }		
-	},
-	onStart: function( inPage) {
+        }
+    },
+    onStart: function(inPage) {
         try {
             console.debug('onStart: Begin');
 
             console.debug('onStart: End');
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".onStart() failed: " + e.toString(), e);
-        }		
-	},
-	wizNewRoleCanchange: function(inSender, inChangeInfo) {
-        var success = this.controller.onWizNewRoleCanChange(inSender, inChangeInfo);		
-	},
-	onEscapeKey: function() {
+        }
+    },
+    wizNewRoleCanchange: function(inSender, inChangeInfo) {
+        var success = this.controller.onWizNewRoleCanChange(inSender, inChangeInfo);
+    },
+    onEscapeKey: function() {
         try {
             app.closeWizard();
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".onEscapeKey() failed: " + e.toString(), e);
-        }		
-	},
-	wizNewRoleChange: function(inSender, inIndex) {
+        }
+    },
+    wizNewRoleChange: function(inSender, inIndex) {
         try {
             switch (inIndex) {
             case 1:
@@ -79,16 +80,16 @@ dojo.declare("NewRole", wm.Page, {
             }
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".wizNewRoleChange() failed: " + e.toString(), e);
-        }		
-	},
-	wizNewRoleDoneClick: function(inSender) {
+        }
+    },
+    wizNewRoleDoneClick: function(inSender) {
         try {
-            app.closeWizard(this.getDictionaryItem("CONFIRMATION_DO_CLOSE_ADD_ROLE"), this.getDictionaryItem("CONFIRMATION_DLG_TITLE_FOR_CLOSE_ADDUSER"));
+            app.closeWizard(this.getDictionaryItem("CONFIRMATION_DO_CLOSE_ADD"), this.getDictionaryItem("CONFIRMATION_DLG_TITLE_FOR_CLOSE_ADD"));
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".wizNewRoleDoneClick() failed: " + e.toString(), e);
-        }		
-	},
-	btnAddDataClick: function(inSender) {
+        }
+    },
+    btnAddDataClick: function(inSender) {
         try {
             console.debug('Start btnAddDataClick');
 
@@ -103,18 +104,18 @@ dojo.declare("NewRole", wm.Page, {
             console.debug('End btnAddDataClick');
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".btnAddDataClick() failed: " + e.toString(), e);
-        }		
-	},
-	addRoleResult: function(inSender, inDeprecated) {
+        }
+    },
+    addRoleResult: function(inSender, inDeprecated) {
         try {
             console.debug('Start addRoleResult');
 
             console.debug('End addRoleResult');
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".addRoleResult() failed: " + e.toString(), e);
-        }		
-	},
-	addRoleError: function(inSender, inError) {
+        }
+    },
+    addRoleError: function(inSender, inError) {
         try {
             console.debug('Start addRoleError');
 
@@ -125,8 +126,8 @@ dojo.declare("NewRole", wm.Page, {
             console.debug('End addRoleError');
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".addRoleError() failed: " + e.toString(), e);
-        }		
-	},
+        }
+    },
     refreshOnAddRoleSuccess: function() {
         try {
             app.dummyServiceVar.doRequest();
@@ -144,8 +145,8 @@ dojo.declare("NewRole", wm.Page, {
             app.dummyServiceVar.doResult();
             return false;
         }
-    },    
-	addRoleSuccess: function(inSender, inDeprecated) {
+    },
+    addRoleSuccess: function(inSender, inDeprecated) {
         try {
             console.debug('Start addRoleSuccess');
 
@@ -206,7 +207,7 @@ dojo.declare("NewRole", wm.Page, {
             console.debug('End addUserSuccess');
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".addRoleSuccess() failed: " + e.toString(), e);
-        }		
-	},
-	_end: 0
+        }
+    },
+    _end: 0
 });

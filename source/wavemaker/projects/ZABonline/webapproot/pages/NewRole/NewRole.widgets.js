@@ -45,6 +45,7 @@ NewRole.widgets = {
 			}]
 		}]
 	}],
+	varTenantId: ["wm.Variable", {"type":"NumberData"}, {}],
 	bxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top"}, {}, {
 		wizNewRole: ["wm.WizardLayers", {}, {"onCancelClick":"wizNewRoleCancelClick","onDoneClick":"wizNewRoleDoneClick","oncanchange":"wizNewRoleCanchange","onchange":"wizNewRoleChange"}, {
 			layRole: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Rolle","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
@@ -71,7 +72,7 @@ NewRole.widgets = {
 								cbxImport: ["wm.Checkbox", {"caption":"Import","displayValue":false}, {}],
 								cbxExport: ["wm.Checkbox", {"caption":"Export","displayValue":false}, {}],
 								cbxReferenceData: ["wm.Checkbox", {"caption":"Stammdaten","displayValue":false}, {}],
-								cbxReporting: ["wm.Checkbox", {"caption":"Reports","displayValue":false}, {}],
+								cbxReporting: ["wm.Checkbox", {"caption":"Berichte","displayValue":false}, {}],
 								cbxMisc: ["wm.Checkbox", {"caption":"Verschiedenes","displayValue":false}, {}],
 								cbxFileressource: ["wm.Checkbox", {"caption":"Dateien","displayValue":false}, {}],
 								cbxSetup: ["wm.Checkbox", {"caption":"Setup","displayValue":false}, {}]

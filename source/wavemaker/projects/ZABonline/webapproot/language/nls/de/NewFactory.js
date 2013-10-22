@@ -83,7 +83,7 @@
   "NO_VALID_DOCUMENT_ID": "Keine g&uuml;ltige Dokumentenidentifizierung gefunden!",
   "NO_VALID_MANDANT_ID": "Keine g&uuml;ltige Mandantenidentifizierung gefunden!",
   "FAILD_BY_OBSCURE_PROCESSING": "Keine klare Verarbeitungsaufforderung ermittelt!",
-  "WARNING_BY_OBSCURE_PROCESSING": "Unklarer Verarbeitungszustand des Betriebsdateneintrages!",
+  "WARNING_BY_OBSCURE_PROCESSING": "Unklarer Verarbeitungszustand der Eingabedaten!",
   "ERROR_MSG_BY_UNKNOWN_CONTROLLER": "Kein Zugriff auf das Modul m&ouml;glich!",
   "ERROR_MSG_BY_CONTROLLER_REFRESHWIZARD": "Fehler beim Aktualisieren des Assistenten!",
   "CONFIRMATION_DO_CLOSE_ADD_FACTORYITEM": "Soll die Neuaufnahme f&uuml;r Betriebe beendet werden?",
