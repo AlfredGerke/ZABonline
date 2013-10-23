@@ -542,13 +542,237 @@ begin
     
     suspend;
   end
-end
-^
+end^
 
 COMMENT ON PROCEDURE SP_ADD_USER_BY_SRV IS
 'Überprüft Sitzungsverwaltung und ruft SP_ADD_USER auf'^
 
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_USER_BY_SRV'^
+
+CREATE OR ALTER PROCEDURE SP_CHK_DATA_BY_ADD_ROLE (
+  ACAPTION varchar(64)) /* Pflichtfeld */  
+RETURNS (
+  success smallint,
+  code smallint,
+  info varchar(2000))
+AS
+begin 
+  success = 0;
+  code = 0;
+  info = '{"result": null}';
+  
+  if (ACAPTION is null) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_ROLE_CAPTION_BY_NEWROLE", "message": "NO_MANDATORY_ROLE_CAPTION"}';
+    suspend;
+    Exit;
+  end
+  
+  if (exists(select1 from V_ROLES where CAPTION=:ACAPTION)) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "DUPLICATE_ROLECAPTION_NOT_ALLOWED_BY_NEWROLE", "message": "DUPLICATE_ROLECAPTION_NOT_ALLOWED"}';
+    suspend;
+    Exit;  
+  end    
+  
+  suspend;
+end^    
+
+COMMENT ON PROCEDURE SP_CHK_DATA_BY_ADD_ROLE IS
+'Überprüft alle logischen Inhalte für einen Berechtigungsateneintrag'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_CHK_DATA_BY_ADD_ROLE'^
+
+CREATE OR ALTER PROCEDURE SP_ADD_ROLE (
+  ACAPTION varchar(64), /* Pflichtfeld */
+  ADESCRIPTION varchar(2000),
+  AISADMIN Boolean,
+  ASETUP Boolean,
+  AMEMBERS Boolean,
+  AACTIVITYRECORDING Boolean,
+  ASEPA Boolean,
+  ABILLING Boolean,
+  AIMPORT Boolean,
+  AEXPORT Boolean,
+  AREFERENCEDATA Boolean,
+  AREPORTING Boolean,
+  AMISC Boolean,
+  AFILERESOURCE Boolean)
+RETURNS (
+  success smallint,
+  code smallint,
+  info varchar(2000))
+AS
+declare variable success_by_touchsession smallint;
+declare variable success_by_grant smallint;
+begin
+  success = 0;
+  code = 0;
+  info = '{"result": null}';
+
+  /* Es werden alle Pflichtfelder überprüft */
+  select 
+    success, 
+    code, 
+    info 
+  from 
+    SP_CHK_DATA_BY_ADD_ROLE(:ACAPTION) 
+  into 
+    :success, 
+    :code, 
+    :info;
+    
+  if (success = 1) then
+  begin
+    success = 0;
+    code = 0;
+    info = '{"result": null}';
+    
+    select
+      success,
+      message,
+      user_id      
+    from
+      SP_INSERT_ROLE(:ACAPTION,
+        :ADESCRIPTION,
+        :AISADMIN,
+        :ASETUP,
+        :AMEMBERS,
+        :AACTIVITYRECORDING,
+        :ASEPA,
+        :ABILLING,
+        :AIMPORT,
+        :AEXPORT,
+        :AREFERENCEDATA,
+        :AREPORTING,
+        :AMISC,
+        :AFILERESOURCE)
+    into
+      :success,
+      :message,
+      :user_id;
+      
+    /* Rückgabe auswerten */     
+    if (success = 0) then
+    begin
+      code = 1;
+      info = '{"kind": 2, "publish": "INSERT_BY_ROLE_FAILD_BY_NEWROLE", "list": [{"message": "INSERT_BY_ROLE_FAILD"}, {"message": "' || :message || '"}]}';
+      suspend;
+      Exit;
+    end
+    
+    /* success = 1; -> success sollte nur durch die Insert-SPs auf 1 gesetzt werden */
+    code = 1;
+    if (success = 1) then
+    begin
+      info = '{"kind": 3, "publish": "ADD_ROLE_SUCCEEDED", "message": "ADD_ROLE_SUCCEEDED"}';
+    end  
+    else
+    begin
+      success = 0;
+      info = '{"kind": 1, "publish": "FAILD_BY_OBSCURE_PROCESSING", "message": "FAILD_BY_OBSCURE_PROCESSING"}';
+    end                                   
+  end  
+
+  suspend;
+end^
+
+COMMENT ON PROCEDURE SP_ADD_ROLE IS
+'Überprüft Eingaben und legt Benutzerrolle an'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_ROLE'^
+
+CREATE OR ALTER PROCEDURE SP_ADD_ROLE_BY_SRV (
+  ASESSION_ID varchar(254),    
+  AUSERNAME varchar(254),
+  AIP varchar(254),
+  ACAPTION varchar(64), /* Pflichtfeld */
+  ADESCRIPTION varchar(2000),  
+  AISADMIN smallint,
+  ASETUP smallint,
+  AMEMBERS smallint,
+  AACTIVITYRECORDING smallint,
+  ASEPA smallint,
+  ABILLING smallint,
+  AIMPORT smallint,
+  AEXPORT smallint,
+  AREFERENCEDATA smallint,
+  AREPORTING smallint,
+  AMISC smallint,
+  AFILERESOURCE smallint)  
+RETURNS (
+  success smallint,
+  code smallint,
+  info varchar(2000))
+AS
+declare variable success_by_touchsession smallint;
+declare variable success_by_grant smallint;
+begin
+  success = 0;
+  code = 0;
+  info = '{"result": null}';
+
+  select success from SP_TOUCHSESSION(:ASESSION_ID, :AUSERNAME, :AIP) into :success_by_touchsession;
+  
+  if (success_by_touchsession = 1) then
+  begin
+    select success from SP_CHECKGRANT(:AUSERNAME, 'IS_ADMIN') into :success_by_grant;
+    
+    if (success_by_grant = 1) then
+    begin
+      /* Wenn der JSON-String im Feld INFO zu lang wird, wird von der SP zwei oder mehrere Datensätze erzeugt.
+         Aus diesem Grund wird die SP über eine FOR-Loop abgefragt
+      */
+      for 
+      select 
+        success, 
+        code, 
+        info 
+      from 
+        SP_ADD_ROLE(:ACAPTION,
+          :ADESCRIPTION,  
+          :AISADMIN,
+          :ASETUP,
+          :AMEMBERS,
+          :AACTIVITYRECORDING,
+          :ASEPA,
+          :ABILLING,
+          :AIMPORT,
+          :AEXPORT,
+          :AREFERENCEDATA,
+          :AREPORTING,
+          :AMISC,
+          :AFILERESOURCE) 
+      into 
+        :success, 
+        :code, 
+        :info 
+      do
+      begin
+        suspend;
+      end 
+    end
+    else
+    begin
+      info = '{"kind": 1, "publish": "NO_GRANT_FOR_ADD_ROLE", "message": "NO_GRANT_FOR_ADD_ROLE"}';
+      
+      suspend;
+    end
+  end
+  else
+  begin
+    info = '{"kind": 1, "publish": "CANCEL_PROCESS_BY_SESSIONMANAGEMENT", "message": "CANCEL_PROCESS_BY_SESSIONMANAGEMENT"}';
+    
+    suspend;
+  end
+end^
+
+COMMENT ON PROCEDURE SP_ADD_USER_BY_SRV IS
+'Überprüft Sitzungsverwaltung und ruft SP_ADD_USER auf'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_ROLE_BY_SRV'^
 
 SET TERM ; ^
 
@@ -568,12 +792,20 @@ COMMIT WORK;
 /* Tables */
 
 /* SPs */
+GRANT EXECUTE ON PROCEDURE SP_TOUCHSESSION TO SP_ADD_ROLE_BY_SRV;
+GRANT EXECUTE ON PROCEDURE SP_CHECKGRANT TO SP_ADD_ROLE_BY_SRV;
+GRANT EXECUTE ON PROCEDURE SP_ADD_ROLE TO SP_ADD_ROLE_BY_SRV;
+
 GRANT EXECUTE ON PROCEDURE SP_TOUCHSESSION TO SP_ADD_USER_BY_SRV;
 GRANT EXECUTE ON PROCEDURE SP_CHECKGRANT TO SP_ADD_USER_BY_SRV;
 GRANT EXECUTE ON PROCEDURE SP_ADD_USER TO SP_ADD_USER_BY_SRV;
 
+GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_ROLE TO SP_ADD_ROLE;
+
 GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_USER TO SP_ADD_USER;
 GRANT EXECUTE ON PROCEDURE SP_INSERT_USER TO SP_ADD_USER;
+
+GRANT SELECT ON V_ROLES TO SP_CHK_DATA_BY_ADD_ROLE;
 
 GRANT SELECT ON V_ROLES TO SP_CHK_DATA_BY_ADD_USER; 
 GRANT SELECT ON V_TENANT TO SP_CHK_DATA_BY_ADD_USER;

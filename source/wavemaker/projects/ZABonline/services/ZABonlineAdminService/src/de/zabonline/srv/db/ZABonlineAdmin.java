@@ -176,6 +176,8 @@ public class ZABonlineAdmin extends JavaServiceSuperClass {
       if (isAuthentic) {
         result = session.createSQLQuery("select * from SP_ADD_ROLE_BY_SRV(:SESSIONID, " + ":USERNAME, "
                                         + ":IP, "
+                                        + ":CAPTION, "
+                                        + ":DESC, "
                                         + ":ISADMIN, "
                                         + ":SETUP, "
                                         + ":MEMBERS, "
@@ -200,6 +202,10 @@ public class ZABonlineAdmin extends JavaServiceSuperClass {
               userName)
             .setParameter("IP",
               ipByRequest)
+            .setParameter("CAPTION",
+              aCaption)
+            .setParameter("DESC",
+              aDescription)
             .setParameter("ISADMIN",
               aIsAdmin_smallint)
             .setParameter("SETUP",

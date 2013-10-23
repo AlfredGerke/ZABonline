@@ -1,4 +1,5 @@
 {
+"NO_GRANT_FOR_ADD_ROLE": "Bearbeiten von Berechtigungsdaten nicht erlaubt!",
 "NO_GRANT_FOR_START_FIND": "Erstellen einer Suchanfrage nicht erlaubt!",
 "NO_GRANT_FOR_ADD_USER": "Bearbeiten von Benutzerdaten nicht erlaubt!",
 "NO_GRANT_FOR_ADD_MEMBER": "Bearbeiten von Mitgliederdaten nicht erlaubt!",

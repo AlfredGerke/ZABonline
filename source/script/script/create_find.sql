@@ -242,7 +242,7 @@ begin
     end
     else
     begin
-      info = '{"kind": 1, "publish": "NO_GRANT_FOR_ADD_USER", "message": "NO_GRANT_FOR_START_FIND"}';
+      info = '{"kind": 1, "publish": "NO_GRANT_FOR_START_FIND", "message": "NO_GRANT_FOR_START_FIND"}';
       
       suspend;
     end

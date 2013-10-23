@@ -111,7 +111,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\crypt\SHA512.js
 			-extend
 				..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js
-			+mod
+			-mod
 				..\..\wavemaker\common\packages\zabonline\mod\TitelLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\SalutationLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js
@@ -131,7 +131,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\NewMemberCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\NewFieldCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js
-		-SQL
+		+SQL
 			-Data
 				data_0001.sql
 				data_0002.sql
@@ -158,16 +158,36 @@ ZABonline
 [Open project files]
 0=..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js
 1=..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
-2=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewFactory.js
+2=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js
+3=create_user.sql
+4=batch.sql
+5=create_admin.sql
+6=create_db.sql
+7=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js
+Selected=create_admin.sql
 [..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js]
-TopLine=376
-Caret=34,388
+TopLine=414
+Caret=5,445
 [..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js]
-TopLine=313
-Caret=52,331
-[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewFactory.js]
-TopLine=70
-Caret=89,88
+TopLine=288
+Caret=63,323
+[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js]
+TopLine=1
+Caret=85,34
+[create_user.sql]
+TopLine=1
+Caret=1,1
+[batch.sql]
+TopLine=33
+Caret=20,52
+[create_admin.sql]
+TopLine=558
+Caret=51,805
+[create_db.sql]
+TopLine=718
+Caret=1,732
+[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js]
+TopLine=85
+Caret=85,103

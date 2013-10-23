@@ -729,6 +729,7 @@ COMMIT WORK;
 /******************************************************************************/
 
 ALTER TABLE DATATYPE ADD CONSTRAINT UNQ_DATATYPE_CODE UNIQUE (CODE) USING INDEX ALT_DATATYPE_CODE;
+ALTER TABLE ROLES ADD CONSTRAINT UNQ_ROLES_CAPTION UNIQUE (CAPTION) USING INDEX ALT_ROLES_CAPTION;
 
 COMMIT WORK;
 /******************************************************************************/

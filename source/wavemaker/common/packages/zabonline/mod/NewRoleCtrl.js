@@ -138,7 +138,7 @@ dojo.declare("NewRoleCtrl", Controller, {
           checked = (rolename.trim() !== "");
           //          
           break;
-        case "Properites":
+        case "Properties":
           checked = true;
           //         
           break;
@@ -207,7 +207,7 @@ dojo.declare("NewRoleCtrl", Controller, {
       return inChangeInfo.canChange; 
     } catch (e) {
       inChangeInfo.canChange = false;
-      this.handleExceptionByCtrl(this.localScope.name + ".wizNewUserCanchange() failed: " + e.toString(), e);      
+      this.handleExceptionByCtrl(this.localScope.name + ".wizNewRoleCanchange() failed: " + e.toString(), e);      
       return inChangeInfo.canChange;
     } 
   },  
@@ -275,7 +275,7 @@ dojo.declare("NewRoleCtrl", Controller, {
   getActiveLayer: function() {
     var local = this.localScope;
     
-    return  local.wizNewUser.getActiveLayer();
+    return  local.wizNewRole.getActiveLayer();
   },  
   selectLayerByIdx: function(idx) {
     var local = this.localScope;
@@ -315,6 +315,9 @@ dojo.declare("NewRoleCtrl", Controller, {
     dojo.subscribe('init-user-as-subdialog', this, "initAsSubDialog");
     
     this.handleSubscribeByResData("ADD_ROLE_SUCCEEDED");
+    this.handleSubscribeByResData("INSERT_BY_ROLE_FAILD_BY_NEWROLE");
+    this.handleSubscribeByResData("NO_MANDATORY_ROLE_CAPTION_BY_NEWROLE");
+    this.handleSubscribeByResData("DUPLICATE_ROLECAPTION_NOT_ALLOWED_BY_NEWROLE");
     this.handleSubscribeByResData("INSERT_BY_ROLE_FAILD_BY_NEWROLE");
     
     this.handleSubscribeByResData("FAILD_BY_OBSCURE_PROCESSING");
