@@ -9,7 +9,7 @@
 /* - Ein möglicher Connect zur Produktionsdatenbank sollte geschlossen werden   
 /******************************************************************************/
 /* History: 2013-04-16
-/*          Erstellt ein Script-Inteface für Hipernate und führt das Script-Interface aus
+/*          Erstellt ein Script-Inteface für Hibernate und führt das Script-Interface aus
 /******************************************************************************/
 
 /******************************************************************************/
