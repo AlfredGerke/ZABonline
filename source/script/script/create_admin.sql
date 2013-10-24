@@ -124,6 +124,10 @@ begin
   end
   
   /* Primay-Key Generatoren */
+  if (AIDENT = 'ROLES') then
+  begin
+    SEQ_ID = next value for SEQ_ROLES_ID;
+  end
 
   if (AIDENT = 'USERS') then
   begin
@@ -322,6 +326,7 @@ AS
 begin
   success = 0;
   message = 'FAILD_BY_UNKNOWN_REASON';
+  user_id = -1;
   
   if (exists(select 1 from V_USERS where Upper(USERNAME)=Upper(:AUSER))) then
   begin
@@ -569,13 +574,15 @@ begin
     Exit;
   end
   
-  if (exists(select1 from V_ROLES where CAPTION=:ACAPTION)) then
+  if (exists(select 1 from V_ROLES where Upper(CAPTION)=Upper(:ACAPTION))) then
   begin
     code = 1;
     info = '{"kind": 1, "publish": "DUPLICATE_ROLECAPTION_NOT_ALLOWED_BY_NEWROLE", "message": "DUPLICATE_ROLECAPTION_NOT_ALLOWED"}';
     suspend;
     Exit;  
   end    
+  
+  success = 1;
   
   suspend;
 end^    
@@ -584,6 +591,100 @@ COMMENT ON PROCEDURE SP_CHK_DATA_BY_ADD_ROLE IS
 'Überprüft alle logischen Inhalte für einen Berechtigungsateneintrag'^
 
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_CHK_DATA_BY_ADD_ROLE'^
+
+CREATE OR ALTER PROCEDURE SP_INSERT_ROLE (
+  ACAPTION varchar(64), /* Pflichtfeld */
+  ADESCRIPTION varchar(2000),
+  AISADMIN Boolean,
+  ASETUP Boolean,
+  AMEMBERS Boolean,
+  AACTIVITYRECORDING Boolean,
+  ASEPA Boolean,
+  ABILLING Boolean,
+  AIMPORT Boolean,
+  AEXPORT Boolean,
+  AREFERENCEDATA Boolean,
+  AREPORTING Boolean,
+  AMISC Boolean,
+  AFILERESOURCE Boolean)
+RETURNS (
+  success smallint,
+  message varchar(254),
+  role_id integer)
+AS
+begin
+  success = 0;
+  message = 'FAILD_BY_UNKNOWN_REASON';
+  role_id = -1;
+  
+  if (exists(select 1 from V_ROLES where Upper(CAPTION)=Upper(:ACAPTION))) then
+  begin
+    message = 'DUPLICATE_ROLECAPTION_NOT_ALLOWED';
+    suspend;
+    Exit;    
+  end
+                                  
+  select SEQ_ID from SP_GET_SEQUENCEID_BY_IDENT('ROLES') into :role_id;
+
+  if ((role_id <> -1) and (role_id is not null)) then
+  begin
+    insert
+    into
+      V_ROLES
+      (
+        ID,
+        CAPTION,
+        DESCRIPTION,
+        IS_ADMIN,
+        SETUP,
+        MEMBERS,
+        ACTIVITY_RECORDING,
+        SEPA,
+        BILLING,
+        IMPORT,
+        EXPORT,
+        REFERENCE_DATA,
+        REPORTING,
+        MISC,
+        FILERESOURCE
+      )
+    values
+      (
+        :role_id,
+        :ACAPTION,
+        :ADESCRIPTION,
+        :AISADMIN,
+        :ASETUP,
+        :AMEMBERS,
+        :AACTIVITYRECORDING,
+        :ASEPA,
+        :ABILLING,
+        :AIMPORT,
+        :AEXPORT,
+        :AREFERENCEDATA,
+        :AREPORTING,
+        :AMISC,
+        :AFILERESOURCE
+      );  
+
+    message = '';
+    success = 1;      
+  end  
+  else
+  begin
+    message = 'NO_VALID_ROLE_ID';
+    success = 0;
+    suspend;
+    Exit;     
+  end
+  
+  suspend;
+end^
+
+COMMENT ON PROCEDURE SP_INSERT_ROLE IS
+'Benutzerrolle einfügen'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_INSERT_ROLE'^
 
 CREATE OR ALTER PROCEDURE SP_ADD_ROLE (
   ACAPTION varchar(64), /* Pflichtfeld */
@@ -605,8 +706,8 @@ RETURNS (
   code smallint,
   info varchar(2000))
 AS
-declare variable success_by_touchsession smallint;
-declare variable success_by_grant smallint;
+declare variable message varchar(254);
+declare variable role_id Integer;
 begin
   success = 0;
   code = 0;
@@ -633,7 +734,7 @@ begin
     select
       success,
       message,
-      user_id      
+      role_id      
     from
       SP_INSERT_ROLE(:ACAPTION,
         :ADESCRIPTION,
@@ -652,7 +753,7 @@ begin
     into
       :success,
       :message,
-      :user_id;
+      :role_id;
       
     /* Rückgabe auswerten */     
     if (success = 0) then
@@ -806,6 +907,8 @@ GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_USER TO SP_ADD_USER;
 GRANT EXECUTE ON PROCEDURE SP_INSERT_USER TO SP_ADD_USER;
 
 GRANT SELECT ON V_ROLES TO SP_CHK_DATA_BY_ADD_ROLE;
+GRANT SELECT, INSERT ON V_ROLES TO SP_INSERT_ROLE; 
+GRANT EXECUTE ON PROCEDURE SP_GET_SEQUENCEID_BY_IDENT TO SP_INSERT_ROLE;
 
 GRANT SELECT ON V_ROLES TO SP_CHK_DATA_BY_ADD_USER; 
 GRANT SELECT ON V_TENANT TO SP_CHK_DATA_BY_ADD_USER;

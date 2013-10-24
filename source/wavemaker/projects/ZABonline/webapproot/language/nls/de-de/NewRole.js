@@ -1,4 +1,5 @@
 {
+  "ERROR_MSG_BY_CONTROLLER_LOOUPDATA": "Fehler aus dem Modul: Lookup-Daten nicht vollst&auml;ndig!",
   "ERROR_MSG_BY_UNKNOWN_CONTROLLER": "Kein Zugriff auf das Modul m&ouml;glich!",
   "ERROR_MSG_BY_CONTROLLER_CLEARWIZARD": "Fehler aus dem Modul: Daten im Assistenten nicht vollst&auml;ndig zur&uuml;ck gesetzt!",
   "CONFIRMATION_DO_CLOSE_ADD": "Soll die Neuaufnahme f&uuml;r eine Berechtigungsdaten beendet werden?",  
@@ -31,5 +32,7 @@
   "NO_MANDATORY_ROLE_CAPTION": "Keine g&uuml;ltige Rollenbezeichnung gefunden!",
   "DUPLICATE_ROLECAPTION_NOT_ALLOWED": "Rollenbezeichnung wurde bereits vergeben!",
   "INSERT_BY_ROLE_FAILD": "Anlegen von Berechtigungsdaten nicht erfolgreich!",
-  "FAILD_BY_OBSCURE_PROCESSING": "Keine klare Verarbeitungsaufforderung ermittelt!",    
+  "FAILD_BY_OBSCURE_PROCESSING": "Keine klare Verarbeitungsaufforderung ermittelt!",
+  "NO_VALID_ROLE_ID": "Keine g&uuml;ltige Berechtigungsdatenidentifizierung gefunden!",  
+      
 }

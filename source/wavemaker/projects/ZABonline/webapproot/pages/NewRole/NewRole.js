@@ -209,5 +209,5 @@ dojo.declare("NewRole", wm.Page, {
             this.controller.handleExceptionByCtrl(this.name + ".addRoleSuccess() failed: " + e.toString(), e);
         }
     },
-    _end: 0
+	_end: 0
 });

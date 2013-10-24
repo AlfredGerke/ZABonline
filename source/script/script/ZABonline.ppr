@@ -111,7 +111,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\crypt\SHA512.js
 			-extend
 				..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js
-			-mod
+			+mod
 				..\..\wavemaker\common\packages\zabonline\mod\TitelLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\SalutationLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js
@@ -131,6 +131,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\NewMemberCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\NewFieldCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js
+				..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
 		+SQL
 			-Data
 				data_0001.sql
@@ -156,38 +157,38 @@ ZABonline
 			clean_up.sql
 			create_hibernate_workaround.sql
 [Open project files]
-0=..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js
-1=..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
-2=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js
-3=create_user.sql
-4=batch.sql
-5=create_admin.sql
-6=create_db.sql
-7=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js
+0=batch.sql
+1=create_admin.sql
+2=create_person.sql
+3=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js
+4=..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js
+5=..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
+6=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js
+7=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
 [Selected Project Files]
 Main=
-Selected=create_admin.sql
-[..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js]
-TopLine=414
-Caret=5,445
-[..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js]
-TopLine=288
-Caret=63,323
-[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js]
-TopLine=1
-Caret=85,34
-[create_user.sql]
-TopLine=1
-Caret=1,1
+Selected=batch.sql
 [batch.sql]
-TopLine=33
-Caret=20,52
+TopLine=27
+Caret=1,1
 [create_admin.sql]
-TopLine=558
-Caret=51,805
-[create_db.sql]
-TopLine=718
-Caret=1,732
-[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js]
-TopLine=85
-Caret=85,103
+TopLine=709
+Caret=3,744
+[create_person.sql]
+TopLine=1887
+Caret=1,1725
+[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js]
+TopLine=10
+Caret=33,12
+[..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js]
+TopLine=495
+Caret=1,513
+[..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js]
+TopLine=309
+Caret=22,327
+[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js]
+TopLine=144
+Caret=1,162
+[..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt]
+TopLine=28
+Caret=29,49
