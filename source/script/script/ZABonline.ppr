@@ -49,7 +49,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 		-ressourcen
 			-javascript
-		+language
+		-language
 			-de
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewAddress.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\Main.js
@@ -69,7 +69,7 @@ ZABonline
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewProcess.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewDossier.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\SearchPage.js
-			+de-de
+			-de-de
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\Main.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\Login.js
@@ -109,7 +109,7 @@ ZABonline
 		+common
 			-crypt
 				..\..\wavemaker\common\packages\zabonline\crypt\SHA512.js
-			-extend
+			+extend
 				..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js
 			+mod
 				..\..\wavemaker\common\packages\zabonline\mod\TitelLookup.js
@@ -157,38 +157,14 @@ ZABonline
 			clean_up.sql
 			create_hibernate_workaround.sql
 [Open project files]
-0=batch.sql
-1=create_admin.sql
-2=create_person.sql
-3=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js
-4=..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js
-5=..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
-6=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js
-7=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
+0=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js
+1=..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
 [Selected Project Files]
 Main=
-Selected=batch.sql
-[batch.sql]
-TopLine=27
-Caret=1,1
-[create_admin.sql]
-TopLine=709
-Caret=3,744
-[create_person.sql]
-TopLine=1887
-Caret=1,1725
+Selected=..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js]
 TopLine=10
 Caret=33,12
-[..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js]
-TopLine=495
-Caret=1,513
 [..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js]
-TopLine=309
-Caret=22,327
-[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js]
-TopLine=144
-Caret=1,162
-[..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt]
-TopLine=28
-Caret=29,49
+TopLine=1
+Caret=1,27

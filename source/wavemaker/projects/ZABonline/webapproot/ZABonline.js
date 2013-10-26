@@ -139,9 +139,9 @@ ZABonline.extend({
 
     },
     closeWizard: function(askFor, title) {
-        
+
         this.controller.closeWizard(askFor, title);
-        
+
     },
     dlgConfirmDlgButton1Click: function(inSender, inButton, inText) {
 
@@ -154,14 +154,14 @@ ZABonline.extend({
         this.controller.handleErrorByCtrl(this.getDictionaryItem("ERROR_MSG_EROOR_BY_CHECKGRANT_SERVICE"), inError);
 
         console.debug('End app.checkGrantError');
-    },    
+    },
     checkGrantAdminError: function(inSender, inError) {
         console.debug('Start app.checkGrantAdminError');
 
         this.controller.handleErrorByCtrl(this.getDictionaryItem("ERROR_MSG_EROOR_BY_CHECKGRANT_SERVICE"), inError);
 
         console.debug('End app.checkGrantAdminError');
-    },        
+    },
     checkGrantSuccess: function(inSender, inDeprecated) {
         try {
             console.debug('Start app.checkGrantVarSuccess');
@@ -197,5 +197,5 @@ ZABonline.extend({
         } catch (e) {
             this.controller.handleExceptionByCtrl(e.toString());
         }
-    }        
+    }
 });

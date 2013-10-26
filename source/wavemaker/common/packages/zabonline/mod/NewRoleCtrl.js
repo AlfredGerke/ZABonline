@@ -54,9 +54,9 @@ dojo.declare("NewRoleCtrl", Controller, {
     var success = 0;
     var local = this.localScope;
     try {      
-      if (success == 1) {                              
-        this.globalScope.globalData.tenantId(this.localScope.varTenantId);
-      }
+      this.globalScope.globalData.tenantId(this.localScope.varTenantId);
+    
+      success = 1;
       
       return success;
     } catch (e) {
@@ -339,5 +339,94 @@ dojo.declare("NewRoleCtrl", Controller, {
   },
   showSearch: function(sender, searchParameter, titel) {
     this.inherited (arguments);
-  }              
+  },  
+  checkWidget: function(widget) {
+    return function(widget) {
+      widget.setChecked(true);
+    }
+  },
+  unCheckWidget: function(widget) {
+    return function(widget) {
+      widget.setChecked(false);
+    }    
+  },  
+  switchWidget: function(widget) {
+    return function(widget) {
+      if (widget.getChecked()) {
+        widget.setChecked(false);
+      } else {
+        widget.setChecked(true);
+      }
+    }
+  },  
+  loopAllGrantWidgets: function(scope, con, func) {
+    var widgets = con.getOrderedWidgets();
+    var len = widgets.length;
+    
+    for (var i = 0; i < len; i++) {
+      var widget = widgets[i];
+      if (wm.isInstanceType(widget, [wm.Checkbox])) {
+        func(widget);
+      }
+    }  
+  },
+  checkAllGrants: function(scope, con) {
+    console.debug('checkAllGrants');
+
+    this.loopAllGrantWidgets(scope, con, this.checkWidget());
+    
+    scope.cbxIsAdmin.setChecked(true);
+    
+    return true;
+  },
+  unCheckAllGrants: function(scope, con) {
+    console.debug('unCheckAllGrants');
+    
+    this.loopAllGrantWidgets(scope, con, this.unCheckWidget());
+        
+    scope.cbxIsAdmin.setChecked(false);
+    
+    return true; 
+  },
+  switchAllGrants: function(scope, con) {
+    console.debug('switchAllGrants');
+    
+    this.loopAllGrantWidgets(scope, con, this.switchWidget());    
+    
+    if (scope.cbxIsAdmin.getChecked()) {
+      scope.cbxIsAdmin.setChecked(false);  
+    } else {
+      scope.cbxIsAdmin.setChecked(true);    
+    }
+    
+    return true;    
+  },        
+  editGrants: function(mode, con) {
+    var local = this.localScope;
+    try {
+      switch (mode) {
+      case "check":
+        ret = this.checkAllGrants(local, con);
+        // 
+        break;  	
+      case "uncheck":
+        ret = this.unCheckAllGrants(local, con);
+        // 
+        break;
+      case "switch":
+        ret = this.switchAllGrants(local, con);      
+        // 
+        break;        
+      default:
+        throw "NewRoleCtrl.editGrants: keine gültige Auswahl";
+        //
+        ret = flase;          
+        break;       	
+      }
+      return ret;
+    } catch (e) {
+      this.handleExceptionByCtrl(local.name + ".editGrants() failed: " + e.toString(), e, -1);      
+      return false;	
+    }
+  }        
 });

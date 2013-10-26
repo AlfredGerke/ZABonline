@@ -1,4 +1,4 @@
-dojo.declare("NewRole", wm.Page, {
+        dojo.declare("NewRole", wm.Page, {
     "i18n": true,
     "preferredDevice": "desktop",
     onResultByNewRedording: function() {},
@@ -209,5 +209,14 @@ dojo.declare("NewRole", wm.Page, {
             this.controller.handleExceptionByCtrl(this.name + ".addRoleSuccess() failed: " + e.toString(), e);
         }
     },
-	_end: 0
+    mnuPropertiesCheckAllClick: function(inSender /*,args*/ ) {
+        this.controller.editGrants("check", this.pnlGrants);
+    },
+    mnuPropertiesAuswahl_aufhebenClick: function(inSender /*,args*/ ) {
+        this.controller.editGrants("uncheck", this.pnlGrants);
+    },
+    mnuPropertiesAuswahl_umkehrenClick: function(inSender /*,args*/ ) {
+        this.controller.editGrants("switch", this.pnlGrants);
+    },
+    _end: 0
 });
