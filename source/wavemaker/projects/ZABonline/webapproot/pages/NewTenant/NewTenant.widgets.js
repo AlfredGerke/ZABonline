@@ -28,7 +28,7 @@ NewTenant.widgets = {
 		}]
 	}],
 	lbxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top"}, {}, {
-		wizNewTenant: ["wm.WizardLayers", {}, {}, {
+		wizNewTenant: ["wm.WizardLayers", {}, {"onCancelClick":"wizNewTenantCancelClick","oncanchange":"wizNewTenantCanchange","onDoneClick":"wizNewTenantDoneClick"}, {
 			layTenant: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Mandant","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 				pnlTenantLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlTenantData: ["wm.FancyPanel", {"title":"Mandant"}, {}, {

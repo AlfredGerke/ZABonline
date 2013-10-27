@@ -260,5 +260,106 @@ public class ZABonlineAdmin extends JavaServiceSuperClass {
       // Alt: WM 6.4.x
       // throw ex;
     }
+  }
+  
+  @SuppressWarnings("unchecked")
+  public List<Results.ProcResults> addTenantData(String aCaption,
+    String aDescription,
+    Integer aFactoryDataSheetId,
+    Integer aPersonDataSheetId,
+    Integer aContactDataSheetId,
+    Integer aAddressDataSheetId,
+    Integer aAreaCodeId,
+    Integer aSessionIdletime,
+    Integer aSessionLifetime) {
+
+    List<Results.ProcResults> result = null;
+
+    String errorMsg = "";
+
+    Boolean isAuthentic = SessionManager.isAthenticated();
+    String sessionId = SessionManager.getSessionId();
+    String userName = SessionManager.getUserName();
+    String ipByRequest = SessionManager.getRemoteAddress();
+
+    ZABonlineDB dbService = ZABonlineDBService.getZABonlineDBService();
+    dbService.getDataServiceManager()
+        .begin();
+    session = dbService.getDataServiceManager()
+        .getSession();
+
+    try {
+      if (isAuthentic) {
+        result = session.createSQLQuery("select * from SP_ADD_TENANT_BY_SRV(:SESSIONID, " + ":USERNAME, "
+                                        + ":IP, "
+                                        + ":CAPTION, "
+                                        + ":DESC, "
+                                        + ":FACTORYDATAID, "
+                                        + ":PERSONDATAID, "
+                                        + ":CONTACTDATAID, "
+                                        + ":ADDRESSDATAID, "
+                                        + ":AREACODEID, "
+                                        + ":SESSIONIDLETIME, "
+                                        + ":SESSIONLIFETIME)")
+            .addScalar("success",
+              Hibernate.INTEGER)
+            .addScalar("code",
+              Hibernate.INTEGER)
+            .addScalar("info",
+              Hibernate.STRING)
+            .setParameter("SESSIONID",
+              sessionId)
+            .setParameter("USERNAME",
+              userName)
+            .setParameter("IP",
+              ipByRequest)
+            .setParameter("CAPTION",
+              aCaption)
+            .setParameter("DESC",
+              aDescription)
+            .setParameter("FACTORYDATAID",
+              aFactoryDataSheetId)
+            .setParameter("PERSONDATAID",
+              aPersonDataSheetId)
+            .setParameter("CONTACTDATAID",
+              aContactDataSheetId)
+            .setParameter("ADDRESSDATAID",
+              aAddressDataSheetId)
+            .setParameter("AREACODEID",
+              aAreaCodeId)
+            .setParameter("SESSIONIDLETIME",
+              aSessionIdletime)
+            .setParameter("SESSIONLIFETIME",
+              aSessionLifetime)              
+            .setResultTransformer(Transformers.aliasToBean(Results.ProcResults.class))
+            .list();
+
+        dbService.commit();
+      } else {
+        throw new RuntimeException(ZABonlineConstants.NO_VALID_AUTHENTIFICATION);
+      }
+
+      return result;
+    }
+
+    catch (RuntimeException ex) {
+      dbService.rollback();
+
+      if (ex.getCause() == null) {
+        errorMsg = ex.getMessage();
+      } else {
+        errorMsg = ex.getCause()
+            .getMessage();
+      }
+
+      if (errorMsg.trim()
+          .isEmpty()) {
+        errorMsg = ZABonlineConstants.UNKNOWN_ERROR_BY_DBSERVICE;
+      }
+
+      throw new RuntimeException(errorMsg);
+      // Alt: WM 6.4.x
+      // throw ex;
+    }
   }  
 }

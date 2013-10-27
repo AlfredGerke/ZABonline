@@ -17,6 +17,18 @@
         <parameter name="aFileresource" typeRef="java.lang.Boolean" isList="false"/>
         <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
     </operation>
+    <operation name="addTenantData">
+        <parameter name="aCaption" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aDescription" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aFactoryDataSheetId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aPersonDataSheetId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aContactDataSheetId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aAddressDataSheetId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aAreaCodeId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aSessionIdletime" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aSessionLifetime" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
     <operation name="addUserData">
         <parameter name="aRoleId" typeRef="java.lang.Integer" isList="false"/>
         <parameter name="aTenantId" typeRef="java.lang.Integer" isList="false"/>

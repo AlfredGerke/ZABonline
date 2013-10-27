@@ -47,6 +47,38 @@
 		}],
 		"returnType": "[de.zabonline.srv.Results.ProcResults]"
 	}, {
+		"name": "addTenantData",
+		"operationType": null,
+		"parameters": [{
+			"name": "aCaption",
+			"type": "java.lang.String"
+		}, {
+			"name": "aDescription",
+			"type": "java.lang.String"
+		}, {
+			"name": "aFactoryDataSheetId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aPersonDataSheetId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aContactDataSheetId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aAddressDataSheetId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aAreaCodeId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aSessionIdletime",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aSessionLifetime",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[de.zabonline.srv.Results.ProcResults]"
+	}, {
 		"name": "addUserData",
 		"operationType": null,
 		"parameters": [{

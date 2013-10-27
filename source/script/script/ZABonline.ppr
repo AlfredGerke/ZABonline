@@ -107,7 +107,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\NewDossier.js
 			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\SearchPage.js
 		+common
-			-crypt
+			+crypt
 				..\..\wavemaker\common\packages\zabonline\crypt\SHA512.js
 			+extend
 				..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js
@@ -159,12 +159,24 @@ ZABonline
 [Open project files]
 0=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js
 1=..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
+2=..\..\wavemaker\common\packages\zabonline\mod\NewTenantCtrl.js
+3=..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
+4=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
+Selected=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js]
 TopLine=10
 Caret=33,12
 [..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js]
+TopLine=432
+Caret=4,432
+[..\..\wavemaker\common\packages\zabonline\mod\NewTenantCtrl.js]
 TopLine=1
-Caret=1,27
+Caret=5,1
+[..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js]
+TopLine=1
+Caret=39,11
+[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js]
+TopLine=178
+Caret=7,148
