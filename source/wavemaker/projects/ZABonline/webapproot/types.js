@@ -4724,6 +4724,33 @@ wm.types = {
 			"liveService": false,
 			"service": "ZABonlineDB"
 		},
+		"com.zabonlinedb.data.output.GetLookupCountryRtnType": {
+			"fields": {
+				"countryCode": {
+					"exclude": [],
+					"fieldOrder": 0,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"id": {
+					"exclude": [],
+					"fieldOrder": 1,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.Integer"
+				}
+			},
+			"internal": false,
+			"liveService": false,
+			"service": "ZABonlineDB"
+		},
 		"com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType": {
 			"fields": {
 				"firstname": {

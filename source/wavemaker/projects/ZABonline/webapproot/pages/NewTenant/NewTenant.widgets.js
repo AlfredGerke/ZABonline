@@ -27,8 +27,24 @@ NewTenant.widgets = {
 			}]
 		}]
 	}],
-	lbxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top"}, {}, {
-		wizNewTenant: ["wm.WizardLayers", {}, {"onCancelClick":"wizNewTenantCancelClick","oncanchange":"wizNewTenantCanchange","onDoneClick":"wizNewTenantDoneClick"}, {
+	addTenant: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"addTenantData","service":"ZABonlineAdminService"}, {}, {
+		input: ["wm.ServiceInput", {"type":"addTenantDataInputs"}, {}, {
+			binding: ["wm.Binding", {}, {}, {
+				wire: ["wm.Wire", {"expression":undefined,"source":"edtTenantCaption.dataValue","targetProperty":"aCaption"}, {}],
+				wire1: ["wm.Wire", {"expression":undefined,"source":"edtTenantDesc.dataValue","targetProperty":"aDescription"}, {}],
+				wire6: ["wm.Wire", {"expression":undefined,"source":"edtSessionIdleTime.dataValue","targetProperty":"aSessionIdletime"}, {}],
+				wire7: ["wm.Wire", {"expression":undefined,"source":"edtSessionLifetime.dataValue","targetProperty":"aSessionLifetime"}, {}],
+				wire8: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData.id","targetProperty":"aCountryCodeId"}, {}]
+			}]
+		}]
+	}],
+	varResultByInsert: ["wm.Variable", {"isList":true,"type":"de.zabonline.srv.Results.ProcResults"}, {}, {
+		binding: ["wm.Binding", {}, {}, {
+			wire: ["wm.Wire", {"expression":undefined,"source":"addTenant","targetProperty":"dataSet"}, {}]
+		}]
+	}],
+	lbxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top","width":"1427px"}, {}, {
+		wizNewTenant: ["wm.WizardLayers", {}, {"onCancelClick":"wizNewTenantCancelClick","onDoneClick":"wizNewTenantDoneClick","oncanchange":"wizNewTenantCanchange"}, {
 			layTenant: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Mandant","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 				pnlTenantLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlTenantData: ["wm.FancyPanel", {"title":"Mandant"}, {}, {
@@ -67,10 +83,10 @@ NewTenant.widgets = {
 				pnlSessionLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlSessionData: ["wm.FancyPanel", {"title":"Sitzung"}, {}, {
 						cboAreaCodePanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboAreaCode: ["wm.SelectMenu", {"allowNone":true,"caption":"Gebietscode","dataField":"areacode","dataType":"com.zabonlinedb.data.output.GetLookupAreaCodeRtnType","displayField":"areacode","displayValue":""}, {}, {
+							cboAreaCode: ["wm.SelectMenu", {"allowNone":true,"caption":"Gebietscode","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupCountryRtnType","displayField":"countryCode","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
-									wire: ["wm.Wire", {"expression":undefined,"source":"app.areaCodeData","targetProperty":"dataSet"}, {}],
-									wire1: ["wm.Wire", {"expression":undefined,"source":"app.areaCodeData.areacode","targetProperty":"dataValue"}, {}]
+									wire1: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData","targetProperty":"dataValue"}, {}],
+									wire: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData","targetProperty":"dataSet"}, {}]
 								}]
 							}],
 							btnFindAreaCode: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindAreaCodeClick"}],

@@ -53,6 +53,11 @@
 		}],
 		"returnType": "[com.zabonlinedb.data.output.GetLookupContactTypeByCountryRtnType]"
 	}, {
+		"name": "getLookupCountry",
+		"operationType": "hqlquery",
+		"parameters": null,
+		"returnType": "[com.zabonlinedb.data.output.GetLookupCountryRtnType]"
+	}, {
 		"name": "getLookupPersonByMarriage",
 		"operationType": "hqlquery",
 		"parameters": [{

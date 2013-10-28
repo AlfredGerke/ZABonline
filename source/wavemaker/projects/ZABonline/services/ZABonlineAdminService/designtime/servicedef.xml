@@ -24,7 +24,7 @@
         <parameter name="aPersonDataSheetId" typeRef="java.lang.Integer" isList="false"/>
         <parameter name="aContactDataSheetId" typeRef="java.lang.Integer" isList="false"/>
         <parameter name="aAddressDataSheetId" typeRef="java.lang.Integer" isList="false"/>
-        <parameter name="aAreaCodeId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aCountryCodeId" typeRef="java.lang.Integer" isList="false"/>
         <parameter name="aSessionIdletime" typeRef="java.lang.Integer" isList="false"/>
         <parameter name="aSessionLifetime" typeRef="java.lang.Integer" isList="false"/>
         <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>

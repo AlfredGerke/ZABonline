@@ -162,9 +162,11 @@ ZABonline
 2=..\..\wavemaker\common\packages\zabonline\mod\NewTenantCtrl.js
 3=..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
 4=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js
+5=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
+6=..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js
+Selected=..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewRole.js]
 TopLine=10
 Caret=33,12
@@ -178,5 +180,11 @@ Caret=5,1
 TopLine=1
 Caret=39,11
 [..\..\wavemaker\projects\ZABonline\webapproot\pages\NewRole\NewRole.js]
-TopLine=178
+TopLine=148
 Caret=7,148
+[..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt]
+TopLine=37
+Caret=32,81
+[..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js]
+TopLine=1
+Caret=1,1

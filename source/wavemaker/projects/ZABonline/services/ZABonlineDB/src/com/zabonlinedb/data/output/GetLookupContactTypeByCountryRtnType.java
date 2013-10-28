@@ -4,7 +4,7 @@ package com.zabonlinedb.data.output;
 
 
 /**
- * Generated for query "getLookupContactTypeByCountry" on 06/13/2013 22:12:04
+ * Generated for query "getLookupContactTypeByCountry" on 10/28/2013 15:36:57
  * 
  */
 public class GetLookupContactTypeByCountryRtnType {

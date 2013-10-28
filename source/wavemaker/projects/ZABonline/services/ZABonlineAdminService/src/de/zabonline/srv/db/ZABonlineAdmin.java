@@ -269,7 +269,7 @@ public class ZABonlineAdmin extends JavaServiceSuperClass {
     Integer aPersonDataSheetId,
     Integer aContactDataSheetId,
     Integer aAddressDataSheetId,
-    Integer aAreaCodeId,
+    Integer aCountryCodeId,
     Integer aSessionIdletime,
     Integer aSessionLifetime) {
 
@@ -298,7 +298,7 @@ public class ZABonlineAdmin extends JavaServiceSuperClass {
                                         + ":PERSONDATAID, "
                                         + ":CONTACTDATAID, "
                                         + ":ADDRESSDATAID, "
-                                        + ":AREACODEID, "
+                                        + ":COUNTRYCODEID, "
                                         + ":SESSIONIDLETIME, "
                                         + ":SESSIONLIFETIME)")
             .addScalar("success",
@@ -325,8 +325,8 @@ public class ZABonlineAdmin extends JavaServiceSuperClass {
               aContactDataSheetId)
             .setParameter("ADDRESSDATAID",
               aAddressDataSheetId)
-            .setParameter("AREACODEID",
-              aAreaCodeId)
+            .setParameter("COUNTRYCODEID",
+              aCountryCodeId)
             .setParameter("SESSIONIDLETIME",
               aSessionIdletime)
             .setParameter("SESSIONLIFETIME",

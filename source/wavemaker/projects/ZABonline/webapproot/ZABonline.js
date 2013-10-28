@@ -56,6 +56,9 @@ dojo.declare("ZABonline", wm.Application, {
 		contactTypeLookupData: ["wm.ServiceVariable", {"operation":"getLookupContactTypeByCountry","service":"ZABonlineDB"}, {}, {
 			input: ["wm.ServiceInput", {"type":"getLookupContactTypeByCountryInputs"}, {}]
 		}], 
+		countryLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupCountry","service":"ZABonlineDB"}, {}, {
+			input: ["wm.ServiceInput", {"type":"getLookupCountryInputs"}, {}]
+		}], 
 		dlgConfirmDlg: ["wm.GenericDialog", {"button1Caption":"Ja","button1Close":true,"button2Caption":"Abbrechen","button2Close":true,"desktopHeight":"65px","height":"105px","title":"Titel","userPrompt":"asdfasdf"}, {"onButton1Click":"dlgConfirmDlgButton1Click"}], 
 		dlgLoading: ["wm.LoadingDialog", {}, {}], 
 		dlgSearchPage: ["wm.PageDialog", {"desktopHeight":"550px","height":"550px","pageName":"SearchPage","title":"Suchen","titlebarButtons":undefined,"width":"800px"}, {}], 

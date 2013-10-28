@@ -46,4 +46,7 @@
         <query-param name="TenantId" type="java.lang.Integer"/>
         select rad.personId as personId, (rad.name1 || &apos;,  &apos; || rad.firstName) as nameFirstname, rad.firstName as firstName, rad.name1 as name1, rad.email as email from RelAddressbookItemDetails rad where tenantId=:TenantId
     </query>
+    <query name="getLookupCountry">
+        select c.countryCode as countryCode, c.id as id from Country c
+    </query>
 </hibernate-mapping>

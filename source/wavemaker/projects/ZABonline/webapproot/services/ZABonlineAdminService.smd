@@ -68,7 +68,7 @@
 			"name": "aAddressDataSheetId",
 			"type": "java.lang.Integer"
 		}, {
-			"name": "aAreaCodeId",
+			"name": "aCountryCodeId",
 			"type": "java.lang.Integer"
 		}, {
 			"name": "aSessionIdletime",
