@@ -30,7 +30,7 @@ dojo.declare("NewRoleCtrl", Controller, {
     try {
       switch (target) {
         case "Role":  
-          this.localScope.edtRoleCaption.quickSetup(doRequire, this.localScope.getDictionaryItem("REG_EXPR_NO_EXPR"), doClear);
+          local.edtRoleCaption.quickSetup(doRequire, local.getDictionaryItem("REG_EXPR_NO_EXPR"), doClear);
           //
           ret = true;          
           break;
@@ -51,16 +51,18 @@ dojo.declare("NewRoleCtrl", Controller, {
     }
   },
   loadLookupData: function(target) {
-    var success = 0;
     var local = this.localScope;
+    var global = this.globalScope;
+      
+    var success = 0;
     try {      
-      this.globalScope.globalData.tenantId(this.localScope.varTenantId);
+      global.globalData.tenantId(local.varTenantId);
     
       success = 1;
       
       return success;
     } catch (e) {
-      this.handleExceptionByCtrl(this.localScope.name + ".loadLookupData() failed: " + e.toString(), e, -1);      
+      this.handleExceptionByCtrl(local.name + ".loadLookupData() failed: " + e.toString(), e, -1);      
       return false;      
     }
   },  
@@ -102,7 +104,7 @@ dojo.declare("NewRoleCtrl", Controller, {
   clearWizard: function(layIdx) {
     try {
       if (!this.setByQuickSetup("Role", false, true)) {
-        throw "Fehler beim Einrichten vom Anmeldedaten!";
+        throw "Fehler beim Einrichten der Rollenbezeichnung!";
       }
       if (!this.setByQuickSetup("Properties", false, true)) {
         throw "Fehler beim Einrichten von Verkn&uuml;pfungen!";

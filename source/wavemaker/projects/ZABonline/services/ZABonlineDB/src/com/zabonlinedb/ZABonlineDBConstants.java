@@ -5,7 +5,7 @@ package com.zabonlinedb;
 
 /**
  *  Query names for service "ZABonlineDB"
- *  10/09/2013 23:01:04
+ *  10/28/2013 22:24:35
  * 
  */
 public class ZABonlineDBConstants {
@@ -22,6 +22,7 @@ public class ZABonlineDBConstants {
     public final static String getLookupPersonByMarriageQueryName = "getLookupPersonByMarriage";
     public final static String getLookupSalutationByCountryQueryName = "getLookupSalutationByCountry";
     public final static String getLookupTenantQueryName = "getLookupTenant";
+    public final static String getLookupCountryQueryName = "getLookupCountry";
     public final static String getAddressByIdQueryName = "getAddressById";
 
 }

@@ -27,7 +27,7 @@ NewTenant.widgets = {
 			}]
 		}]
 	}],
-	addTenant: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"addTenantData","service":"ZABonlineAdminService"}, {}, {
+	addTenant: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"addTenantData","service":"ZABonlineAdminService"}, {"onError":"addTenantError","onResult":"addTenantResult","onSuccess":"addTenantSuccess"}, {
 		input: ["wm.ServiceInput", {"type":"addTenantDataInputs"}, {}, {
 			binding: ["wm.Binding", {}, {}, {
 				wire: ["wm.Wire", {"expression":undefined,"source":"edtTenantCaption.dataValue","targetProperty":"aCaption"}, {}],
@@ -43,8 +43,9 @@ NewTenant.widgets = {
 			wire: ["wm.Wire", {"expression":undefined,"source":"addTenant","targetProperty":"dataSet"}, {}]
 		}]
 	}],
+	varTenantId: ["wm.Variable", {"type":"NumberData"}, {}],
 	lbxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top","width":"1427px"}, {}, {
-		wizNewTenant: ["wm.WizardLayers", {}, {"onCancelClick":"wizNewTenantCancelClick","onDoneClick":"wizNewTenantDoneClick","oncanchange":"wizNewTenantCanchange"}, {
+		wizNewTenant: ["wm.WizardLayers", {}, {"onCancelClick":"wizNewTenantCancelClick","onDoneClick":"wizNewTenantDoneClick","oncanchange":"wizNewTenantCanchange","onchange":"wizNewTenantChange"}, {
 			layTenant: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Mandant","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 				pnlTenantLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlTenantData: ["wm.FancyPanel", {"title":"Mandant"}, {}, {
@@ -92,8 +93,8 @@ NewTenant.widgets = {
 							btnFindAreaCode: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindAreaCodeClick"}],
 							btnAddAreaCode: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnAddAreaCodeClick"}]
 						}],
-						edtSessionIdleTime: ["wm.Number", {"caption":"Ruhezeit","dataValue":undefined,"displayValue":"","helpText":"Ruhezeit in Minuten"}, {}],
-						edtSessionLifetime: ["wm.Number", {"caption":"Lebenszeit","dataValue":undefined,"displayValue":"","helpText":"Lebenszeit in Tagen"}, {}]
+						edtSessionIdleTime: ["wm.Number", {"caption":"Ruhezeit","dataValue":undefined,"displayValue":"","helpText":"Ruhezeit in Minuten","required":true}, {}],
+						edtSessionLifetime: ["wm.Number", {"caption":"Lebenszeit","dataValue":undefined,"displayValue":"","helpText":"Lebenszeit in Tagen","required":true}, {}]
 					}]
 				}]
 			}],

@@ -11,6 +11,8 @@ dojo.declare("NewTenantCtrl", Controller, {
     console.debug('End NewTenantCtrl.constructor');
   },
   initControls: function(global, local) {
+    local.edtSessionIdleTime.setValue("helpText", local.getDictionaryItem("HELP_SESSIONIDLETIME_INFO"));
+    local.edtSessionLifetime.setValue("helpText", local.getDictionaryItem("HELP_SESSIONLIFETIME_INFO"));
   },
   initStart: function() {
     var global = this.globalScope;
@@ -18,10 +20,21 @@ dojo.declare("NewTenantCtrl", Controller, {
     
     this.initControls(global, local); 
   },
+  setReferenceButtons: function(scope, showing){
+      scope.btnAddFactoryDatasheet.setShowing(showing);
+      scope.btnFindFactoryDatasheet.setShowing(showing);
+      scope.btnAddPersonDatasheet.setShowing(showing);
+      scope.btnAddContactDatasheet.setShowing(showing);
+      scope.btnFindContactDatasheet.setShowing(showing);
+      scope.btnAddAddressDatasheet.setShowing(showing);
+      scope.btnAddAddressDatasheet.setShowing(showing);  
+  },
   initAsSubDialog: function(onStart) {
     var local = this.localScope;
     if (onStart) {
+      this.setReferenceButtons(local, false);
     } else {
+      this.setReferenceButtons(local, true);    
     }
   },  
   setByQuickSetup: function(target, doRequire, doClear) {
@@ -29,15 +42,21 @@ dojo.declare("NewTenantCtrl", Controller, {
     var ret = false;    
     try {
       switch (target) {
-        case "Role":  
-          this.localScope.edtRoleCaption.quickSetup(doRequire, this.localScope.getDictionaryItem("REG_EXPR_NO_EXPR"), doClear);
+        case "Tenant":  
+          local.edtTenantCaption.quickSetup(doRequire, local.getDictionaryItem("REG_EXPR_NO_EXPR"), doClear);
           //
           ret = true;          
           break;
-        case "Properties":
+        case "Related":
           //
           ret = true;
           break;
+        case "Properties":
+          local.edtSessionIdleTime.quickSetup(doRequire, local.getDictionaryItem("REG_EXPR_NO_EXPR"), doClear);
+          local.edtSessionLifetime.quickSetup(doRequire, local.getDictionaryItem("REG_EXPR_NO_EXPR"), doClear);
+          //
+          ret = true;
+          break;          
         default:
           throw "NewTenantCtrl.setQuickSetup: keine gültige Auswahl";
           //
@@ -51,16 +70,18 @@ dojo.declare("NewTenantCtrl", Controller, {
     }
   },
   loadLookupData: function(target) {
-    var success = 0;
     var local = this.localScope;
+    var global = this.globalScope;  
+    
+    var success = 0;
     try {      
-      this.globalScope.globalData.tenantId(this.localScope.varTenantId);
+      global.globalData.tenantId(local.varTenantId);
     
       success = 1;
       
       return success;
     } catch (e) {
-      this.handleExceptionByCtrl(this.localScope.name + ".loadLookupData() failed: " + e.toString(), e, -1);      
+      this.handleExceptionByCtrl(local.name + ".loadLookupData() failed: " + e.toString(), e, -1);      
       return false;      
     }
   },  
@@ -71,16 +92,21 @@ dojo.declare("NewTenantCtrl", Controller, {
     var ret = false;
     try {
       switch (target) {
-        case "Role":
-          local.layRole.clearData();                   
+        case "Tenant":
+          local.layTenant.clearData();                   
           //          
           ret = true;          
           break;
-        case "Properties":
-          local.layProperties.clearData();
+        case "Related":
+          local.layRelated.clearData();
           //
           ret = true;
           break;
+        case "Properties":
+          local.laySession.clearData();
+          //
+          ret = true;
+          break;          
         case "SummeryInfo":
           local.laySummery.clearData();
           this.setSummeryInfo();
@@ -101,25 +127,32 @@ dojo.declare("NewTenantCtrl", Controller, {
   },
   clearWizard: function(layIdx) {
     try {
-      if (!this.setByQuickSetup("Role", false, true)) {
-        throw "Fehler beim Einrichten vom Anmeldedaten!";
+      if (!this.setByQuickSetup("Tenant", true, true)) {
+        throw "Fehler beim Einrichten der Mandantenbezeichnung!";
       }
-      if (!this.setByQuickSetup("Properties", false, true)) {
-        throw "Fehler beim Einrichten von Verkn&uuml;pfungen!";
-      }      
-      //
-      if (!this.clearData("Role")) {
-        throw "Fehler beim Zurücksetzen von Anmeldedaten!";
+      
+      if (!this.setByQuickSetup("Properties", true, true)) {
+        throw "Fehler beim Einrichten der Mandanteneigenschaften!";
       }
+            
+      if (!this.clearData("Tenant")) {
+        throw "Fehler beim Zurücksetzen der Mandantenbezeichnung!";
+      }
+      
+      if (!this.clearData("Related")) {
+        throw "Fehler beim Zurücksetzen von von Verkn&uuml;pfungen!";
+      }
+      
       if (!this.clearData("Properties")) {
-        throw "Fehler beim Zurücksetzen von Verkn&uuml;pfungen!";
+        throw "Fehler beim Zurücksetzen von Mandanteneigenschaften!";
       }
+      
       if (!this.clearData("SummeryInfo")) {
         throw "Fehler beim Zurücksetzen der Zusammenfassung!";
       }
-      //
+      
       this.selectLayerByIdx(layIdx);
-      //
+      
       return true;
     } catch (e) {    
       this.handleExceptionByCtrl(this.localScope.name + ".clearWizard() failed: " + e.toString(), e, -1);      
@@ -132,14 +165,23 @@ dojo.declare("NewTenantCtrl", Controller, {
     var checked = false;
     try {
       switch (target) {
-        case "Role":
+        case "Tenant":
           var rolename = global.utils.setDefaultStr(local.edtRoleCaption.getDataValue());
          
           checked = (rolename.trim() !== "");
           //          
           break;
-        case "Properties":
+        case "Related":
           checked = true;
+          //         
+          break;          
+        case "Properties":
+          var idletiem = local.edtSessionIdleTime.getDataValue(); 
+          var lifetime =  local.edtSessionLifetime.getDataValue(); 
+          
+          checked = ((idletime) and (lifetime));
+          if checked then
+            checked = ((idletime > 0) and (lifetime > 0));
           //         
           break;
         case "Summary":
