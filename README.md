@@ -93,9 +93,9 @@ In WaveMaker wird Hibernate als ORM-Layer eingesetzt. Tabellen werden in Java-En
 übersetzt und mit einer *.hbm.xml-Beschreibungsdatei zusammen wird die Kommunikation 
 mit Daten in einer DB hergestellt. In WaveMaker kann über einen einfachen Assistenten
 das gesamte Datenmodell in Entitäten übersetzt werden. Allerdings lassen sich keine 
-einzelnen Tabellen separat übersetzt werden. Es gibt zwar die Möglichkeit eine
-Entität von Hand zu erstellen, dies kann aber je nach Umfang der Tabelle erheblich 
-an Zeit kosten.
+einzelnen Tabellen separat übersetzen. Es gibt zwar die Möglichkeit eine Entität 
+von Hand zu erstellen, dies kann aber je nach Umfang der Tabelle erheblich an Zeit 
+kosten.    
 Um das Problem zu lösen wird eine Sammlung von SPs (StoredProcedures) eingeführt,
 die es ermöglichen über einen SQL-Script-Editor aus der Datenbank eine beliebige
 Tabelle in eine Java-Entität zu übersetzen.  
