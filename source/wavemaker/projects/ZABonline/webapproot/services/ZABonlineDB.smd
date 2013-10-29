@@ -87,6 +87,14 @@
 		}],
 		"returnType": "[com.zabonlinedb.data.output.GetLookupSalutationByCountryRtnType]"
 	}, {
+		"name": "getLookupTableStoreByLabel",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "label",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType]"
+	}, {
 		"name": "getLookupTenant",
 		"operationType": "hqlquery",
 		"parameters": null,

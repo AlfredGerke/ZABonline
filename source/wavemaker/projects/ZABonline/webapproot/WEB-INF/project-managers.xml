@@ -64,13 +64,13 @@
                         <value>com.zabonlinedb.data.Titel</value>
                         <value>com.zabonlinedb.data.Updatehistory</value>
                         <value>com.zabonlinedb.data.Users</value>
-                        <value>com.zabonlinedb.data.RelPersonBankId</value>
-                        <value>com.zabonlinedb.data.RelFactoryAddressId</value>
                         <value>com.zabonlinedb.data.RelTableStoreFieldStoreId</value>
-                        <value>com.zabonlinedb.data.RelFactoryBankId</value>
-                        <value>com.zabonlinedb.data.RelPersonAddressId</value>
                         <value>com.zabonlinedb.data.RelPersonContactId</value>
+                        <value>com.zabonlinedb.data.RelFactoryAddressId</value>
+                        <value>com.zabonlinedb.data.RelPersonBankId</value>
+                        <value>com.zabonlinedb.data.RelFactoryBankId</value>
                         <value>com.zabonlinedb.data.RelPersonCategoryId</value>
+                        <value>com.zabonlinedb.data.RelPersonAddressId</value>
                         <value>com.zabonlinedb.data.RegistryId</value>
                         <value>com.zabonlinedb.data.output.GetLookupRoleRtnType</value>
                         <value>com.zabonlinedb.data.output.GetLookupSalutationByCountryRtnType</value>
@@ -83,6 +83,7 @@
                         <value>com.zabonlinedb.data.output.GetLookupAreaCodeRtnType</value>
                         <value>com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType</value>
                         <value>com.zabonlinedb.data.output.GetLookupPersonByTenantRtnType</value>
+                        <value>com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType</value>
                     </list>
                 </entry>
                 <entry key="ZABonlineDBService">

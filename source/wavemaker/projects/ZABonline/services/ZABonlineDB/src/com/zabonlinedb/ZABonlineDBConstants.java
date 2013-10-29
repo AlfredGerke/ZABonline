@@ -5,24 +5,25 @@ package com.zabonlinedb;
 
 /**
  *  Query names for service "ZABonlineDB"
- *  10/28/2013 22:24:35
+ *  10/29/2013 22:26:39
  * 
  */
 public class ZABonlineDBConstants {
 
-    public final static String getLookupAreaCodeQueryName = "getLookupAreaCode";
-    public final static String getLookupContactPartnerByTenantQueryName = "getLookupContactPartnerByTenant";
     public final static String getCountryByCodeQueryName = "getCountryByCode";
+    public final static String getLookupContactPartnerByTenantQueryName = "getLookupContactPartnerByTenant";
+    public final static String getLookupRoleQueryName = "getLookupRole";
+    public final static String getLookupPersonByMarriageQueryName = "getLookupPersonByMarriage";
+    public final static String getLookupTableStoreByLabelQueryName = "getLookupTableStoreByLabel";
+    public final static String getLookupTenantQueryName = "getLookupTenant";
+    public final static String getAddressByIdQueryName = "getAddressById";
+    public final static String getLookupAreaCodeQueryName = "getLookupAreaCode";
     public final static String getLookupAddressTypeByCountryQueryName = "getLookupAddressTypeByCountry";
     public final static String getLookupContactTypeByCountryQueryName = "getLookupContactTypeByCountry";
     public final static String getLookupTitelByCountryQueryName = "getLookupTitelByCountry";
-    public final static String getLookupRoleQueryName = "getLookupRole";
     public final static String getInfoByUserNameQueryName = "getInfoByUserName";
     public final static String getLookupPersonByTenantQueryName = "getLookupPersonByTenant";
-    public final static String getLookupPersonByMarriageQueryName = "getLookupPersonByMarriage";
     public final static String getLookupSalutationByCountryQueryName = "getLookupSalutationByCountry";
-    public final static String getLookupTenantQueryName = "getLookupTenant";
     public final static String getLookupCountryQueryName = "getLookupCountry";
-    public final static String getAddressByIdQueryName = "getAddressById";
 
 }

@@ -27,7 +27,7 @@ dojo.declare("ZABonline", wm.Application, {
 				wire: ["wm.Wire", {"expression":undefined,"source":"app.addressTypeLookupData","targetProperty":"dataSet"}, {}]
 			}]
 		}], 
-		addressTypeLookupData: ["wm.ServiceVariable", {"operation":"getLookupAddressTypeByCountry","service":"ZABonlineDB"}, {}, {
+		addressTypeLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupAddressTypeByCountry","service":"ZABonlineDB"}, {}, {
 			input: ["wm.ServiceInput", {"type":"getLookupAddressTypeByCountryInputs"}, {}]
 		}], 
 		areaCodeData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupAreaCodeRtnType"}, {}, {
@@ -35,10 +35,10 @@ dojo.declare("ZABonline", wm.Application, {
 				wire: ["wm.Wire", {"expression":undefined,"source":"app.areaCodeLookupData","targetProperty":"dataSet"}, {}]
 			}]
 		}], 
-		areaCodeLookupData: ["wm.ServiceVariable", {"operation":"getLookupAreaCode","service":"ZABonlineDB"}, {}, {
+		areaCodeLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupAreaCode","service":"ZABonlineDB"}, {}, {
 			input: ["wm.ServiceInput", {"type":"getLookupAreaCodeInputs"}, {}]
 		}], 
-		checkGrant: ["wm.ServiceVariable", {"inFlightBehavior":"dontExecute","operation":"checkGrant","service":"ZABonlineGrantsService"}, {"onError":"checkGrantError","onSuccess":"checkGrantSuccess"}, {
+		checkGrant: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"checkGrant","service":"ZABonlineGrantsService"}, {"onError":"checkGrantError","onSuccess":"checkGrantSuccess"}, {
 			input: ["wm.ServiceInput", {"type":"checkGrantInputs"}, {}, {
 				binding: ["wm.Binding", {}, {}, {
 					wire: ["wm.Wire", {"expression":undefined,"source":"app.grantToCheck.dataValue","targetProperty":"aGrant"}, {}]
@@ -53,7 +53,7 @@ dojo.declare("ZABonline", wm.Application, {
 				wire: ["wm.Wire", {"expression":undefined,"source":"app.contactTypeLookupData","targetProperty":"dataSet"}, {}]
 			}]
 		}], 
-		contactTypeLookupData: ["wm.ServiceVariable", {"operation":"getLookupContactTypeByCountry","service":"ZABonlineDB"}, {}, {
+		contactTypeLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupContactTypeByCountry","service":"ZABonlineDB"}, {}, {
 			input: ["wm.ServiceInput", {"type":"getLookupContactTypeByCountryInputs"}, {}]
 		}], 
 		countryLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupCountry","service":"ZABonlineDB"}, {}, {
@@ -79,19 +79,27 @@ dojo.declare("ZABonline", wm.Application, {
 				wire: ["wm.Wire", {"expression":undefined,"source":"app.salutationLookupData","targetProperty":"dataSet"}, {}]
 			}]
 		}], 
-		salutationLookupData: ["wm.ServiceVariable", {"operation":"getLookupSalutationByCountry","service":"ZABonlineDB"}, {}, {
+		salutationLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupSalutationByCountry","service":"ZABonlineDB"}, {}, {
 			input: ["wm.ServiceInput", {"type":"getLookupSalutationByCountryInputs"}, {}]
 		}], 
 		selectMenu: ["wm.Variable", {"type":"StringData"}, {}], 
+		tableStoreData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType"}, {}, {
+			binding: ["wm.Binding", {}, {}, {
+				wire: ["wm.Wire", {"expression":undefined,"source":"app.tableStoreLookupData","targetProperty":"dataSet"}, {}]
+			}]
+		}], 
+		tableStoreLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupTableStoreByLabel","service":"ZABonlineDB"}, {}, {
+			input: ["wm.ServiceInput", {"type":"getLookupTableStoreByLabelInputs"}, {}]
+		}], 
 		titelData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType"}, {}, {
 			binding: ["wm.Binding", {}, {}, {
 				wire: ["wm.Wire", {"expression":undefined,"source":"app.titelLookupData","targetProperty":"dataSet"}, {}]
 			}]
 		}], 
-		titelLookupData: ["wm.ServiceVariable", {"operation":"getLookupTitelByCountry","service":"ZABonlineDB"}, {}, {
+		titelLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupTitelByCountry","service":"ZABonlineDB"}, {}, {
 			input: ["wm.ServiceInput", {"type":"getLookupTitelByCountryInputs"}, {}]
 		}], 
-		userData: ["wm.ServiceVariable", {"operation":"getInfoByUserName","service":"ZABonlineDB"}, {}, {
+		userData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getInfoByUserName","service":"ZABonlineDB"}, {}, {
 			input: ["wm.ServiceInput", {"type":"getInfoByUserNameInputs"}, {}]
 		}], 
 		wizDialog: ["wm.PageDialog", {"desktopHeight":"550px","height":"550px","hideControls":true,"title":"PageDialog","width":"800px"}, {}], 

@@ -84,7 +84,7 @@ NewTenant.widgets = {
 				pnlSessionLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlSessionData: ["wm.FancyPanel", {"title":"Sitzung"}, {}, {
 						cboAreaCodePanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboAreaCode: ["wm.SelectMenu", {"allowNone":true,"caption":"Gebietscode","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupCountryRtnType","displayField":"countryCode","displayValue":""}, {}, {
+							cboAreaCode: ["wm.SelectMenu", {"allowNone":true,"caption":"Ländercode","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupCountryRtnType","displayField":"countryCode","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
 									wire1: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData","targetProperty":"dataValue"}, {}],
 									wire: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData","targetProperty":"dataSet"}, {}]

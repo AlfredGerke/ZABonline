@@ -21,13 +21,14 @@ import com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType;
 import com.zabonlinedb.data.output.GetLookupPersonByTenantRtnType;
 import com.zabonlinedb.data.output.GetLookupRoleRtnType;
 import com.zabonlinedb.data.output.GetLookupSalutationByCountryRtnType;
+import com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType;
 import com.zabonlinedb.data.output.GetLookupTenantRtnType;
 import com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType;
 
 
 /**
  *  Operations for service "ZABonlineDB"
- *  10/28/2013 22:24:35
+ *  10/29/2013 22:26:39
  * 
  */
 @SuppressWarnings("unchecked")
@@ -38,16 +39,41 @@ public class ZABonlineDB
     private DataServiceManager dsMgr;
     private TaskManager taskMgr;
 
-    public List<GetLookupAreaCodeRtnType> getLookupAreaCode(PagingOptions pagingOptions) {
-        return ((List<GetLookupAreaCodeRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupAreaCodeQueryName), pagingOptions));
+    public List<Country> getCountryByCode(String Code, PagingOptions pagingOptions) {
+        return ((List<Country> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getCountryByCodeQueryName), Code, pagingOptions));
     }
 
     public List<GetLookupContactPartnerByTenantRtnType> getLookupContactPartnerByTenant(Integer TenantId, PagingOptions pagingOptions) {
         return ((List<GetLookupContactPartnerByTenantRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupContactPartnerByTenantQueryName), TenantId, pagingOptions));
     }
 
-    public List<Country> getCountryByCode(String Code, PagingOptions pagingOptions) {
-        return ((List<Country> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getCountryByCodeQueryName), Code, pagingOptions));
+    public List<GetLookupRoleRtnType> getLookupRole(PagingOptions pagingOptions) {
+        return ((List<GetLookupRoleRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupRoleQueryName), pagingOptions));
+    }
+
+    public List<GetLookupPersonByMarriageRtnType> getLookupPersonByMarriage(Integer TenantId, PagingOptions pagingOptions) {
+        return ((List<GetLookupPersonByMarriageRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupPersonByMarriageQueryName), TenantId, pagingOptions));
+    }
+
+    public List<GetLookupTableStoreByLabelRtnType> getLookupTableStoreByLabel(Integer label, PagingOptions pagingOptions) {
+        return ((List<GetLookupTableStoreByLabelRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupTableStoreByLabelQueryName), label, pagingOptions));
+    }
+
+    public List<GetLookupTenantRtnType> getLookupTenant(PagingOptions pagingOptions) {
+        return ((List<GetLookupTenantRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupTenantQueryName), pagingOptions));
+    }
+
+    public com.zabonlinedb.data.Address getAddressById(Integer id, PagingOptions pagingOptions) {
+        List<com.zabonlinedb.data.Address> rtn = ((List<com.zabonlinedb.data.Address> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getAddressByIdQueryName), id, pagingOptions));
+        if (rtn.isEmpty()) {
+            return null;
+        } else {
+            return rtn.get(0);
+        }
+    }
+
+    public List<GetLookupAreaCodeRtnType> getLookupAreaCode(PagingOptions pagingOptions) {
+        return ((List<GetLookupAreaCodeRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupAreaCodeQueryName), pagingOptions));
     }
 
     public List<GetLookupAddressTypeByCountryRtnType> getLookupAddressTypeByCountry(Integer CountryId, PagingOptions pagingOptions) {
@@ -62,10 +88,6 @@ public class ZABonlineDB
         return ((List<GetLookupTitelByCountryRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupTitelByCountryQueryName), CountryId, pagingOptions));
     }
 
-    public List<GetLookupRoleRtnType> getLookupRole(PagingOptions pagingOptions) {
-        return ((List<GetLookupRoleRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupRoleQueryName), pagingOptions));
-    }
-
     public List<Users> getInfoByUserName(String Username, PagingOptions pagingOptions) {
         return ((List<Users> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getInfoByUserNameQueryName), Username, pagingOptions));
     }
@@ -74,29 +96,12 @@ public class ZABonlineDB
         return ((List<GetLookupPersonByTenantRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupPersonByTenantQueryName), TenantId, pagingOptions));
     }
 
-    public List<GetLookupPersonByMarriageRtnType> getLookupPersonByMarriage(Integer TenantId, PagingOptions pagingOptions) {
-        return ((List<GetLookupPersonByMarriageRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupPersonByMarriageQueryName), TenantId, pagingOptions));
-    }
-
     public List<GetLookupSalutationByCountryRtnType> getLookupSalutationByCountry(Integer CountryId, PagingOptions pagingOptions) {
         return ((List<GetLookupSalutationByCountryRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupSalutationByCountryQueryName), CountryId, pagingOptions));
     }
 
-    public List<GetLookupTenantRtnType> getLookupTenant(PagingOptions pagingOptions) {
-        return ((List<GetLookupTenantRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupTenantQueryName), pagingOptions));
-    }
-
     public List<GetLookupCountryRtnType> getLookupCountry(PagingOptions pagingOptions) {
         return ((List<GetLookupCountryRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupCountryQueryName), pagingOptions));
-    }
-
-    public com.zabonlinedb.data.Address getAddressById(Integer id, PagingOptions pagingOptions) {
-        List<com.zabonlinedb.data.Address> rtn = ((List<com.zabonlinedb.data.Address> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getAddressByIdQueryName), id, pagingOptions));
-        if (rtn.isEmpty()) {
-            return null;
-        } else {
-            return rtn.get(0);
-        }
     }
 
     public Object insert(Object o) {

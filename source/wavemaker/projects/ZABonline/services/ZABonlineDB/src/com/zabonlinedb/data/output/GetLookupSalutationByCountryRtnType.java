@@ -4,7 +4,7 @@ package com.zabonlinedb.data.output;
 
 
 /**
- * Generated for query "getLookupSalutationByCountry" on 10/28/2013 15:36:58
+ * Generated for query "getLookupSalutationByCountry" on 10/29/2013 21:39:49
  * 
  */
 public class GetLookupSalutationByCountryRtnType {

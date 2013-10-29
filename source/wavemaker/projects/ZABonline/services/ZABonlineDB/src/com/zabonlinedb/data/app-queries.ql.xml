@@ -49,4 +49,8 @@
     <query name="getLookupCountry">
         select c.countryCode as countryCode, c.id as id from Country c
     </query>
+    <query name="getLookupTableStoreByLabel">
+        <query-param name="label" type="java.lang.Integer"/>
+        select ts.tableName as tableName, ts.id as id from TableStore ts where ts.label=:label
+    </query>
 </hibernate-mapping>
