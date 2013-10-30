@@ -44,6 +44,26 @@ NewTenant.widgets = {
 		}]
 	}],
 	varTenantId: ["wm.Variable", {"type":"NumberData"}, {}],
+	tableStoreFactoryData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType"}, {}, {
+		binding: ["wm.Binding", {}, {}, {
+			wire: ["wm.Wire", {"expression":undefined,"source":"app.tableStoreLookupData","targetProperty":"dataSet"}, {}]
+		}]
+	}],
+	tableStorePersonData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType"}, {}, {
+		binding: ["wm.Binding", {}, {}, {
+			wire: ["wm.Wire", {"expression":undefined,"source":"app.tableStoreLookupData","targetProperty":"dataSet"}, {}]
+		}]
+	}],
+	tableStoreContactData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType"}, {}, {
+		binding: ["wm.Binding", {}, {}, {
+			wire: ["wm.Wire", {"expression":undefined,"source":"app.tableStoreLookupData","targetProperty":"dataSet"}, {}]
+		}]
+	}],
+	tableStoreAddressData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType"}, {}, {
+		binding: ["wm.Binding", {}, {}, {
+			wire: ["wm.Wire", {"expression":undefined,"source":"app.tableStoreLookupData","targetProperty":"dataSet"}, {}]
+		}]
+	}],
 	lbxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top","width":"1427px"}, {}, {
 		wizNewTenant: ["wm.WizardLayers", {}, {"onCancelClick":"wizNewTenantCancelClick","onDoneClick":"wizNewTenantDoneClick","oncanchange":"wizNewTenantCanchange","onchange":"wizNewTenantChange"}, {
 			layTenant: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Mandant","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
@@ -58,22 +78,38 @@ NewTenant.widgets = {
 				pnlRelatedLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlRelatedData: ["wm.FancyPanel", {"title":"Verknüpfungen"}, {}, {
 						cboFactoryDatasheetPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboFactoryDatasheet: ["wm.SelectMenu", {"caption":"Betriebsdaten","dataValue":undefined,"displayValue":""}, {}],
+							cboFactoryDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Betriebsdaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType","dataValue":undefined,"displayField":"tableName","displayValue":""}, {}, {
+								binding: ["wm.Binding", {}, {}, {
+									wire: ["wm.Wire", {"expression":undefined,"source":"tableStoreFactoryData","targetProperty":"dataSet"}, {}]
+								}]
+							}],
 							btnFindFactoryDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindFactoryDatasheetClick"}],
 							btnAddFactoryDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnAddFactoryDatasheetClick"}]
 						}],
 						cboPersonDatasheetPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboPersonDatasheet: ["wm.SelectMenu", {"caption":"Personendaten","dataValue":undefined,"displayValue":""}, {}],
+							cboPersonDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Personendaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType","dataValue":undefined,"displayField":"tableName","displayValue":""}, {}, {
+								binding: ["wm.Binding", {}, {}, {
+									wire: ["wm.Wire", {"expression":undefined,"source":"tableStorePersonData","targetProperty":"dataSet"}, {}]
+								}]
+							}],
 							btnFindPersonDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindPersonDatasheetClick"}],
 							btnAddPersonDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnAddPersonDatasheetClick"}]
 						}],
 						cboContactDatasheetPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboContactDatasheet: ["wm.SelectMenu", {"caption":"Kontaktdaten","dataValue":undefined,"displayValue":""}, {}],
+							cboContactDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Kontaktdaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType","dataValue":undefined,"displayField":"tableName","displayValue":""}, {}, {
+								binding: ["wm.Binding", {}, {}, {
+									wire: ["wm.Wire", {"expression":undefined,"source":"tableStoreContactData","targetProperty":"dataSet"}, {}]
+								}]
+							}],
 							btnFindContactDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindContactDatasheetClick"}],
 							btnAddContactDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnAddContactDatasheetClick"}]
 						}],
 						cboAddressDatasheetPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboAddressDatasheet: ["wm.SelectMenu", {"caption":"Adressdaten","dataValue":undefined,"displayValue":""}, {}],
+							cboAddressDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Adressdaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType","dataValue":undefined,"displayField":"tableName","displayValue":""}, {}, {
+								binding: ["wm.Binding", {}, {}, {
+									wire: ["wm.Wire", {"expression":undefined,"source":"tableStoreAddressData","targetProperty":"dataSet"}, {}]
+								}]
+							}],
 							btnFindAddressDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindAddressDatasheetClick"}],
 							btnAddAddressDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnAddAddressDatasheetClick"}]
 						}]

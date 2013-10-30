@@ -70,6 +70,46 @@ dojo.declare("NewTenantCtrl", Controller, {
       return false;
     }
   },
+  loadLookupdataAddressData: function() {
+    /*
+    var global = this.globalScope;
+      
+    global.tabelStoreLookup.setResultVar(local.tableStoreAddressData);
+    global.tabelStoreLookup.setLabel("CONTACT_DATA");
+    //global.connect(global.tabelStoreLookup, "onSuccess", this, "<selctMenu init>");
+    global.tabelStoreLookup.refresh();
+    */     
+  },  
+  loadLookupdataContactData: function() {
+    /*
+    var global = this.globalScope;
+      
+    global.tabelStoreLookup.setResultVar(local.tableStoreContactData);
+    global.tabelStoreLookup.setLabel("CONTACT_DATA");
+    global.connect(global.tabelStoreLookup, "onSuccess", this, "loadLookupdataAddressData");
+    global.tabelStoreLookup.refresh();
+    */     
+  },  
+  loadLookupdataPersonData: function() {
+    /*
+    var global = this.globalScope;
+      
+    global.tabelStoreLookup.setResultVar(local.tableStorePersonData);
+    global.tabelStoreLookup.setLabel("PERSON_DATA");
+    global.connect(global.tabelStoreLookup, "onSuccess", this, "loadLookupdataContactData");
+    global.tabelStoreLookup.refresh();
+    */     
+  },  
+  loadLookupDataFactoryData: function() {
+    /*
+    var global = this.globalScope;  
+  
+    global.tabelStoreLookup.setResultVar(local.tableStoreFactoryData);
+    global.tabelStoreLookup.setLabel("FACTORY_DATA");
+    global.connect(global.tabelStoreLookup, "onSuccess", this, "loadLookupdataPersonData");
+    global.tabelStoreLookup.refresh();
+    */  
+  },
   loadLookupData: function(target) {
     var local = this.localScope;
     var global = this.globalScope;  
@@ -77,6 +117,8 @@ dojo.declare("NewTenantCtrl", Controller, {
     var success = 0;
     try {      
       global.globalData.tenantId(local.varTenantId);
+    
+      //this.loadLookupDataFactoryData();
     
       success = 1;
       
@@ -180,9 +222,10 @@ dojo.declare("NewTenantCtrl", Controller, {
           var idletiem = local.edtSessionIdleTime.getDataValue(); 
           var lifetime =  local.edtSessionLifetime.getDataValue(); 
           
-          checked = ((idletime) and (lifetime));
-          if checked then
-            checked = ((idletime > 0) and (lifetime > 0));
+          checked = ((idletime) && (lifetime));
+          if (checked) {
+            checked = ((idletime > 0) && (lifetime > 0));
+          }  
           //         
           break;
         case "Summary":
@@ -210,46 +253,50 @@ dojo.declare("NewTenantCtrl", Controller, {
     var previousIndex = inSender.layerIndex - 1; 
     try {
       switch (inSender.layerIndex) {
-      case 0:
-        doChange = this.checkData("Tenant");
-        if (!doChange) {
-          errorMsg = local.getDictionaryItem("ERROR_MSG_NO_VALID_TENANT_DATA");
-        }
-        //
-        break;
-      case 1:
-        if (inChangeInfo.newIndex == previousIndex) {
-          doChange = true;
-        } else {
-          doChange = this.checkData("Related");
+        case 0:
+          doChange = this.checkData("Tenant");
           if (!doChange) {
-            errorMsg = local.getDictionaryItem("ERROR_MSG_NO_VALID_RELATED_DATA");
+            errorMsg = local.getDictionaryItem("ERROR_MSG_NO_VALID_TENANT_DATA");
           }
-        }
-        //
-        break;
-      case 2:
-        if (inChangeInfo.newIndex == previousIndex) {
-          doChange = true;
-        } else {      
-          doChange = this.checkData("Properties");
-          if (!doChange) {
-            errorMsg = local.getDictionaryItem("ERROR_MSG_NO_VALID_PROPERTIES_DATA");
+          //
+          break;
+        case 1:
+          if (inChangeInfo.newIndex == previousIndex) {
+            doChange = true;
+          } else {
+            doChange = this.checkData("Related");
+            if (!doChange) {
+              errorMsg = local.getDictionaryItem("ERROR_MSG_NO_VALID_RELATED_DATA");
+            }
           }
-        }  
-        //
-        break;
-      case 3:
-        if (inChangeInfo.newIndex == previousIndex) {
-          doChange = true;
-        } else {      
-          doChange = this.checkData("Summary");
-          if (!doChange) {
-            errorMsg = local.getDictionaryItem("ERROR_MSG_NO_VALID_SUMMARY_DATA");
-          }
-        }  
-        //
-        break;        
+          //
+          break;
+        case 2:
+          if (inChangeInfo.newIndex == previousIndex) {
+            doChange = true;
+          } else {      
+            doChange = this.checkData("Properties");
+            if (!doChange) {
+              errorMsg = local.getDictionaryItem("ERROR_MSG_NO_VALID_PROPERTIES_DATA");
+            }
+          }  
+          //
+          break;
+        case 3:
+          if (inChangeInfo.newIndex == previousIndex) {
+            doChange = true;
+          } else {      
+            doChange = this.checkData("Summary");
+            if (!doChange) {
+              errorMsg = local.getDictionaryItem("ERROR_MSG_NO_VALID_SUMMARY_DATA");
+            }
+          }  
+          //
+          break;  
+        default:
+          doChange = flase;
+          //          
+          break;              
       }
       //
       inChangeInfo.canChange = doChange;
@@ -325,7 +372,7 @@ dojo.declare("NewTenantCtrl", Controller, {
   getActiveLayer: function() {
     var local = this.localScope;
     
-    return  local.wizNewTenant.getActiveLayer();
+    return local.wizNewTenant.getActiveLayer();
   },  
   selectLayerByIdx: function(idx) {
     var local = this.localScope;
