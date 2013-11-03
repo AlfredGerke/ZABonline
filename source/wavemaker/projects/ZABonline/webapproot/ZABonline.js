@@ -56,6 +56,11 @@ dojo.declare("ZABonline", wm.Application, {
 		contactTypeLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupContactTypeByCountry","service":"ZABonlineDB"}, {}, {
 			input: ["wm.ServiceInput", {"type":"getLookupContactTypeByCountryInputs"}, {}]
 		}], 
+		countryCodeData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupCountryRtnType"}, {}, {
+			binding: ["wm.Binding", {}, {}, {
+				wire: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData","targetProperty":"dataSet"}, {}]
+			}]
+		}], 
 		countryLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupCountry","service":"ZABonlineDB"}, {}, {
 			input: ["wm.ServiceInput", {"type":"getLookupCountryInputs"}, {}]
 		}], 

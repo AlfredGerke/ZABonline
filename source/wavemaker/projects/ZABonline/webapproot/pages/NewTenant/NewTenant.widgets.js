@@ -128,10 +128,9 @@ NewTenant.widgets = {
 				pnlSessionLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlSessionData: ["wm.FancyPanel", {"title":"Sitzung"}, {}, {
 						cboAreaCodePanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboAreaCode: ["wm.SelectMenu", {"allowNone":true,"caption":"Länderkennung","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupCountryRtnType","displayField":"countryCode","displayValue":""}, {}, {
+							cboAreaCode: ["wm.SelectMenu", {"allowNone":true,"caption":"Länderkennung","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupCountryRtnType","dataValue":"","displayField":"countryCode","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
-									wire1: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData","targetProperty":"dataValue"}, {}],
-									wire: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData","targetProperty":"dataSet"}, {}]
+									wire: ["wm.Wire", {"expression":undefined,"source":"app.countryCodeData","targetProperty":"dataSet"}, {}]
 								}]
 							}],
 							btnFindAreaCode: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindAreaCodeClick"}],

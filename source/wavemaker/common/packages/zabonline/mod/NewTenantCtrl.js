@@ -10,6 +10,9 @@ dojo.declare("NewTenantCtrl", Controller, {
     
     console.debug('End NewTenantCtrl.constructor');
   },
+  onInitCountryCode: function() {
+    this.initSelectMenu("CountryCode");
+  },  
   initControls: function(global, local) {
     local.edtSessionIdleTime.setValue("helpText", local.getDictionaryItem("HELP_SESSIONIDLETIME_INFO"));
     local.edtSessionLifetime.setValue("helpText", local.getDictionaryItem("HELP_SESSIONLIFETIME_INFO"));
@@ -19,6 +22,8 @@ dojo.declare("NewTenantCtrl", Controller, {
     var local = this.localScope;
     
     this.initControls(global, local); 
+  
+    local.connect(global.countryCodeLookup, "onSuccess", this, "onInitCountryCode");
   },
   setReferenceButtons: function(scope, showing){
       scope.btnAddFactoryDatasheet.setShowing(showing);
@@ -36,6 +41,43 @@ dojo.declare("NewTenantCtrl", Controller, {
     } else {
       this.setReferenceButtons(local, true);    
     }
+  },  
+  initSelectMenu: function(target, idx) {  
+    var global = this.globalScope;
+    var local = this.localScope;
+    var doBreak = true;    
+    try {
+      console.debug("Start NewTenantCtrl.initSelectMenu");
+      
+      if (!target) {
+        target = "CountryCode";
+        doBreak = false; 
+      }
+      
+      if (!idx) {
+        idx = 0;
+      }
+      
+      switch (target) {
+        case "CountryCode":
+          var initCountryCodeValue = global.countryCodeLookup.getCaption(idx, "");
+          local.cboAreaCode.setDisplayValue(initCountryCodeValue);
+          //
+          if (doBreak) {            
+            break;
+          }
+        default:
+          throw "NewTenantCtrl.initSelectMenu: keine gültige Auswahl";
+          //
+          break;    
+      }
+      console.debug("End NewTenantCtrl.initSelectMenu");
+                  
+      return true;
+    } catch (e) {
+      this.handleExceptionByCtrl(this.localScope.name + ".initSelectMenu() failed: " + e.toString(), e, -1);
+      return false;
+    }     
   },  
   setByQuickSetup: function(target, doRequire, doClear) {
     var local = this.localScope;
@@ -76,10 +118,16 @@ dojo.declare("NewTenantCtrl", Controller, {
     
     var success = 0;
     try {      
-      global.globalData.tenantId(local.varTenantId);
-       
-      success = 1;
-      
+     
+      if (this.globalScope.countryCodeLookup.refresh() > 0) {
+        success = 1;
+      } else {
+        success = 0;
+      }
+
+      if (success == 1) {
+        this.globalScope.globalData.tenantId(this.localScope.varTenantId);
+      }  
       return success;
     } catch (e) {
       this.handleExceptionByCtrl(local.name + ".loadLookupData() failed: " + e.toString(), e, -1);      
@@ -177,7 +225,7 @@ dojo.declare("NewTenantCtrl", Controller, {
           //         
           break;          
         case "Properties":
-          var idletiem = local.edtSessionIdleTime.getDataValue(); 
+          var idletime = local.edtSessionIdleTime.getDataValue(); 
           var lifetime =  local.edtSessionLifetime.getDataValue(); 
           
           checked = ((idletime) && (lifetime));
