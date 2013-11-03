@@ -70,46 +70,6 @@ dojo.declare("NewTenantCtrl", Controller, {
       return false;
     }
   },
-  loadLookupdataAddressData: function() {
-    /*
-    var global = this.globalScope;
-      
-    global.tabelStoreLookup.setResultVar(local.tableStoreAddressData);
-    global.tabelStoreLookup.setLabel("CONTACT_DATA");
-    //global.connect(global.tabelStoreLookup, "onSuccess", this, "<selctMenu init>");
-    global.tabelStoreLookup.refresh();
-    */     
-  },  
-  loadLookupdataContactData: function() {
-    /*
-    var global = this.globalScope;
-      
-    global.tabelStoreLookup.setResultVar(local.tableStoreContactData);
-    global.tabelStoreLookup.setLabel("CONTACT_DATA");
-    global.connect(global.tabelStoreLookup, "onSuccess", this, "loadLookupdataAddressData");
-    global.tabelStoreLookup.refresh();
-    */     
-  },  
-  loadLookupdataPersonData: function() {
-    /*
-    var global = this.globalScope;
-      
-    global.tabelStoreLookup.setResultVar(local.tableStorePersonData);
-    global.tabelStoreLookup.setLabel("PERSON_DATA");
-    global.connect(global.tabelStoreLookup, "onSuccess", this, "loadLookupdataContactData");
-    global.tabelStoreLookup.refresh();
-    */     
-  },  
-  loadLookupDataFactoryData: function() {
-    /*
-    var global = this.globalScope;  
-  
-    global.tabelStoreLookup.setResultVar(local.tableStoreFactoryData);
-    global.tabelStoreLookup.setLabel("FACTORY_DATA");
-    global.connect(global.tabelStoreLookup, "onSuccess", this, "loadLookupdataPersonData");
-    global.tabelStoreLookup.refresh();
-    */  
-  },
   loadLookupData: function(target) {
     var local = this.localScope;
     var global = this.globalScope;  
@@ -117,9 +77,7 @@ dojo.declare("NewTenantCtrl", Controller, {
     var success = 0;
     try {      
       global.globalData.tenantId(local.varTenantId);
-    
-      //this.loadLookupDataFactoryData();
-    
+       
       success = 1;
       
       return success;
@@ -209,9 +167,9 @@ dojo.declare("NewTenantCtrl", Controller, {
     try {
       switch (target) {
         case "Tenant":
-          var rolename = global.utils.setDefaultStr(local.edtRoleCaption.getDataValue());
+          var mandant = global.utils.setDefaultStr(local.edtTenantCaption.getDataValue());
          
-          checked = (rolename.trim() !== "");
+          checked = (mandant.trim() !== "");
           //          
           break;
         case "Related":

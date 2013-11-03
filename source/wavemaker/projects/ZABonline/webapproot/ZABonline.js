@@ -83,9 +83,6 @@ dojo.declare("ZABonline", wm.Application, {
 			input: ["wm.ServiceInput", {"type":"getLookupSalutationByCountryInputs"}, {}]
 		}], 
 		selectMenu: ["wm.Variable", {"type":"StringData"}, {}], 
-		tableStoreLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupTableStoreByLabel","service":"ZABonlineDB"}, {}, {
-			input: ["wm.ServiceInput", {"type":"getLookupTableStoreByLabelInputs"}, {}]
-		}], 
 		titelData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType"}, {}, {
 			binding: ["wm.Binding", {}, {}, {
 				wire: ["wm.Wire", {"expression":undefined,"source":"app.titelLookupData","targetProperty":"dataSet"}, {}]

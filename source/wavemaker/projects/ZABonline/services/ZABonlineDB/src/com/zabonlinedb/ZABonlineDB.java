@@ -28,7 +28,7 @@ import com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType;
 
 /**
  *  Operations for service "ZABonlineDB"
- *  10/29/2013 22:26:39
+ *  11/02/2013 23:11:21
  * 
  */
 @SuppressWarnings("unchecked")
@@ -55,7 +55,7 @@ public class ZABonlineDB
         return ((List<GetLookupPersonByMarriageRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupPersonByMarriageQueryName), TenantId, pagingOptions));
     }
 
-    public List<GetLookupTableStoreByLabelRtnType> getLookupTableStoreByLabel(Integer label, PagingOptions pagingOptions) {
+    public List<GetLookupTableStoreByLabelRtnType> getLookupTableStoreByLabel(String label, PagingOptions pagingOptions) {
         return ((List<GetLookupTableStoreByLabelRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupTableStoreByLabelQueryName), label, pagingOptions));
     }
 

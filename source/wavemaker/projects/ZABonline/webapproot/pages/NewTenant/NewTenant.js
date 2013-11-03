@@ -1,4 +1,5 @@
 dojo.declare("NewTenant", wm.Page, {
+    "i18n": true,
     "preferredDevice": "desktop",
     onResultByNewRedording: function() {},
     onSuccessByNewRecording: function(success) {},
@@ -238,6 +239,42 @@ dojo.declare("NewTenant", wm.Page, {
             }
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".wizNewTenantChange() failed: " + e.toString(), e);
+        }
+    },
+    tsLookupAddressDataSuccess: function(inSender, inDeprecated) {
+        try {
+            console.debug('tsLookupAddressData.getPageCount: ' + this.tsLookupAddressData.getPageCount());
+            console.debug('tsLookupAddressData.getTotal: ' + this.tsLookupAddressData.getTotal());
+            console.debug('tsLookupAddressData.getCount: ' + this.tsLookupAddressData.getCount());
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".tsLookupAddressDataSuccess() failed: " + e.toString(), e);
+        }
+    },
+    tsLookupContactDataSuccess: function(inSender, inDeprecated) {
+        try {
+            console.debug('tsLookupContactData.getPageCount: ' + this.tsLookupContactData.getPageCount());
+            console.debug('tsLookupContactData.getTotal: ' + this.tsLookupContactData.getTotal());
+            console.debug('tsLookupContactData.getCount: ' + this.tsLookupContactData.getCount());
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".tsLookupContactDataSuccess() failed: " + e.toString(), e);
+        }
+    },
+    tsLookupFactoryDataSuccess: function(inSender, inDeprecated) {
+        try {
+            console.debug('tsLookupFactoryData.getPageCount: ' + this.tsLookupFactoryData.getPageCount());
+            console.debug('tsLookupFactoryData.getTotal: ' + this.tsLookupFactoryData.getTotal());
+            console.debug('tsLookupFactoryData.getCount: ' + this.tsLookupFactoryData.getCount());
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".tsLookupFactoryDataSuccess() failed: " + e.toString(), e);
+        }
+    },
+    tsLookupPersonDataSuccess: function(inSender, inDeprecated) {
+        try {
+            console.debug('tsLookupPersonData.getPageCount: ' + this.tsLookupPersonData.getPageCount());
+            console.debug('tsLookupPersonData.getTotal: ' + this.tsLookupPersonData.getTotal());
+            console.debug('tsLookupPersonData.getCount: ' + this.tsLookupPersonData.getCount());
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".tsLookupPersonDataSuccess() failed: " + e.toString(), e);
         }
     },
     _end: 0

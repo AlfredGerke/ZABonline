@@ -44,24 +44,32 @@ NewTenant.widgets = {
 		}]
 	}],
 	varTenantId: ["wm.Variable", {"type":"NumberData"}, {}],
-	tableStoreFactoryData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType"}, {}, {
-		binding: ["wm.Binding", {}, {}, {
-			wire: ["wm.Wire", {"expression":undefined,"source":"app.tableStoreLookupData","targetProperty":"dataSet"}, {}]
+	tsLookupFactoryData: ["wm.ServiceVariable", {"autoUpdate":true,"inFlightBehavior":"executeLast","operation":"getLookupTableStoreByLabel","service":"ZABonlineDB"}, {"onSuccess":"tsLookupFactoryDataSuccess"}, {
+		input: ["wm.ServiceInput", {"type":"getLookupTableStoreByLabelInputs"}, {}, {
+			binding: ["wm.Binding", {}, {}, {
+				wire: ["wm.Wire", {"expression":"\"FACTORY_DATA\"","targetProperty":"label"}, {}]
+			}]
 		}]
 	}],
-	tableStorePersonData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType"}, {}, {
-		binding: ["wm.Binding", {}, {}, {
-			wire: ["wm.Wire", {"expression":undefined,"source":"app.tableStoreLookupData","targetProperty":"dataSet"}, {}]
+	tsLookupPersonData: ["wm.ServiceVariable", {"autoUpdate":true,"inFlightBehavior":"executeLast","operation":"getLookupTableStoreByLabel","service":"ZABonlineDB"}, {"onSuccess":"tsLookupPersonDataSuccess"}, {
+		input: ["wm.ServiceInput", {"type":"getLookupTableStoreByLabelInputs"}, {}, {
+			binding: ["wm.Binding", {}, {}, {
+				wire: ["wm.Wire", {"expression":"\"PERSON_DATA\"","targetProperty":"label"}, {}]
+			}]
 		}]
 	}],
-	tableStoreContactData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType"}, {}, {
-		binding: ["wm.Binding", {}, {}, {
-			wire: ["wm.Wire", {"expression":undefined,"source":"app.tableStoreLookupData","targetProperty":"dataSet"}, {}]
+	tsLookupContactData: ["wm.ServiceVariable", {"autoUpdate":true,"inFlightBehavior":"executeLast","operation":"getLookupTableStoreByLabel","service":"ZABonlineDB"}, {"onSuccess":"tsLookupContactDataSuccess"}, {
+		input: ["wm.ServiceInput", {"type":"getLookupTableStoreByLabelInputs"}, {}, {
+			binding: ["wm.Binding", {}, {}, {
+				wire: ["wm.Wire", {"expression":"\"CONTACT_DATA\"","targetProperty":"label"}, {}]
+			}]
 		}]
 	}],
-	tableStoreAddressData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType"}, {}, {
-		binding: ["wm.Binding", {}, {}, {
-			wire: ["wm.Wire", {"expression":undefined,"source":"app.tableStoreLookupData","targetProperty":"dataSet"}, {}]
+	tsLookupAddressData: ["wm.ServiceVariable", {"autoUpdate":true,"inFlightBehavior":"executeLast","operation":"getLookupTableStoreByLabel","service":"ZABonlineDB"}, {"onSuccess":"tsLookupAddressDataSuccess"}, {
+		input: ["wm.ServiceInput", {"type":"getLookupTableStoreByLabelInputs"}, {}, {
+			binding: ["wm.Binding", {}, {}, {
+				wire: ["wm.Wire", {"expression":"\"ADDRESS_DATA\"","targetProperty":"label"}, {}]
+			}]
 		}]
 	}],
 	lbxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top","width":"1427px"}, {}, {
@@ -80,7 +88,7 @@ NewTenant.widgets = {
 						cboFactoryDatasheetPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
 							cboFactoryDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Betriebsdaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType","dataValue":undefined,"displayField":"tableName","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
-									wire: ["wm.Wire", {"expression":undefined,"source":"tableStoreFactoryData","targetProperty":"dataSet"}, {}]
+									wire: ["wm.Wire", {"expression":undefined,"source":"tsLookupFactoryData","targetProperty":"dataSet"}, {}]
 								}]
 							}],
 							btnFindFactoryDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindFactoryDatasheetClick"}],
@@ -89,7 +97,7 @@ NewTenant.widgets = {
 						cboPersonDatasheetPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
 							cboPersonDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Personendaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType","dataValue":undefined,"displayField":"tableName","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
-									wire: ["wm.Wire", {"expression":undefined,"source":"tableStorePersonData","targetProperty":"dataSet"}, {}]
+									wire: ["wm.Wire", {"expression":undefined,"source":"tsLookupPersonData","targetProperty":"dataSet"}, {}]
 								}]
 							}],
 							btnFindPersonDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindPersonDatasheetClick"}],
@@ -98,7 +106,7 @@ NewTenant.widgets = {
 						cboContactDatasheetPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
 							cboContactDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Kontaktdaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType","dataValue":undefined,"displayField":"tableName","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
-									wire: ["wm.Wire", {"expression":undefined,"source":"tableStoreContactData","targetProperty":"dataSet"}, {}]
+									wire: ["wm.Wire", {"expression":undefined,"source":"tsLookupContactData","targetProperty":"dataSet"}, {}]
 								}]
 							}],
 							btnFindContactDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindContactDatasheetClick"}],
@@ -107,7 +115,7 @@ NewTenant.widgets = {
 						cboAddressDatasheetPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
 							cboAddressDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Adressdaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType","dataValue":undefined,"displayField":"tableName","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
-									wire: ["wm.Wire", {"expression":undefined,"source":"tableStoreAddressData","targetProperty":"dataSet"}, {}]
+									wire: ["wm.Wire", {"expression":undefined,"source":"tsLookupAddressData","targetProperty":"dataSet"}, {}]
 								}]
 							}],
 							btnFindAddressDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindAddressDatasheetClick"}],
@@ -120,7 +128,7 @@ NewTenant.widgets = {
 				pnlSessionLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlSessionData: ["wm.FancyPanel", {"title":"Sitzung"}, {}, {
 						cboAreaCodePanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboAreaCode: ["wm.SelectMenu", {"allowNone":true,"caption":"Ländercode","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupCountryRtnType","displayField":"countryCode","displayValue":""}, {}, {
+							cboAreaCode: ["wm.SelectMenu", {"allowNone":true,"caption":"Länderkennung","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupCountryRtnType","displayField":"countryCode","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
 									wire1: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData","targetProperty":"dataValue"}, {}],
 									wire: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData","targetProperty":"dataSet"}, {}]
