@@ -134,7 +134,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\TableStoreLookup.js
 		+SQL
-			-Data
+			+Data
 				data_0001.sql
 				data_0002.sql
 				data_0003.sql
@@ -168,11 +168,11 @@ ZABonline
 7=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
 8=..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
 9=..\..\wavemaker\common\packages\zabonline\mod\CountryCodeLookup.js
-10=..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
-11=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewUser\NewUser.js
+10=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewUser\NewUser.js
+11=..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\Controller.js
+Selected=..\..\wavemaker\common\packages\zabonline\mod\NewTenantCtrl.js
 [..\..\wavemaker\common\packages\zabonline\mod\NewTenantCtrl.js]
 TopLine=204
 Caret=89,214
@@ -186,8 +186,8 @@ Caret=87,9
 TopLine=1
 Caret=58,2
 [..\..\wavemaker\common\packages\zabonline\mod\Controller.js]
-TopLine=47
-Caret=13,80
+TopLine=71
+Caret=1,83
 [..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js]
 TopLine=78
 Caret=1,131
@@ -201,11 +201,11 @@ Caret=55,76
 TopLine=1
 Caret=36,20
 [..\..\wavemaker\common\packages\zabonline\mod\CountryCodeLookup.js]
-TopLine=1
+TopLine=2
 Caret=144,12
-[..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js]
-TopLine=1
-Caret=1,1
 [..\..\wavemaker\projects\ZABonline\webapproot\pages\NewUser\NewUser.js]
-TopLine=107
-Caret=35,141
+TopLine=113
+Caret=95,132
+[..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js]
+TopLine=43
+Caret=1,91

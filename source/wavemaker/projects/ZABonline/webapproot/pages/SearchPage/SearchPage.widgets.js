@@ -15,8 +15,8 @@ SearchPage.widgets = {
 		pnlDetail: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 			gridResult: ["wm.DojoGrid", {"height":"100%","localizationStructure":{},"minDesktopHeight":60,"singleClickEdit":true}, {}]
 		}],
-		pnlBottum: ["wm.Panel", {"height":"48px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
-			navResult: ["wm.DataNavigator", {"border":"0","height":"100%","width":"100%"}, {}]
+		pnlBottum: ["wm.Panel", {"height":"36px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
+			navResult: ["wm.DataNavigator", {"border":"0","height":"33px","width":"100%"}, {}]
 		}]
 	}]
 }

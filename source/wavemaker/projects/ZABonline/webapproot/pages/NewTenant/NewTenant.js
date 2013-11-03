@@ -17,34 +17,60 @@ dojo.declare("NewTenant", wm.Page, {
         }
     },
     btnFindFactoryDatasheetClick: function(inSender) {
-        //code kommt noch
+        this.controller.showSearch(this, "{kind: 1001, mode: 0, find: 'table_store', label: 'FACTORY_DATA', callback: 'onGetResultBySearch'}");
     },
     btnFindPersonDatasheetClick: function(inSender) {
-        //code kommt noch		
+        this.controller.showSearch(this, "{kind: 1001, mode: 0, find: 'table_store', label: 'PERSON_DATA', callback: 'onGetResultBySearch'}");
     },
     btnFindContactDatasheetClick: function(inSender) {
-        //code kommt noch		
+        this.controller.showSearch(this, "{kind: 1001, mode: 0, find: 'table_store', label: 'CONTACT_DATA', callback: 'onGetResultBySearch'}");
     },
     btnFindAddressDatasheetClick: function(inSender) {
-        //code kommt noch		
+        this.controller.showSearch(this, "{kind: 1001, mode: 0, find: 'table_store', label: 'ADDRESS_DATA', callback: 'onGetResultBySearch'}");
     },
     btnFindAreaCodeClick: function(inSender) {
-        //code kommt noch		
+        this.controller.showSearch(this, "{kind: 1000, mode: 0, find: 'country', callback: 'onGetResultBySearch'}");
+    },
+    refreshCountryCode: function() {
+        app.toastInfo("Länderkennungen aktualisieren!");
     },
     btnAddAreaCodeClick: function(inSender) {
-        //code kommt noch		
+        try {
+            // hier wird der Katalog für die Länderkennung für eine Neuaufnahme geöffenet: Code kommt noch
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".btnAddAreaCodeClick() failed: " + e.toString(), e);
+        }
+    },
+    refreshTable: function() {
+        app.toastInfo("Verknüpfungen für Tabellen aktualisieren!");
     },
     btnAddFactoryDatasheetClick: function(inSender) {
-        //code kommt noch		
+        try {
+            app.controller.showWizard("NewTable", "Neuaufnahme Tabelle", true, this, "refreshTable", "init-role-as-subdialog");
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".btnAddAreaCodeClick() failed: " + e.toString(), e);
+        }
     },
     btnAddPersonDatasheetClick: function(inSender) {
-        //code kommt noch		
+        try {
+            app.controller.showWizard("NewTable", "Neuaufnahme Tabelle", true, this, "refreshTable", "init-role-as-subdialog");
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".btnAddAreaCodeClick() failed: " + e.toString(), e);
+        }
     },
     btnAddContactDatasheetClick: function(inSender) {
-        //code kommt noch		
+        try {
+            app.controller.showWizard("NewTable", "Neuaufnahme Tabelle", true, this, "refreshTable", "init-role-as-subdialog");
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".btnAddAreaCodeClick() failed: " + e.toString(), e);
+        }
     },
     btnAddAddressDatasheetClick: function(inSender) {
-        //code kommt noch		
+        try {
+            app.controller.showWizard("NewTable", "Neuaufnahme Tabelle", true, this, "refreshTable", "init-role-as-subdialog");
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".btnAddAreaCodeClick() failed: " + e.toString(), e);
+        }
     },
     wizNewTenantCancelClick: function(inSender) {
         try {

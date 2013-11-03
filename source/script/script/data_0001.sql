@@ -245,6 +245,10 @@ BEGIN
   desc = 'count=4;; json={"kind": 1000,  "mode": 0, "find": "<?>", "callback": "<?>"}';
   INSERT INTO JSON_KIND (COUNTRY_ID, CAPTION, DESCRIPTION, DONOTDELETE) VALUES (:default_country_id, :code, :desc, 1);
   
+  code = '1001';
+  desc = 'count=5;; json={"kind": 1001, "mode": 0, "find": "<?>", "label": "<?>", "callback": "<?>"}';
+  INSERT INTO JSON_KIND (COUNTRY_ID, CAPTION, DESCRIPTION, DONOTDELETE) VALUES (:default_country_id, :code, :desc, 1);  
+  
   code = 'SOFTDEL';
   desc = 'Deleteflag für Tabellen';  
   INSERT INTO V_ADM_COMMON_IDX_COLUMNS (CAPTION, DESCRIPTION) VALUES (:code, :desc);  
