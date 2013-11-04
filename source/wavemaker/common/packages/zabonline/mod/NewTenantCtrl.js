@@ -10,6 +10,39 @@ dojo.declare("NewTenantCtrl", Controller, {
     
     console.debug('End NewTenantCtrl.constructor');
   },
+  tsLookupDataByCallback: function() {
+    return function(scope, label) {
+      try {
+        switch (label) {
+        case "PERSON_DATA":
+          return scope.tsLookupPersonData;
+          
+          break;
+        case "FACTORY_DATA":
+          return scope.tsLookupFactoryData;
+          
+          break;
+        case "CONTACT_DATA":
+          return scope.tsLookupContactData;
+          
+          break;
+        case "ADDRESS_DATA":
+          return scope.tsLookupAddressData;
+          
+          break;                      
+        default:
+          throw "tsLookupDataByCallback: keine gültige Auswahl";
+          //
+          break;    
+      }
+      console.debug("End NewTenantCtrl.initSelectMenu");
+                  
+      } catch (e) {
+      console.debug("tsLookupDataByCallback failed: " + e.toString());
+      return null;
+      }    
+    };
+  },
   onInitCountryCode: function() {
     this.initSelectMenu("CountryCode");
   },  
@@ -60,12 +93,32 @@ dojo.declare("NewTenantCtrl", Controller, {
       
       switch (target) {
         case "CountryCode":
-          var initCountryCodeValue = global.countryCodeLookup.getCaption(idx, "");
+          var initCountryCodeValue = global.countryCodeLookup.getCode(idx, "");
           local.cboAreaCode.setDisplayValue(initCountryCodeValue);
           //
           if (doBreak) {            
             break;
           }
+        case "Related":
+          global.tableStoreLookup.registerCallback(local, this.tsLookupDataByCallback());
+          
+          global.tableStoreLookup.setLabel("PERSON_DATA");
+          var initTablename = global.tableStoreLookup.getTableName(idx, "");
+          local.cboPersonDatasheet.setDisplayValue(initTablename);
+          
+          global.tableStoreLookup.setLabel("FACTORY_DATA");
+          var initTablename = global.tableStoreLookup.getTableName(idx, "");
+          local.cboFactoryDatasheet.setDisplayValue(initTablename);
+          
+          global.tableStoreLookup.setLabel("CONTACT_DATA");
+          var initTablename = global.tableStoreLookup.getTableName(idx, "");
+          local.cboContactDatasheet.setDisplayValue(initTablename);
+         
+          global.tableStoreLookup.setLabel("ADDRESS_DATA");
+          var initTablename = global.tableStoreLookup.getTableName(idx, "");
+          local.cboAddressDatasheet.setDisplayValue(initTablename);
+        
+          break;
         default:
           throw "NewTenantCtrl.initSelectMenu: keine gültige Auswahl";
           //
@@ -201,6 +254,10 @@ dojo.declare("NewTenantCtrl", Controller, {
       }
       
       this.selectLayerByIdx(layIdx);
+
+      if (!this.initSelectMenu()) {
+        global.toastWarning(this.getDictionaryItem("ERROR_MSG_BY_INIT_SELECTMENU"));
+      }
       
       return true;
     } catch (e) {    

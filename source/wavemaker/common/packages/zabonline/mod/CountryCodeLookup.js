@@ -1,6 +1,14 @@
 dojo.provide("wm.packages.zabonline.mod.CountryCodeLookup");
 //
 dojo.declare("CountryCodeLookup", null, {
+  getCode: function(index, ret) {
+    if (this.getCount() > index) {
+      var item = this.scope.countryCodeData.getItem(index);
+      return item.getValue("countryCode");
+    } else {
+      return ret;
+    }  
+  },
   getCount: function() {
     var count = 0;
 

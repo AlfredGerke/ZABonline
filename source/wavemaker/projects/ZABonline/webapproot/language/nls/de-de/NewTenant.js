@@ -1,4 +1,5 @@
 {
+  "ERROR_MSG_BY_INIT_SELECTMENU": "",
   "HELP_SESSIONIDLETIME_INFO": "Ruhezeit in Minuten",
   "HELP_SESSIONLIFETIME_INFO": "Lebenszeit in Tagen",
   "REG_EXPR_NO_EXPR": ".*",

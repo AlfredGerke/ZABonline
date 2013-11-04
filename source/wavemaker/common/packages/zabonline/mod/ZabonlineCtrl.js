@@ -27,6 +27,7 @@ dojo.declare("ZabonlineCtrl", Controller, {
       wm.require("zabonline.mod.AreaCodeLookup", true);
       wm.require("zabonline.mod.SalutationLookup", true);
       wm.require("zabonline.mod.CountryCodeLookup", true);
+      wm.require("zabonline.mod.TableStoreLookup", true);
       
       console.debug('End Zabonline.requireLookups');
     } catch (e) {
@@ -43,6 +44,7 @@ dojo.declare("ZabonlineCtrl", Controller, {
       this.globalScope.areaCodeLookup = new AreaCodeLookup(app);
       this.globalScope.salutationLookup = new SalutationLookup(app);
       this.globalScope.countryCodeLookup = new CountryCodeLookup(app);
+      this.globalScope.tableStoreLookup = new TableStoreLookup(app);
       
       console.debug('End Zabonline.createLookups');
     } catch (e) {

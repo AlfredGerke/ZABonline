@@ -1,18 +1,16 @@
-// Modul wird für die Löschung freigegeben
-// Das Modul wird wahrscheinlich aus dem Projekt entfernt
 dojo.provide("wm.packages.zabonline.mod.TableStoreLookup");
 //
 dojo.declare("TableStoreLookup", null, {
   getTableName: function(index, ret) {
     if (this.getCount() > index) {
-      var item = this.getItemFunc(this.callbackScope, this.label, index);
+      var item = this.getResultVarFunc(this.callbackScope, this.label).getItem(index);
       return item.getValue("tableName");
     } else {
       return ret;
     }  
   },
   getCount: function() {
-    var count = this.getCountFunc(this.callbackScope, this.label);
+    var count = this.getResultVarFunc(this.callbackScope, this.label).getCount();
 
     if (count !== null) { 
       return count;
@@ -20,11 +18,9 @@ dojo.declare("TableStoreLookup", null, {
       return 0;
     }  
   },
-  registerCallback: function(scope, callbackGetItem, callbackClearData, callbackGetCount) {
+  registerCallback: function(scope, callbackGetResultVarFunc) {
     this.callbackScope = scope;
-    this.getItemFunc = callbackGetItem;
-    this.clearDataFunc = callbackClearData;
-    this.getCountFunc = callbackGetCount;    
+    this.getResultVarFunc = callbackGetResultVarFunc;
   },
   setLabel: function(label) {
     this.label = label;
@@ -34,7 +30,7 @@ dojo.declare("TableStoreLookup", null, {
       
       var refresh_success = 0;
 
-      this.clearDataFunc(this.callbackScope, this.label);
+      this.getResultVarFunc(this.callbackScope, this.label).clearData();
 
       this.scope.tableStoreLookupData.input.setValue('label', this.label);
       if (this.scope.tableStoreLookupData.canUpdate()) {
@@ -56,6 +52,8 @@ dojo.declare("TableStoreLookup", null, {
   },
   postscript: function() {
     console.debug('Start TableStoreLookup.postscript');
+    
+    this.scope.connect(this.scope.tableStoreLookupData, "onSuccess", this, "onSuccess");    
   
     console.debug('End TableStoreLookup.postscript');
   },
