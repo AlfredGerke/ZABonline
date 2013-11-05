@@ -25,26 +25,27 @@ dojo.declare("TableStoreLookup", null, {
   setLabel: function(label) {
     this.label = label;
   },
-  refresh: function(force) {
-    if ((this.getCount() === 0) || (force == 1)) {
-      
-      var refresh_success = 0;
-
-      this.getResultVarFunc(this.callbackScope, this.label).clearData();
-
-      this.scope.tableStoreLookupData.input.setValue('label', this.label);
-      if (this.scope.tableStoreLookupData.canUpdate()) {
-        this.scope.tableStoreLookupData.update();
-        refresh_success = 1;
-      } else {
-        refresh_success = 0;
-      }
-
-      return refresh_success;
-    } else {
-      return this.getCount();
-    }
-  },
+  //Solange es keine global ServiceVariable gibt ist ein Refresh sinnlos 
+  //refresh: function(force) {
+  //  if ((this.getCount() === 0) || (force == 1)) {
+  //  
+  //  var refresh_success = 0;
+  //  
+  //  this.getResultVarFunc(this.callbackScope, this.label).clearData();
+  //  
+  //  this.scope.tableStoreLookupData.input.setValue('label', this.label);
+  //  if (this.scope.tableStoreLookupData.canUpdate()) {
+  //    this.scope.tableStoreLookupData.update();
+  //    refresh_success = 1;
+  //  } else {
+  //    refresh_success = 0;
+  //  }
+  //  
+  //  return refresh_success;
+  //  } else {
+  //    return this.getCount();
+  //  }
+  //},
   constructor: function(globalScope) {
     console.debug('Start TableStoreLookup.constructor');
     this.scope = globalScope;
@@ -53,7 +54,8 @@ dojo.declare("TableStoreLookup", null, {
   postscript: function() {
     console.debug('Start TableStoreLookup.postscript');
     
-    this.scope.connect(this.scope.tableStoreLookupData, "onSuccess", this, "onSuccess");    
+    //Es wird keine global ServiceVariable verwendet
+    //this.scope.connect(this.scope.tableStoreLookupData, "onSuccess", this, "onSuccess");    
   
     console.debug('End TableStoreLookup.postscript');
   },

@@ -870,10 +870,182 @@ begin
   end
 end^
 
-COMMENT ON PROCEDURE SP_ADD_USER_BY_SRV IS
-'Überprüft Sitzungsverwaltung und ruft SP_ADD_USER auf'^
+COMMENT ON PROCEDURE SP_ADD_ROLE_BY_SRV IS
+'Überprüft Sitzungsverwaltung und ruft SP_ADD_ROLE auf'^
 
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_ROLE_BY_SRV'^
+
+CREATE OR ALTER PROCEDURE SP_ADD_TENANT (
+  ACAPTION varchar(64), /* Pflichtfeld */
+  ADESCRIPTION varchar(2000),  
+  AFACTORYDATAID integer,
+  APERSONDATAID integer,
+  ACONTACTDATAID integer,
+  AADDRESSDATAID integer,
+  ACOUNTRYCODEID integer,
+  ASESSIONIDLETIME integer, /* Pflichtfeld */
+  ASESSIONLIFETIME integer) /* Pflichtfeld */  
+RETURNS (
+  success smallint,
+  code smallint,
+  info varchar(2000))
+AS
+declare variable message varchar(254);
+declare variable tenant_id Integer;
+begin
+  success = 0;
+  code = 0;
+  info = '{"result": null}';
+
+  /* Es werden alle Pflichtfelder überprüft */
+  select 
+    success, 
+    code, 
+    info 
+  from 
+    SP_CHK_DATA_BY_ADD_TENANT(:ACAPTION,
+      :ACOUNTRYCODEID,
+      :ASESSIONIDLETIME,
+      :ASESSIONLIFETIME) 
+  into 
+    :success, 
+    :code, 
+    :info;
+    
+  if (success = 1) then
+  begin
+    success = 0;
+    code = 0;
+    info = '{"result": null}';
+    
+    select
+      success,
+      message,
+      role_id      
+    from
+      SP_INSERT_TENANT(:ACAPTION,
+        :ADESCRIPTION,  
+        :AFACTORYDATAID,
+        :APERSONDATAID,
+        :ACONTACTDATAID,
+        :AADDRESSDATAID,
+        :ACOUNTRYCODEID,
+        :ASESSIONIDLETIME,
+        :ASESSIONLIFETIME)
+    into
+      :success,
+      :message,
+      :tenant_id;
+      
+    /* Rückgabe auswerten */     
+    if (success = 0) then
+    begin
+      code = 1;
+      info = '{"kind": 2, "publish": "INSERT_BY_TENANT_FAILD_BY_NEWTENANT", "list": [{"message": "IINSERT_BY_TENANT_FAILD_BY_NEWTENANT"}, {"message": "' || :message || '"}]}';
+      suspend;
+      Exit;
+    end
+    
+    /* success = 1; -> success sollte nur durch die Insert-SPs auf 1 gesetzt werden */
+    code = 1;
+    if (success = 1) then
+    begin
+      info = '{"kind": 3, "publish": "ADD_TENANT_SUCCEEDED", "message": "ADD_TENANT_SUCCEEDED"}';
+    end  
+    else
+    begin
+      success = 0;
+      info = '{"kind": 1, "publish": "FAILD_BY_OBSCURE_PROCESSING", "message": "FAILD_BY_OBSCURE_PROCESSING"}';
+    end                                   
+  end  
+
+  suspend;
+end^
+
+COMMENT ON PROCEDURE SP_ADD_TENANT IS
+'Überprüft Eingabedaten und legt Mandanten an'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_TENANT'^
+
+CREATE OR ALTER PROCEDURE SP_ADD_TENANT_BY_SRV (
+  ASESSION_ID varchar(254),    
+  AUSERNAME varchar(254),
+  AIP varchar(254),
+  ACAPTION varchar(64), /* Pflichtfeld */
+  ADESCRIPTION varchar(2000),  
+  AFACTORYDATAID integer,
+  APERSONDATAID integer,
+  ACONTACTDATAID integer,
+  AADDRESSDATAID integer,
+  ACOUNTRYCODEID integer,
+  ASESSIONIDLETIME integer, /* Pflichtfeld */
+  ASESSIONLIFETIME integer) /* Pflichtfeld */  
+RETURNS (
+  success smallint,
+  code smallint,
+  info varchar(2000))
+AS
+declare variable success_by_touchsession smallint;
+declare variable success_by_grant smallint;
+begin
+  success = 0;
+  code = 0;
+  info = '{"result": null}';
+
+  select success from SP_TOUCHSESSION(:ASESSION_ID, :AUSERNAME, :AIP) into :success_by_touchsession;
+  
+  if (success_by_touchsession = 1) then
+  begin
+    select success from SP_CHECKGRANT(:AUSERNAME, 'IS_ADMIN') into :success_by_grant;
+    
+    if (success_by_grant = 1) then
+    begin
+      /* Wenn der JSON-String im Feld INFO zu lang wird, wird von der SP zwei oder mehrere Datensätze erzeugt.
+         Aus diesem Grund wird die SP über eine FOR-Loop abgefragt
+      */
+      for 
+      select 
+        success, 
+        code, 
+        info 
+      from 
+        SP_ADD_TENANT(:ACAPTION,
+          :ADESCRIPTION,  
+          :AFACTORYDATAID,
+          :APERSONDATAID,
+          :ACONTACTDATAID,
+          :AADDRESSDATAID,
+          :ACOUNTRYCODEID,
+          :ASESSIONIDLETIME,
+          :ASESSIONLIFETIME) 
+      into 
+        :success, 
+        :code, 
+        :info 
+      do
+      begin
+        suspend;
+      end 
+    end
+    else
+    begin
+      info = '{"kind": 1, "publish": "NO_GRANT_FOR_ADD_TENANT", "message": "NO_GRANT_FOR_ADD_TENANT"}';
+      
+      suspend;
+    end
+  end
+  else
+  begin
+    info = '{"kind": 1, "publish": "CANCEL_PROCESS_BY_SESSIONMANAGEMENT", "message": "CANCEL_PROCESS_BY_SESSIONMANAGEMENT"}';
+    
+    suspend;
+  end
+end^
+
+COMMENT ON PROCEDURE SP_ADD_TENANT_BY_SRV IS
+'Überprüft Sitzungsverwaltung und ruft SP_ADD_TENANT auf'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_TENANT_BY_SRV'^
 
 SET TERM ; ^
 

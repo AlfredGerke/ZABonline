@@ -10,6 +10,7 @@ dojo.declare("NewTenantCtrl", Controller, {
     
     console.debug('End NewTenantCtrl.constructor');
   },
+  //Callback wird für TabelStoreLookup benötigt
   tsLookupDataByCallback: function() {
     return function(scope, label) {
       try {
@@ -45,7 +46,19 @@ dojo.declare("NewTenantCtrl", Controller, {
   },
   onInitCountryCode: function() {
     this.initSelectMenu("CountryCode");
-  },  
+  },
+  onInitDSPeronData: function() {
+    this.initSelectMenu("PesonData");  
+  },
+  onInitDSFactoryData: function() {
+    this.initSelectMenu("FactoryData");  
+  },
+  onInitDSContactData: function() {
+    this.initSelectMenu("ContactData");  
+  },
+  onInitDSAddressData: function() {
+    this.initSelectMenu("AddressData");  
+  },    
   initControls: function(global, local) {
     local.edtSessionIdleTime.setValue("helpText", local.getDictionaryItem("HELP_SESSIONIDLETIME_INFO"));
     local.edtSessionLifetime.setValue("helpText", local.getDictionaryItem("HELP_SESSIONLIFETIME_INFO"));
@@ -57,15 +70,19 @@ dojo.declare("NewTenantCtrl", Controller, {
     this.initControls(global, local); 
   
     local.connect(global.countryCodeLookup, "onSuccess", this, "onInitCountryCode");
+    local.connect(local.tsLookupPersonData, "onSuccess", this, "onInitDSPeronData");
+    local.connect(local.tsLookupFactoryData, "onSuccess", this, "onInitDSFactoryData");
+    local.connect(local.tsLookupContactData, "onSuccess", this, "onInitDSContactData");
+    local.connect(local.tsLookupAddressData, "onSuccess", this, "onInitDSAddressData");  
   },
   setReferenceButtons: function(scope, showing){
-      scope.btnAddFactoryDatasheet.setShowing(showing);
-      scope.btnFindFactoryDatasheet.setShowing(showing);
-      scope.btnAddPersonDatasheet.setShowing(showing);
-      scope.btnAddContactDatasheet.setShowing(showing);
-      scope.btnFindContactDatasheet.setShowing(showing);
-      scope.btnAddAddressDatasheet.setShowing(showing);
-      scope.btnAddAddressDatasheet.setShowing(showing);  
+    scope.btnAddFactoryDatasheet.setShowing(showing);
+    scope.btnFindFactoryDatasheet.setShowing(showing);
+    scope.btnAddPersonDatasheet.setShowing(showing);
+    scope.btnAddContactDatasheet.setShowing(showing);
+    scope.btnFindContactDatasheet.setShowing(showing);
+    scope.btnAddAddressDatasheet.setShowing(showing);
+    scope.btnAddAddressDatasheet.setShowing(showing);  
   },
   initAsSubDialog: function(onStart) {
     var local = this.localScope;
@@ -93,32 +110,61 @@ dojo.declare("NewTenantCtrl", Controller, {
       
       switch (target) {
         case "CountryCode":
-          var initCountryCodeValue = global.countryCodeLookup.getCode(idx, "");
+          //
+          //Vorerst den Default-CountryCode des Users einstellen
+          //var initCountryCodeValue = global.countryCodeLookup.getCode(idx, "");
+          var initCountryCodeValue = global.globalData.countryCode();
           local.cboAreaCode.setDisplayValue(initCountryCodeValue);
           //
           if (doBreak) {            
             break;
           }
-        case "Related":
+        case "PesonData":
           global.tableStoreLookup.registerCallback(local, this.tsLookupDataByCallback());
           
           global.tableStoreLookup.setLabel("PERSON_DATA");
-          var initTablename = global.tableStoreLookup.getTableName(idx, "");
-          local.cboPersonDatasheet.setDisplayValue(initTablename);
+          //Vorerst Feld auf "" setzen
+          //var initTablename = global.tableStoreLookup.getTableName(idx, "");
+          var initTablename = " ";
+          local.cboPersonDatasheet.setDisplayValue(initTablename);                           
+          //
+          if (doBreak) {            
+            break;
+          }  
+        case "FactoryData":
+          global.tableStoreLookup.registerCallback(local, this.tsLookupDataByCallback());
           
+          //Vorerst Feld auf "" setzen          
           global.tableStoreLookup.setLabel("FACTORY_DATA");
-          var initTablename = global.tableStoreLookup.getTableName(idx, "");
-          local.cboFactoryDatasheet.setDisplayValue(initTablename);
+          //var initTablename = global.tableStoreLookup.getTableName(idx, "");
+          var initTablename = " ";
+          local.cboFactoryDatasheet.setDisplayValue(initTablename);          
+          //
+          if (doBreak) {            
+            break;
+          }          
+        case "ContactData":
+          global.tableStoreLookup.registerCallback(local, this.tsLookupDataByCallback());
           
+          //Vorerst Feld auf "" setzen
           global.tableStoreLookup.setLabel("CONTACT_DATA");
-          var initTablename = global.tableStoreLookup.getTableName(idx, "");
-          local.cboContactDatasheet.setDisplayValue(initTablename);
-         
+          //var initTablename = global.tableStoreLookup.getTableName(idx, "");
+          var initTablename = " ";
+          local.cboContactDatasheet.setDisplayValue(initTablename);          
+          //
+          if (doBreak) {            
+            break;
+          }          
+        case "AddressData":  
+          global.tableStoreLookup.registerCallback(local, this.tsLookupDataByCallback());
+
           global.tableStoreLookup.setLabel("ADDRESS_DATA");
-          var initTablename = global.tableStoreLookup.getTableName(idx, "");
+          //Vorerst Feld auf "" setzen
+          //var initTablename = global.tableStoreLookup.getTableName(idx, "");
+          var initTablename = " ";          
           local.cboAddressDatasheet.setDisplayValue(initTablename);
-        
-          break;
+            
+          break;         
         default:
           throw "NewTenantCtrl.initSelectMenu: keine gültige Auswahl";
           //
@@ -172,11 +218,11 @@ dojo.declare("NewTenantCtrl", Controller, {
     var success = 0;
     try {      
      
-      if (this.globalScope.countryCodeLookup.refresh() > 0) {
+      if (global.countryCodeLookup.refresh() > 0) {
         success = 1;
       } else {
         success = 0;
-      }
+      }    
 
       if (success == 1) {
         this.globalScope.globalData.tenantId(this.localScope.varTenantId);
@@ -483,6 +529,7 @@ dojo.declare("NewTenantCtrl", Controller, {
     this.handleSubscribeByResData("NO_MANDATORY_TENANT_CAPTION_BY_NEWTENANT");
     this.handleSubscribeByResData("DUPLICATE_TENANTCAPTION_NOT_ALLOWED_BY_NEWTENANT");
     this.handleSubscribeByResData("INSERT_BY_TENANT_FAILD_BY_NEWTENANT");
+    this.handleSubscribeByResData("NO_GRANT_FOR_ADD_TENANT");
     
     this.handleSubscribeByResData("FAILD_BY_OBSCURE_PROCESSING");
     
