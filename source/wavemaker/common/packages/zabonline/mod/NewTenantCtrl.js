@@ -526,11 +526,11 @@ dojo.declare("NewTenantCtrl", Controller, {
     
     this.handleSubscribeByResData("ADD_TENANT_SUCCEEDED");
     this.handleSubscribeByResData("INSERT_BY_TENANT_FAILD_BY_NEWTENANT");
-    this.handleSubscribeByResData("NO_MANDATORY_TENANT_CAPTION_BY_NEWTENANT");
-    this.handleSubscribeByResData("DUPLICATE_TENANTCAPTION_NOT_ALLOWED_BY_NEWTENANT");
+    this.handleSubscribeByResData("DUPLICATE_TENANT_NOT_ALLOWED_BY_NEWTENANT");
     this.handleSubscribeByResData("INSERT_BY_TENANT_FAILD_BY_NEWTENANT");
     this.handleSubscribeByResData("NO_GRANT_FOR_ADD_TENANT");
-    
+    this.handleSubscribeByResData("NO_MANDATORY_TENANT_BY_NEWTENANT");
+    this.handleSubscribeByResData("NO_VALID_COUNTRY_ID_BY_NEWTENANT");    
     this.handleSubscribeByResData("FAILD_BY_OBSCURE_PROCESSING");
     
     console.debug('End Controller.subscribeForChannels.SubClass');    

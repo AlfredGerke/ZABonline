@@ -168,11 +168,11 @@ ZABonline
 Main=
 Selected=create_admin.sql
 [..\..\wavemaker\common\packages\zabonline\mod\NewTenantCtrl.js]
-TopLine=516
-Caret=63,534
+TopLine=506
+Caret=71,533
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewTenant.js]
 TopLine=1
-Caret=37,2
+Caret=29,2
 [..\..\wavemaker\common\packages\zabonline\mod\TableStoreLookup.js]
 TopLine=1
 Caret=73,28
@@ -183,5 +183,5 @@ Caret=31,68
 TopLine=15
 Caret=14,46
 [create_admin.sql]
-TopLine=908
-Caret=69,961
+TopLine=858
+Caret=44,941

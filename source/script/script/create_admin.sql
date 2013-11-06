@@ -875,6 +875,79 @@ COMMENT ON PROCEDURE SP_ADD_ROLE_BY_SRV IS
 
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_ROLE_BY_SRV'^
 
+CREATE OR ALTER PROCEDURE SP_CHK_DATA_BY_ADD_TENANT(
+  ACAPTION varchar(64), /* Pflichtfeld */
+  ACOUNTRYCODEID integer,
+  ASESSIONIDLETIME integer, /* Pflichtfeld */
+  ASESSIONLIFETIME integer) /* Pflichtfeld */
+RETURNS (
+  success smallint,
+  code smallint,
+  info varchar(2000))
+AS
+begin
+  
+  if (ACAPTION is null) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_TENANT_BY_NEWTENANT", "message": "NO_MANDATORY_TENANT"}';
+    suspend;
+    Exit;    
+  end
+  else
+  begin
+    if (exists(select 1 from V_TENANT where Upper(USERNAME)=Upper(:AUSER))) then
+    begin
+      code = 1;
+      info = '{"kind": 1, "publish": "DUPLICATE_TENANT_NOT_ALLOWED_BY_NEWTENANT", "message": "DUPLICATE_TENANT_NOT_ALLOWED"}';
+      suspend;
+      Exit;    
+    end
+  end
+  
+  if (ACOUNTRYCODEID is null) then
+  begin
+    /* vorerst keine Aktion */
+  end
+  else
+  begin
+    if (not exists(select 1 from V_COUNTRY where ID=:ACOUNTRYCODEID)) then
+    begin
+      code = 1;
+      info = '{"kind": 1, "publish": "NO_VALID_COUNTRY_ID_BY_NEWTENANT", "message": "NO_VALID_COUNTRY_ID"}';
+      suspend;
+      Exit;      
+    end
+  end
+
+  if (ASESSIONIDLETIME is null) then
+  begin
+  end
+  else
+  begin
+    if (ASESSIONIDLETIME < 30) then
+    begin
+    end
+  end
+  
+  if (ASESSIONLIFETIME is null) then
+  begin
+  end
+  else
+  begin
+    if (ASESSIONLIFETIME < 1) then
+    begin
+    end
+  end
+  
+  suspend;
+end^
+  
+COMMENT ON PROCEDURE SP_CHK_DATA_BY_ADD_TENANT IS
+'Überprüft alle logischen Inhalte für einen Mandanteneintrag'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_CHK_DATA_BY_ADD_TENANT'^  
+  
 CREATE OR ALTER PROCEDURE SP_ADD_TENANT (
   ACAPTION varchar(64), /* Pflichtfeld */
   ADESCRIPTION varchar(2000),  
@@ -1090,6 +1163,13 @@ GRANT SELECT ON V_USERS TO SP_CHK_DATA_BY_ADD_USER;
 GRANT SELECT, INSERT ON V_USERS TO SP_INSERT_USER; 
 GRANT EXECUTE ON PROCEDURE SP_GET_SEQUENCEID_BY_IDENT TO SP_INSERT_USER;
 
+GRANT EXECUTE ON PROCEDURE SP_TOUCHSESSION TO SP_ADD_TENANT_BY_SRV;
+GRANT EXECUTE ON PROCEDURE SP_CHECKGRANT TO SP_ADD_TENANT_BY_SRV;
+GRANT EXECUTE ON PROCEDURE SP_ADD_ROLE TO SP_ADD_TENANT_BY_SRV;
+
+GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_TENANT TO SP_ADD_TENANT; 
+GRANT EXECUTE ON PROCEDURE SP_INSERT_TENANT TO SP_ADD_TENANT; 
+    
 /* Roles */
 
 COMMIT WORK;
