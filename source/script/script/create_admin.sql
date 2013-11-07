@@ -124,6 +124,11 @@ begin
   end
   
   /* Primay-Key Generatoren */
+  if (AIDENT = 'TENANT') then
+  begin
+    SEQ_ID = next value for SEQ_TENANT_ID;  
+  end
+  
   if (AIDENT = 'ROLES') then
   begin
     SEQ_ID = next value for SEQ_ROLES_ID;
@@ -886,6 +891,9 @@ RETURNS (
   info varchar(2000))
 AS
 begin
+  success = 0;
+  code = 0;
+  info = '{"result": null}';
   
   if (ACAPTION is null) then
   begin
@@ -896,7 +904,7 @@ begin
   end
   else
   begin
-    if (exists(select 1 from V_TENANT where Upper(USERNAME)=Upper(:AUSER))) then
+    if (exists(select 1 from V_TENANT where Upper(CAPTION)=Upper(:ACAPTION))) then
     begin
       code = 1;
       info = '{"kind": 1, "publish": "DUPLICATE_TENANT_NOT_ALLOWED_BY_NEWTENANT", "message": "DUPLICATE_TENANT_NOT_ALLOWED"}';
@@ -922,24 +930,43 @@ begin
 
   if (ASESSIONIDLETIME is null) then
   begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_SESSIONIDLETIME_BY_NEWTENANT", "message": "NO_MANDATORY_SESSIONIDLETIME"}';
+    suspend;
+    Exit;   
   end
   else
   begin
-    if (ASESSIONIDLETIME < 30) then
+    if (ASESSIONIDLETIME <= 0) then
     begin
+      code = 1;
+      info = '{"kind": 1, "publish": "SESSIONIDLETIME_OUT_OF_RANGE_BY_NEWTENANT", "message": "SESSIONIDLETIME_OUT_OF_RANGE"}';
+      suspend;
+      Exit;    
     end
   end
   
   if (ASESSIONLIFETIME is null) then
   begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_SESSIONLIFETIME_BY_NEWTENANT", "message": "NO_MANDATORY_SESSIONLIFETIME"}';
+    suspend;
+    Exit;  
   end
   else
   begin
-    if (ASESSIONLIFETIME < 1) then
+    if (ASESSIONLIFETIME <= 0) then
     begin
+      code = 1;
+      info = '{"kind": 1, "publish": "SESSIONLIFETIME_OUT_OF_RANGE_BY_NEWTENANT", "message": "SESSIONLIFETIME_OUT_OF_RANGE"}';
+      suspend;
+      Exit;    
     end
   end
   
+  /* Kein Exit bis hierhin */
+  success = 1;
+    
   suspend;
 end^
   
@@ -947,6 +974,80 @@ COMMENT ON PROCEDURE SP_CHK_DATA_BY_ADD_TENANT IS
 'Überprüft alle logischen Inhalte für einen Mandanteneintrag'^
 
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_CHK_DATA_BY_ADD_TENANT'^  
+  
+CREATE OR ALTER PROCEDURE SP_INSERT_TENANT (
+  ACAPTION varchar(64), /* Pflichtfeld */
+  ADESCRIPTION varchar(2000),  
+  AFACTORYDATAID integer,
+  APERSONDATAID integer,
+  ACONTACTDATAID integer,
+  AADDRESSDATAID integer,
+  ACOUNTRYCODEID integer,
+  ASESSIONIDLETIME integer, /* Pflichtfeld */
+  ASESSIONLIFETIME integer) /* Pflichtfeld */  
+RETURNS (
+  success smallint,
+  message varchar(254),
+  tenant_id integer)
+AS
+begin
+  success = 0;
+  message = 'FAILD_BY_UNKNOWN_REASON';
+  tenant_id = -1;
+  
+  if (exists(select 1 from V_TENANT where Upper(CAPTION)=Upper(:ACAPTION))) then
+  begin
+    message = 'DUPLICATE_TENANT_NOT_ALLOWED';
+    suspend;
+    Exit;    
+  end
+                                  
+  select SEQ_ID from SP_GET_SEQUENCEID_BY_IDENT('TENANT') into :tenant_id;
+
+  if ((tenant_id <> -1) and (tenant_id is not null)) then
+  begin
+    insert
+    into
+      V_TENANT
+      (
+        ID,
+        CAPTION,
+        DESCRIPTION,
+        /* Hier geht es weiter */
+      )
+    values
+      (
+        :tenant_id,
+        :ACAPTION,
+        :ADESCRIPTION,
+        /* Hier geht es weiter */
+        :AFACTORYDATAID,
+        :APERSONDATAID,
+        :ACONTACTDATAID,
+        :AADDRESSDATAID,
+        :ACOUNTRYCODEID,
+        :ASESSIONIDLETIME,
+        :ASESSIONLIFETIME
+      );  
+
+    message = '';
+    success = 1;      
+  end  
+  else
+  begin
+    message = 'NO_VALID_TENANT_ID';
+    success = 0;
+    suspend;
+    Exit;     
+  end
+  
+  suspend;
+end^
+
+COMMENT ON PROCEDURE SP_INSERT_TENANT IS
+'Mandanten einfügen'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_INSERT_TENANT'^
   
 CREATE OR ALTER PROCEDURE SP_ADD_TENANT (
   ACAPTION varchar(64), /* Pflichtfeld */
@@ -1169,6 +1270,8 @@ GRANT EXECUTE ON PROCEDURE SP_ADD_ROLE TO SP_ADD_TENANT_BY_SRV;
 
 GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_TENANT TO SP_ADD_TENANT; 
 GRANT EXECUTE ON PROCEDURE SP_INSERT_TENANT TO SP_ADD_TENANT; 
+GRANT SELECT ON V_COUNTRY TO SP_CHK_DATA_BY_ADD_TENANT;
+GRANT SELECT ON V_TENANT TO SP_CHK_DATA_BY_ADD_TENANT;
     
 /* Roles */
 

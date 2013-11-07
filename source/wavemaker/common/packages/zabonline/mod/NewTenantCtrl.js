@@ -532,6 +532,10 @@ dojo.declare("NewTenantCtrl", Controller, {
     this.handleSubscribeByResData("NO_MANDATORY_TENANT_BY_NEWTENANT");
     this.handleSubscribeByResData("NO_VALID_COUNTRY_ID_BY_NEWTENANT");    
     this.handleSubscribeByResData("FAILD_BY_OBSCURE_PROCESSING");
+    this.handleSubscribeByResData("NO_MANDATORY_SESSIONIDLETIME_BY_NEWTENANT");
+    this.handleSubscribeByResData("NO_MANDATORY_SESSIONLIFETIME_BY_NEWTENANT");
+    this.handleSubscribeByResData("SESSIONLIFETIME_OUT_OF_RANGE_BY_NEWTENANT");
+    this.handleSubscribeByResData("SESSIONIDLETIME_OUT_OF_RANGE_BY_NEWTENANT");
     
     console.debug('End Controller.subscribeForChannels.SubClass');    
   },

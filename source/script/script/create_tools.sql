@@ -315,7 +315,7 @@ BEGIN
   table_name = Trim(ATABLENAME);
   indexed_column = Trim(AINDEXEDCOLUMN);
 
-  index_name = 'IDX_' || :table_name || '_SD';
+  index_name = 'IDX_' || :table_name || '_SI';
    
   if (exists(select 1 from RDB$INDICES where RDB$INDEX_NAME=:index_name)) then
   begin
