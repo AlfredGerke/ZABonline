@@ -34,7 +34,12 @@ NewTenant.widgets = {
 				wire1: ["wm.Wire", {"expression":undefined,"source":"edtTenantDesc.dataValue","targetProperty":"aDescription"}, {}],
 				wire6: ["wm.Wire", {"expression":undefined,"source":"edtSessionIdleTime.dataValue","targetProperty":"aSessionIdletime"}, {}],
 				wire7: ["wm.Wire", {"expression":undefined,"source":"edtSessionLifetime.dataValue","targetProperty":"aSessionLifetime"}, {}],
-				wire8: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData.id","targetProperty":"aCountryCodeId"}, {}]
+				wire8: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData.id","targetProperty":"aCountryCodeId"}, {}],
+				wire2: ["wm.Wire", {"expression":undefined,"source":"edtMaxAttempt.dataValue","targetProperty":"aMaxAttempt"}, {}],
+				wire3: ["wm.Wire", {"expression":undefined,"source":"cboFactoryDatasheet.dataValue","targetProperty":"aFactoryDataSheetId"}, {}],
+				wire4: ["wm.Wire", {"expression":undefined,"source":"cboPersonDatasheet.dataValue","targetProperty":"aPersonDataSheetId"}, {}],
+				wire5: ["wm.Wire", {"expression":undefined,"source":"cboContactDatasheet.dataValue","targetProperty":"aContactDataSheetId"}, {}],
+				wire9: ["wm.Wire", {"expression":undefined,"source":"cboAddressDatasheet.dataValue","targetProperty":"aAddressDataSheetId"}, {}]
 			}]
 		}]
 	}],
@@ -137,7 +142,8 @@ NewTenant.widgets = {
 							btnAddAreaCode: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnAddAreaCodeClick"}]
 						}],
 						edtSessionIdleTime: ["wm.Number", {"caption":"Ruhezeit","dataValue":undefined,"displayValue":"","helpText":"Ruhezeit in Minuten","required":true}, {}],
-						edtSessionLifetime: ["wm.Number", {"caption":"Lebenszeit","dataValue":undefined,"displayValue":"","helpText":"Lebenszeit in Tagen","required":true}, {}]
+						edtSessionLifetime: ["wm.Number", {"caption":"Lebenszeit","dataValue":undefined,"displayValue":"","helpText":"Lebenszeit in Tagen","required":true}, {}],
+						edtMaxAttempt: ["wm.Number", {"caption":"Vorschläge","dataValue":undefined,"displayValue":"","helpText":"max. Anzahl Suchwortvorschläge","required":true}, {}]
 					}]
 				}]
 			}],

@@ -1948,10 +1948,10 @@ BEGIN
     sql_stmt = 'COMMENT ON INDEX ALT_' || :relation_name || ' IS ''(created by SP_CREATE_CATALOG_TABLE)''';
     execute statement sql_stmt;
     
-    sql_stmt = 'CREATE INDEX IDX_' || :relation_name || '_SD ON ' || :relation_name || '(SOFTDEL)';
+    sql_stmt = 'CREATE INDEX IDX_' || :relation_name || '_SI ON ' || :relation_name || '(SOFTDEL)';
     execute statement sql_stmt;  
     
-    sql_stmt = 'COMMENT ON INDEX IDX_' || :relation_name || '_SD IS ''(created by SP_CREATE_CATALOG_TABLE)''';
+    sql_stmt = 'COMMENT ON INDEX IDX_' || :relation_name || '_SI IS ''(created by SP_CREATE_CATALOG_TABLE)''';
     execute statement sql_stmt;    
               
     success = 1;  

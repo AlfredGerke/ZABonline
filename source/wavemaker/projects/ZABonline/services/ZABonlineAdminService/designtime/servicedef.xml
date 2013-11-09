@@ -27,6 +27,7 @@
         <parameter name="aCountryCodeId" typeRef="java.lang.Integer" isList="false"/>
         <parameter name="aSessionIdletime" typeRef="java.lang.Integer" isList="false"/>
         <parameter name="aSessionLifetime" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aMaxAttempt" typeRef="java.lang.Integer" isList="false"/>
         <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
     </operation>
     <operation name="addUserData">

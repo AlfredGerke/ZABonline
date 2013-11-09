@@ -271,7 +271,8 @@ public class ZABonlineAdmin extends JavaServiceSuperClass {
     Integer aAddressDataSheetId,
     Integer aCountryCodeId,
     Integer aSessionIdletime,
-    Integer aSessionLifetime) {
+    Integer aSessionLifetime,
+    Integer aMaxAttempt) {
 
     List<Results.ProcResults> result = null;
 
@@ -300,7 +301,8 @@ public class ZABonlineAdmin extends JavaServiceSuperClass {
                                         + ":ADDRESSDATAID, "
                                         + ":COUNTRYCODEID, "
                                         + ":SESSIONIDLETIME, "
-                                        + ":SESSIONLIFETIME)")
+                                        + ":SESSIONLIFETIME, "
+                                        + ":MAXATTEMPT)")
             .addScalar("success",
               Hibernate.INTEGER)
             .addScalar("code",
@@ -331,6 +333,8 @@ public class ZABonlineAdmin extends JavaServiceSuperClass {
               aSessionIdletime)
             .setParameter("SESSIONLIFETIME",
               aSessionLifetime)              
+            .setParameter("MAXATTEMPT",
+              aMaxAttempt)
             .setResultTransformer(Transformers.aliasToBean(Results.ProcResults.class))
             .list();
 

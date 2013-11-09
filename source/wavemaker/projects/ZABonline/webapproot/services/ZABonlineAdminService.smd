@@ -76,6 +76,9 @@
 		}, {
 			"name": "aSessionLifetime",
 			"type": "java.lang.Integer"
+		}, {
+			"name": "aMaxAttempt",
+			"type": "java.lang.Integer"
 		}],
 		"returnType": "[de.zabonline.srv.Results.ProcResults]"
 	}, {

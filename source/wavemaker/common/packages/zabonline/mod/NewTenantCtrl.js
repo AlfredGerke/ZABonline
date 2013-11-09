@@ -62,6 +62,7 @@ dojo.declare("NewTenantCtrl", Controller, {
   initControls: function(global, local) {
     local.edtSessionIdleTime.setValue("helpText", local.getDictionaryItem("HELP_SESSIONIDLETIME_INFO"));
     local.edtSessionLifetime.setValue("helpText", local.getDictionaryItem("HELP_SESSIONLIFETIME_INFO"));
+    local.edtMaxAttempt.setValue("helpText", local.getDictionaryItem("HELP_MAX_ATTEMPT_INFO"));
   },
   initStart: function() {
     var global = this.globalScope;
@@ -330,10 +331,11 @@ dojo.declare("NewTenantCtrl", Controller, {
         case "Properties":
           var idletime = local.edtSessionIdleTime.getDataValue(); 
           var lifetime =  local.edtSessionLifetime.getDataValue(); 
+          var attempt = local.edtMaxAttempt.getDataValue();
           
-          checked = ((idletime) && (lifetime));
+          checked = ((idletime) && (lifetime) && (attempt));
           if (checked) {
-            checked = ((idletime > 0) && (lifetime > 0));
+            checked = ((idletime > 0) && (lifetime > 0) && (attempt > 0));
           }  
           //         
           break;
@@ -536,6 +538,8 @@ dojo.declare("NewTenantCtrl", Controller, {
     this.handleSubscribeByResData("NO_MANDATORY_SESSIONLIFETIME_BY_NEWTENANT");
     this.handleSubscribeByResData("SESSIONLIFETIME_OUT_OF_RANGE_BY_NEWTENANT");
     this.handleSubscribeByResData("SESSIONIDLETIME_OUT_OF_RANGE_BY_NEWTENANT");
+    this.handleSubscribeByResData("NO_MANDATORY_MAXATTEMPT_BY_NEWTENANT");
+    this.handleSubscribeByResData("MAXATTEMPT_OUT_OF_RANGE_BY_NEWTENANT");
     
     console.debug('End Controller.subscribeForChannels.SubClass');    
   },

@@ -884,7 +884,8 @@ CREATE OR ALTER PROCEDURE SP_CHK_DATA_BY_ADD_TENANT(
   ACAPTION varchar(64), /* Pflichtfeld */
   ACOUNTRYCODEID integer,
   ASESSIONIDLETIME integer, /* Pflichtfeld */
-  ASESSIONLIFETIME integer) /* Pflichtfeld */
+  ASESSIONLIFETIME integer, /* Pflichtfeld */
+  AMAXATTEMPT integer) /* Pflichtfeld */
 RETURNS (
   success smallint,
   code smallint,
@@ -964,6 +965,24 @@ begin
     end
   end
   
+  if (AMAXATTEMPT is null) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_MAXATTEMPT_BY_NEWTENANT", "message": "NO_MANDATORY_MAXATTEMPT"}';
+    suspend;
+    Exit;  
+  end
+  else
+  begin
+    if (AMAXATTEMPT <= 0) then
+    begin
+      code = 1;
+      info = '{"kind": 1, "publish": "MAXATTEMPT_OUT_OF_RANGE_BY_NEWTENANT", "message": "MAXATTEMPT_OUT_OF_RANGE"}';
+      suspend;
+      Exit;    
+    end
+  end 
+   
   /* Kein Exit bis hierhin */
   success = 1;
     
@@ -984,7 +1003,8 @@ CREATE OR ALTER PROCEDURE SP_INSERT_TENANT (
   AADDRESSDATAID integer,
   ACOUNTRYCODEID integer,
   ASESSIONIDLETIME integer, /* Pflichtfeld */
-  ASESSIONLIFETIME integer) /* Pflichtfeld */  
+  ASESSIONLIFETIME integer, /* Pflichtfeld */
+  AMAXATTEMPT integer) /* Pflichtfeld */  
 RETURNS (
   success smallint,
   message varchar(254),
@@ -994,6 +1014,8 @@ begin
   success = 0;
   message = 'FAILD_BY_UNKNOWN_REASON';
   tenant_id = -1;
+  
+  if (ASessio)
   
   if (exists(select 1 from V_TENANT where Upper(CAPTION)=Upper(:ACAPTION))) then
   begin
@@ -1012,15 +1034,20 @@ begin
       (
         ID,
         CAPTION,
-        DESCRIPTION,
-        /* Hier geht es weiter */
+        DESCRIPTION,    
+        DATASHEET_FACTORY_DATA_ID,
+        DATASHEET_PERSON_ID,
+        DATASHEET_CONTACT_ID,
+        DATASHEET_ADDRESS_ID,        
+        COUNTRY_ID,
+        SESSION_IDLE_TIME,
+        SESSION_LIFETIME                
       )
     values
       (
         :tenant_id,
         :ACAPTION,
         :ADESCRIPTION,
-        /* Hier geht es weiter */
         :AFACTORYDATAID,
         :APERSONDATAID,
         :ACONTACTDATAID,
@@ -1058,7 +1085,8 @@ CREATE OR ALTER PROCEDURE SP_ADD_TENANT (
   AADDRESSDATAID integer,
   ACOUNTRYCODEID integer,
   ASESSIONIDLETIME integer, /* Pflichtfeld */
-  ASESSIONLIFETIME integer) /* Pflichtfeld */  
+  ASESSIONLIFETIME integer, /* Pflichtfeld */ 
+  AMAXATTEMPT integer) /* Pflichtfeld */  
 RETURNS (
   success smallint,
   code smallint,
@@ -1080,7 +1108,8 @@ begin
     SP_CHK_DATA_BY_ADD_TENANT(:ACAPTION,
       :ACOUNTRYCODEID,
       :ASESSIONIDLETIME,
-      :ASESSIONLIFETIME) 
+      :ASESSIONLIFETIME,
+      :AMAXATTEMPT) 
   into 
     :success, 
     :code, 
@@ -1095,7 +1124,7 @@ begin
     select
       success,
       message,
-      role_id      
+      tenant_id
     from
       SP_INSERT_TENANT(:ACAPTION,
         :ADESCRIPTION,  
@@ -1105,7 +1134,8 @@ begin
         :AADDRESSDATAID,
         :ACOUNTRYCODEID,
         :ASESSIONIDLETIME,
-        :ASESSIONLIFETIME)
+        :ASESSIONLIFETIME,
+        :AMAXATTEMPT)
     into
       :success,
       :message,
@@ -1153,7 +1183,8 @@ CREATE OR ALTER PROCEDURE SP_ADD_TENANT_BY_SRV (
   AADDRESSDATAID integer,
   ACOUNTRYCODEID integer,
   ASESSIONIDLETIME integer, /* Pflichtfeld */
-  ASESSIONLIFETIME integer) /* Pflichtfeld */  
+  ASESSIONLIFETIME integer, /* Pflichtfeld */
+  AMAXATTEMPT integer) /* Pflichtfeld */   
 RETURNS (
   success smallint,
   code smallint,
@@ -1191,7 +1222,8 @@ begin
           :AADDRESSDATAID,
           :ACOUNTRYCODEID,
           :ASESSIONIDLETIME,
-          :ASESSIONLIFETIME) 
+          :ASESSIONLIFETIME,
+          :AMAXATTEMPT) 
       into 
         :success, 
         :code, 
@@ -1272,6 +1304,8 @@ GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_TENANT TO SP_ADD_TENANT;
 GRANT EXECUTE ON PROCEDURE SP_INSERT_TENANT TO SP_ADD_TENANT; 
 GRANT SELECT ON V_COUNTRY TO SP_CHK_DATA_BY_ADD_TENANT;
 GRANT SELECT ON V_TENANT TO SP_CHK_DATA_BY_ADD_TENANT;
+GRANT SELECT, INSERT ON V_TENANT TO SP_INSERT_TENANT;
+GRANT EXECUTE ON PROCEDURE SP_GET_SEQUENCEID_BY_IDENT TO SP_INSERT_TENANT;     
     
 /* Roles */
 
