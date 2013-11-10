@@ -16,7 +16,6 @@ import com.zabonlinedb.data.output.GetLookupAddressTypeByCountryRtnType;
 import com.zabonlinedb.data.output.GetLookupAreaCodeRtnType;
 import com.zabonlinedb.data.output.GetLookupContactPartnerByTenantRtnType;
 import com.zabonlinedb.data.output.GetLookupContactTypeByCountryRtnType;
-import com.zabonlinedb.data.output.GetLookupCountryRtnType;
 import com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType;
 import com.zabonlinedb.data.output.GetLookupPersonByTenantRtnType;
 import com.zabonlinedb.data.output.GetLookupRoleRtnType;
@@ -24,6 +23,7 @@ import com.zabonlinedb.data.output.GetLookupSalutationByCountryRtnType;
 import com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType;
 import com.zabonlinedb.data.output.GetLookupTenantRtnType;
 import com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType;
+import com.zabonlinedb.data.output.GetLookupCountryRtnType;
 
 
 /**

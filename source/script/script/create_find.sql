@@ -133,6 +133,88 @@ COMMENT ON COLUMN TENANT.MAX_COUNT_BY_SIMPLE_ATTEMPT IS
 /* Userview aktualisieren */
 execute procedure SP_CREATE_USER_VIEW 'TENANT';
 
+/* SPs */
+SET TERM ^ ;
+
+CREATE OR ALTER PROCEDURE SP_INSERT_TENANT (
+  ACAPTION varchar(64), /* Pflichtfeld */
+  ADESCRIPTION varchar(2000),  
+  AFACTORYDATAID integer,
+  APERSONDATAID integer,
+  ACONTACTDATAID integer,
+  AADDRESSDATAID integer,
+  ACOUNTRYCODEID integer,
+  ASESSIONIDLETIME integer, /* Pflichtfeld */
+  ASESSIONLIFETIME integer, /* Pflichtfeld */
+  AMAXATTEMPT integer) /* Pflichtfeld */  
+RETURNS (
+  success smallint,
+  message varchar(254),
+  tenant_id integer)
+AS
+begin
+  success = 0;
+  message = 'FAILD_BY_UNKNOWN_REASON';
+  tenant_id = -1;
+  
+  if (exists(select 1 from V_TENANT where Upper(CAPTION)=Upper(:ACAPTION))) then
+  begin
+    message = 'DUPLICATE_TENANT_NOT_ALLOWED';
+    suspend;
+    Exit;    
+  end
+                                  
+  select SEQ_ID from SP_GET_SEQUENCEID_BY_IDENT('TENANT') into :tenant_id;
+
+  if ((tenant_id <> -1) and (tenant_id is not null)) then
+  begin
+    insert
+    into
+      V_TENANT
+      (
+        ID,
+        CAPTION,
+        DESCRIPTION,    
+        DATASHEET_FACTORY_DATA_ID,
+        DATASHEET_PERSON_ID,
+        DATASHEET_CONTACT_ID,
+        DATASHEET_ADDRESS_ID,        
+        COUNTRY_ID,
+        SESSION_IDLE_TIME,
+        SESSION_LIFETIME,
+        MAX_COUNT_BY_SIMPLE_ATTEMPT                
+      )
+    values
+      (
+        :tenant_id,
+        :ACAPTION,
+        :ADESCRIPTION,
+        :AFACTORYDATAID,
+        :APERSONDATAID,
+        :ACONTACTDATAID,
+        :AADDRESSDATAID,
+        :ACOUNTRYCODEID,
+        :ASESSIONIDLETIME,
+        :ASESSIONLIFETIME,
+        :AMAXATTEMPT
+      );  
+
+    message = '';
+    success = 1;      
+  end  
+  else
+  begin
+    message = 'NO_VALID_TENANT_ID';
+    success = 0;
+    suspend;
+    Exit;     
+  end
+  
+  suspend;
+end^
+
+SET TERM ; ^
+
 COMMIT WORK;
 /******************************************************************************/
 /*                                  Views                                   

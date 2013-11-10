@@ -33,13 +33,13 @@ NewTenant.widgets = {
 				wire: ["wm.Wire", {"expression":undefined,"source":"edtTenantCaption.dataValue","targetProperty":"aCaption"}, {}],
 				wire1: ["wm.Wire", {"expression":undefined,"source":"edtTenantDesc.dataValue","targetProperty":"aDescription"}, {}],
 				wire6: ["wm.Wire", {"expression":undefined,"source":"edtSessionIdleTime.dataValue","targetProperty":"aSessionIdletime"}, {}],
-				wire7: ["wm.Wire", {"expression":undefined,"source":"edtSessionLifetime.dataValue","targetProperty":"aSessionLifetime"}, {}],
 				wire8: ["wm.Wire", {"expression":undefined,"source":"app.countryLookupData.id","targetProperty":"aCountryCodeId"}, {}],
-				wire2: ["wm.Wire", {"expression":undefined,"source":"edtMaxAttempt.dataValue","targetProperty":"aMaxAttempt"}, {}],
-				wire3: ["wm.Wire", {"expression":undefined,"source":"cboFactoryDatasheet.dataValue","targetProperty":"aFactoryDataSheetId"}, {}],
-				wire4: ["wm.Wire", {"expression":undefined,"source":"cboPersonDatasheet.dataValue","targetProperty":"aPersonDataSheetId"}, {}],
+				wire2: ["wm.Wire", {"expression":undefined,"source":"edtSessionLifetime.dataValue","targetProperty":"aSessionLifetime"}, {}],
+				wire3: ["wm.Wire", {"expression":undefined,"source":"edtMaxAttempt.dataValue","targetProperty":"aMaxAttempt"}, {}],
+				wire4: ["wm.Wire", {"expression":undefined,"source":"cboAddressDatasheet.dataValue","targetProperty":"aAddressDataSheetId"}, {}],
 				wire5: ["wm.Wire", {"expression":undefined,"source":"cboContactDatasheet.dataValue","targetProperty":"aContactDataSheetId"}, {}],
-				wire9: ["wm.Wire", {"expression":undefined,"source":"cboAddressDatasheet.dataValue","targetProperty":"aAddressDataSheetId"}, {}]
+				wire7: ["wm.Wire", {"expression":undefined,"source":"cboPersonDatasheet.dataValue","targetProperty":"aPersonDataSheetId"}, {}],
+				wire9: ["wm.Wire", {"expression":undefined,"source":"cboFactoryDatasheet.dataValue","targetProperty":"aFactoryDataSheetId"}, {}]
 			}]
 		}]
 	}],

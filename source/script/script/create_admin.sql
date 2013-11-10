@@ -1015,8 +1015,6 @@ begin
   message = 'FAILD_BY_UNKNOWN_REASON';
   tenant_id = -1;
   
-  if (ASessio)
-  
   if (exists(select 1 from V_TENANT where Upper(CAPTION)=Upper(:ACAPTION))) then
   begin
     message = 'DUPLICATE_TENANT_NOT_ALLOWED';

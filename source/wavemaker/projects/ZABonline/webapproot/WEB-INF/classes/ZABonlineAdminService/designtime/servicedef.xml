@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="ZABonlineAdminService" class="de.zabonline.srv.db.ZABonlineAdmin" CRUDService="false" type="JavaService" springFile="ZABonlineAdminService.spring.xml">
+    <operation name="addRoleData">
+        <parameter name="aCaption" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aDescription" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aIsAdmin" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aSetup" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aMembers" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aActivityRecording" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aSEPA" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aBilling" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aImport" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aExport" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aReferenceData" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aReporting" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aMisc" typeRef="java.lang.Boolean" isList="false"/>
+        <parameter name="aFileresource" typeRef="java.lang.Boolean" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
+    <operation name="addTenantData">
+        <parameter name="aCaption" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aDescription" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aFactoryDataSheetId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aPersonDataSheetId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aContactDataSheetId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aAddressDataSheetId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aCountryCodeId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aSessionIdletime" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aSessionLifetime" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aMaxAttempt" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
     <operation name="addUserData">
         <parameter name="aRoleId" typeRef="java.lang.Integer" isList="false"/>
         <parameter name="aTenantId" typeRef="java.lang.Integer" isList="false"/>
