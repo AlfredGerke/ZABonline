@@ -200,8 +200,8 @@ Caret=77,31
 TopLine=108
 Caret=13,137
 [create_factory.sql]
-TopLine=646
-Caret=34,646
+TopLine=638
+Caret=13,670
 [data_0004.sql]
-TopLine=99
-Caret=24,135
+TopLine=92
+Caret=1,137

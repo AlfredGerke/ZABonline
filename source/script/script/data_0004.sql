@@ -134,12 +134,6 @@ BEGIN
   
   INSERT INTO DATASHEET (ID, TENANT_ID, TAG_ID, TABLE_STORE_ID, CAPTION, DESCRIPTION, SOFTDEL)
   VALUES (2, 1, NULL, 1, 'Kontaktdaten2', NULL, 0);
-
-COMMIT WORK;
-  
-
-COMMIT WORK;
-  
               
 END^        
 SET TERM ; ^ /* definiert das Ende eines Ausführungsblockes */
