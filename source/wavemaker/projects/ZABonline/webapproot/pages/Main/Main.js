@@ -165,7 +165,7 @@ dojo.declare("Main", wm.Page, {
     invalidateSessionVarError: function(inSender, inError) {
         console.debug('Start Main.invalidateSessionVarError');
 
-        console.warning('Fehler beim schließen einer Sitzung!');
+        console.error('Fehler beim Schließen einer Sitzung: ' + inError);
 
         console.debug('End Main.invalidateSessionVarError');
     },

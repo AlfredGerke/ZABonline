@@ -5,7 +5,7 @@ package com.zabonlinedb;
 
 /**
  *  Query names for service "ZABonlineDB"
- *  11/02/2013 23:11:21
+ *  11/10/2013 22:41:59
  * 
  */
 public class ZABonlineDBConstants {
@@ -18,6 +18,7 @@ public class ZABonlineDBConstants {
     public final static String getLookupTenantQueryName = "getLookupTenant";
     public final static String getAddressByIdQueryName = "getAddressById";
     public final static String getLookupAreaCodeQueryName = "getLookupAreaCode";
+    public final static String getLookupDataSheetByLabelQueryName = "getLookupDataSheetByLabel";
     public final static String getLookupAddressTypeByCountryQueryName = "getLookupAddressTypeByCountry";
     public final static String getLookupContactTypeByCountryQueryName = "getLookupContactTypeByCountry";
     public final static String getLookupTitelByCountryQueryName = "getLookupTitelByCountry";

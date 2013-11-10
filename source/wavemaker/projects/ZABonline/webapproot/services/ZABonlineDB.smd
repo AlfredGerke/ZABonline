@@ -58,6 +58,14 @@
 		"parameters": null,
 		"returnType": "[com.zabonlinedb.data.output.GetLookupCountryRtnType]"
 	}, {
+		"name": "getLookupDataSheetByLabel",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "label",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[com.zabonlinedb.data.output.GetLookupDataSheetByLabelRtnType]"
+	}, {
 		"name": "getLookupPersonByMarriage",
 		"operationType": "hqlquery",
 		"parameters": [{

@@ -22,6 +22,7 @@
   "ERROR_MSG_NO_VALID_PROPERTIES_DATA": "Notwendige Eigenschaften fehlen!",
   "ERROR_MSG_NO_VALID_SUMMARY_DATA": "Zusammenfassung ung&uuml;ltig!",
   "CAPTION_NO_INFO": "keine Angaben",
+  "CAPTION_MAX_ATTEMPT": "Suchwortvorschl&auml;ge",
   "CAPTION_TENANTNAME": "Mandant",
   "CAPTION_TENANTDESC": "Beschreibung",
   "CAPTION_FACTORY_DATA": "Betriebsdaten",

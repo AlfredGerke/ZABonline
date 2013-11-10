@@ -49,32 +49,52 @@ NewTenant.widgets = {
 		}]
 	}],
 	varTenantId: ["wm.Variable", {"type":"NumberData"}, {}],
-	tsLookupFactoryData: ["wm.ServiceVariable", {"autoUpdate":true,"inFlightBehavior":"executeLast","operation":"getLookupTableStoreByLabel","service":"ZABonlineDB"}, {"onSuccess":"tsLookupFactoryDataSuccess"}, {
-		input: ["wm.ServiceInput", {"type":"getLookupTableStoreByLabelInputs"}, {}, {
+	tsLookupFactoryData: ["wm.ServiceVariable", {"autoUpdate":true,"inFlightBehavior":"executeLast","operation":"getLookupDataSheetByLabel","service":"ZABonlineDB"}, {"onSuccess":"tsLookupFactoryDataSuccess"}, {
+		input: ["wm.ServiceInput", {"type":"getLookupDataSheetByLabelInputs"}, {}, {
 			binding: ["wm.Binding", {}, {}, {
 				wire: ["wm.Wire", {"expression":"\"FACTORY_DATA\"","targetProperty":"label"}, {}]
 			}]
 		}]
 	}],
-	tsLookupPersonData: ["wm.ServiceVariable", {"autoUpdate":true,"inFlightBehavior":"executeLast","operation":"getLookupTableStoreByLabel","service":"ZABonlineDB"}, {"onSuccess":"tsLookupPersonDataSuccess"}, {
-		input: ["wm.ServiceInput", {"type":"getLookupTableStoreByLabelInputs"}, {}, {
+	tsLookupPersonData: ["wm.ServiceVariable", {"autoUpdate":true,"inFlightBehavior":"executeLast","operation":"getLookupDataSheetByLabel","service":"ZABonlineDB"}, {"onSuccess":"tsLookupPersonDataSuccess"}, {
+		input: ["wm.ServiceInput", {"type":"getLookupDataSheetByLabelInputs"}, {}, {
 			binding: ["wm.Binding", {}, {}, {
 				wire: ["wm.Wire", {"expression":"\"PERSON_DATA\"","targetProperty":"label"}, {}]
 			}]
 		}]
 	}],
-	tsLookupContactData: ["wm.ServiceVariable", {"autoUpdate":true,"inFlightBehavior":"executeLast","operation":"getLookupTableStoreByLabel","service":"ZABonlineDB"}, {"onSuccess":"tsLookupContactDataSuccess"}, {
-		input: ["wm.ServiceInput", {"type":"getLookupTableStoreByLabelInputs"}, {}, {
+	tsLookupContactData: ["wm.ServiceVariable", {"autoUpdate":true,"inFlightBehavior":"executeLast","operation":"getLookupDataSheetByLabel","service":"ZABonlineDB"}, {"onSuccess":"tsLookupContactDataSuccess"}, {
+		input: ["wm.ServiceInput", {"type":"getLookupDataSheetByLabelInputs"}, {}, {
 			binding: ["wm.Binding", {}, {}, {
 				wire: ["wm.Wire", {"expression":"\"CONTACT_DATA\"","targetProperty":"label"}, {}]
 			}]
 		}]
 	}],
-	tsLookupAddressData: ["wm.ServiceVariable", {"autoUpdate":true,"inFlightBehavior":"executeLast","operation":"getLookupTableStoreByLabel","service":"ZABonlineDB"}, {"onSuccess":"tsLookupAddressDataSuccess"}, {
-		input: ["wm.ServiceInput", {"type":"getLookupTableStoreByLabelInputs"}, {}, {
+	tsLookupAddressData: ["wm.ServiceVariable", {"autoUpdate":true,"inFlightBehavior":"executeLast","operation":"getLookupDataSheetByLabel","service":"ZABonlineDB"}, {"onSuccess":"tsLookupAddressDataSuccess"}, {
+		input: ["wm.ServiceInput", {"type":"getLookupDataSheetByLabelInputs"}, {}, {
 			binding: ["wm.Binding", {}, {}, {
 				wire: ["wm.Wire", {"expression":"\"ADDRESS_DATA\"","targetProperty":"label"}, {}]
 			}]
+		}]
+	}],
+	varDSContactData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupDataSheetByLabelRtnType"}, {}, {
+		binding: ["wm.Binding", {}, {}, {
+			wire: ["wm.Wire", {"expression":undefined,"source":"tsLookupContactData","targetProperty":"dataSet"}, {}]
+		}]
+	}],
+	varDSAddressData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupDataSheetByLabelRtnType"}, {}, {
+		binding: ["wm.Binding", {}, {}, {
+			wire: ["wm.Wire", {"expression":undefined,"source":"tsLookupAddressData","targetProperty":"dataSet"}, {}]
+		}]
+	}],
+	varDSPersonData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupDataSheetByLabelRtnType"}, {}, {
+		binding: ["wm.Binding", {}, {}, {
+			wire: ["wm.Wire", {"expression":undefined,"source":"tsLookupPersonData","targetProperty":"dataSet"}, {}]
+		}]
+	}],
+	varDSFactoryData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupDataSheetByLabelRtnType"}, {}, {
+		binding: ["wm.Binding", {}, {}, {
+			wire: ["wm.Wire", {"expression":undefined,"source":"tsLookupFactoryData","targetProperty":"dataSet"}, {}]
 		}]
 	}],
 	lbxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top","width":"1427px"}, {}, {
@@ -91,36 +111,36 @@ NewTenant.widgets = {
 				pnlRelatedLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlRelatedData: ["wm.FancyPanel", {"title":"Verknüpfungen"}, {}, {
 						cboFactoryDatasheetPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboFactoryDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Betriebsdaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType","dataValue":undefined,"displayField":"tableName","displayValue":""}, {}, {
+							cboFactoryDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Betriebsdaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupDataSheetByLabelRtnType","dataValue":undefined,"displayField":"caption","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
-									wire: ["wm.Wire", {"expression":undefined,"source":"tsLookupFactoryData","targetProperty":"dataSet"}, {}]
+									wire: ["wm.Wire", {"expression":undefined,"source":"varDSFactoryData","targetProperty":"dataSet"}, {}]
 								}]
 							}],
 							btnFindFactoryDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindFactoryDatasheetClick"}],
 							btnAddFactoryDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnAddFactoryDatasheetClick"}]
 						}],
 						cboPersonDatasheetPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboPersonDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Personendaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType","dataValue":undefined,"displayField":"tableName","displayValue":""}, {}, {
+							cboPersonDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Personendaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupDataSheetByLabelRtnType","dataValue":undefined,"displayField":"caption","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
-									wire: ["wm.Wire", {"expression":undefined,"source":"tsLookupPersonData","targetProperty":"dataSet"}, {}]
+									wire: ["wm.Wire", {"expression":undefined,"source":"varDSPersonData","targetProperty":"dataSet"}, {}]
 								}]
 							}],
 							btnFindPersonDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindPersonDatasheetClick"}],
 							btnAddPersonDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnAddPersonDatasheetClick"}]
 						}],
 						cboContactDatasheetPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboContactDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Kontaktdaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType","dataValue":undefined,"displayField":"tableName","displayValue":""}, {}, {
+							cboContactDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Kontaktdaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupDataSheetByLabelRtnType","dataValue":undefined,"displayField":"caption","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
-									wire: ["wm.Wire", {"expression":undefined,"source":"tsLookupContactData","targetProperty":"dataSet"}, {}]
+									wire: ["wm.Wire", {"expression":undefined,"source":"varDSContactData","targetProperty":"dataSet"}, {}]
 								}]
 							}],
 							btnFindContactDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindContactDatasheetClick"}],
 							btnAddContactDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnAddContactDatasheetClick"}]
 						}],
 						cboAddressDatasheetPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboAddressDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Adressdaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType","dataValue":undefined,"displayField":"tableName","displayValue":""}, {}, {
+							cboAddressDatasheet: ["wm.SelectMenu", {"allowNone":true,"caption":"Adressdaten","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupDataSheetByLabelRtnType","dataValue":undefined,"displayField":"caption","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
-									wire: ["wm.Wire", {"expression":undefined,"source":"tsLookupAddressData","targetProperty":"dataSet"}, {}]
+									wire: ["wm.Wire", {"expression":undefined,"source":"varDSAddressData","targetProperty":"dataSet"}, {}]
 								}]
 							}],
 							btnFindAddressDatasheet: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnFindAddressDatasheetClick"}],
@@ -166,7 +186,8 @@ NewTenant.widgets = {
 							btnGotoSitzung: ["wm.Button", {"caption":"Ändern","margin":"4","width":"100%"}, {"onclick":"navCallSession"}],
 							lblSumInfoAreaCode: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
 							lblSumInfoIdleTime: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
-							lblSumInfoLifetime: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}]
+							lblSumInfoLifetime: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}],
+							lblSumInfoMaxAttempt: ["wm.Label", {"caption":"","height":"20px","padding":"4","width":"100%"}, {}]
 						}]
 					}],
 					pnlSummeryDetailBottom: ["wm.Panel", {"height":"10%","horizontalAlign":"left","verticalAlign":"top","width":"100%"}, {}, {

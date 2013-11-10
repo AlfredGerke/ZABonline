@@ -456,10 +456,12 @@ dojo.declare("NewTenantCtrl", Controller, {
         var country_code = local.getDictionaryItem("CAPTION_COUNTRY_CODE") + ": " + global.utils.setDefaultStr(local.cboAreaCode.getDisplayValue(), no_info);
         var idletime = local.getDictionaryItem("CAPTION_SESSION_IDLETIME") + ": " + global.utils.setDefaultStr(local.edtSessionIdleTime.getDisplayValue(), no_info);
         var lifetime = local.getDictionaryItem("CAPTION_SESSION_LIFETIME") + ": " + global.utils.setDefaultStr(local.edtSessionLifetime.getDisplayValue(), no_info);
-        //
+        var max_attempt = local.getDictionaryItem("CAPTION_MAX_ATTEMPT") + ": " + global.utils.setDefaultStr(local.edtMaxAttempt.getDisplayValue(), no_info);
+        //                                   
         local.lblSumInfoAreaCode.setCaption(country_code);
         local.lblSumInfoIdleTime.setCaption(idletime);
         local.lblSumInfoLifetime.setCaption(lifetime);
+        local.lblSumInfoMaxAttempt.setCaption(max_attempt);
         //
         ret = true;  
         break;

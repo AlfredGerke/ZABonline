@@ -4,7 +4,7 @@ package com.zabonlinedb.data.output;
 
 
 /**
- * Generated for query "getLookupTenant" on 11/09/2013 21:44:42
+ * Generated for query "getLookupTenant" on 11/10/2013 22:41:44
  * 
  */
 public class GetLookupTenantRtnType {

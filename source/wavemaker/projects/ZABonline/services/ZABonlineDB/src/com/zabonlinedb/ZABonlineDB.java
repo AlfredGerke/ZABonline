@@ -16,6 +16,8 @@ import com.zabonlinedb.data.output.GetLookupAddressTypeByCountryRtnType;
 import com.zabonlinedb.data.output.GetLookupAreaCodeRtnType;
 import com.zabonlinedb.data.output.GetLookupContactPartnerByTenantRtnType;
 import com.zabonlinedb.data.output.GetLookupContactTypeByCountryRtnType;
+import com.zabonlinedb.data.output.GetLookupCountryRtnType;
+import com.zabonlinedb.data.output.GetLookupDataSheetByLabelRtnType;
 import com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType;
 import com.zabonlinedb.data.output.GetLookupPersonByTenantRtnType;
 import com.zabonlinedb.data.output.GetLookupRoleRtnType;
@@ -23,12 +25,11 @@ import com.zabonlinedb.data.output.GetLookupSalutationByCountryRtnType;
 import com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType;
 import com.zabonlinedb.data.output.GetLookupTenantRtnType;
 import com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType;
-import com.zabonlinedb.data.output.GetLookupCountryRtnType;
 
 
 /**
  *  Operations for service "ZABonlineDB"
- *  11/02/2013 23:11:21
+ *  11/10/2013 22:41:59
  * 
  */
 @SuppressWarnings("unchecked")
@@ -74,6 +75,10 @@ public class ZABonlineDB
 
     public List<GetLookupAreaCodeRtnType> getLookupAreaCode(PagingOptions pagingOptions) {
         return ((List<GetLookupAreaCodeRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupAreaCodeQueryName), pagingOptions));
+    }
+
+    public List<GetLookupDataSheetByLabelRtnType> getLookupDataSheetByLabel(String label, PagingOptions pagingOptions) {
+        return ((List<GetLookupDataSheetByLabelRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupDataSheetByLabelQueryName), label, pagingOptions));
     }
 
     public List<GetLookupAddressTypeByCountryRtnType> getLookupAddressTypeByCountry(Integer CountryId, PagingOptions pagingOptions) {
