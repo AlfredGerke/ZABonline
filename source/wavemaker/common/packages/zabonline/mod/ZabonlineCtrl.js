@@ -178,7 +178,7 @@ dojo.declare("ZabonlineCtrl", Controller, {
     var global = this.globalScope;  
     
     switch (select) {
-    case "main-add-field":
+    case "main-add-datasheet":
         dojo.publish(select, [global]);
         //
         break;

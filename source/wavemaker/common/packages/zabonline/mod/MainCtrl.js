@@ -64,6 +64,9 @@ dojo.declare("MainCtrl", Controller, {
   startAddTables: function(global) {
     this.startAddPageByName(global, "NewTable", "Neuanlage Datenbanktabelle");        
   },
+  startAddDatasheets: function(global) {
+    this.startAddPageByName(global, "NewDatasheet", "Neuanlage Datenblatt");  
+  },
   startErrOnCloseDlg: function(inError, msg) {
     var local = this.localScope;
     
@@ -81,7 +84,7 @@ dojo.declare("MainCtrl", Controller, {
     
     console.debug('Start Controller.subscribeForChannels.SubClass');   
     
-    dojo.subscribe("main-add-field", this, "startAddFields");
+    dojo.subscribe("main-add-datasheet", this, "startAddDatasheets");
     dojo.subscribe("main-add-table", this, "startAddTables");
     //dojo.subscribe("main-add-goto-schema", this, "");
     dojo.subscribe("main-add-tenant", this, "startAddTenant");

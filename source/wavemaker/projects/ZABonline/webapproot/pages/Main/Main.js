@@ -141,10 +141,6 @@ dojo.declare("Main", wm.Page, {
         }
     },
     /* nach diesem Aufruf wird ein weiteres OnClick-Ereignis ausgelöst, welches die SerciceVariabel für den CheckGrant-Service startet (s. Propertyeditor) */
-    mnuMainFelderClick: function(inSender /*,args*/ ) {
-        app.controller.startAdminGrantedModuleByChannel("main-add-field");
-    },
-    /* nach diesem Aufruf wird ein weiteres OnClick-Ereignis ausgelöst, welches die SerciceVariabel für den CheckGrant-Service startet (s. Propertyeditor) */
     mnuMainTabelleClick: function(inSender /*,args*/ ) {
         app.controller.startAdminGrantedModuleByChannel("main-add-table");
     },
@@ -222,5 +218,9 @@ dojo.declare("Main", wm.Page, {
             this.controller.handleExceptionByCtrl(this.name + ".mnuMainUeber_die_AnwendungClick() failed: " + e.toString(), e);
         }
     },
-    _end: 0
+    /* nach diesem Aufruf wird ein weiteres OnClick-Ereignis ausgelöst, welches die SerciceVariabel für den CheckGrant-Service startet (s. Propertyeditor) */
+    mnuMainDatenblattClick: function(inSender /*,args*/) {
+        app.controller.startAdminGrantedModuleByChannel("main-add-datasheet");
+	},
+	_end: 0
 });
