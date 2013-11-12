@@ -9,5 +9,6 @@ wm.loadLibs([
   "wm.packages.zabonline.mod.NewUserCtrl",
   "wm.packages.zabonline.mod.NewRoleCtrl",
   "wm.packages.zabonline.mod.NewTenantCtrl",
-  "wm.packages.zabonline.mod.SearchPageCtrl"
+  "wm.packages.zabonline.mod.SearchPageCtrl",
+  "wm.packages.zabonline.mod.NewCatalogItemCtrl"
 ]);

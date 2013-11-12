@@ -138,6 +138,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\TableStoreLookup.js
+				..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
 		+SQL
 			+Data
 				data_0001.sql
@@ -164,9 +165,21 @@ ZABonline
 			create_hibernate_workaround.sql
 [Open project files]
 0=batch.sql
+1=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
+2=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
+3=..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
 [Selected Project Files]
 Main=
-Selected=batch.sql
+Selected=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
 [batch.sql]
 TopLine=1
 Caret=1,1
+[..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js]
+TopLine=1
+Caret=59,1
+[..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js]
+TopLine=28
+Caret=1,58
+[..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js]
+TopLine=1
+Caret=49,14
