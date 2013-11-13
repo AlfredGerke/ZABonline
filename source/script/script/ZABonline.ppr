@@ -72,7 +72,7 @@ ZABonline
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\SearchPage.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewDatasheet.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewCatalogItem.js
-			-de-de
+			+de-de
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\app.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\Login.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\Main.js
@@ -168,9 +168,12 @@ ZABonline
 1=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
 2=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
 3=..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
+4=..\..\wavemaker\common\packages\zabonline\mod\Controller.js
+5=..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
+6=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewCatalogItem\NewCatalogItem.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
+Selected=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewCatalogItem\NewCatalogItem.js
 [batch.sql]
 TopLine=1
 Caret=1,1
@@ -183,3 +186,12 @@ Caret=1,58
 [..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js]
 TopLine=1
 Caret=49,14
+[..\..\wavemaker\common\packages\zabonline\mod\Controller.js]
+TopLine=53
+Caret=6,87
+[..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js]
+TopLine=117
+Caret=46,137
+[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewCatalogItem\NewCatalogItem.js]
+TopLine=1
+Caret=1,1

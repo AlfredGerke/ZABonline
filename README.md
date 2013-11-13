@@ -123,7 +123,7 @@ Administration:
 * Benutzer
 * Benutzerrollen
 * Mandanten 
-* Benutzerdefinierte Felder
+* Benutzerdefinierte Datenblätter
 * Benutzerdefinierte Tabellen
 
 Mitgliederverwaltung:    

@@ -96,7 +96,7 @@ dojo.declare("ZabonlineCtrl", Controller, {
       try {
         this.reInitWizard();
         if (!this.wizDLGByShowWizard) {
-          this.globalScope.wizDialog.hide();
+          global.wizDialog.hide();
         } else {
           this.wizDLGByShowWizard.hide();
         }
@@ -109,13 +109,14 @@ dojo.declare("ZabonlineCtrl", Controller, {
       console.debug('End Zabonline.onCloseWizard');        
   },
   closeWizard: function(askFor, title) {
+    var global = this.globalScope;
     try {
       console.debug('Start Zabonline.closeWizard');      
       
       if (askFor) {
-        this.globalScope.dlgConfirmDlg.setTitle((!title) ? this.globalScope.getDictionaryItem("CONFIRM_DLG_TITLE") : title);
-        this.globalScope.dlgConfirmDlg.setUserPrompt(askFor);  
-        this.globalScope.dlgConfirmDlg.showModal();
+        global.dlgConfirmDlg.setTitle((!title) ? global.getDictionaryItem("CONFIRM_DLG_TITLE") : title);
+        global.dlgConfirmDlg.setUserPrompt(askFor);  
+        global.dlgConfirmDlg.showModal();
       } else {
         this.onCloseWizard();
       }
@@ -125,26 +126,42 @@ dojo.declare("ZabonlineCtrl", Controller, {
       this.handleExceptionByCtrl(this.localScope.name + ".closeWizard() failed: " + e.toString(), e, -1);
     }
   },
+  openCatalogItem: function(page, titel, catalog, sender, callback) {
+    var local = this.localScope;
+    var global = this.globalScope;
+    
+    this.catalogItemConHandle = global.connect(global.dlgCatalogItem, "onClose", sender, callback);
+    
+    global.dlgCatalogItem.setTitle(title);
+    global.globalScope.dlgCatalogItem.setPageName(page);
+    global.globalScope.dlgCatalogItem.show();   
+  
+  },
+  closeCatalogItem: function() {
+  
+  },
   showWizard: function(page, title, inWiz, sender, callback, subscribtion) {
     var global = this.globalScope;    
     try {          
       if (!inWiz) {
 
         if (callback) {
-          this.conHandle = global.connect(global.wizSubDialog, "onClose", sender, callback);
+          //Stimmt das so mit global.wizSubDialog? 
+          //this.conHandle = global.connect(global.wizSubDialog, "onClose", sender, callback);
+          this.conHandle = global.connect(global.wizDialog, "onClose", sender, callback);
         }                
 
         this.wizDLGByShowWizard = null;             
-        this.globalScope.wizDialog.setTitle(title);
-        this.globalScope.wizDialog.setPageName(page);
-        this.globalScope.wizDialog.show();
+        global.wizDialog.setTitle(title);
+        global.wizDialog.setPageName(page);
+        global.wizDialog.show();
       } else {
 
         if (callback) {
           this.conHandle = global.connect(global.wizSubDialog, "onClose", sender, callback);
         }          
         
-        this.wizDLGByShowWizard = this.globalScope.wizSubDialog;
+        this.wizDLGByShowWizard = global.wizSubDialog;
         this.wizDLGByShowWizard.setTitle(title);
         this.wizDLGByShowWizard.setPageName(page);
         this.wizDLGByShowWizard.show();              
