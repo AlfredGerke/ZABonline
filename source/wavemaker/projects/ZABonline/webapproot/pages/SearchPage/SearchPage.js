@@ -41,7 +41,6 @@ dojo.declare("SearchPage", wm.Page, {
     onStart: function(inPage) {
         try {
             console.debug('SearchPage.onStart: Begin');
-
             console.debug('SearchPage.onStart: End');
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".onStart() failed: " + e.toString(), e);
