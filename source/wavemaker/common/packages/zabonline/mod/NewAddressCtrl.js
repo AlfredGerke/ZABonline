@@ -801,5 +801,8 @@ dojo.declare("NewAddressCtrl", Controller, {
   },
   showSearch: function(sender, searchParameter, titel) {
     this.inherited (arguments);
-  }    
+  },
+  showCatalogItem: function(sender, catalogParameter, titel) {
+    this.inherited (arguments);
+  }      
 });

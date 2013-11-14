@@ -84,5 +84,13 @@ dojo.declare("Controller", null, {
     } catch(e) {
       this.handleExceptionByCtrl(this.localScope.name + ".showSearch() failed: " + e.toString(), e, -1);
     }
-  }
+  },
+  showCatalogItem: function(sender, catalogParameter, titel) {
+    var local = this.localScope;
+    try {    
+      dojo.publish('init-catalogitem-by-parameter', [sender, catalogParameter, titel]);
+    } catch(e) {
+      this.handleExceptionByCtrl(local.name + ".showCatalogItem() failed: " + e.toString(), e, -1);
+    }
+  }  
 });

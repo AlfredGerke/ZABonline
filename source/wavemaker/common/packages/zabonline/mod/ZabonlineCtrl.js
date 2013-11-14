@@ -126,20 +126,6 @@ dojo.declare("ZabonlineCtrl", Controller, {
       this.handleExceptionByCtrl(this.localScope.name + ".closeWizard() failed: " + e.toString(), e, -1);
     }
   },
-  openCatalogItem: function(page, titel, catalog, sender, callback) {
-    var local = this.localScope;
-    var global = this.globalScope;
-    
-    this.catalogItemConHandle = global.connect(global.dlgCatalogItem, "onClose", sender, callback);
-    
-    global.dlgCatalogItem.setTitle(title);
-    global.globalScope.dlgCatalogItem.setPageName(page);
-    global.globalScope.dlgCatalogItem.show();   
-  
-  },
-  closeCatalogItem: function() {
-  
-  },
   showWizard: function(page, title, inWiz, sender, callback, subscribtion) {
     var global = this.globalScope;    
     try {          

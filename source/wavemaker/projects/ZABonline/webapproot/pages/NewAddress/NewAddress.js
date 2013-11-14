@@ -453,8 +453,9 @@ dojo.declare("NewAddress", wm.Page, {
     btnFindSalutationClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000, mode: 0, find: 'salutation', callback: 'onGetResultBySearch'}");
     },
+    refreshBySalutationCatalog: function() {},
     btnAddSalutationClick: function(inSender) {
-        //code kommt noch
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'SALUTATION', callback: 'refreshBySalutationCatalog'}", "Neuaufnahme Anrede");
     },
     btnFindTitelClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'titel', callback: 'onGetResultBySearch'}");
