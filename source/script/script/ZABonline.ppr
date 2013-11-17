@@ -17,9 +17,9 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\src\ZABonlineDB.spring.xml
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\project-managers.xml
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
-		+doc
+		-doc
 			..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
-		+webapproot
+		-webapproot
 			..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
 			..\..\wavemaker\projects\ZABonline\webapproot\config.js
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
@@ -50,7 +50,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 		-ressourcen
 			-javascript
-		+language
+		-language
 			-de
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewAddress.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\Main.js
@@ -164,46 +164,14 @@ ZABonline
 			clean_up.sql
 			create_hibernate_workaround.sql
 [Open project files]
-0=batch.sql
-1=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
-2=..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
-3=..\..\wavemaker\common\packages\zabonline\mod\Controller.js
-4=..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
-5=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewCatalogItem\NewCatalogItem.js
-6=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
-7=..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js
-8=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js
-9=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js
+0=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
+1=..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
-[batch.sql]
-TopLine=1
-Caret=1,1
-[..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js]
-TopLine=785
-Caret=5,804
-[..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js]
-TopLine=1
-Caret=49,14
-[..\..\wavemaker\common\packages\zabonline\mod\Controller.js]
-TopLine=63
-Caret=18,88
-[..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js]
-TopLine=110
-Caret=1,129
-[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewCatalogItem\NewCatalogItem.js]
-TopLine=5
-Caret=29,1
+Selected=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
 [..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js]
 TopLine=1
-Caret=64,55
-[..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js]
-TopLine=60
-Caret=1,78
-[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js]
-TopLine=437
-Caret=120,454
-[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js]
-TopLine=1
-Caret=42,4
+Caret=18,6
+[..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js]
+TopLine=112
+Caret=37,142
