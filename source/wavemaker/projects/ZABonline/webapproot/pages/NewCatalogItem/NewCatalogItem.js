@@ -5,8 +5,7 @@ dojo.declare("NewCatalogItem", wm.Page, {
         try {
             console.debug('NewCatalogItem.start: start');
 
-            app.dlgLoading.setParameter(app.dummyServiceVar, this.lbxMain);
-
+            //app.dlgLoading.setParameter(app.dummyServiceVar, this.lbxMain);
             this.controller = new NewCatalogItemCtrl(app, this);
 
             console.debug('NewCatalogItem.start: end');
@@ -22,6 +21,7 @@ dojo.declare("NewCatalogItem", wm.Page, {
         try {
             console.debug('NewCatalogItem.onShow: start');
 
+            app.dlgLoading.setParameter(app.dummyServiceVar, this.lbxMain);
             if (!this.controller) {
                 app.alert(this.getDictionaryItem("ERROR_MSG_BY_UNKNOWN_CONTROLLER"));
             } else {
@@ -30,14 +30,13 @@ dojo.declare("NewCatalogItem", wm.Page, {
                 if (!this.controller.loadLookupData()) {
                     throw this.getDictionaryItem("ERROR_MSG_BY_CONTROLLER_LOOUPDATA");
                 }
-                app.dummyServiceVar.doResult();
             }
-
+            
             console.debug('NewCatalogItem.onShow: end');
         } catch (e) {
             app.dummyServiceVar.doResult();
-            this.controller.handleExceptionByCtrl(this.name + ".onShow() failed: " + e.toString(), e, 1);
-            app.closeWizard();
+            this.controller.handleExceptionByCtrl(this.name + ".onShow() failed: " + e.toString(), e, 1);            
+            app.closeCataloItem(this.controller);
         }
     },
     onStart: function(inPage) {

@@ -7,7 +7,7 @@ dojo.declare("SearchPage", wm.Page, {
         try {
             console.debug('SearchPage.start: start');
 
-            app.dlgLoading.setParameter(app.dummyServiceVar, this.lbxMain);
+           
 
             this.controller = new SearchPageCtrl(app, this);
 
@@ -20,6 +20,8 @@ dojo.declare("SearchPage", wm.Page, {
         try {
             console.debug('SearchPage.onShow: start');
 
+            app.dlgLoading.setParameter(app.dummyServiceVar, this.lbxMain);
+            
             if (!this.controller) {
                 app.alert(this.getDictionaryItem("ERROR_MSG_BY_UNKNOWN_CONTROLLER"));
             } else {
@@ -35,7 +37,7 @@ dojo.declare("SearchPage", wm.Page, {
         } catch (e) {
             app.dummyServiceVar.doResult();
             this.controller.handleExceptionByCtrl(this.name + ".onShow() failed: " + e.toString(), e, 1);
-            app.closeWizard();
+            app.closeSearchPage(this.controller);
         }
     },
     onStart: function(inPage) {

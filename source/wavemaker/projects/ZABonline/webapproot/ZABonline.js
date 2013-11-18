@@ -64,7 +64,7 @@ dojo.declare("ZABonline", wm.Application, {
 		countryLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupCountry","service":"ZABonlineDB"}, {}, {
 			input: ["wm.ServiceInput", {"type":"getLookupCountryInputs"}, {}]
 		}], 
-		dlgCatalogItem: ["wm.PageDialog", {"desktopHeight":"300px","height":"300px","title":"Katalog erweitern","width":"420px"}, {}], 
+		dlgCatalogItem: ["wm.PageDialog", {"desktopHeight":"300px","height":"300px","pageName":"NewCatalogItem","title":"Katalog erweitern","width":"420px"}, {}], 
 		dlgConfirmDlg: ["wm.GenericDialog", {"button1Caption":"Ja","button1Close":true,"button2Caption":"Abbrechen","button2Close":true,"desktopHeight":"65px","height":"105px","title":"Titel","userPrompt":"asdfasdf"}, {"onButton1Click":"dlgConfirmDlgButton1Click"}], 
 		dlgLoading: ["wm.LoadingDialog", {}, {}], 
 		dlgSearchPage: ["wm.PageDialog", {"desktopHeight":"550px","height":"550px","pageName":"SearchPage","title":"Suchen","titlebarButtons":undefined,"width":"800px"}, {}], 
@@ -206,5 +206,11 @@ ZABonline.extend({
         } catch (e) {
             this.controller.handleExceptionByCtrl(e.toString());
         }
-    }
+    },
+    closeSearchPage: function(controller){
+        app.dlgSearchPage.hide();
+    },
+    closeCataloItem: function(controller){
+        app.dlgCatalogItem.hide();
+    }    
 });

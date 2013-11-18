@@ -799,10 +799,10 @@ dojo.declare("NewAddressCtrl", Controller, {
   handleExceptionByCtrl: function(msg, e, code) {
     this.inherited (arguments);    
   },
-  showSearch: function(sender, searchParameter, titel) {
+  showSearch: function(sender, searchParameter, title) {
     this.inherited (arguments);
   },
-  showCatalogItem: function(sender, catalogParameter, titel) {
+  showCatalogItem: function(sender, catalogParameter, title) {
     this.inherited (arguments);
   }      
 });

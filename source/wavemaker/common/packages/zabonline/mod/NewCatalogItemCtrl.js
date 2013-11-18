@@ -16,7 +16,7 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
   },
   loadLookupData: function() {
   },
-  initCatalogItemByParameter: function(sender, parameter, titel) {
+  initCatalogItemByParameter: function(sender, parameter, title) {
     /**
      * "parameter" ist ein JSON-String
      * Es muss immer die "kind"-Eigenschaft angegeben sein
@@ -39,8 +39,8 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
         console.debug('CatalogItemCtrl.initCatalogItemByParameter.sender: ' + sender.name)
         console.debug('CatalogItemCtrl.initCatalogItemByParameter.katalogparameter:' + parameter)
              
-        if (titel) {
-          global.dlgCatalogItem.setTitel(titel);
+        if (title) {
+          global.dlgCatalogItem.setTitle(title);
         }
   
         global.dlgCatalogItem.setPageName(this.catalogParameter.page);

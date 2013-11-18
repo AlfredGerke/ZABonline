@@ -77,18 +77,18 @@ dojo.declare("Controller", null, {
       }
     }        
   },
-  showSearch: function(sender, searchParameter, titel) {
+  showSearch: function(sender, searchParameter, title) {
     var local = this.localScope;
     try {    
-      dojo.publish('init-search-by-parameter', [sender, searchParameter, titel]);
+      dojo.publish('init-search-by-parameter', [sender, searchParameter, title]);
     } catch(e) {
       this.handleExceptionByCtrl(this.localScope.name + ".showSearch() failed: " + e.toString(), e, -1);
     }
   },
-  showCatalogItem: function(sender, catalogParameter, titel) {
+  showCatalogItem: function(sender, catalogParameter, title) {
     var local = this.localScope;
     try {    
-      dojo.publish('init-catalogitem-by-parameter', [sender, catalogParameter, titel]);
+      dojo.publish('init-catalogitem-by-parameter', [sender, catalogParameter, title]);
     } catch(e) {
       this.handleExceptionByCtrl(local.name + ".showCatalogItem() failed: " + e.toString(), e, -1);
     }

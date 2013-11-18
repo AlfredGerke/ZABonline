@@ -166,12 +166,24 @@ ZABonline
 [Open project files]
 0=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
 1=..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
+2=..\..\wavemaker\common\packages\zabonline\mod\Controller.js
+3=..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js
+4=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
+Selected=..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
 [..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js]
-TopLine=1
-Caret=18,6
+TopLine=30
+Caret=47,43
 [..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js]
-TopLine=112
+TopLine=87
 Caret=37,142
+[..\..\wavemaker\common\packages\zabonline\mod\Controller.js]
+TopLine=68
+Caret=1,88
+[..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js]
+TopLine=39
+Caret=1,42
+[..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js]
+TopLine=489
+Caret=54,802
