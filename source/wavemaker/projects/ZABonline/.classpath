@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="services/addressBookService/src"/>
+  <classpathentry kind="src" path="services/CatalogService/src"/>
 	<classpathentry kind="src" path="services/RegistryService/src"/>
 	<classpathentry kind="src" path="services/ZABonlineSessionMgrService/src"/>
 	<classpathentry kind="src" path="services/ZABonlineDBService/src"/>
 	<classpathentry kind="src" path="services/ResultStructs/src"/>
 	<classpathentry kind="src" path="services/FileUploadDownload/src"/>
 	<classpathentry kind="src" path="services/ZABonlineDB/src"/>
-	<classpathentry excluding="addressBookService/src/|FileUploadDownload/src/|ZABonlineDB/src/|ZABonlineSessionMgrService/src/|ZABonlineDBService/src/|ResultStructs/src/|RegistryService/src/|Miscellaneous/src/|FactoryService/src/|MiscellaneousAnonym/src/|ZABonlineAdminService/src/|ZABonlineGrantsService/src/" kind="src" path="services"/>
+	<classpathentry excluding="addressBookService/src/|CatalogService/src/|FileUploadDownload/src/|ZABonlineDB/src/|ZABonlineSessionMgrService/src/|ZABonlineDBService/src/|ResultStructs/src/|RegistryService/src/|Miscellaneous/src/|FactoryService/src/|MiscellaneousAnonym/src/|ZABonlineAdminService/src/|ZABonlineGrantsService/src/" kind="src" path="services"/>
 	<classpathentry kind="src" path="webapproot/WEB-INF/lib"/>
 	<classpathentry kind="src" path="services/Miscellaneous/src"/>
 	<classpathentry kind="src" path="services/FactoryService/src"/>

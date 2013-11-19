@@ -12,6 +12,7 @@
 		"service_invalid_MiscellaneousAnonym": false, 
 		"service_invalid_ZABonlineAdminService": false, 
 		"service_invalid_ZABonlineGrantsService": false, 
-		"service_invalid_Miscellaneous": false
+		"service_invalid_Miscellaneous": false, 
+		"service_invalid_CatalogService": false
 	}
 }

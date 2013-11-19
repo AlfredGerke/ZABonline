@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="CatalogService" class="de.zabonline.srv.db.CatalogManagement" CRUDService="false" type="JavaService" springFile="CatalogService.spring.xml">
+    <operation name="addCatalogItem">
+        <parameter name="catalog" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aTenantId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aCountryId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aCaption" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aDesc" typeRef="java.lang.String" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
+    <dataobjects/>
+</service>

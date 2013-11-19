@@ -17,9 +17,9 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\src\ZABonlineDB.spring.xml
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\project-managers.xml
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
-		-doc
+		+doc
 			..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
-		-webapproot
+		+webapproot
 			..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
 			..\..\wavemaker\projects\ZABonline\webapproot\config.js
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
@@ -50,7 +50,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 		-ressourcen
 			-javascript
-		-language
+		+language
 			-de
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewAddress.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\Main.js
@@ -139,6 +139,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\NewRoleCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\TableStoreLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
+				..\..\wavemaker\common\packages\zabonline\mod\CountryCodeLookup.js
 		+SQL
 			+Data
 				data_0001.sql
@@ -165,25 +166,13 @@ ZABonline
 			create_hibernate_workaround.sql
 [Open project files]
 0=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
-1=..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
-2=..\..\wavemaker\common\packages\zabonline\mod\Controller.js
-3=..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js
-4=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
+1=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
+Selected=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
 [..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js]
-TopLine=30
-Caret=47,43
-[..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js]
-TopLine=87
-Caret=37,142
-[..\..\wavemaker\common\packages\zabonline\mod\Controller.js]
-TopLine=68
-Caret=1,88
-[..\..\wavemaker\common\packages\zabonline\mod\SearchPageCtrl.js]
-TopLine=39
-Caret=1,42
-[..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js]
-TopLine=489
-Caret=54,802
+TopLine=141
+Caret=63,167
+[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js]
+TopLine=1
+Caret=27,2

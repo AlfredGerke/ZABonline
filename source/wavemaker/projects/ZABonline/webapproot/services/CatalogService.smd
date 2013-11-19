@@ -1,0 +1,25 @@
+{
+	"methods": [{
+		"name": "addCatalogItem",
+		"operationType": null,
+		"parameters": [{
+			"name": "catalog",
+			"type": "java.lang.String"
+		}, {
+			"name": "aTenantId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aCountryId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aCaption",
+			"type": "java.lang.String"
+		}, {
+			"name": "aDesc",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[de.zabonline.srv.Results.ProcResults]"
+	}],
+	"serviceType": "JSON-RPC",
+	"serviceURL": "CatalogService.json"
+}

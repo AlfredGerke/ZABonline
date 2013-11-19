@@ -3,6 +3,9 @@
     <bean class="com.wavemaker.runtime.service.TypeManager" parent="typeManagerBase" scope="singleton" id="typeManager">
         <property name="types">
             <map merge="true">
+                <entry key="CatalogService">
+                    <list/>
+                </entry>
                 <entry key="FactoryService">
                     <list/>
                 </entry>

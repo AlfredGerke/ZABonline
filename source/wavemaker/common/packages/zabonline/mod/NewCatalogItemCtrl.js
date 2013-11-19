@@ -13,8 +13,138 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
   initStart: function() {
     var global = this.globalScope;
     var local = this.localScope;  
+    
+    local.connect(global.countryCodeLookup, "onSuccess", this, "onInitCountryCode");    
   },
+  setByQuickSetup: function(target, doRequire, doClear) {
+    var local = this.localScope;
+    var ret = false;    
+    var no_reg_expr = local.getDictionaryItem("REG_EXPR_NO_EXPR"); 
+    try {
+      switch (target) {
+        case "Catalog":  
+          //local.edtContryCode.quickSetup(doRequire, no_reg_expr, doClear);
+          local.edtDescription.quickSetup(doRequire, no_reg_expr, doClear);
+          local.edtCaption.quickSetup(doRequire, no_reg_expr, doClear);
+          //
+          ret = true;          
+          break;
+        default:
+          throw "NewCatalogItemCtrl.setQuickSetup: keine gültige Auswahl";
+          //
+          ret = flase;          
+          break;
+      }
+      return ret;
+    } catch (e) {
+      this.handleExceptionByCtrl(local.name + ".setByQuickSetup() failed: " + e.toString(), e, -1);
+      return false;
+    }
+  },  
+  clearData: function(target) {
+    var global = this.globalScope;
+    var local = this.localScope;    
+  
+    var ret = false;
+    try {
+      switch (target) {
+        case "Catalog":
+          local.pnlDetail.clearData();                   
+          //          
+          ret = true;          
+          break;
+        default:
+          throw "NewCatalogItemCtrl.clearData: keine gültige Auswahl";
+          //
+          ret = flase;          
+          break;
+      }      
+      return ret;
+    } catch (e) {
+      this.handleExceptionByCtrl(local.name + ".clearData() failed: " + e.toString(), e, -1);      
+      return false;
+    }
+  },  
+  clearWizard: function() {
+    try {
+      if (!this.setByQuickSetup("Catalog", true, true)) {
+        throw "Fehler beim Einrichten der Mandantenbezeichnung!";
+      }
+            
+      if (!this.clearData("Catalog")) {
+        throw "Fehler beim Zurücksetzen der Mandantenbezeichnung!";
+      }
+
+      if (!this.initSelectMenu()) {
+        global.toastWarning(this.getDictionaryItem("ERROR_MSG_BY_INIT_SELECTMENU"));
+      }
+      
+      return true;
+    } catch (e) {    
+      this.handleExceptionByCtrl(this.localScope.name + ".clearWizard() failed: " + e.toString(), e, -1);      
+      return false;
+    }
+  },  
+  onInitCountryCode: function() {
+    this.initSelectMenu("CountryCode");
+  },
+  initSelectMenu: function(target, idx) {  
+    var global = this.globalScope;
+    var local = this.localScope;
+    var doBreak = true;    
+    try {
+      console.debug("Start NewCatalogItemCtrl.initSelectMenu");
+      
+      if (!target) {
+        target = "CountryCode";
+        doBreak = false; 
+      }
+      
+      if (!idx) {
+        idx = 0;
+      }
+      
+      switch (target) {
+        case "CountryCode":
+          //
+          var initCountryCodeValue = global.globalData.countryCode();
+          local.edtContryCode.setDisplayValue(initCountryCodeValue);
+          //
+          break;
+        default:
+          throw "NewTenantCtrl.initSelectMenu: keine gültige Auswahl";
+          //
+          break;    
+      }
+      console.debug("End NewCatalogItemCtrl.initSelectMenu");
+                  
+      return true;
+    } catch (e) {
+      this.handleExceptionByCtrl(this.localScope.name + ".initSelectMenu() failed: " + e.toString(), e, -1);
+      return false;
+    }     
+  },    
   loadLookupData: function() {
+    var local = this.localScope;
+    var global = this.globalScope;  
+    
+    var success = 0;
+    try {      
+     
+      if (global.countryCodeLookup.refresh() > 0) {
+        success = 1;
+      } else {
+        success = 0;
+      }    
+
+      if (success == 1) {
+        this.globalScope.globalData.tenantId(this.localScope.varTenantId);
+      }  
+      return success;
+    } catch (e) {
+      this.handleExceptionByCtrl(local.name + ".loadLookupData() failed: " + e.toString(), e, -1);      
+      return false;      
+    }  
   },
   initCatalogItemByParameter: function(sender, parameter, title) {
     /**
