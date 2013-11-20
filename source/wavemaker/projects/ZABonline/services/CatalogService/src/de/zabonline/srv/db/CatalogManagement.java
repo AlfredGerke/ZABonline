@@ -28,6 +28,7 @@ public class CatalogManagement extends JavaServiceSuperClass {
   public List<Results.ProcResults> addCatalogItem(String catalog,
     Integer aTenantId,
     Integer aCountryId,
+    Boolean aDoNotDelete,
     String aCaption,
     String aDesc) {
 
@@ -39,6 +40,8 @@ public class CatalogManagement extends JavaServiceSuperClass {
     String sessionId = SessionManager.getSessionId();
     String userName = SessionManager.getUserName();
     String ipByRequest = SessionManager.getRemoteAddress();
+    
+    Short aDoNotDelete_smallint = (short) ((aDoNotDelete) ? 1 : 0);
 
     ZABonlineDB dbService = ZABonlineDBService.getZABonlineDBService();
     dbService.getDataServiceManager()
@@ -50,6 +53,7 @@ public class CatalogManagement extends JavaServiceSuperClass {
       if (isAuthentic) {
         result = session.createSQLQuery("select * from SP_ADDCATALOGITEM(:SESSIONID, " + ":USERNAME, "
                                         + ":IP, "
+                                        + ":DONOTDELETE, "
                                         + ":CATALOG, "
                                         + ":TENANTID, "
                                         + ":COUNTRYID, "
@@ -67,6 +71,8 @@ public class CatalogManagement extends JavaServiceSuperClass {
               userName)
             .setParameter("IP",
               ipByRequest)
+            .setParameter("DONOTDELETE",
+              aDoNotDelete_smallint)
             .setParameter("TENANTID",
               aTenantId)
             .setParameter("COUNTRYID",

@@ -4,6 +4,7 @@
         <parameter name="catalog" typeRef="java.lang.String" isList="false"/>
         <parameter name="aTenantId" typeRef="java.lang.Integer" isList="false"/>
         <parameter name="aCountryId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aDoNotDelete" typeRef="java.lang.Boolean" isList="false"/>
         <parameter name="aCaption" typeRef="java.lang.String" isList="false"/>
         <parameter name="aDesc" typeRef="java.lang.String" isList="false"/>
         <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>

@@ -19,7 +19,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
 		+doc
 			..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
-		+webapproot
+		-webapproot
 			..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
 			..\..\wavemaker\projects\ZABonline\webapproot\config.js
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
@@ -50,7 +50,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 		-ressourcen
 			-javascript
-		+language
+		-language
 			-de
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\NewAddress.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\Main.js
@@ -167,12 +167,32 @@ ZABonline
 [Open project files]
 0=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
 1=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js
+2=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
+3=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js
+4=..\..\wavemaker\common\packages\zabonline\mod\NewTenantCtrl.js
+5=..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js
+6=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js
 [Selected Project Files]
 Main=
 Selected=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
 [..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js]
-TopLine=141
-Caret=63,167
+TopLine=48
+Caret=55,68
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js]
 TopLine=1
-Caret=27,2
+Caret=39,8
+[..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js]
+TopLine=113
+Caret=1,1
+[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js]
+TopLine=1
+Caret=1,1
+[..\..\wavemaker\common\packages\zabonline\mod\NewTenantCtrl.js]
+TopLine=64
+Caret=23,79
+[..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js]
+TopLine=1
+Caret=49,35
+[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js]
+TopLine=335
+Caret=1,361

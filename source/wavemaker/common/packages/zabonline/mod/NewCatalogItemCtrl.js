@@ -10,11 +10,69 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
     
     console.debug('End NewCatalogItemCtrl.constructor');
   },
+  initControls: function() {
+    var local = this.localScope;
+    
+    local.pnlCatalogTitel.setTitle(local.getDictionaryItem("CAPTION_CATALOG"));  
+  },
   initStart: function() {
     var global = this.globalScope;
     var local = this.localScope;  
     
+    this.initControls();
+    
     local.connect(global.countryCodeLookup, "onSuccess", this, "onInitCountryCode");    
+  },  
+  setCountryCodeControlByMode: function(mode){
+    var local = this.localScope;
+    switch (mode) {
+      case 0:
+        local.btnFindCountry.setShowing(false);
+        local.btnAddCountryCode.setShowing(false);
+        local.edtContryCode.setDisabled(true);
+        
+        break;
+      case 1:
+        local.btnFindCountry.setShowing(true);
+        local.btnAddCountryCode.setShowing(true);
+        local.edtContryCode.setDisabled(false);
+                
+        break;
+      default:
+        local.btnFindCountry.setShowing(false);
+        local.btnAddCountryCode.setShowing(false);
+        local.edtContryCode.setDisabled(true);
+      
+        break;    
+    }
+  },
+  onInitControls: function() {
+    /**
+     * "parameter" ist ein JSON-String
+     * Es muss immer die "kind"-Eigenschaft angegeben sein
+     * "kind" gibt immer die Struktur des JSON-Strings vor          
+     * für "kind": 1001
+     *   "mode" unterscheiden zwischen Admin und Nicht-Admins
+     *   "mode": 0 -> ist nicht admin
+     *   "mode": 1 -> ist admin
+     *   "page": z.B. NewCatalogItem -> Name der Page     
+     *   "catalog": z.B. SALUATION -> Namer der Tabelle des Katalogs     
+     *   "callback": Callback soll nach dem Beenden des Dialoges getriggert werden                         
+     */
+    var local = this.localScope;
+    var catalog = this.catalogParameter.catalog; 
+    var mode = this.catalogParameter.mode;
+    
+    if (catalog) {
+      local.pnlCatalogTitel.setTitle(local.getDictionaryItem("CAPTION_CATALOG") + ": " + catalog); 
+      local.varCatalog.setValue("dataValue", catalog);  
+    }
+    
+    if (mode) {
+      this.setCountryCodeControlByMode(mode);
+    } else {
+      this.setCountryCodeControlByMode(0);
+    }
   },
   setByQuickSetup: function(target, doRequire, doClear) {
     var local = this.localScope;
@@ -76,7 +134,7 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
       }
 
       if (!this.initSelectMenu()) {
-        global.toastWarning(this.getDictionaryItem("ERROR_MSG_BY_INIT_SELECTMENU"));
+        global.toastWarning(local.getDictionaryItem("ERROR_MSG_BY_INIT_SELECTMENU"));
       }
       
       return true;
@@ -120,7 +178,7 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
                   
       return true;
     } catch (e) {
-      this.handleExceptionByCtrl(this.localScope.name + ".initSelectMenu() failed: " + e.toString(), e, -1);
+      this.handleExceptionByCtrl(local.name + ".initSelectMenu() failed: " + e.toString(), e, -1);
       return false;
     }     
   },    
@@ -166,16 +224,16 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
       if (kindFound != -1) {      
         this.catalogParameter = dojo.fromJson(parameter);
       
-        console.debug('CatalogItemCtrl.initCatalogItemByParameter.sender: ' + sender.name)
-        console.debug('CatalogItemCtrl.initCatalogItemByParameter.katalogparameter:' + parameter)
+        console.debug('CatalogItemCtrl.initCatalogItemByParameter.sender: ' + sender.name);
+        console.debug('CatalogItemCtrl.initCatalogItemByParameter.katalogparameter:' + parameter);
              
         if (title) {
-          global.dlgCatalogItem.setTitle(title);
+          global.dlgCatalogItem.setTitle(title);         
         }
-  
+        
         global.dlgCatalogItem.setPageName(this.catalogParameter.page);
         global.dlgCatalogItem.show();
-    
+        
       } else {
          throw this.getDictionaryItem("ERROR_MSG_BY_CONTROLLER_NO_KIND_FOUND");
       }                  

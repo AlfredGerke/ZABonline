@@ -12,6 +12,9 @@
 			"name": "aCountryId",
 			"type": "java.lang.Integer"
 		}, {
+			"name": "aDoNotDelete",
+			"type": "java.lang.Boolean"
+		}, {
 			"name": "aCaption",
 			"type": "java.lang.String"
 		}, {
