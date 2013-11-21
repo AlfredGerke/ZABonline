@@ -265,55 +265,6 @@ dojo.declare("NewAddress", wm.Page, {
 
             app.dlgLoading.setParameter(this.addAddressBookItem, this.wizNewAddress);
 
-            /* this.startTestProcVar(); */
-
-/* In einer ersten Version werden die allermeisten Eingabeparamter direkt mit den Controls gebunden!!!
-            this.addAddressBookItem.input.setValue('aTenantId',  app.globalData.tenantId());
-            this.addAddressBookItem.input.setValue('aSalutationId', ???);
-            this.addAddressBookItem.input.setValue('aAltsalutation', ???);
-            this.addAddressBookItem.input.setValue('aTitelId', ???);
-            this.addAddressBookItem.input.setValue('aFirstName', ???);
-            this.addAddressBookItem.input.setValue('aName', ???);
-            this.addAddressBookItem.input.setValue('aName2', ???);
-            this.addAddressBookItem.input.setValue('aDayOfBirth', ???);
-            this.addAddressBookItem.input.setValue('aIsPrivatePerson', ???);
-            this.addAddressBookItem.input.setValue('aIsMarried', ???);
-            this.addAddressBookItem.input.setValue('aMarriedToId', ???);
-            this.addAddressBookItem.input.setValue('aMarriedSince', ???);
-            this.addAddressBookItem.input.setValue('aMarriagePartnerFirstName', ???);
-            this.addAddressBookItem.input.setValue('aMarriagePartnerName1', ???);
-            this.addAddressBookItem.input.setValue('aAddressDataPresent', ???);
-            this.addAddressBookItem.input.setValue('aAddressTypeId', ???);
-            this.addAddressBookItem.input.setValue('aDistrict', ???);
-            this.addAddressBookItem.input.setValue('aZipcode', ???);
-            this.addAddressBookItem.input.setValue('aCity', ???);
-            this.addAddressBookItem.input.setValue('aPostOfficeBox', ???);
-            this.addAddressBookItem.input.setValue('aStreet', ???);
-            this.addAddressBookItem.input.setValue('aStreetAddressFrom', ???);
-            this.addAddressBookItem.input.setValue('aStreetAddressTo', ???);
-            this.addAddressBookItem.input.setValue('aIsPostAddress', ???);
-            this.addAddressBookItem.input.setValue('aIsPrivateAddress', ???);
-            this.addAddressBookItem.input.setValue('aContactDataPresent', ???);
-            this.addAddressBookItem.input.setValue('aContactTypeId', ???);
-            this.addAddressBookItem.input.setValue('aAreaCode', ???);
-            this.addAddressBookItem.input.setValue('aPhoneFmt', ???);
-            this.addAddressBookItem.input.setValue('aFaxFmt', ???);
-            this.addAddressBookItem.input.setValue('aWWW', ???);
-            this.addAddressBookItem.input.setValue('aEmail', ???);
-            this.addAddressBookItem.input.setValue('aSkype', ???);
-            this.addAddressBookItem.input.setValue('aMessangerName', ???);
-            this.addAddressBookItem.input.setValue('aBankDataPresent', ???);
-            this.addAddressBookItem.input.setValue('aDepositor', ???);
-            this.addAddressBookItem.input.setValue('aBlzFmt', ???);
-            this.addAddressBookItem.input.setValue('aKtoFmt', ???);
-            this.addAddressBookItem.input.setValue('aIBAN', ???);
-            this.addAddressBookItem.input.setValue('aBIC', ???);
-            this.addAddressBookItem.input.setValue('aInfoDataPresent', ???);
-            this.addAddressBookItem.input.setValue('aInfo', ???);
-            this.addAddressBookItem.input.setValue('aPhotoPresent', ???);
-            this.addAddressBookItem.input.setValue('aPhotoUniqueName', ???);
-            this.addAddressBookItem.input.setValue('aPhotoRealName', ???);*/
-
             if (this.addAddressBookItem.canUpdate()) {
                 this.addAddressBookItem.update();
             } else {
@@ -353,7 +304,7 @@ dojo.declare("NewAddress", wm.Page, {
             app.dummyServiceVar.doResult();
             return true;
         } catch (e) {
-            this.controller.handleExceptionByCtrl(this.name + ".addAddressBookItemSuccess() failed: " + e.toString(), e, -1);
+            this.controller.handleExceptionByCtrl(this.name + ".refreshOnAddAddressBookItemSuccess() failed: " + e.toString(), e, -1);
             app.dummyServiceVar.doResult();
             return false;
         }
@@ -455,13 +406,14 @@ dojo.declare("NewAddress", wm.Page, {
     },
     refreshBySalutationCatalog: function() {},
     btnAddSalutationClick: function(inSender) {
-        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'SALUTATION', callback: 'refreshBySalutationCatalog'}", "Neuaufnahme Anrede");
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'SALUTATION', callback: 'refreshBySalutationCatalog'}", app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_SALUTATION"));
     },
     btnFindTitelClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'titel', callback: 'onGetResultBySearch'}");
     },
+    refreshByTitleCatalog: function() {},
     btnAddTitelClick: function(inSender) {
-        //code kommt noch
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'TITLE', callback: 'refreshByTitleCatalog'}", app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_TITLE"));
     },
     btnFindPersonClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'person', callback: 'onGetResultBySearch'}");
@@ -472,14 +424,16 @@ dojo.declare("NewAddress", wm.Page, {
     btnFindAddressTypeClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'addressType', callback: 'onGetResultBySearch'}");
     },
+    refreshByAddressTypeCatalog: function() {},
     btnAddAddressTypeClick: function(inSender) {
-        //code kommt noch
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'ADDRESS_TYPE', callback: 'refreshByAddressTypeCatalog'}", app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_ADDRESS_TYPE"));
     },
     btnFindContactTypeClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'contactType', callback: 'onGetResultBySearch'}");
     },
+    refreshByContactTypeCatalog: function() {},
     btnAddContactTypeClick: function(inSender) {
-        //code kommt noch
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'CONTACT_TYPE', callback: 'refreshByContactTypeCatalog'}", app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_CONTACT_TYPE"));
     },
     btnFindAreaCodeClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'areaCode', callback: 'onGetResultBySearch'}");

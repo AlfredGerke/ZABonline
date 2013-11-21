@@ -260,7 +260,7 @@ dojo.declare("NewFactory", wm.Page, {
             app.dummyServiceVar.doResult();
             return true;
         } catch (e) {
-            this.controller.handleExceptionByCtrl(this.name + ".addAddressBookItemSuccess() failed: " + e.toString(), e, -1);
+            this.controller.handleExceptionByCtrl(this.name + ".refreshOnAddServiceSuccess() failed: " + e.toString(), e, -1);
             app.dummyServiceVar.doResult();
             return false;
         }
