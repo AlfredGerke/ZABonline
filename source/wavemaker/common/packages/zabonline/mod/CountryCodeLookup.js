@@ -20,6 +20,8 @@ dojo.declare("CountryCodeLookup", null, {
   },
   refresh: function(force) {
     if ((this.getCount() === 0) || (force == 1)) {
+      
+      console.debug('CountryCodeLookup.refresh');
 
       var refresh_success = 0;
 
@@ -50,10 +52,12 @@ dojo.declare("CountryCodeLookup", null, {
     console.debug('End CountryCodeLookup.postscript');
   },
   onSuccess: function(inSender, inDeprecated) {
+    console.debug('Start CountryCodeLookup.onSuccess');
     try {
 
     } catch (e) {
         console.error('ERROR IN countryCodeLookupDataSuccess: ' + e);
     }
+    console.debug('End CountryCodeLookup.onSuccess');
   }
 });

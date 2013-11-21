@@ -70,17 +70,17 @@ dojo.declare("NewCatalogItem", wm.Page, {
             console.debug('End addCatalogItemError');
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".addCatalogItemError() failed: " + e.toString(), e);
-        }		
-	},
-	addCatalogItemResult: function(inSender, inDeprecated) {
+        }
+    },
+    addCatalogItemResult: function(inSender, inDeprecated) {
         try {
             console.debug('Start addCatalogItemResult');
 
             console.debug('End addCatalogItemResult');
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".addCatalogItemResult() failed: " + e.toString(), e);
-        }		
-	},
+        }
+    },
     refreshOnAddCatalogItemSuccess: function() {
         try {
             app.dummyServiceVar.doRequest();
@@ -96,11 +96,11 @@ dojo.declare("NewCatalogItem", wm.Page, {
             app.dummyServiceVar.doResult();
             return false;
         }
-    },    
-	addCatalogItemSuccess: function(inSender, inDeprecated) {
+    },
+    addCatalogItemSuccess: function(inSender, inDeprecated) {
         try {
             console.debug('Start addCatalogItemSuccess');
-            
+
             console.debug('Success: ' + this.varResultByInsert.getValue('success'));
             console.debug('Code: ' + this.varResultByInsert.getValue('code'));
             console.debug('Info: ' + this.varResultByInsert.getValue('info'));
@@ -157,10 +157,24 @@ dojo.declare("NewCatalogItem", wm.Page, {
             console.debug('End addCatalogItemSuccess');
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".addCatalogItemSuccess() failed: " + e.toString(), e);
-        }		
-	},
-	btnAddCatalogItemClick: function(inSender) {
-		
-	},
-	_end: 0
+        }
+    },
+    btnAddCatalogItemClick: function(inSender) {
+        try {
+            console.debug('Start btnAddCatalogItemClick');
+
+            app.dlgLoading.setParameter(this.addCatalogItem, this.pnlCatalogTitle);
+
+            if (this.addCatalogItem.canUpdate()) {
+                this.addCatalogItem.update();
+            } else {
+                app.toastError(this.getDictionaryItem("ERROR_MSG_ADD_CATALOGITEM_NO_SUCCESS_BY_EXECUTE"));
+            }
+
+            console.debug('End btnAddCatalogItemClick');
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".btnAddCatalogItemClick() failed: " + e.toString(), e);
+        }
+    },
+    _end: 0
 });

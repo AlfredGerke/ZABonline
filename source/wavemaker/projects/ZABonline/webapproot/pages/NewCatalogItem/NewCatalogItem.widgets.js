@@ -19,7 +19,7 @@ NewCatalogItem.widgets = {
 	}],
 	varCatalog: ["wm.Variable", {"type":"StringData"}, {}],
 	lbxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top"}, {}, {
-		pnlCatalogTitel: ["wm.FancyPanel", {"title":"Katalog"}, {}, {
+		pnlCatalogTitle: ["wm.FancyPanel", {"title":"Katalog"}, {}, {
 			pnlClient: ["wm.Panel", {"height":"100%","horizontalAlign":"left","margin":"5","padding":"5","verticalAlign":"top","width":"100%"}, {}, {
 				pnlDetail: ["wm.Panel", {"height":"100%","horizontalAlign":"left","verticalAlign":"top","width":"100%"}, {}, {
 					selectMenu1Panel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"373px"}, {}, {
