@@ -22,8 +22,8 @@ NewCatalogItem.widgets = {
 		pnlCatalogTitle: ["wm.FancyPanel", {"title":"Katalog"}, {}, {
 			pnlClient: ["wm.Panel", {"height":"100%","horizontalAlign":"left","margin":"5","padding":"5","verticalAlign":"top","width":"100%"}, {}, {
 				pnlDetail: ["wm.Panel", {"height":"100%","horizontalAlign":"left","verticalAlign":"top","width":"100%"}, {}, {
-					selectMenu1Panel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"373px"}, {}, {
-						edtContryCode: ["wm.SelectMenu", {"caption":"Länderkennung","captionSize":"110px","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupCountryRtnType","dataValue":undefined,"displayField":"countryCode","displayValue":"","helpText":undefined,"required":true}, {}, {
+					selectMenu1Panel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"298px"}, {}, {
+						edtContryCode: ["wm.SelectMenu", {"caption":"Länderkennung","captionSize":"110px","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupCountryRtnType","dataValue":undefined,"displayField":"countryCode","displayValue":"","helpText":undefined,"required":true,"width":"226px"}, {}, {
 							binding: ["wm.Binding", {}, {}, {
 								wire: ["wm.Wire", {"expression":undefined,"source":"app.countryCodeData","targetProperty":"dataSet"}, {}]
 							}]
@@ -36,7 +36,11 @@ NewCatalogItem.widgets = {
 					edtDescription: ["wm.Text", {"caption":"Beschreibung","captionSize":"110px","dataValue":undefined,"displayValue":"","maxChars":"2000","required":true}, {}]
 				}],
 				pnlBottom: ["wm.Panel", {"height":"60px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"bottom","width":"100%"}, {}, {
-					btnAddCatalogItem: ["wm.Button", {"caption":"Eintrag aufnehmen","margin":"4","width":"100%"}, {"onclick":"btnAddCatalogItemClick"}]
+					btnAddCatalogItem: ["wm.Button", {"caption":"Eintrag aufnehmen","margin":"4","width":"100%"}, {"onclick":"btnAddCatalogItemClick"}, {
+						binding: ["wm.Binding", {}, {}, {
+							wire: ["wm.Wire", {"expression":"(${edtContryCode.invalid} || ${edtCaption.invalid} || ${edtDescription.invalid})","targetProperty":"disabled"}, {}]
+						}]
+					}]
 				}]
 			}]
 		}]

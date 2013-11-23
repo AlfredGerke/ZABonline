@@ -2184,6 +2184,85 @@ COMMIT WORK;
 /*                                 Erst jetzt stehen ZABCATALOGE zur Verfügung                                  
 /******************************************************************************/
 
+SET TERM ^ ;
+
+CREATE OR ALTER PROCEDURE SP_ADDCATALOGITEM_BY_SRV (
+  ASESSIONID VARCHAR(128),
+  AUSERNAME VARCHAR(256),
+  AIP VARCHAR(64),
+  ATENANTID integer,
+  ADONOTDELETE smallint,
+  ACATALOG VARCHAR(31),
+  ACOUNTRYID integer,
+  ACAPTION  VARCHAR(254),
+  ADESC VARCHAR(2000))
+RETURNS (
+  success smallint,
+  code smallint,
+  info varchar(2000))
+AS
+declare variable success_by_touchsession smallint;
+declare variable success_by_grant smallint;
+begin
+  success = 0;
+  code = 0;
+  info = '{"result": null}';
+
+  select success from SP_TOUCHSESSION(:ASESSION_ID, :AUSERNAME, :AIP) into :success_by_touchsession;
+  
+  if (success_by_touchsession = 1) then
+  begin
+    select success from SP_CHECKGRANT(:AUSERNAME, 'REFERENCE_DATA') into :success_by_grant;
+    
+    if (success_by_grant = 1) then
+    begin
+      /* Wenn der JSON-String im Feld INFO zu lang wird, wird von der SP zwei oder mehrere Datensätze erzeugt.
+         Aus diesem Grund wird die SP über eine FOR-Loop abgefragt
+      */
+      for 
+      select 
+        success, 
+        code, 
+        info 
+      from 
+        SP_ADDCATALOGITEM (:ATENANTID,
+          :ADONOTDELETE,
+          :ACATALOG,
+          :ACOUNTRYID,
+          :ACAPTION,
+          :ADESC) 
+      into 
+        :success, 
+        :code, 
+        :info 
+      do
+      begin
+        suspend;
+      end 
+    end
+    else
+    begin
+      info = '{"kind": 1, "publish": "NO_GRANT_FOR_ADD_CATALOGITEM", "message": "NO_GRANT_FOR_ADD_CATALOGITEM"}';
+      
+      suspend;
+    end
+  end
+  else
+  begin
+    info = '{"kind": 1, "publish": "CANCEL_PROCESS_BY_SESSIONMANAGEMENT", "message": "CANCEL_PROCESS_BY_SESSIONMANAGEMENT"}';
+    
+    suspend;
+  end
+end
+^
+
+COMMENT ON PROCEDURE SP_ADD_SP_ADDCATALOGITEM_BY_SRV IS
+'Überprüft Sitzungsverwaltung und ruft SP_ADD_SP_ADDCATALOGITEM auf'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_SP_ADDCATALOGITEM_BY_SRV'^
+
+SET TERM ; ^
+
 /* Katalog: JSON_KIND komplett über SP erstellen */
 execute procedure SP_CREATE_ZABCATALOG 'JSON_KIND';
 

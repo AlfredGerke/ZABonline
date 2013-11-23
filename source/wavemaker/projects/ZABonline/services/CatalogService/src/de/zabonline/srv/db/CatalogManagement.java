@@ -25,7 +25,7 @@ public class CatalogManagement extends JavaServiceSuperClass {
   }
 
   @SuppressWarnings("unchecked")
-  public List<Results.ProcResults> addCatalogItem(String catalog,
+  public List<Results.ProcResults> addCatalogItem(String aCatalog,
     Integer aTenantId,
     Integer aCountryId,
     Boolean aDoNotDelete,
@@ -51,11 +51,12 @@ public class CatalogManagement extends JavaServiceSuperClass {
 
     try {
       if (isAuthentic) {
-        result = session.createSQLQuery("select * from SP_ADDCATALOGITEM(:SESSIONID, " + ":USERNAME, "
+        result = session.createSQLQuery("select * from SP_ADDCATALOGITEM_BY_SRV(:SESSIONID, " 
+                                        + ":USERNAME, "
                                         + ":IP, "
+                                        + ":TENANTID, "
                                         + ":DONOTDELETE, "
                                         + ":CATALOG, "
-                                        + ":TENANTID, "
                                         + ":COUNTRYID, "
                                         + ":CAPTION, "
                                         + ":DESC)")
@@ -71,10 +72,12 @@ public class CatalogManagement extends JavaServiceSuperClass {
               userName)
             .setParameter("IP",
               ipByRequest)
+            .setParameter("TENANTID",
+              aTenantId)              
             .setParameter("DONOTDELETE",
               aDoNotDelete_smallint)
-            .setParameter("TENANTID",
-              aTenantId)
+            .setParameter("CATALOG", 
+              aCatalog)
             .setParameter("COUNTRYID",
               aCountryId)
             .setParameter("CAPTION",

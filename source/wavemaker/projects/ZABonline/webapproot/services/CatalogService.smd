@@ -3,7 +3,7 @@
 		"name": "addCatalogItem",
 		"operationType": null,
 		"parameters": [{
-			"name": "catalog",
+			"name": "aCatalog",
 			"type": "java.lang.String"
 		}, {
 			"name": "aTenantId",

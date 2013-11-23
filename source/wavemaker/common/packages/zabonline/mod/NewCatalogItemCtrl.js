@@ -13,15 +13,13 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
   initControls: function() {
     var local = this.localScope;
     
-    local.pnlCatalogTitel.setTitle(local.getDictionaryItem("CAPTION_CATALOG"));  
+    local.pnlCatalogTitle.setTitle(local.getDictionaryItem("CAPTION_CATALOG"));  
   },
   initStart: function() {
     var global = this.globalScope;
     var local = this.localScope;  
     
-    this.initControls();
-    
-    local.connect(global.countryCodeLookup, "onSuccess", this, "onInitCountryCode");    
+    this.initControls();    
   },  
   setCountryCodeControlByMode: function(mode){
     var local = this.localScope;
@@ -64,7 +62,7 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
     var mode = this.catalogParameter.mode;
     
     if (catalog) {
-      local.pnlCatalogTitel.setTitle(local.getDictionaryItem("CAPTION_CATALOG") + ": " + catalog); 
+      local.pnlCatalogTitle.setTitle(local.getDictionaryItem("CAPTION_CATALOG") + ": " + catalog); 
       local.varCatalog.setValue("dataValue", catalog);  
     }
     
@@ -187,7 +185,10 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
     var global = this.globalScope;  
     
     var success = 0;
-    try {      
+    try {           
+      if (!this.cclCon) {
+        this.cclCon = local.connect(global.countryCodeLookup, "onSuccess", this, "onInitCountryCode");
+      }
      
       if (global.countryCodeLookup.refresh() > 0) {
         success = 1;
@@ -252,6 +253,8 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
     console.debug('Start Controller.subscribeForChannels.SubClass');
 
     dojo.subscribe('init-catalogitem-by-parameter', this, "initCatalogItemByParameter");
+    
+    this.handleSubscribeByResData("NO_GRANT_FOR_ADD_CATALOGITEM");
     
     console.debug('End Controller.subscribeForChannels.SubClass');
   },
