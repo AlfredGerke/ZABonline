@@ -181,8 +181,8 @@ Selected=create_db.sql
 TopLine=225
 Caret=81,264
 [create_db.sql]
-TopLine=91
-Caret=1,102
+TopLine=2758
+Caret=4,2793
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js]
 TopLine=1
 Caret=25,2
@@ -193,8 +193,8 @@ Caret=75,10
 TopLine=452
 Caret=1,479
 [create_tools.sql]
-TopLine=855
-Caret=53,884
+TopLine=657
+Caret=12,685
 [create_admin.sql]
 TopLine=294
 Caret=1,314

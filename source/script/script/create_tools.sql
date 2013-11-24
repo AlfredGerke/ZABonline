@@ -576,7 +576,7 @@ CREATE OR ALTER PROCEDURE SP_CREATE_SEQUENCE_GETTER(
 RETURNS (
   success smallint)    
 AS
-declare variable sql_stmt varchar(254);
+declare variable sql_stmt varchar(2000);
 declare variable relation_name varchar(32);
 declare variable seq_name varchar(32);
 begin
@@ -627,7 +627,7 @@ CREATE OR ALTER PROCEDURE SP_CREATE_CATALOG_SETTER(
 RETURNS (
   success smallint)    
 AS
-declare variable sql_stmt varchar(254);
+declare variable sql_stmt varchar(2000);
 declare variable relation_name varchar(32);
 declare variable view_name varchar(32);
 begin
@@ -674,13 +674,17 @@ begin
   suspend;
 end';
     
-    execute statement sql_stmt;
-       
-    sql_stmt = 'COMMENT ON PROCEDURE ' || :relation_name || ' IS ''Setter für den Katalog ' || :ATABLENAME || ' (created by SP_CREATE_CATALOG_SETTER)''';
-    execute statement sql_stmt;
+      execute statement sql_stmt;
+         
+      sql_stmt = 'COMMENT ON PROCEDURE ' || :relation_name || ' IS ''Setter für den Katalog ' || :ATABLENAME || ' (created by SP_CREATE_CATALOG_SETTER)''';
+      execute statement sql_stmt;
+        
+      select success from SP_GRANT_ROLE_TO_OBJECT(:relation_name, 'INSERT', :view_name) into :success;
       
-    select success from SP_GRANT_ROLE_TO_OBJECT('R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', :relation_name) into :success;     
-            
+      if (success = 1) then
+      begin        
+        select success from SP_GRANT_ROLE_TO_OBJECT('R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', :relation_name) into :success;    
+      end                     
     end
     else
     begin
@@ -902,6 +906,10 @@ GRANT EXECUTE ON PROCEDURE SP_CREATE_TRIGGER_BU TO INSTALLER;
 GRANT EXECUTE ON PROCEDURE SP_CREATE_TRIGGER_BD TO INSTALLER;
 GRANT EXECUTE ON PROCEDURE SP_CREATE_ALL_SIMPLE_INDEX TO INSTALLER;
 GRANT EXECUTE ON PROCEDURE SP_CREATE_ALL_USER_VIEWS TO INSTALLER;
+GRANT EXECUTE ON PROCEDURE SP_CREATE_SEQUENCE_GETTER TO INSTALLER;
+GRANT EXECUTE ON PROCEDURE SP_CREATE_CATALOG_SETTER TO INSTALLER;
+GRANT EXECUTE ON PROCEDURE SP_GRANT_ROLE_TO_OBJECT TO SP_CREATE_SEQUENCE_GETTER;
+GRANT EXECUTE ON PROCEDURE SP_GRANT_ROLE_TO_OBJECT TO SP_CREATE_CATALOG_SETTER;
 
 COMMIT WORK;
 /******************************************************************************/

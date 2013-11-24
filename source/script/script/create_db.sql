@@ -2704,6 +2704,14 @@ SET TERM ; ^
 
 COMMIT WORK;
 /******************************************************************************/
+/*                   Erst jetzt stehen ZABCATALOGE zur Verfügung
+/******************************************************************************/
+
+/* Katalog: JSON_KIND komplett über SP erstellen */
+execute procedure SP_CREATE_ZABCATALOG 'JSON_KIND';
+
+COMMIT WORK;
+/******************************************************************************/
 /*                                 Grants                                 
 /******************************************************************************/
 
@@ -2771,7 +2779,6 @@ GRANT SELECT ON V_REGISTRY TO PROCEDURE SP_READSECTIONS_BY_SRV;
 GRANT EXECUTE ON PROCEDURE SP_TOUCHSESSION TO PROCEDURE SP_CHECKGRANT_BY_SVR;
 GRANT EXECUTE ON PROCEDURE SP_CHECKGRANT TO PROCEDURE SP_CHECKGRANT_BY_SVR;
 GRANT SELECT ON V_ROLES TO PROCEDURE SP_CHECKGRANT;
-
   
 GRANT EXECUTE ON PROCEDURE SP_TOUCHSESSION TO PROCEDURE SP_ADDCATALOGITEM_BY_SRV;
 GRANT EXECUTE ON PROCEDURE SP_CHECKGRANT TO PROCEDURE SP_ADDCATALOGITEM_BY_SRV;
@@ -2780,21 +2787,14 @@ GRANT EXECUTE ON PROCEDURE SP_ADDCATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM_BY_S
 GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM;
 GRANT EXECUTE ON PROCEDURE SP_INSERT_CATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM;
 
+/*
 GRANT EXECUTE ON PROCEDURE SP_CREATE_SEQUENCE_GETTER TO PROCEDURE SP_CREATE_ZABCATALOG;
 GRANT EXECUTE ON PROCEDURE SP_CREATE_CATALOG_SETTER TO PROCEDURE SP_CREATE_ZABCATALOG;
-
+ */
 
 /* Roles */
 /* zusätzliche Rechte um Zugriff auf das Sessionmanagement zu erlangen */
 GRANT UPDATE, INSERT ON V_SESSION TO R_ZABGUEST;
-
-COMMIT WORK;
-/******************************************************************************/
-/*                   Erst jetzt stehen ZABCATALOGE zur Verfügung
-/******************************************************************************/
-
-/* Katalog: JSON_KIND komplett über SP erstellen */
-execute procedure SP_CREATE_ZABCATALOG 'JSON_KIND';
 
 COMMIT WORK;
 /******************************************************************************/
