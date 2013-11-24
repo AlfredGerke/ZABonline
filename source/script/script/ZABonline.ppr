@@ -172,6 +172,8 @@ ZABonline
 4=..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js
 5=create_tools.sql
 6=create_admin.sql
+7=batch.sql
+8=create_user.sql
 [Selected Project Files]
 Main=
 Selected=create_db.sql
@@ -179,8 +181,8 @@ Selected=create_db.sql
 TopLine=225
 Caret=81,264
 [create_db.sql]
-TopLine=2298
-Caret=43,2315
+TopLine=91
+Caret=1,102
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js]
 TopLine=1
 Caret=25,2
@@ -191,8 +193,14 @@ Caret=75,10
 TopLine=452
 Caret=1,479
 [create_tools.sql]
-TopLine=646
-Caret=36,699
+TopLine=855
+Caret=53,884
 [create_admin.sql]
 TopLine=294
 Caret=1,314
+[batch.sql]
+TopLine=1
+Caret=1,1
+[create_user.sql]
+TopLine=10
+Caret=1,1

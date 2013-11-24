@@ -2010,8 +2010,14 @@ BEGIN
     /* passend zur Sequence eine Zugriffs-SP einrichten */
     if (success = 1) then
     begin
-      select success from SP_CREATE_SEQUENCE_GETTER(:relation) into :success;
+      select success from SP_CREATE_SEQUENCE_GETTER(:relation_name) into :success;
     end
+  end
+
+  /* passend zum Katalog eine Insert-Routine einrichten */
+  if (success = 1) then
+  begin
+    select success from SP_CREATE_CATALOG_SETTER(:relation_name) into :success;
   end
     
   /* Trigger anlegen */
@@ -2175,47 +2181,11 @@ execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN'
 
 /* keine automatischen Grants vergeben da SP_CREATE_ALL_SIMPLE_INDEX nur bei der Installation angewendet werden soll */ 
 
-SET TERM ; ^
-
-COMMIT WORK;
-/******************************************************************************/
-/*                                 Insert into UPDATEHISTORY                                  
-/******************************************************************************/
-SET TERM ^ ; /* definiert den Begin eines Ausführungsblockes */
-EXECUTE BLOCK AS
-DECLARE number varchar(2000);
-DECLARE subitem varchar(2000);
-DECLARE script varchar(255);
-DECLARE description varchar(2000);
-BEGIN
-  number = '0';
-  subitem = '0';
-  script = 'create_db.sql';
-  description = 'Grundsteinlegung des Datenmodelles für ZABonline (Wavemaker)';
-  
-  if (exists(select 1 from RDB$RELATIONS where RDB$RELATION_NAME='UPDATEHISTORY')) then
-  begin   
-    execute statement 'INSERT INTO UPDATEHISTORY(NUMBER, SUBITEM, SCRIPT, DESCRIPTION) VALUES ( ''' || :number ||''', ''' || :subitem ||''', ''' || :script || ''', ''' || :description || ''');';
-  end  
-
-END^        
-SET TERM ; ^ /* definiert das Ende eines Ausführungsblockes */
-
-COMMIT WORK;
-/******************************************************************************/
-/*                                 Erst jetzt stehen ZABCATALOGE zur Verfügung                                  
-/******************************************************************************/
-
-/* Katalog: JSON_KIND komplett über SP erstellen */
-execute procedure SP_CREATE_ZABCATALOG 'JSON_KIND';
-
-SET TERM ^ ;
-                                                                                                                                                                
 CREATE OR ALTER PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM (
-  ATENANTID integer,
+  ATENANT_ID integer,
   ADONOTDELETE smallint,
   ACATALOG VARCHAR(31), /* Plichtfeld */
-  ACOUNTRYID integer, /* Pflichtfeld */
+  ACOUNTRY_ID integer, /* Pflichtfeld */
   ACAPTION  VARCHAR(254), /* Pflichtfeld */
   ADESC VARCHAR(2000))
 returns (
@@ -2272,7 +2242,7 @@ begin
     end
   end
   
-  if (ACOUNTRYID is null) then
+  if (ACOUNTRY_ID is null) then
   begin
     code = 1;
     info = '{"kind": 1, "publish": "NO_MANDATORY_COUNTRY_ID_BY_NEWCATALOGITEM", "message": "NO_MANDATORY_COUNTRY_ID"}';
@@ -2281,7 +2251,7 @@ begin
   end
   else
   begin
-    if (not exists(select 1 from V_COUNTRY where ID=:ACOUNTRYID)) then
+    if (not exists(select 1 from V_COUNTRY where ID=:ACOUNTRY_ID)) then
     begin
       code = 1;
       info = '{"kind": 1, "publish": "NO_VALID_COUNTRY_ID_BY_NEWCATALOGITEM", "message": "NO_VALID_COUNTRY_ID"}';
@@ -2312,7 +2282,7 @@ begin
 end^
 
 COMMENT ON PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM IS
-'Eingabedaten für einen Katalog überprüfen';
+'Eingabedaten für einen Katalog überprüfen'^
 
 CREATE OR ALTER PROCEDURE SP_INSERT_CATALOGITEM (
   ATENANTID integer,
@@ -2362,7 +2332,7 @@ begin
       || ''', '
       || :ADONOTDELETE
       || ')';
-    execute statment sql_stmt into :success;  
+    execute statement sql_stmt into :success;
 
     if (success = 0) then
     begin
@@ -2385,7 +2355,7 @@ begin
 end^
 
 COMMENT ON PROCEDURE SP_INSERT_CATALOGITEM IS
-'Katalogeintrag einfügen';
+'Katalogeintrag einfügen'^
 
 CREATE OR ALTER PROCEDURE SP_ADDCATALOGITEM (
   ATENANTID integer,
@@ -2399,7 +2369,7 @@ RETURNS (
   code smallint,
   info varchar(2000))
 AS
-declare variable "message" varchar(254);
+declare variable msg varchar(254);
 declare variable catalog_item_id integer;
 begin
   success = 0;
@@ -2442,14 +2412,14 @@ begin
         :ADESC)
     into
       :success,
-      :message,
+      :msg,
       :catalog_item_id;
       
     /* Rückgabe auswerten */     
     if (success = 0) then
     begin
       code = 1;
-      info = '{"kind": 2, "publish": "INSERT_BY_CATALOGITEM_FAILD_BY_NEWCATLOGITEM", "list": [{"message": "INSERT_BY_CATALOGITEM_FAILD"}, {"message": "' || :message || '"}]}';
+      info = '{"kind": 2, "publish": "INSERT_BY_CATALOGITEM_FAILD_BY_NEWCATLOGITEM", "list": [{"message": "INSERT_BY_CATALOGITEM_FAILD"}, {"message": "' || :msg || '"}]}';
       suspend;
       Exit;
     end
@@ -2471,19 +2441,19 @@ begin
 end
 ^
 
-COMMENT ON PROCEDURE SP_ADD_SP_ADDCATALOGITEM IS
+COMMENT ON PROCEDURE SP_ADDCATALOGITEM IS
 'Überprüft Eingaben und legt Katalogeintrag an'^
 
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_SP_ADDCATALOGITEM'^
 
 CREATE OR ALTER PROCEDURE SP_ADDCATALOGITEM_BY_SRV (
-  ASESSIONID VARCHAR(128),
+  ASESSION_ID VARCHAR(128),
   AUSERNAME VARCHAR(256),
   AIP VARCHAR(64),
-  ATENANTID integer,
+  ATENANT_ID integer,
   ADONOTDELETE smallint,
   ACATALOG VARCHAR(31), /* Plichtfeld */
-  ACOUNTRYID integer, /* Pflichtfeld */
+  ACOUNTRY_ID integer, /* Pflichtfeld */
   ACAPTION  VARCHAR(254), /* Pflichtfeld */
   ADESC VARCHAR(2000))
 RETURNS (
@@ -2515,10 +2485,10 @@ begin
         code, 
         info 
       from 
-        SP_ADDCATALOGITEM (:ATENANTID,
+        SP_ADDCATALOGITEM (:ATENANT_ID,
           :ADONOTDELETE,
           :ACATALOG,
-          :ACOUNTRYID,
+          :ACOUNTRY_ID,
           :ACAPTION,
           :ADESC) 
       into 
@@ -2546,10 +2516,10 @@ begin
 end
 ^
 
-COMMENT ON PROCEDURE SP_ADD_SP_ADDCATALOGITEM_BY_SRV IS
-'Überprüft Sitzungsverwaltung und ruft SP_ADD_SP_ADDCATALOGITEM auf'^
+COMMENT ON PROCEDURE SP_ADDCATALOGITEM_BY_SRV IS
+'Überprüft Sitzungsverwaltung und ruft SP_ADDCATALOGITEM auf'^
 
-execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_SP_ADDCATALOGITEM_BY_SRV'^
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADDCATALOGITEM_BY_SRV'^
 
 SET TERM ; ^
 
@@ -2810,10 +2780,21 @@ GRANT EXECUTE ON PROCEDURE SP_ADDCATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM_BY_S
 GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM;
 GRANT EXECUTE ON PROCEDURE SP_INSERT_CATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM;
 
+GRANT EXECUTE ON PROCEDURE SP_CREATE_SEQUENCE_GETTER TO PROCEDURE SP_CREATE_ZABCATALOG;
+GRANT EXECUTE ON PROCEDURE SP_CREATE_CATALOG_SETTER TO PROCEDURE SP_CREATE_ZABCATALOG;
+
 
 /* Roles */
 /* zusätzliche Rechte um Zugriff auf das Sessionmanagement zu erlangen */
 GRANT UPDATE, INSERT ON V_SESSION TO R_ZABGUEST;
+
+COMMIT WORK;
+/******************************************************************************/
+/*                   Erst jetzt stehen ZABCATALOGE zur Verfügung
+/******************************************************************************/
+
+/* Katalog: JSON_KIND komplett über SP erstellen */
+execute procedure SP_CREATE_ZABCATALOG 'JSON_KIND';
 
 COMMIT WORK;
 /******************************************************************************/

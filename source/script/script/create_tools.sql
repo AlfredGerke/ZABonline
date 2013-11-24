@@ -593,10 +593,10 @@ returns(
   id integer)      
 as
 begin
-  id = next value for ' || :seq_name || '
+  id = next value for ' || :seq_name || ';
 
   suspend;
-end ';
+end';
     
     execute statement sql_stmt;
        
@@ -672,7 +672,7 @@ begin
   success = 1;
 
   suspend;
-end ';
+end';
     
     execute statement sql_stmt;
        
