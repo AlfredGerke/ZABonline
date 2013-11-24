@@ -544,7 +544,7 @@ begin
   success = 0;
   relation_name = 'SEQ_' || :ATABLENAME || '_ID';
   
-  if (exists(select 1 from RDB$RELATIONS where RDB$RELATION_NAME=:relation_name)) then
+  if (exists(select 1 from RDB$GENERATORS where RDB$GENERATOR_NAME=:relation_name)) then
   begin   
     success = 0;
   end
@@ -570,6 +570,133 @@ end^
 
 COMMENT ON PROCEDURE SP_CREATE_SEQUNECE IS
 'Erstellt eine Sequence zu einem Tabellennamen'^
+
+CREATE OR ALTER PROCEDURE SP_CREATE_SEQUENCE_GETTER(
+  ATABLENAME VARCHAR(32))
+RETURNS (
+  success smallint)    
+AS
+declare variable sql_stmt varchar(254);
+declare variable relation_name varchar(32);
+declare variable seq_name varchar(32);
+begin
+  success = 0;
+  seq_name = 'SEQ_' || :ATABLENAME || '_ID'; 
+  relation_name = 'GET_' || :ATABLENAME || '_ID';
+  
+  if (exists(select 1 from RDB$GENERATORS where RDB$GENERATOR_NAME=:seq_name)) then
+  begin
+    if (not exists(select 1 from RDB$PROCEDURES where RDB$PROCEDURE_NAME=:relation_name)) then
+    begin
+      sql_stmt = 'CREATE OR ALTER PROCEDURE ' || :relation_name || '  
+returns(
+  id integer)      
+as
+begin
+  id = next value for ' || :seq_name || '
+
+  suspend;
+end ';
+    
+    execute statement sql_stmt;
+       
+    sql_stmt = 'COMMENT ON PROCEDURE ' || :relation_name || ' IS ''Getter für die Sequence ' || :seq_name || ' (created by SP_CREATE_SEQUENCE_GETTER)''';
+    execute statement sql_stmt;
+      
+    select success from SP_GRANT_ROLE_TO_OBJECT('R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', :relation_name) into :success;     
+            
+    end
+    else
+    begin
+      success = 0;
+    end
+  end
+  else
+  begin
+    success = 0;
+  end
+    
+  suspend;
+end^
+
+COMMENT ON PROCEDURE SP_CREATE_SEQUENCE_GETTER IS
+'Erstellt eine Sequence-Zugriffs-SP zu einem Tabellennamen'^
+
+CREATE OR ALTER PROCEDURE SP_CREATE_CATALOG_SETTER(
+  ATABLENAME VARCHAR(32))
+RETURNS (
+  success smallint)    
+AS
+declare variable sql_stmt varchar(254);
+declare variable relation_name varchar(32);
+declare variable view_name varchar(32);
+begin
+  success = 0;
+  view_name = 'V_' || Upper(:ATABLENAME); 
+  relation_name = 'SET_' || Upper(:ATABLENAME);
+  
+  if (exists(select 1 from RDB$RELATIONS where RDB$RELATION_NAME=:view_name)) then
+  begin
+    if (not exists(select 1 from RDB$PROCEDURES where RDB$PROCEDURE_NAME=:relation_name)) then
+    begin
+      sql_stmt = 'CREATE OR ALTER PROCEDURE ' || :relation_name || '(
+  AId integer,
+  ACountryId integer,
+  ACaption varchar(254),
+  ADesc varchar(2000),
+  ADoNotDelete smallint)        
+returns(
+  success smallint)      
+as
+begin
+
+  insert
+  into
+  ' || :view_name || '
+  (
+    ID,
+    COUNTRY_ID,
+    CAPTION,
+    DESCRIPTION,
+    DONOTDELETE
+  )
+  values
+  (
+    :AId,
+    :ACountryId,
+    :ACaption,
+    :ADesc,
+    :ADoNotDelete
+  );
+  
+  success = 1;
+
+  suspend;
+end ';
+    
+    execute statement sql_stmt;
+       
+    sql_stmt = 'COMMENT ON PROCEDURE ' || :relation_name || ' IS ''Setter für den Katalog ' || :ATABLENAME || ' (created by SP_CREATE_CATALOG_SETTER)''';
+    execute statement sql_stmt;
+      
+    select success from SP_GRANT_ROLE_TO_OBJECT('R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', :relation_name) into :success;     
+            
+    end
+    else
+    begin
+      success = 0;
+    end
+  end
+  else
+  begin
+    success = 0;
+  end
+    
+  suspend;
+end^
+
+COMMENT ON PROCEDURE SP_CREATE_CATALOG_SETTER IS
+'Erstellt eine Insert-Proc zu einen Katalog'^
 
 CREATE OR ALTER PROCEDURE SP_CREATE_TRIGGER_BI (
   ATABLENAME varchar(32),
@@ -743,6 +870,18 @@ execute procedure SP_CREATE_TRIGGER_BU 'ADM_USERVIEW_SOURCES';
 /* Grants vergeben */
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'INSTALLER', 'ALL', 'ADM_USERVIEW_SOURCES';
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'INSTALLER', 'ALL', 'V_ADM_USERVIEW_SOURCES';
+
+/* Katalog: ADM_CATALOGS komplett über SP erstellen */
+execute procedure SP_CREATE_ADMIN_CATALOG_TABLE 'ADM_CATALOGS';
+
+/* Sequence anlegen */
+execute procedure SP_CREATE_SEQUNECE 'ADM_CATALOGS';
+/* Trigger anlegen */
+execute procedure SP_CREATE_TRIGGER_BI 'ADM_CATALOGS';
+execute procedure SP_CREATE_TRIGGER_BU 'ADM_CATALOGS';
+/* Grants vergeben */
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'INSTALLER', 'ALL', 'ADM_CATALOGS';
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'INSTALLER', 'ALL', 'V_ADM_CATALOGS';
 
 COMMIT WORK;
 /******************************************************************************/

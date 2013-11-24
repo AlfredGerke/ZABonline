@@ -1942,7 +1942,7 @@ BEGIN
     sql_stmt = 'ALTER TABLE ' || :relation_name || ' ADD CONSTRAINT FK_' || :relation_name || '_TYPE_TAG FOREIGN KEY (TAG_ID) REFERENCES TAG (ID) ON DELETE SET NULL ON UPDATE CASCADE';
     execute statement sql_stmt;  
     
-    sql_stmt = 'CREATE UNIQUE INDEX ALT_' || :relation_name || ' ON ' || :relation_name || '(CAPTION)';
+    sql_stmt = 'CREATE UNIQUE INDEX ALT_' || :relation_name || ' ON ' || :relation_name || '(COUNTRY_ID, CAPTION)';
     execute statement sql_stmt;  
     
     sql_stmt = 'COMMENT ON INDEX ALT_' || :relation_name || ' IS ''(created by SP_CREATE_CATALOG_TABLE)''';
@@ -1980,6 +1980,23 @@ BEGIN
   /* Katalog anlegen */
   select success from SP_CREATE_CATALOG_TABLE(:relation_name, :cat_comment) into :success;
   
+  /* Namen des Kataloges registrieren */
+  if (success = 1) then
+  begin
+    insert
+    into
+    V_ADM_CATALOGS
+    (
+      CAPTION,
+      DESCRIPTION
+    )
+    values
+    (
+      :relation_name,
+      :cat_comment
+    );
+  end
+  
   /* Userview anlegen */
   if (success = 1) then
   begin
@@ -1990,6 +2007,11 @@ BEGIN
   if (success = 1) then
   begin  
     select success from SP_CREATE_SEQUNECE(:relation_name) into :success;
+    /* passend zur Sequence eine Zugriffs-SP einrichten */
+    if (success = 1) then
+    begin
+      select success from SP_CREATE_SEQUENCE_GETTER(:relation) into :success;
+    end
   end
     
   /* Trigger anlegen */
@@ -2184,7 +2206,275 @@ COMMIT WORK;
 /*                                 Erst jetzt stehen ZABCATALOGE zur Verfügung                                  
 /******************************************************************************/
 
+/* Katalog: JSON_KIND komplett über SP erstellen */
+execute procedure SP_CREATE_ZABCATALOG 'JSON_KIND';
+
 SET TERM ^ ;
+                                                                                                                                                                
+CREATE OR ALTER PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM (
+  ATENANTID integer,
+  ADONOTDELETE smallint,
+  ACATALOG VARCHAR(31), /* Plichtfeld */
+  ACOUNTRYID integer, /* Pflichtfeld */
+  ACAPTION  VARCHAR(254), /* Pflichtfeld */
+  ADESC VARCHAR(2000))
+returns (
+    success smallint,
+    code smallint,
+    info varchar(2000))
+as
+begin 
+  success = 0;
+  code = 0;
+  info = '{"result": null}';
+  
+  if (ATENANT_ID is null) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_MANDANT_ID_BY_NEWCATALOGITEM", "message": "NO_MANDATORY_MANDANT_ID"}';
+    suspend;
+    Exit;
+  end
+  else
+  begin  
+    if (not exists(select 1 from V_TENANT where ID=:ATENANT_ID)) then
+    begin
+      code = 1;
+      info = '{"kind": 1, "publish": "NO_VALID_MANDANT_ID_BY_NEWCATALOGITEM", "message": "NO_VALID_MANDANT_ID"}';
+      suspend;
+      Exit;  
+    end
+  end
+
+  if (ADONOTDELETE  not in (0,1)) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_VALID_DONOTLOGIN_BY_NEWCATALOGITEM", "message": "NO_VALID_DONOTLOGIN"}';
+    suspend;
+    Exit;  
+  end  
+
+  if (ACATALOG is null) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_CATALOG_BY_NEWCATALOGITEM", "message": "NO_MANDATORY_CATALOG"}';
+    suspend;
+    Exit;    
+  end
+  else
+  begin
+    if (not exists(select 1 from V_ADM_CATALOGS where Upper(CAPTION)=Upper(:ACATALOG))) then
+    begin
+      code = 1;
+      info = '{"kind": 1, "publish": "NO_CATALOGTABLE_BY_NEWCATALOGITEM", "message": "UNKNOWN_CATALOG"}';
+      suspend;
+      Exit;    
+    end
+  end
+  
+  if (ACOUNTRYID is null) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_COUNTRY_ID_BY_NEWCATALOGITEM", "message": "NO_MANDATORY_COUNTRY_ID"}';
+    suspend;
+    Exit;
+  end
+  else
+  begin
+    if (not exists(select 1 from V_COUNTRY where ID=:ACOUNTRYID)) then
+    begin
+      code = 1;
+      info = '{"kind": 1, "publish": "NO_VALID_COUNTRY_ID_BY_NEWCATALOGITEM", "message": "NO_VALID_COUNTRY_ID"}';
+      suspend;
+      Exit;  
+    end  
+  end
+
+  if ((ACAPTION is null) or (Trim(ACAPTION) = '')) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_CAPTION_BY_NEWCATALOGITEM", "message": "NO_MANDATORY_CAPTION"}';
+    suspend;
+    Exit;    
+  end
+  
+  if ((ADESC is null) or (Trim(ADESC) = '')) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_DESCRIPTION_BY_NEWCATALOGITEM", "message": "NO_MANDATORY_DESCRIPTION"}';
+    suspend;
+    Exit;    
+  end
+  
+  success = 1;
+  
+  suspend;
+end^
+
+COMMENT ON PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM IS
+'Eingabedaten für einen Katalog überprüfen';
+
+CREATE OR ALTER PROCEDURE SP_INSERT_CATALOGITEM (
+  ATENANTID integer,
+  ADONOTDELETE smallint,
+  ACATALOG VARCHAR(31), /* Plichtfeld */
+  ACOUNTRYID integer, /* Pflichtfeld */
+  ACAPTION  VARCHAR(254), /* Pflichtfeld */
+  ADESC VARCHAR(2000))
+returns (
+    success smallint,
+    "MESSAGE" varchar(254),
+    catalog_item_id integer)
+as
+declare variable sql_stmt varchar(2000);
+declare variable found smallint;
+begin
+  success = 0;
+  message = 'FAILD_BY_UNKNOWN_REASON';
+  catalog_item_id = -1;
+  sql_stmt = '';
+  found = 0;
+  
+  sql_stmt = 'select 1 from V_' || Upper(:ACATALOG) || ' where COUNTRY_ID=' || :ACOUNTRYID || ' and Upper(CAPTION)="' || Upper(ACAPTION) || '"';
+  execute statement sql_stmt into :found;
+  if (found = 1) then  
+  begin
+    message = 'DUPLICATE_CATALOGCAPTION_NOT_ALLOWED';
+    suspend;
+    Exit;      
+  end
+                        
+  sql_stmt = 'execute procedure GET_' || Upper(:ACATALOG) || '_ID';
+  execute statement sql_stmt into :catalog_item_id;                       
+
+  if ((catalog_item_id <> -1) and (catalog_item_id is not null)) then
+  begin
+    sql_stmt = 'execute procedure SET_' 
+      || Upper(:ACATALOG) 
+      || ' (' 
+      || :catalog_item_id 
+      || ', ' 
+      || :ACOUNTRYID 
+      || ', ''' 
+      || :ACAPTION 
+      || ''', ''' 
+      || :ADESC 
+      || ''', '
+      || :ADONOTDELETE
+      || ')';
+    execute statment sql_stmt into :success;  
+
+    if (success = 0) then
+    begin
+      message = 'INSERT_BY_SETTER_FAILD';
+    end
+    else
+    begin
+      message = '';
+    end   
+  end  
+  else
+  begin
+    message = 'NO_VALID_USER_ID';
+    success = 0;
+    suspend;
+    Exit;     
+  end
+  
+  suspend;
+end^
+
+COMMENT ON PROCEDURE SP_INSERT_CATALOGITEM IS
+'Katalogeintrag einfügen';
+
+CREATE OR ALTER PROCEDURE SP_ADDCATALOGITEM (
+  ATENANTID integer,
+  ADONOTDELETE smallint,
+  ACATALOG VARCHAR(31), /* Plichtfeld */
+  ACOUNTRYID integer, /* Pflichtfeld */
+  ACAPTION  VARCHAR(254), /* Pflichtfeld */
+  ADESC VARCHAR(2000))
+RETURNS (
+  success smallint,
+  code smallint,
+  info varchar(2000))
+AS
+declare variable "message" varchar(254);
+declare variable catalog_item_id integer;
+begin
+  success = 0;
+  code = 0;
+  info = '{"result": null}';
+  
+  /* Es werden alle Pflichtfelder überprüft */
+  select
+    success, 
+    code, 
+    info 
+  from 
+    SP_CHK_DATA_BY_ADD_CATALOGITEM(:ATENANTID,
+      :ADONOTDELETE,
+      :ACATALOG,
+      :ACOUNTRYID,
+      :ACAPTION,
+      :ADESC) 
+  into 
+    :success, 
+    :code, 
+    :info;
+
+  if (success = 1) then
+  begin
+    success = 0;
+    code = 0;
+    info = '{"result": null}';
+    
+    select
+      success,
+      message,
+      catalog_item_id      
+    from
+      SP_INSERT_CATALOGITEM(:ATENANTID,
+        :ADONOTDELETE,
+        :ACATALOG,
+        :ACOUNTRYID,
+        :ACAPTION,
+        :ADESC)
+    into
+      :success,
+      :message,
+      :catalog_item_id;
+      
+    /* Rückgabe auswerten */     
+    if (success = 0) then
+    begin
+      code = 1;
+      info = '{"kind": 2, "publish": "INSERT_BY_CATALOGITEM_FAILD_BY_NEWCATLOGITEM", "list": [{"message": "INSERT_BY_CATALOGITEM_FAILD"}, {"message": "' || :message || '"}]}';
+      suspend;
+      Exit;
+    end
+    
+    /* success = 1; -> success sollte nur durch die Insert-SPs auf 1 gesetzt werden */
+    code = 1;
+    if (success = 1) then
+    begin
+      info = '{"kind": 3, "publish": "ADD_CATALOGITEM_SUCCEEDED", "message": "ADD_CATALOGITEM_SUCCEEDED"}';
+    end  
+    else
+    begin
+      success = 0;
+      info = '{"kind": 1, "publish": "FAILD_BY_OBSCURE_PROCESSING", "message": "FAILD_BY_OBSCURE_PROCESSING"}';
+    end                                   
+  end  
+
+  suspend;  
+end
+^
+
+COMMENT ON PROCEDURE SP_ADD_SP_ADDCATALOGITEM IS
+'Überprüft Eingaben und legt Katalogeintrag an'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_SP_ADDCATALOGITEM'^
 
 CREATE OR ALTER PROCEDURE SP_ADDCATALOGITEM_BY_SRV (
   ASESSIONID VARCHAR(128),
@@ -2192,9 +2482,9 @@ CREATE OR ALTER PROCEDURE SP_ADDCATALOGITEM_BY_SRV (
   AIP VARCHAR(64),
   ATENANTID integer,
   ADONOTDELETE smallint,
-  ACATALOG VARCHAR(31),
-  ACOUNTRYID integer,
-  ACAPTION  VARCHAR(254),
+  ACATALOG VARCHAR(31), /* Plichtfeld */
+  ACOUNTRYID integer, /* Pflichtfeld */
+  ACAPTION  VARCHAR(254), /* Pflichtfeld */
   ADESC VARCHAR(2000))
 RETURNS (
   success smallint,
@@ -2262,9 +2552,6 @@ COMMENT ON PROCEDURE SP_ADD_SP_ADDCATALOGITEM_BY_SRV IS
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_SP_ADDCATALOGITEM_BY_SRV'^
 
 SET TERM ; ^
-
-/* Katalog: JSON_KIND komplett über SP erstellen */
-execute procedure SP_CREATE_ZABCATALOG 'JSON_KIND';
 
 COMMIT WORK;
 /******************************************************************************/
@@ -2514,6 +2801,15 @@ GRANT SELECT ON V_REGISTRY TO PROCEDURE SP_READSECTIONS_BY_SRV;
 GRANT EXECUTE ON PROCEDURE SP_TOUCHSESSION TO PROCEDURE SP_CHECKGRANT_BY_SVR;
 GRANT EXECUTE ON PROCEDURE SP_CHECKGRANT TO PROCEDURE SP_CHECKGRANT_BY_SVR;
 GRANT SELECT ON V_ROLES TO PROCEDURE SP_CHECKGRANT;
+
+  
+GRANT EXECUTE ON PROCEDURE SP_TOUCHSESSION TO PROCEDURE SP_ADDCATALOGITEM_BY_SRV;
+GRANT EXECUTE ON PROCEDURE SP_CHECKGRANT TO PROCEDURE SP_ADDCATALOGITEM_BY_SRV;
+GRANT EXECUTE ON PROCEDURE SP_ADDCATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM_BY_SRV;
+
+GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM;
+GRANT EXECUTE ON PROCEDURE SP_INSERT_CATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM;
+
 
 /* Roles */
 /* zusätzliche Rechte um Zugriff auf das Sessionmanagement zu erlangen */

@@ -253,8 +253,18 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
     console.debug('Start Controller.subscribeForChannels.SubClass');
 
     dojo.subscribe('init-catalogitem-by-parameter', this, "initCatalogItemByParameter");
-    
-    this.handleSubscribeByResData("NO_GRANT_FOR_ADD_CATALOGITEM");
+    this.handleSubscribeByResData("NO_MANDATORY_MANDANT_ID_BY_NEWCATALOGITEM");
+    this.handleSubscribeByResData("NO_VALID_MANDANT_ID_BY_NEWCATALOGITEM");
+    this.handleSubscribeByResData("NO_VALID_DONOTLOGIN_BY_NEWCATALOGITEM");
+    this.handleSubscribeByResData("NO_MANDATORY_CATALOG_BY_NEWCATALOGITEM");
+    this.handleSubscribeByResData("NO_CATALOGTABLE_BY_NEWCATALOGITEM");
+    this.handleSubscribeByResData("NO_MANDATORY_COUNTRY_ID_BY_NEWCATALOGITEM");
+    this.handleSubscribeByResData("NO_VALID_COUNTRY_ID_BY_NEWCATALOGITEM");
+    this.handleSubscribeByResData("NO_MANDATORY_CAPTION_BY_NEWCATALOGITEM");
+    this.handleSubscribeByResData("NO_MANDATORY_DESCRIPTION_BY_NEWCATALOGITEM");    
+    this.handleSubscribeByResData("INSERT_BY_CATALOGITEM_FAILD_BY_NEWCATLOGITEM");
+    this.handleSubscribeByResData("ADD_CATALOGITEM_SUCCEEDED");
+    this.handleSubscribeByResData("FAILD_BY_OBSCURE_PROCESSING");
     
     console.debug('End Controller.subscribeForChannels.SubClass');
   },
