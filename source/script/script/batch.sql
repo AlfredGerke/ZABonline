@@ -68,6 +68,8 @@ input 'recreate_user_views.sql';
 *
 */
 
+input 'create_grant_catalog_properties.sql';
+
 /******************************************************************************/
 /*                                  Clean up
 /*

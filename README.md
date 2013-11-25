@@ -5,7 +5,7 @@ ZABonline
 
 Einarbeitung in die Erstellung von Web-Anwendungen am Beispiel einer Mitgliederverwaltung
 
-**Inhaltsübersicht:**
+**InhaltsÃ¼bersicht:**
 
 - Zielvorgabe
 - Wavemaker
@@ -13,7 +13,7 @@ Einarbeitung in die Erstellung von Web-Anwendungen am Beispiel einer Mitgliederv
 - Hibernate
 - Versionen
 - Funktionsumfang von ZABonline
-- zusätzliche Entwicklungsumgebungen
+- zusÃ¤tzliche Entwicklungsumgebungen
 
 
 Zielvorgabe
@@ -26,40 +26,40 @@ Folgende Punkte sind dabei besonders zu beachten:
 
 * ZABonline solle eine klassische J2EE-Anwendung werden 
 * Client-Code soll browser-zentriert ablaufen 
-* Der Browser ist immer Plattform für die Anwendung
+* Der Browser ist immer Plattform fÃ¼r die Anwendung
 * Es sollen hosted Code und packaged Code zum Einsatz kommen
 * Es soll ein Mobile-Interface geben (7- und 10-Zoll)
-* Am Ende soll eine funktionsfähige Mitgliederverwaltung stehen   
+* Am Ende soll eine funktionsfÃ¤hige Mitgliederverwaltung stehen   
 
-Da dieses Projekt zum erlernen von neuen Techniken dient, ist ein Termin für ein
-erstes Release derzeit nicht vorgesehen. In der näheren Zukunft werden Milestones 
+Da dieses Projekt zum erlernen von neuen Techniken dient, ist ein Termin fÃ¼r ein
+erstes Release derzeit nicht vorgesehen. In der nÃ¤heren Zukunft werden Milestones 
 definiert, welche einen kleinen Ausblick auf die Entwicklungsrichtung geben sollen.
 
 
 Wavemaker
 ---------
-Als zentrales Werkzeug für die Entwicklung des Clients und der Einbindung von 
+Als zentrales Werkzeug fÃ¼r die Entwicklung des Clients und der Einbindung von 
 Webservices sowie dem Aufbau des Servers wird [Wavemaker](http://http://www.wavemaker.com/ "WaveMaker") verwendet. Beim Server handelt es sich 
-um einen Tomcat-Server. Allerdings unterstützt Wavemaker auch andere Server. 
-Anwendung welche mit Wavemaker erstellt werden sind grundsätzlich in jeder Standard J2EE-Umgebung lauffähig.
+um einen Tomcat-Server. Allerdings unterstÃ¼tzt Wavemaker auch andere Server. 
+Anwendung welche mit Wavemaker erstellt werden sind grundsÃ¤tzlich in jeder Standard J2EE-Umgebung lauffÃ¤hig.
 Um die Entwicklung des Servers zu vereinfachen wird Eclipse (JUNO) eingesetzt.   
 
-Hauptgründe warum Wavemaker gewählt wurde:
+HauptgrÃ¼nde warum Wavemaker gewÃ¤hlt wurde:
 
 * Wird kontinuierlich weiterentwickelt
-* Mobile Interfaces können entwickelt werden
-* Drag und Drop für die Erstellung des Clients
+* Mobile Interfaces kÃ¶nnen entwickelt werden
+* Drag und Drop fÃ¼r die Erstellung des Clients
 * Weitestgehende automatisierung der Kommunikation zwischen Client und Browser
 * Dojo wird als JavaScript-Library eingesetzt
-* Unterstützt sehr gut browser-zentrierten Code
+* UnterstÃ¼tzt sehr gut browser-zentrierten Code
  
 
 Firebird
 --------
 Als Datenbank wird Firebird eingesetzt. Da Wavemaker sehr flexibel ist, was den 
-Einsatz von Datenbanken angeht, wurde sich für Firebird entschieden. Sehr gute Erfahrungen 
-aus mehreren Projekten der letzten Jahre haben zur Wahl dieser Datenbank als Back-End geführt.
-Die Verbindung zur Datenbank wird über die JDBC-Treiber JayBird von Firebird hergestellt.    
+Einsatz von Datenbanken angeht, wurde sich fÃ¼r Firebird entschieden. Sehr gute Erfahrungen 
+aus mehreren Projekten der letzten Jahre haben zur Wahl dieser Datenbank als Back-End gefÃ¼hrt.
+Die Verbindung zur Datenbank wird Ã¼ber die JDBC-Treiber JayBird von Firebird hergestellt.    
 
 Die Verbindungsparameter lauten wie folgt: 
 
@@ -74,35 +74,35 @@ Die Verbindungsparameter lauten wie folgt:
         Revese Naming Strategy=com.wavemaker.tools.data.reveng.DefaultRevengNamingStrategy
 
 Der Server meldet sich nicht mit einem Admin-Account an der DB an. Der Benutzer `WEBCONNECT`
-ist in seinen Rechten stark eingeschränkt. 
+ist in seinen Rechten stark eingeschrÃ¤nkt. 
 
-Folgende primäre Einschränkungen sind zu beachten:
+Folgende primÃ¤re EinschrÃ¤nkungen sind zu beachten:
 
 * Kein Zugriff auf Tabellen
-* Kein Löschrecht
+* Kein LÃ¶schrecht
 * Keinen Zugriff auf DDL
  
-Daten werden über speziellen Views, Standard-Views genannt, bearbeitet. Standardviews 
-bieten die Möglichkeit auf ein Select, Update und Insert. Es wird kein Delete
+Daten werden Ã¼ber speziellen Views, Standard-Views genannt, bearbeitet. Standardviews 
+bieten die MÃ¶glichkeit auf ein Select, Update und Insert. Es wird kein Delete
 zugelassen, vielmehr besitzt jedes Schema ein Deleteflag.         
   
 
 Hibernate
 ---------
-In WaveMaker wird Hibernate als ORM-Layer eingesetzt. Tabellen werden in Java-Entitäten 
-übersetzt und mit einer *.hbm.xml-Beschreibungsdatei zusammen wird die Kommunikation 
-mit Daten in einer DB hergestellt. In WaveMaker kann über einen einfachen Assistenten
-das gesamte Datenmodell in Entitäten übersetzt werden. Allerdings lassen sich keine 
-einzelnen Tabellen separat übersetzen. Es gibt zwar die Möglichkeit eine Entität 
+In WaveMaker wird Hibernate als ORM-Layer eingesetzt. Tabellen werden in Java-EntitÃ¤ten 
+Ã¼bersetzt und mit einer *.hbm.xml-Beschreibungsdatei zusammen wird die Kommunikation 
+mit Daten in einer DB hergestellt. In WaveMaker kann Ã¼ber einen einfachen Assistenten
+das gesamte Datenmodell in EntitÃ¤ten Ã¼bersetzt werden. Allerdings lassen sich keine 
+einzelnen Tabellen separat Ã¼bersetzen. Es gibt zwar die MÃ¶glichkeit eine EntitÃ¤t 
 von Hand zu erstellen, dies kann aber je nach Umfang der Tabelle erheblich an Zeit 
 kosten.    
-Um das Problem zu lösen wird eine Sammlung von SPs (StoredProcedures) eingeführt,
-die es ermöglichen über einen SQL-Script-Editor aus der Datenbank eine beliebige
-Tabelle in eine Java-Entität zu übersetzen.  
+Um das Problem zu lÃ¶sen wird eine Sammlung von SPs (StoredProcedures) eingefÃ¼hrt,
+die es ermÃ¶glichen Ã¼ber einen SQL-Script-Editor aus der Datenbank eine beliebige
+Tabelle in eine Java-EntitÃ¤t zu Ã¼bersetzen.  
 
-Über folgendes Script kann eine Java-Entität erstellt werden:  
+Ãœber folgendes Script kann eine Java-EntitÃ¤t erstellt werden:  
 
-* [Hibernate Script Interface](source/script/script/create_hibernate_script_interface.sql "Script-Inteface - Erstellt eine beliebige Java-Entität")   
+* [Hibernate Script Interface](source/script/script/create_hibernate_script_interface.sql "Script-Inteface - Erstellt eine beliebige Java-EntitÃ¤t")   
   
 
 Versionen
@@ -123,7 +123,7 @@ Administration:
 * Benutzer
 * Benutzerrollen
 * Mandanten 
-* Benutzerdefinierte Datenblätter
+* Benutzerdefinierte DatenblÃ¤tter
 * Benutzerdefinierte Tabellen
 
 Mitgliederverwaltung:    
@@ -151,7 +151,7 @@ Controlling:
 * Mandantenverwaltung
 * Vorgangsverwaltung
 * Wiedervorlagen (automatisch)
-* Suchen (über alle Aspekte eines Mandanten)
+* Suchen (Ã¼ber alle Aspekte eines Mandanten)
 
 Allgemein:    
 
@@ -167,32 +167,32 @@ Module:
 * Vorgangsverwaltung
 
 
-zusätzliche Entwicklungsumgebungen
+zusÃ¤tzliche Entwicklungsumgebungen
 ----------------------------------
 
 * [Eclipse](http://www.eclipse.org/webtools/ "Eclipse - Java EE IDE for Web Developers")
-* [PSPad](http://http://www.pspad.com/de/ "PSPad – der ultimative Editor für Softwareentwickler")
+* [PSPad](http://http://www.pspad.com/de/ "PSPad â€“ der ultimative Editor fÃ¼r Softwareentwickler")
 * [IBExpert](http://ibexpert.net/ibe/ "IBExpert - the database experts")
 
 ## Eclipse
-Die Java-Sourcen können in einem eigenen Editor von Wavemaker bearbeitet werden. Je 
-umfangreicher sich allerdings der Servercode gestaltet, um so mühseliger ist die 
+Die Java-Sourcen kÃ¶nnen in einem eigenen Editor von Wavemaker bearbeitet werden. Je 
+umfangreicher sich allerdings der Servercode gestaltet, um so mÃ¼hseliger ist die 
 Verwendung dieses Editors. Als gute Alternative hat sich Eclipse (Juno) erwiesen.
-Das Projekt ließ sich problemlos anlegen, bearbeiten und kompilieren. Es ist allerdings
+Das Projekt lieÃŸ sich problemlos anlegen, bearbeiten und kompilieren. Es ist allerdings
 darauf zu achten, das mit dem JRE 6 gearbeitet wird, da diese Runtime von Wavemaker
 verlangt wird. Sicherlich lassen sich auch andere Entwicklungstool wie z. B. NetBeans
 verwenden.
 
 ## PSPad
-Die JavaScript-Sourcen können wie die Java-Sourcen in einem eigenen Editor von Wavemaker 
+Die JavaScript-Sourcen kÃ¶nnen wie die Java-Sourcen in einem eigenen Editor von Wavemaker 
 bearbeitet werden. Allerdings hat es sich gezeigt das die Anwendung eines externen 
-Editors für JavaScript-Sourcen von Vorteil ist. Dabei hat sich der PSPad als eine 
-gute Alternative angeboten. Der Texteditor ist speziell für Softwareentwickler 
-geeignet und unterstützt diverse Programmiersprachen. Natürlich kann jeder andere 
+Editors fÃ¼r JavaScript-Sourcen von Vorteil ist. Dabei hat sich der PSPad als eine 
+gute Alternative angeboten. Der Texteditor ist speziell fÃ¼r Softwareentwickler 
+geeignet und unterstÃ¼tzt diverse Programmiersprachen. NatÃ¼rlich kann jeder andere 
 Editor ebenfalls zur Anwendung kommen.   
 
 ## IBExpert
-IBExpert ist ein ideales Entwicklungswerkzeug für die Firebird-Datenbank. Der Editor
+IBExpert ist ein ideales Entwicklungswerkzeug fÃ¼r die Firebird-Datenbank. Der Editor
 bietet ausnahmslos alle notwendigen Werkzeuge zur Bearbeitung der Datenbank und zur 
-Entwicklung von SQL und PSQL an. So nutzt zum Beispiel der WorkAround für Hibernate-Entities
+Entwicklung von SQL und PSQL an. So nutzt zum Beispiel der WorkAround fÃ¼r Hibernate-Entities
 den IBExpert um Ergebnismengen in eine separate Textdatei zu sichern.  

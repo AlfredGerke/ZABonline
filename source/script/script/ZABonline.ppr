@@ -141,7 +141,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\CountryCodeLookup.js
 		+SQL
-			+Data
+			-Data
 				data_0001.sql
 				data_0002.sql
 				data_0003.sql
@@ -164,43 +164,36 @@ ZABonline
 			recreate_user_views.sql
 			clean_up.sql
 			create_hibernate_workaround.sql
+			create_grant_catalog_properties.sql
 [Open project files]
-0=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
-1=create_db.sql
-2=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js
-3=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\app.js
-4=..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js
-5=create_tools.sql
-6=create_admin.sql
-7=batch.sql
-8=create_user.sql
+0=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\app.js
+1=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js
+2=create_db.sql
+3=create_tools.sql
+4=create_admin.sql
+5=batch.sql
+6=create_grant_catalog_properties.sql
 [Selected Project Files]
 Main=
-Selected=create_db.sql
-[..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js]
-TopLine=225
-Caret=81,264
-[create_db.sql]
-TopLine=2758
-Caret=4,2793
-[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js]
-TopLine=1
-Caret=25,2
+Selected=create_grant_catalog_properties.sql
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\app.js]
 TopLine=1
 Caret=75,10
-[..\..\wavemaker\common\packages\zabonline\mod\NewUserCtrl.js]
-TopLine=452
-Caret=1,479
+[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js]
+TopLine=1
+Caret=25,2
+[create_db.sql]
+TopLine=2753
+Caret=49,2766
 [create_tools.sql]
-TopLine=657
-Caret=12,685
+TopLine=890
+Caret=66,910
 [create_admin.sql]
 TopLine=294
 Caret=1,314
 [batch.sql]
-TopLine=1
-Caret=1,1
-[create_user.sql]
-TopLine=10
-Caret=1,1
+TopLine=49
+Caret=43,71
+[create_grant_catalog_properties.sql]
+TopLine=23
+Caret=68,55

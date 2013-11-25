@@ -1,9 +1,9 @@
 Datenbank
 =========
 
-Aufbau des Datenmodelles über SQL-Scripte und dem IBExpert
+Aufbau des Datenmodelles Ã¼ber SQL-Scripte und dem IBExpert
 
-**Inhaltsübersicht:**
+**InhaltsÃ¼bersicht:**
 
 - Firebird
 - IBExpert
@@ -16,20 +16,21 @@ Firebird
 --------
 Als Datenbank wird Firebird 2.5 verwendet. Diese Version ist notwendig, da in den 
 Scripten Sprachelemente verwendet werden, die zum Teil erst mit der Version 2.5 
-eingeführt wurden. (z.B.: `CREATE USER`)
+eingefÃ¼hrt wurden. (z.B.: `CREATE USER`)
 
 
 IBExpert
 --------
-Die Scripte sind für das Script-Interface für IBExpert optimiert.      
-Folgende Befehle werden immer zu Anfang in jedem Script aufgeführt:
+Die Scripte sind fÃ¼r das Script-Interface fÃ¼r IBExpert optimiert.      
+Folgende Befehle werden immer zu Anfang in jedem Script aufgefÃ¼hrt:
 
 * `SET SQL DIALECT 3`
 * `SET NAMES WIN1252`
 * `SET CLIENTLIB '<Pfadeangabe>\fbclient.dll';` 
-* `CONNECT '<IP des Servers>:<Alias>' USER '<Benutzer>' PASSWORD '<password>';` 
+* `CREATE DATABASE '<IP des Servers>:<Alias>' USER '<Benutzer>' PASSWORD '<Password>' PAGE_SIZE <Size> DEFAULT CHARACTER SET WIN1252 COLLATION WIN1252;`
+* `CONNECT '<IP des Servers>:<Alias>' USER '<Benutzer>' PASSWORD '<Password>';` 
 
-Bestimmte Angaben wie IP des Servers oder DB-Alias müssen natürlich beim klonen 
+Bestimmte Angaben wie IP des Servers oder DB-Alias mÃ¼ssen natÃ¼rlich beim klonen 
 auf die lokale Umgebung angepasst werden.
 
 
@@ -40,7 +41,7 @@ Die Scripte werden immer in diverse Abschnitte aufgeteilt:
 * Kommentarheader (Pflicht)
 * Initialisierung der Verbindungsparameter (Pflicht)
 * Update-/Versions-Historie (Pflicht)
-* Abschnitte für DB-Objekte (wenn benötigt)
+* Abschnitte fÃ¼r DB-Objekte (wenn benÃ¶tigt)
     * Exceptions
     * Domains
     * Sequences
@@ -53,36 +54,36 @@ Die Scripte werden immer in diverse Abschnitte aufgeteilt:
     
 Jeder Abschnitt wird in der Regel mit einem `COMMIT WORK` abgeschlossen.    
 
-Für alle Scripte die Datenbankobjekte für die Mitgliederverwaltung erstellen,
-wird der Benutzer `INSTALLER` für die Verbindungsparameter verwendet.      
+FÃ¼r alle Scripte die Datenbankobjekte fÃ¼r die Mitgliederverwaltung erstellen,
+wird der Benutzer `INSTALLER` fÃ¼r die Verbindungsparameter verwendet.      
 Neben den Scripten welche die Mitgliederverwaltung aufbauen, gibt es Scripte welche 
-Werkzeuge für die Codegenerierung zur Verfügung stellen. Diese Scripte werden immer 
+Werkzeuge fÃ¼r die Codegenerierung zur VerfÃ¼gung stellen. Diese Scripte werden immer 
 mit dem Benutzer `SYSDBA` initialisert. 
 
 ### Spezielle Scripte
-Folgende Scripte richten Werkzeuge für die Codegenerierng ein, unterstützen die 
-Installation, oder stellen grundsätzliche Funktionalitäten zur Verfügung:
+Folgende Scripte richten Werkzeuge fÃ¼r die Codegenerierng ein, unterstÃ¼tzen die 
+Installation, oder stellen grundsÃ¤tzliche FunktionalitÃ¤ten zur VerfÃ¼gung:
 
 * `create_user.sql`: Erstellt alle notwendigen Benutzer
-* `create_tools.sql`: Werkzeuge für die Codegenerierung
+* `create_tools.sql`: Werkzeuge fÃ¼r die Codegenerierung
 * `create_hibernate_workaround.sql`: Hibernate Script Interface
 * `create_json.sql`: JSON-Workaround (in Planung)
 * `create_simple_indexe.sql`: Einspalten-Indexe generieren
-* `recreate_user_views.sql`: User-Views reorganisieren (wird derzeit nicht ausgeführt; unnötig?)
-* `clean_up.sql`: Temporäre DB-Objekte wieder entfernen
+* `recreate_user_views.sql`: User-Views reorganisieren (wird derzeit nicht ausgefÃ¼hrt: unnÃ¶tig?)
+* `clean_up.sql`: TemporÃ¤re DB-Objekte wieder entfernen
 
 Die Codegenerierung erzeugt derzeit 2/3 der verwendeten DB-Objekte.      
 Folgende DB-Objekte werden immer automatisch erstellt:
 
 * Update Views (User-Views)
-* Standard Sequences für PrimaryKeys
+* Standard Sequences fÃ¼r PrimaryKeys
 * Standard Kataloge
-* Admin Kataloge (notwendig für die Installation und Wartung)
+* Admin Kataloge (notwendig fÃ¼r die Installation und Wartung)
 * m-n Verbindungen (Relation-Tables)
-* Standard Grants (Zugriffsrechte für DB-Objekte)
+* Standard Grants (Zugriffsrechte fÃ¼r DB-Objekte)
 * Standard Trigger (Before-Update, Before-Insert, Before-Delete)
-* Einspalten-Indexe (z.B. für die Spalte `SOFTDEL`)
-* Hibernate-Entities (Sorucen für die WaveMaker-Schnittstelle)
+* Einspalten-Indexe (z.B. fÃ¼r die Spalte `SOFTDEL`)
+* Hibernate-Entities (Sorucen fÃ¼r die WaveMaker-Schnittstelle)
 
   
 Hibernate
@@ -96,17 +97,17 @@ Zugriffrechte
 
 Benutzer
 --------
-Für die Installation und den Betrieb der Mitgliederverwaltung werden zustätzlich
-zum `SYSDBA` zwei weitere Benutzer benötigt:
+FÃ¼r die Installation und den Betrieb der Mitgliederverwaltung werden zustÃ¤tzlich
+zum `SYSDBA` zwei weitere Benutzer benÃ¶tigt:
 
 * `INSTALLER`
 * `WEBCONNECT`
 
-Die Werkzeuge für die Codegenerierung, den grundsätzlichen Funktionalitäten und 
+Die Werkzeuge fÃ¼r die Codegenerierung, den grundsÃ¤tzlichen FunktionalitÃ¤ten und 
 des *Hibernate Script Interface* werden mit dem `SYSDBA` installiert.        
-Das gesamte Datenmodell für die Mitgliederverwaltung wird mit dem Benutzer `INSTALLER` 
+Das gesamte Datenmodell fÃ¼r die Mitgliederverwaltung wird mit dem Benutzer `INSTALLER` 
 eingerichtet.    
 Der Benutzer `WEBCONNECT` wird vom Servlet-Container verwendet um eine Connect zur
-Datenbank herzustellen. `WEBCONNECT` ist in seinen Rechten stark eingeschränkt. So
-kann diese Benutzer keinen direkten Zugriff auf die Tabellen herstellen. Daten können
-nur über Update Views (User-Views) verwaltet werden.     
+Datenbank herzustellen. `WEBCONNECT` ist in seinen Rechten stark eingeschrÃ¤nkt. So
+kann diese Benutzer keinen direkten Zugriff auf die Tabellen herstellen. Daten kÃ¶nnen
+nur Ã¼ber Update Views (User-Views) verwaltet werden.     

@@ -1967,7 +1967,10 @@ execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN'
 
 CREATE OR ALTER PROCEDURE SP_CREATE_ZABCATALOG (
   ATABLENAME DBOBJECTNAME24,
-  ACOMMENT VARCHAR(254) DEFAULT 'ZABonline')
+  ACOMMENT VARCHAR(254) DEFAULT 'ZABonline',
+  ADOREGISTER smallint = 1,
+  ADOGETTER smallint = 1,
+  ADOSETTER smallint = 1)
 RETURNS (
   success smallint)  
 AS
@@ -1981,7 +1984,7 @@ BEGIN
   select success from SP_CREATE_CATALOG_TABLE(:relation_name, :cat_comment) into :success;
   
   /* Namen des Kataloges registrieren */
-  if (success = 1) then
+  if ((success = 1) and (ADOREGISTER = 1)) then
   begin
     insert
     into
@@ -2008,14 +2011,14 @@ BEGIN
   begin  
     select success from SP_CREATE_SEQUNECE(:relation_name) into :success;
     /* passend zur Sequence eine Zugriffs-SP einrichten */
-    if (success = 1) then
+    if ((success = 1) and (ADOGETTER = 1)) then
     begin
       select success from SP_CREATE_SEQUENCE_GETTER(:relation_name) into :success;
     end
   end
 
   /* passend zum Katalog eine Insert-Routine einrichten */
-  if (success = 1) then
+  if ((success = 1) and (ADOSETTER = 1)) then
   begin
     select success from SP_CREATE_CATALOG_SETTER(:relation_name) into :success;
   end
@@ -2284,6 +2287,8 @@ end^
 COMMENT ON PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM IS
 'Eingabedaten für einen Katalog überprüfen'^
 
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_CHK_DATA_BY_ADD_CATALOGITEM'^
+
 CREATE OR ALTER PROCEDURE SP_INSERT_CATALOGITEM (
   ATENANTID integer,
   ADONOTDELETE smallint,
@@ -2356,6 +2361,8 @@ end^
 
 COMMENT ON PROCEDURE SP_INSERT_CATALOGITEM IS
 'Katalogeintrag einfügen'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_INSERT_CATALOGITEM'^
 
 CREATE OR ALTER PROCEDURE SP_ADDCATALOGITEM (
   ATENANTID integer,
@@ -2710,6 +2717,59 @@ COMMIT WORK;
 /* Katalog: JSON_KIND komplett über SP erstellen */
 execute procedure SP_CREATE_ZABCATALOG 'JSON_KIND';
 
+SET TERM ^ ;
+
+CREATE OR ALTER PROCEDURE SP_GRANT_CAT_PROPERTIES (
+  AROLE varchar(31),
+  ADOSETTER smallint = 1,
+  ADOGETTER smallint = 1,
+  ADOVIEW smallint = 1)
+as
+declare variable cat varchar(31);
+declare variable setter varchar(31);
+declare variabel getter varchar(31);
+declare variable cat_view varchar(31);
+begin
+
+  if ((ADOSETTER = 1) or (ADOGETTER = 1) or (ADOVIEW = 1)) then
+  begin
+    for
+    select
+    from
+      V_ADM_CATALOGS
+    into
+      :cat
+    do
+    begin
+      setter = 'SET_' || Upper(cat);
+      getter = 'GET_' || Upper(cat) || '_ID';    
+      cat_view = 'V_' || Upper(cat);
+    
+     if (ADOSETTER = 1) then
+     begin
+       execute procedure SP_GRANT_ROLE_TO_OBJECT :AROLE, 'EXECUTE', :setter;
+     end
+  
+     if (ADOGETTER = 1) then
+     begin   
+       execute procedure SP_GRANT_ROLE_TO_OBJECT :AROLE, 'EXECUTE', :getter;
+     end
+       
+     if (ADOVIEW = 1) then
+     begin  
+       execute procedure SP_GRANT_ROLE_TO_OBJECT :AROLE, 'select', :cat_view;
+     end  
+    end
+  end  
+  
+  suspend;
+end^
+
+COMMENT ON PROCEDURE SP_GRANT_CAT_PROPERTIES IS
+'Weist Grants auf Catalogeingenschaften DB-Objekten zu'^
+
+SET TERM ; ^
+
 COMMIT WORK;
 /******************************************************************************/
 /*                                 Grants                                 
@@ -2718,6 +2778,7 @@ COMMIT WORK;
 /* Users */
 GRANT R_WEBCONNECT TO WEBCONNECT;
 GRANT R_ZABGUEST TO WEBCONNECT;
+GRANT EXECUTE ON PROCEDURE SP_CREATE_CATALOG_SETTER TO INSTALLER;
 
 /* Views */
 
@@ -2786,6 +2847,9 @@ GRANT EXECUTE ON PROCEDURE SP_ADDCATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM_BY_S
 
 GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM;
 GRANT EXECUTE ON PROCEDURE SP_INSERT_CATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM;
+
+GRANT SELET ON V_ADM_CATALOGS TO PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM; 
+
 
 /*
 GRANT EXECUTE ON PROCEDURE SP_CREATE_SEQUENCE_GETTER TO PROCEDURE SP_CREATE_ZABCATALOG;
