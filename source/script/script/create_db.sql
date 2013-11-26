@@ -2727,38 +2727,63 @@ CREATE OR ALTER PROCEDURE SP_GRANT_CAT_PROPERTIES (
 as
 declare variable cat varchar(31);
 declare variable setter varchar(31);
-declare variabel getter varchar(31);
+declare variable getter varchar(31);
 declare variable cat_view varchar(31);
+declare variable success smallint;
 begin
 
   if ((ADOSETTER = 1) or (ADOGETTER = 1) or (ADOVIEW = 1)) then
   begin
     for
     select
+      caption
     from
       V_ADM_CATALOGS
     into
       :cat
     do
     begin
+      success = 0;
+
       setter = 'SET_' || Upper(cat);
       getter = 'GET_' || Upper(cat) || '_ID';    
       cat_view = 'V_' || Upper(cat);
     
-     if (ADOSETTER = 1) then
-     begin
-       execute procedure SP_GRANT_ROLE_TO_OBJECT :AROLE, 'EXECUTE', :setter;
-     end
+      if (ADOSETTER = 1) then
+      begin
+        select
+          success
+        from
+          SP_GRANT_ROLE_TO_OBJECT(:AROLE,
+            'EXECUTE',
+            :setter)
+        into
+          :success;
+      end
   
-     if (ADOGETTER = 1) then
-     begin   
-       execute procedure SP_GRANT_ROLE_TO_OBJECT :AROLE, 'EXECUTE', :getter;
-     end
+      if (ADOGETTER = 1) then
+      begin
+        select
+          success
+        from
+          SP_GRANT_ROLE_TO_OBJECT(:AROLE,
+            'EXECUTE',
+            :getter)
+         into
+           :success;
+      end
        
-     if (ADOVIEW = 1) then
-     begin  
-       execute procedure SP_GRANT_ROLE_TO_OBJECT :AROLE, 'select', :cat_view;
-     end  
+      if (ADOVIEW = 1) then
+      begin
+        select
+          success
+        from
+          SP_GRANT_ROLE_TO_OBJECT(:AROLE,
+            'select',
+            :cat_view)
+        into
+          :success;
+      end
     end
   end  
   
@@ -2778,7 +2803,6 @@ COMMIT WORK;
 /* Users */
 GRANT R_WEBCONNECT TO WEBCONNECT;
 GRANT R_ZABGUEST TO WEBCONNECT;
-GRANT EXECUTE ON PROCEDURE SP_CREATE_CATALOG_SETTER TO INSTALLER;
 
 /* Views */
 
@@ -2848,7 +2872,7 @@ GRANT EXECUTE ON PROCEDURE SP_ADDCATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM_BY_S
 GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM;
 GRANT EXECUTE ON PROCEDURE SP_INSERT_CATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM;
 
-GRANT SELET ON V_ADM_CATALOGS TO PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM; 
+GRANT SELECT ON V_ADM_CATALOGS TO PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM;
 
 
 /*

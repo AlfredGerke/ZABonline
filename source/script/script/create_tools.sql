@@ -884,8 +884,8 @@ execute procedure SP_CREATE_SEQUNECE 'ADM_CATALOGS';
 execute procedure SP_CREATE_TRIGGER_BI 'ADM_CATALOGS';
 execute procedure SP_CREATE_TRIGGER_BU 'ADM_CATALOGS';
 /* Grants vergeben */
-execute procedure SP_GRANT_ROLE_TO_OBJECT 'INSTALLER', 'ALL', 'ADM_CATALOGS';
-execute procedure SP_GRANT_ROLE_TO_OBJECT 'INSTALLER', 'ALL', 'V_ADM_CATALOGS';
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'INSTALLER', 'ALL', 'ADM_CATALOGS', 1;
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'INSTALLER', 'ALL', 'V_ADM_CATALOGS', 1;
 
 COMMIT WORK;
 /******************************************************************************/
