@@ -197,7 +197,7 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
       }    
 
       if (success == 1) {
-        this.globalScope.globalData.tenantId(this.localScope.varTenantId);
+        this.globalScope.globalData.tenantId(local.varTenantId);
       }  
       return success;
     } catch (e) {
@@ -224,7 +224,7 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
       var kindFound = parameter.search(/kind/);
       if (kindFound != -1) {      
         this.catalogParameter = dojo.fromJson(parameter);
-      
+                 
         console.debug('CatalogItemCtrl.initCatalogItemByParameter.sender: ' + sender.name);
         console.debug('CatalogItemCtrl.initCatalogItemByParameter.katalogparameter:' + parameter);
              

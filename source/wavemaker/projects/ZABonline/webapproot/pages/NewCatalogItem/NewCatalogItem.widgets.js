@@ -1,9 +1,8 @@
 NewCatalogItem.widgets = {
-	varTenantVar: ["wm.Variable", {"type":"NumberData"}, {}],
 	addCatalogItem: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"addCatalogItem","service":"CatalogService"}, {"onError":"addCatalogItemError","onResult":"addCatalogItemResult","onSuccess":"addCatalogItemSuccess"}, {
 		input: ["wm.ServiceInput", {"type":"addCatalogItemInputs"}, {}, {
 			binding: ["wm.Binding", {}, {}, {
-				wire: ["wm.Wire", {"expression":undefined,"source":"varTenantVar.dataValue","targetProperty":"aTenantId"}, {}],
+				wire: ["wm.Wire", {"expression":undefined,"source":"varTenantId.dataValue","targetProperty":"aTenantId"}, {}],
 				wire1: ["wm.Wire", {"expression":undefined,"source":"edtContryCode.dataValue","targetProperty":"aCountryId"}, {}],
 				wire2: ["wm.Wire", {"expression":undefined,"source":"edtCaption.dataValue","targetProperty":"aCaption"}, {}],
 				wire3: ["wm.Wire", {"expression":undefined,"source":"edtDescription.dataValue","targetProperty":"aDesc"}, {}],
@@ -18,6 +17,7 @@ NewCatalogItem.widgets = {
 		}]
 	}],
 	varCatalog: ["wm.Variable", {"type":"StringData"}, {}],
+	varTenantId: ["wm.Variable", {"type":"NumberData"}, {}],
 	lbxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top"}, {}, {
 		pnlCatalogTitle: ["wm.FancyPanel", {"title":"Katalog"}, {}, {
 			pnlClient: ["wm.Panel", {"height":"100%","horizontalAlign":"left","margin":"5","padding":"5","verticalAlign":"top","width":"100%"}, {}, {

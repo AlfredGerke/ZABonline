@@ -164,6 +164,8 @@ dojo.declare("NewCatalogItem", wm.Page, {
             console.debug('Start btnAddCatalogItemClick');
 
             app.dlgLoading.setParameter(this.addCatalogItem, this.pnlCatalogTitle);
+            
+            this.addCatalogItem.input.setValue('aCatalog', this.controller.catalogParameter.catalog);
 
             if (this.addCatalogItem.canUpdate()) {
                 this.addCatalogItem.update();

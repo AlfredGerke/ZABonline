@@ -24,7 +24,7 @@ public class CatalogManagement extends JavaServiceSuperClass {
     super(INFO);
   }
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("unchecked") 
   public List<Results.ProcResults> addCatalogItem(String aCatalog,
     Integer aTenantId,
     Integer aCountryId,

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="CatalogService" class="de.zabonline.srv.db.CatalogManagement" CRUDService="false" type="JavaService" springFile="CatalogService.spring.xml">
     <operation name="addCatalogItem">
-        <parameter name="catalog" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aCatalog" typeRef="java.lang.String" isList="false"/>
         <parameter name="aTenantId" typeRef="java.lang.Integer" isList="false"/>
         <parameter name="aCountryId" typeRef="java.lang.Integer" isList="false"/>
         <parameter name="aDoNotDelete" typeRef="java.lang.Boolean" isList="false"/>
