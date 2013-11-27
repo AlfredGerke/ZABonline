@@ -41,10 +41,10 @@
   "DUPLICATE_USERNAME_NOT_ALLOWED": "Benutzername wurde bereits vergeben!",
   "NO_VALID_USER_ID": "Keine g&uuml;ltige Benutzeridentifizierung gefunden!",
   "FAILD_BY_UNKNOWN_REASON": "Aus unbekanntem Grund fehlgeschlagen!",
+  "FAILD_BY_OBSCURE_PROCESSING": "Keine klare Verarbeitungsaufforderung ermittelt!",
   "INSERT_BY_USER_FAILD": "Anlegen von Benutzerdaten nicht erfolgreich!",
   "ERROR_MSG_ADD_USER_NO_SUCCESS_BY_EXECUTE": "Daten konnten nicht &uuml;bernommen werden. Bitte noch einmal versuchen!",
   "ERROR_MSG_ERROR_BY_ADDUSER": "Der Service wurde mit einem Fehler abgebrochen: ",
-  "ERROR_MSG_BY_CONTROLLER_REFRESHWIZARD": "Fehler beim Aktualisieren des Assistenten!",
   "ERROR_MSG_BY_CONTROLLER_CLEARWIZARD": "Fehler aus dem Modul: Daten im Assistenten nicht vollst&auml;ndig zur&uuml;ck gesetzt!",
   "NO_GRANT_FOR_ADD_USER": "Bearbeiten von Benutzerdaten nicht erlaubt!"
 }

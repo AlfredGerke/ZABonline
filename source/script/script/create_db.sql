@@ -2290,28 +2290,35 @@ COMMENT ON PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM IS
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_CHK_DATA_BY_ADD_CATALOGITEM'^
 
 CREATE OR ALTER PROCEDURE SP_INSERT_CATALOGITEM (
-  ATENANTID integer,
-  ADONOTDELETE smallint,
-  ACATALOG VARCHAR(31), /* Plichtfeld */
-  ACOUNTRYID integer, /* Pflichtfeld */
-  ACAPTION  VARCHAR(254), /* Pflichtfeld */
-  ADESC VARCHAR(2000))
+    atenantid integer,
+    adonotdelete smallint,
+    acatalog varchar(31),
+    acountryid integer,
+    acaption varchar(254),
+    adesc varchar(2000))
 returns (
     success smallint,
     "MESSAGE" varchar(254),
     catalog_item_id integer)
 as
 declare variable sql_stmt varchar(2000);
-declare variable found smallint;
+declare variable "FOUND" smallint;
 begin
   success = 0;
   message = 'FAILD_BY_UNKNOWN_REASON';
   catalog_item_id = -1;
   sql_stmt = '';
   found = 0;
-  
-  sql_stmt = 'select 1 from V_' || Upper(:ACATALOG) || ' where COUNTRY_ID=' || :ACOUNTRYID || ' and Upper(CAPTION)="' || Upper(ACAPTION) || '"';
+
+  sql_stmt = 'select 1 from V_' 
+    || Upper(:ACATALOG) 
+    || ' where COUNTRY_ID=' 
+    || :ACOUNTRYID 
+    || ' and Upper(CAPTION)=''' 
+    || Upper(:ACAPTION) 
+    || '''';
   execute statement sql_stmt into :found;
+  
   if (found = 1) then  
   begin
     message = 'DUPLICATE_CATALOGCAPTION_NOT_ALLOWED';
@@ -2324,21 +2331,27 @@ begin
 
   if ((catalog_item_id <> -1) and (catalog_item_id is not null)) then
   begin
+
     sql_stmt = 'execute procedure SET_' 
       || Upper(:ACATALOG) 
-      || ' (' 
-      || :catalog_item_id 
-      || ', ' 
-      || :ACOUNTRYID 
-      || ', ''' 
-      || :ACAPTION 
-      || ''', ''' 
-      || :ADESC 
-      || ''', '
-      || :ADONOTDELETE
+      || ' ( '
+      || ':CATALOGITEMID'
+      || ', '
+      || ':COUNTRYID'
+      || ', '
+      || ':CAPTION '
+      || ', '
+      || ':DESCRIPTION'
+      || ', '
+      || ':DONOTDELETE'
       || ')';
-    execute statement sql_stmt into :success;
+    execute statement (sql_stmt) (CATALOGITEMID := catalog_item_id,
+                                  COUNTRYID := ACOUNTRYID,
+                                  CAPTION := ACAPTION,
+                                  DESCRIPTION := ADESC,
+                                  DONOTDELETE := ADONOTDELETE) into :success;
 
+    
     if (success = 0) then
     begin
       message = 'INSERT_BY_SETTER_FAILD';
@@ -2350,7 +2363,7 @@ begin
   end  
   else
   begin
-    message = 'NO_VALID_USER_ID';
+    message = 'NO_VALID_CATLOG_ITEM_ID';
     success = 0;
     suspend;
     Exit;     

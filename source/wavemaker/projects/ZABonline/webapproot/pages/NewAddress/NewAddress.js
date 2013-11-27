@@ -413,7 +413,7 @@ dojo.declare("NewAddress", wm.Page, {
     },
     refreshByTitleCatalog: function() {},
     btnAddTitelClick: function(inSender) {
-        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'TITLE', callback: 'refreshByTitleCatalog'}", app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_TITLE"));
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'TITEL', callback: 'refreshByTitleCatalog'}", app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_TITLE"));
     },
     btnFindPersonClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'person', callback: 'onGetResultBySearch'}");
