@@ -164,7 +164,7 @@ dojo.declare("NewFactoryCtrl", Controller, {
       return false;
     }
   },  
-  loadLookupData: function(target) {
+  loadLookupData: function() {
     var success = 0;
     try {                                               
       if (this.globalScope.addressTypeLookup.refresh() > 0) {

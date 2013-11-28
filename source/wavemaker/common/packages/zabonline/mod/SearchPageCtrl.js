@@ -18,7 +18,7 @@ dojo.declare("SearchPageCtrl", Controller, {
     
     this.initControls(global, local);
   },
-  loadLookupData: function(target) {
+  loadLookupData: function() {
     var success = 1;
     var local = this.localScope;
     try { 

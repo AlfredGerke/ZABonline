@@ -85,10 +85,10 @@ dojo.declare("Controller", null, {
       this.handleExceptionByCtrl(this.localScope.name + ".showSearch() failed: " + e.toString(), e, -1);
     }
   },
-  showCatalogItem: function(sender, catalogParameter, title) {
+  showCatalogItem: function(sender, catalogParameter, callback, title) {
     var local = this.localScope;
     try {    
-      dojo.publish('init-catalogitem-by-parameter', [sender, catalogParameter, title]);
+      dojo.publish('init-catalogitem-by-parameter', [sender, catalogParameter, callback, title]);
     } catch(e) {
       this.handleExceptionByCtrl(local.name + ".showCatalogItem() failed: " + e.toString(), e, -1);
     }

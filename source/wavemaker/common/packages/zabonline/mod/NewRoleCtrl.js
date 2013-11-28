@@ -50,7 +50,7 @@ dojo.declare("NewRoleCtrl", Controller, {
       return false;
     }
   },
-  loadLookupData: function(target) {
+  loadLookupData: function() {
     var local = this.localScope;
     var global = this.globalScope;
       

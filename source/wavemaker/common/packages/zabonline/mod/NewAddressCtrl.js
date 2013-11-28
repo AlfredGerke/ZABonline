@@ -171,7 +171,25 @@ dojo.declare("NewAddressCtrl", Controller, {
       return false;
     }
   },  
-  loadLookupData: function(target) {
+  onRefreshSalutationLookup: function(force) {
+    var global = this.globalScope;
+    var local = this.localScope;
+    var succes = 0;
+    
+    try {
+     if (global.salutationLookup.refresh(force) > 0) {
+        success = 1;
+      } else {
+        success = 0;
+      }
+      
+      return success;
+    } catch (e) {
+      this.handleExceptionByCtrl(local.name + ".onRefreshSalutationLookup() failed: " + e.toString(), e, -1);      
+      return false;      
+    }
+  },
+  loadLookupData: function() {
     var success = 0;
     try {                                           
       if (this.globalScope.salutationLookup.refresh() > 0) {
@@ -802,7 +820,7 @@ dojo.declare("NewAddressCtrl", Controller, {
   showSearch: function(sender, searchParameter, title) {
     this.inherited (arguments);
   },
-  showCatalogItem: function(sender, catalogParameter, title) {
+  showCatalogItem: function(sender, catalogParameter, callback, title) {
     this.inherited (arguments);
   }      
 });

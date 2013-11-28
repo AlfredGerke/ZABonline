@@ -401,19 +401,34 @@ dojo.declare("NewAddress", wm.Page, {
             this.controller.handleExceptionByCtrl(this.name + ".wizNewAddressDoneClick() failed: " + e.toString(), e);
         }
     },
+    onGetResultBySearch: function() {},
     btnFindSalutationClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000, mode: 0, find: 'salutation', callback: 'onGetResultBySearch'}");
     },
-    refreshBySalutationCatalog: function() {},
+    refreshByAddCatalogItem: function() {
+        return function(scope, catalog) {
+
+            switch (catalog) {
+            case "SALUTATION":
+                scope.controller.onRefreshSalutationLookup(1);
+
+                break;
+            case "TITEL":
+                break;
+            default:
+                break;
+            }
+
+        };
+    },
     btnAddSalutationClick: function(inSender) {
-        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'SALUTATION', callback: 'refreshBySalutationCatalog'}", app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_SALUTATION"));
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'SALUTATION'}", this.refreshByAddCatalogItem(), app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_SALUTATION"));
     },
     btnFindTitelClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'titel', callback: 'onGetResultBySearch'}");
     },
-    refreshByTitleCatalog: function() {},
     btnAddTitelClick: function(inSender) {
-        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'TITEL', callback: 'refreshByTitleCatalog'}", app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_TITLE"));
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'TITEL'}", this.refreshByAddCatalogItem(), app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_TITLE"));
     },
     btnFindPersonClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'person', callback: 'onGetResultBySearch'}");
@@ -424,16 +439,14 @@ dojo.declare("NewAddress", wm.Page, {
     btnFindAddressTypeClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'addressType', callback: 'onGetResultBySearch'}");
     },
-    refreshByAddressTypeCatalog: function() {},
     btnAddAddressTypeClick: function(inSender) {
-        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'ADDRESS_TYPE', callback: 'refreshByAddressTypeCatalog'}", app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_ADDRESS_TYPE"));
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'ADDRESS_TYPE'}", this.refreshByAddCatalogItem(), app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_ADDRESS_TYPE"));
     },
     btnFindContactTypeClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'contactType', callback: 'onGetResultBySearch'}");
     },
-    refreshByContactTypeCatalog: function() {},
     btnAddContactTypeClick: function(inSender) {
-        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'CONTACT_TYPE', callback: 'refreshByContactTypeCatalog'}", app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_CONTACT_TYPE"));
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'CONTACT_TYPE'}", this.refreshByAddCatalogItem(), app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_CONTACT_TYPE"));
     },
     btnFindAreaCodeClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'areaCode', callback: 'onGetResultBySearch'}");

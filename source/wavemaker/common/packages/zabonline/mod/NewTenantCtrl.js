@@ -212,7 +212,7 @@ dojo.declare("NewTenantCtrl", Controller, {
       return false;
     }
   },
-  loadLookupData: function(target) {
+  loadLookupData: function() {
     var local = this.localScope;
     var global = this.globalScope;  
     

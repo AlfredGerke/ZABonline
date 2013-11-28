@@ -205,7 +205,7 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
       return false;      
     }  
   },
-  initCatalogItemByParameter: function(sender, parameter, title) {
+  initCatalogItemByParameter: function(sender, parameter, callback, title) {
     /**
      * "parameter" ist ein JSON-String
      * Es muss immer die "kind"-Eigenschaft angegeben sein
@@ -215,11 +215,13 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
      *   "mode": 0 -> ist nicht admin
      *   "mode": 1 -> ist admin
      *   "page": z.B. NewCatalogItem -> Name der Page     
-     *   "catalog": z.B. SALUATION -> Namer der Tabelle des Katalogs     
-     *   "callback": Callback soll nach dem Beenden des Dialoges getriggert werden                         
+     *   "catalog": z.B. SALUATION -> Namer der Tabelle des Katalogs                             
      */         
     var global = this.globalScope;
     var local = this.localScope;
+    
+    this.sender = sender;
+    this.callback = callback;
     try {    
       var kindFound = parameter.search(/kind/);
       if (kindFound != -1) {      
@@ -235,6 +237,8 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
         global.dlgCatalogItem.setPageName(this.catalogParameter.page);
         global.dlgCatalogItem.show();
         
+        this.conHandle = local.connect(global.dlgCatalogItem, "onClose", this, "resetParameter");
+        
       } else {
          throw this.getDictionaryItem("ERROR_MSG_BY_CONTROLLER_NO_KIND_FOUND");
       }                  
@@ -244,6 +248,11 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
   },
   resetParameter: function() {
     var global = this.globalScope;
+    var local = this.localScope;
+        
+    local.disconnect(this.conHandle);
+        
+    this.callback(this.sender, this.catalogParameter.catalog);    
         
     this.catalogParameter = null;
     

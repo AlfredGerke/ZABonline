@@ -164,7 +164,7 @@ dojo.declare("NewUserCtrl", Controller, {
       return false;      
     }  
   },    
-  loadLookupData: function(target) {
+  loadLookupData: function() {
     var success = 0;
     var local = this.localScope;
     try { 
