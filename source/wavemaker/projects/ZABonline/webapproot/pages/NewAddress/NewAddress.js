@@ -407,18 +407,7 @@ dojo.declare("NewAddress", wm.Page, {
     },
     refreshByAddCatalogItem: function() {
         return function(scope, catalog) {
-
-            switch (catalog) {
-            case "SALUTATION":
-                scope.controller.onRefreshSalutationLookup(1);
-
-                break;
-            case "TITEL":
-                break;
-            default:
-                break;
-            }
-
+            scope.controller.onRefreshLookupByTarget(catalog, 1);
         };
     },
     btnAddSalutationClick: function(inSender) {

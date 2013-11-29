@@ -170,24 +170,56 @@ dojo.declare("NewAddressCtrl", Controller, {
       this.handleExceptionByCtrl(this.localScope.name + ".setByQuickSetup() failed: " + e.toString(), e, -1);
       return false;
     }
-  },  
-  onRefreshSalutationLookup: function(force) {
-    var global = this.globalScope;
+  },
+  onRefreshLookup: function(lookup, force) {
     var local = this.localScope;
     var succes = 0;
     
     try {
-     if (global.salutationLookup.refresh(force) > 0) {
-        success = 1;
+      if (lookup) {
+        if (lookup.refresh(force) > 0) {
+          success = 1;
+        } else {
+          success = 0;
+        }
       } else {
         success = 0;
       }
       
       return success;
     } catch (e) {
-      this.handleExceptionByCtrl(local.name + ".onRefreshSalutationLookup() failed: " + e.toString(), e, -1);      
+      this.handleExceptionByCtrl(local.name + ".onRefreshLookup() failed: " + e.toString(), e, -1);      
       return false;      
     }
+  },    
+  onRefreshLookupByTarget: function(target, force) {
+    var global = this.globalScope;
+    var success = 0;
+    
+    switch (target) {
+      case "SALUTATION":
+        success =  this.onRefreshLookup(global.salutationLookup, force);
+        //
+        break;
+      case "TITEL":
+        success =  this.onRefreshLookup(this.globalScope.titelLookup, force);
+        //
+        break;  
+      case "ADDRESS_TYPE":
+        success =  this.onRefreshLookup(this.globalScope.addressTypeLookup, force);
+        //
+        break;        
+      case "CONTACT_TYPE":
+        success =  this.onRefreshLookup(this.globalScope.contactTypeLookup, force);
+        //
+        break;  
+      default:
+          success = 0;
+          //
+        break;
+    }
+    
+    return success;
   },
   loadLookupData: function() {
     var success = 0;
