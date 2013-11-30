@@ -12,6 +12,11 @@
 		"operationType": null,
 		"parameters": null,
 		"returnType": "[de.zabonline.srv.Results.SuccessInfo]"
+	}, {
+		"name": "checkGrantReferenceData",
+		"operationType": null,
+		"parameters": null,
+		"returnType": "[de.zabonline.srv.Results.SuccessInfo]"
 	}],
 	"serviceType": "JSON-RPC",
 	"serviceURL": "ZABonlineGrantsService.json"

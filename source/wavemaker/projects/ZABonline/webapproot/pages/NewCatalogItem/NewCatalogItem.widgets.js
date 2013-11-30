@@ -18,6 +18,17 @@ NewCatalogItem.widgets = {
 	}],
 	varCatalog: ["wm.Variable", {"type":"StringData"}, {}],
 	varTenantId: ["wm.Variable", {"type":"NumberData"}, {}],
+	checkGrantAddCatItem: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"checkGrantReferenceData","service":"ZABonlineGrantsService"}, {"onError":"checkGrantAddCatItemError","onResult":"checkGrantAddCatItemResult","onSuccess":"checkGrantAddCatItemSuccess"}, {
+		input: ["wm.ServiceInput", {"type":"checkGrantReferenceDataInputs"}, {}],
+		binding: ["wm.Binding", {}, {}, {
+			wire: ["wm.Wire", {"expression":undefined,"source":"pnlCatalogTitle","targetProperty":"loadingDialog"}, {}]
+		}]
+	}],
+	resultByCheckGrantAddCatItem: ["wm.Variable", {"isList":true,"type":"de.zabonline.srv.Results.SuccessInfo"}, {}, {
+		binding: ["wm.Binding", {}, {}, {
+			wire: ["wm.Wire", {"expression":undefined,"source":"checkGrantAddCatItem","targetProperty":"dataSet"}, {}]
+		}]
+	}],
 	lbxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top"}, {}, {
 		pnlCatalogTitle: ["wm.FancyPanel", {"title":"Katalog"}, {}, {
 			pnlClient: ["wm.Panel", {"height":"100%","horizontalAlign":"left","margin":"5","padding":"5","verticalAlign":"top","width":"100%"}, {}, {

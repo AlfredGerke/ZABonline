@@ -24,25 +24,14 @@ dojo.declare("NewCatalogItem", wm.Page, {
             if (!this.controller) {
                 app.alert(this.getDictionaryItem("ERROR_MSG_BY_UNKNOWN_CONTROLLER"));
             } else {
-                app.dummyServiceVar.doRequest();
-
-                if (!this.controller.clearWizard()) {
-                    throw this.getDictionaryItem("ERROR_MSG_BY_CONTROLLER_CLEARWIZARD");
+                if (!this.controller.checkGrantAddCatItem()) {
+                    throw this.getDictionaryItem("NO_GRANT_FOR_ADD_CATALOGITEM");
                 }
-
-                if (!this.controller.loadLookupData()) {
-                    throw this.getDictionaryItem("ERROR_MSG_BY_CONTROLLER_LOOUPDATA");
-                }
-
-                this.controller.onInitControls();
-
-                app.dummyServiceVar.doResult();
             }
 
             console.debug('NewCatalogItem.onShow: end');
         } catch (e) {
-            app.dummyServiceVar.doResult();
-            this.controller.handleExceptionByCtrl(this.name + ".onShow() failed: " + e.toString(), e, 1);
+            this.controller.handleExceptionByCtrl(this.name + ".onShow() failed: " + e.toString(), e);
             app.closeCataloItem(this.controller);
         }
     },
@@ -164,7 +153,7 @@ dojo.declare("NewCatalogItem", wm.Page, {
             console.debug('Start btnAddCatalogItemClick');
 
             app.dlgLoading.setParameter(this.addCatalogItem, this.pnlCatalogTitle);
-            
+
             this.addCatalogItem.input.setValue('aCatalog', this.controller.catalogParameter.catalog);
 
             if (this.addCatalogItem.canUpdate()) {
@@ -176,6 +165,65 @@ dojo.declare("NewCatalogItem", wm.Page, {
             console.debug('End btnAddCatalogItemClick');
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".btnAddCatalogItemClick() failed: " + e.toString(), e);
+        }
+    },
+    checkGrantAddCatItemError: function(inSender, inError) {
+        try {
+            console.debug('Start checkGrantAddCatItemError');
+
+            throw this.getDictionaryItem("NO_GRANT_FOR_ADD_CATALOGITEM");
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(e.toString(), e);
+            app.closeCataloItem(this.controller);
+        }
+    },
+    checkGrantAddCatItemResult: function(inSender, inDeprecated) {
+        try {
+            console.debug('Start checkGrantAddCatItemResult');
+
+            console.debug('End checkGrantAddCatItemResult');
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".checkGrantAddCatItemResult() failed: " + e.toString(), e);
+        }
+    },
+    checkGrantAddCatItemSuccess: function(inSender, inDeprecated) {
+        var by_check_grant = 0;
+        var success = 0;
+        var msg = "";
+        
+        try {
+            console.debug('Start checkGrantAddCatItemSuccess');
+            
+            success = this.resultByCheckGrantAddCatItem.getValue('success');
+
+            if (success == 1) {
+                app.dummyServiceVar.doRequest();
+
+                if (!this.controller.clearWizard()) {
+                    throw this.getDictionaryItem("ERROR_MSG_BY_CONTROLLER_CLEARWIZARD");
+                }
+
+                if (!this.controller.loadLookupData()) {
+                    throw this.getDictionaryItem("ERROR_MSG_BY_CONTROLLER_LOOUPDATA");
+                }
+
+                this.controller.onInitControls();
+
+                app.dummyServiceVar.doResult();
+            } else {
+                by_check_grant = 1;
+                throw this.getDictionaryItem("NO_GRANT_FOR_ADD_CATALOGITEM");
+            }
+            console.debug('End checkGrantAddCatItemSuccess');
+        } catch (e) {
+            app.dummyServiceVar.doResult();
+            if (by_check_grant === 0) {
+                msg = this.name + ".checkGrantAddCatItemSuccess() failed: " + e.toString();
+            } else {
+                msg = e.toString();
+            }
+            this.controller.handleExceptionByCtrl(msg, e);            
+            app.closeCataloItem(this.controller);            
         }
     },
     _end: 0

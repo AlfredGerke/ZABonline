@@ -90,4 +90,8 @@ public class ZABonlineGrants extends JavaServiceSuperClass {
 
     return checkGrant("IS_ADMIN");
   }
+  
+  public List<Results.SuccessInfo> checkGrantReferenceData() {
+    return checkGrant("REFERENCE_DATA");
+  }  
 }

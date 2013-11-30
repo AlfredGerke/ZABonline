@@ -25,29 +25,29 @@ dojo.declare("NewAddressCtrl", Controller, {
   initAsSubDialog: function(onStart) {
     var local = this.localScope;
     if (onStart) {
-      local.btnFindSalutation.setShowing(false);
-      local.btnAddSalutation.setShowing(false);
-      local.btnFindTitel.setShowing(false);
-      local.btnAddTitel.setShowing(false);
+      //local.btnFindSalutation.setShowing(false);
+      //local.btnAddSalutation.setShowing(false);
+      //local.btnFindTitel.setShowing(false);
+      //local.btnAddTitel.setShowing(false);
       local.btnFindPerson.setShowing(false);
       local.btnAddPerson.setShowing(false);
-      local.btnFindAddressType.setShowing(false);
-      local.btnAddAddressType.setShowing(false);
-      local.btnFindContactType.setShowing(false);
-      local.btnAddContactType.setShowing(false);
+      //local.btnFindAddressType.setShowing(false);
+      //local.btnAddAddressType.setShowing(false);
+      //local.btnFindContactType.setShowing(false);
+      //local.btnAddContactType.setShowing(false);
       local.btnFindAreaCode.setShowing(false);
       local.btnAddAreaCode.setShowing(false);
     } else {
-      local.btnFindSalutation.setShowing(true);
-      local.btnAddSalutation.setShowing(true);
-      local.btnFindTitel.setShowing(true);
-      local.btnAddTitel.setShowing(true);
+      //local.btnFindSalutation.setShowing(true);
+      //local.btnAddSalutation.setShowing(true);
+      //local.btnFindTitel.setShowing(true);
+      //local.btnAddTitel.setShowing(true);
       local.btnFindPerson.setShowing(true);
       local.btnAddPerson.setShowing(true);
-      local.btnFindAddressType.setShowing(true);
-      local.btnAddAddressType.setShowing(true);
-      local.btnFindContactType.setShowing(true);
-      local.btnAddContactType.setShowing(true);
+      //local.btnFindAddressType.setShowing(true);
+      //local.btnAddAddressType.setShowing(true);
+      //local.btnFindContactType.setShowing(true);
+      //local.btnAddContactType.setShowing(true);
       local.btnFindAreaCode.setShowing(true);
       local.btnAddAreaCode.setShowing(true);      
     }

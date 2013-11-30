@@ -234,11 +234,10 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
           global.dlgCatalogItem.setTitle(title);         
         }
         
-        global.dlgCatalogItem.setPageName(this.catalogParameter.page);
-        global.dlgCatalogItem.show();
-        
         this.conHandle = local.connect(global.dlgCatalogItem, "onClose", this, "resetParameter");
         
+        global.dlgCatalogItem.setPageName(this.catalogParameter.page);
+        global.dlgCatalogItem.show();
       } else {
          throw this.getDictionaryItem("ERROR_MSG_BY_CONTROLLER_NO_KIND_FOUND");
       }                  
@@ -282,5 +281,18 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
   },
   handleSubscribeByResData: function(subscription) {
     this.inherited (arguments);
+  },
+  checkGrantAddCatItem: function() {
+    var local = this.localScope;
+    var success = 0;
+    
+    if (local.checkGrantAddCatItem.canUpdate()) {
+      local.checkGrantAddCatItem.update();
+      success = 1;
+    } else {
+      success = 0;
+    }
+    
+    return success;   
   }    
 });
