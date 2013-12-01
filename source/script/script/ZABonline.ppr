@@ -28,6 +28,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\MainCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
+				..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\NewFactoryCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\NewFieldCtrl.js
 				..\..\wavemaker\common\packages\zabonline\mod\NewMemberCtrl.js
@@ -121,6 +122,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\MemberByAccordion\MemberByAccordion.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewCatalogItem\NewCatalogItem.js
+			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewCountry\NewCountry.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewDatasheet\NewDatasheet.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewDossier\NewDossier.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\NewFactory\NewFactory.js
@@ -173,29 +175,27 @@ ZABonline
 1=..\..\wavemaker\common\packages\zabonline\mod\Controller.js
 2=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js
 3=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
-4=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
-5=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\Main.js
-6=..\..\wavemaker\common\packages\zabonline\mod\MainCtrl.js
-7=..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
-8=create_db.sql
+4=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\Main.js
+5=..\..\wavemaker\common\packages\zabonline\mod\MainCtrl.js
+6=..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
+7=create_db.sql
+8=..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js
+9=..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\Controller.js
+Selected=..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js
 [..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js]
-TopLine=266
-Caret=18,291
+TopLine=201
+Caret=71,238
 [..\..\wavemaker\common\packages\zabonline\mod\Controller.js]
-TopLine=52
-Caret=51,68
+TopLine=61
+Caret=3,96
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js]
 TopLine=1
 Caret=80,27
 [..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js]
 TopLine=175
 Caret=1,195
-[..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt]
-TopLine=81
-Caret=69,90
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\Main.js]
 TopLine=1
 Caret=87,14
@@ -208,3 +208,9 @@ Caret=1,1
 [create_db.sql]
 TopLine=126
 Caret=74,152
+[..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js]
+TopLine=1
+Caret=7,185
+[..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js]
+TopLine=1
+Caret=44,14

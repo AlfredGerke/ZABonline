@@ -1,14 +1,14 @@
-dojo.provide("wm.packages.zabonline.mod.NewCatalogItemCtrl");
+dojo.provide("wm.packages.zabonline.mod.NewCountryCodeCtrl");
 //
 wm.require("zabonline.mod.Controller", true);
 //
-dojo.declare("NewCatalogItemCtrl", Controller, {
+dojo.declare("NewCountryCodeCtrl", Controller, {
   constructor: function(globalScope, localScope) {
-    console.debug('Start NewCatalogItemCtrl.constructor');
+    console.debug('Start NewCountryCodeCtrl.constructor');
     
     this.initStart();
     
-    console.debug('End NewCatalogItemCtrl.constructor');
+    console.debug('End NewCountryCodeCtrl.constructor');
   },
   initControls: function() {
     var local = this.localScope;
@@ -21,55 +21,16 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
     
     this.initControls();    
   },  
-  setCountryCodeControlByMode: function(mode){
-    var local = this.localScope;
-    switch (mode) {
-      case 0:
-        local.btnFindCountry.setShowing(false);
-        local.btnAddCountryCode.setShowing(false);
-        local.edtContryCode.setDisabled(true);
-        
-        break;
-      case 1:
-        local.btnFindCountry.setShowing(true);
-        local.btnAddCountryCode.setShowing(true);
-        local.edtContryCode.setDisabled(false);
-                
-        break;
-      default:
-        local.btnFindCountry.setShowing(false);
-        local.btnAddCountryCode.setShowing(false);
-        local.edtContryCode.setDisabled(true);
-      
-        break;    
-    }
-  },
   onInitControls: function() {
     /**
      * "parameter" ist ein JSON-String
      * Es muss immer die "kind"-Eigenschaft angegeben sein
      * "kind" gibt immer die Struktur des JSON-Strings vor          
-     * für "kind": 1001
-     *   "mode" unterscheiden zwischen Admin und Nicht-Admins
-     *   "mode": 0 -> ist nicht admin
-     *   "mode": 1 -> ist admin
-     *   "page": z.B. NewCatalogItem -> Name der Page     
-     *   "catalog": z.B. SALUATION -> Namer der Tabelle des Katalogs                             
+     * für "kind": 1002
+     *     "page": z.B. NewCountry -> Name der Page     
      */
     var local = this.localScope;
-    var catalog = this.catalogParameter.catalog; 
-    var mode = this.catalogParameter.mode;
     
-    if (catalog) {
-      local.pnlCatalogTitle.setTitle(local.getDictionaryItem("CAPTION_CATALOG") + ": " + catalog); 
-      local.varCatalog.setValue("dataValue", catalog);  
-    }
-    
-    if (mode) {
-      this.setCountryCodeControlByMode(mode);
-    } else {
-      this.setCountryCodeControlByMode(0);
-    }
   },
   setByQuickSetup: function(target, doRequire, doClear) {
     var local = this.localScope;
@@ -79,13 +40,12 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
       switch (target) {
         case "Catalog":  
           //local.edtContryCode.quickSetup(doRequire, no_reg_expr, doClear);
-          local.edtDescription.quickSetup(doRequire, no_reg_expr, doClear);
-          local.edtCaption.quickSetup(doRequire, no_reg_expr, doClear);
+          //local.edtDescription.quickSetup(doRequire, no_reg_expr, doClear);
           //
           ret = true;          
           break;
         default:
-          throw "NewCatalogItemCtrl.setQuickSetup: keine gültige Auswahl";
+          throw "NewCountryCodeCtrl.setQuickSetup: keine gültige Auswahl";
           //
           ret = flase;          
           break;
@@ -109,7 +69,7 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
           ret = true;          
           break;
         default:
-          throw "NewCatalogItemCtrl.clearData: keine gültige Auswahl";
+          throw "NewCountryCodeCtrl.clearData: keine gültige Auswahl";
           //
           ret = flase;          
           break;
@@ -141,17 +101,16 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
     }
   },  
   onInitCountryCode: function() {
-    this.initSelectMenu("CountryCode");
   },
   initSelectMenu: function(target, idx) {  
     var global = this.globalScope;
     var local = this.localScope;
     var doBreak = true;    
     try {
-      console.debug("Start NewCatalogItemCtrl.initSelectMenu");
+      console.debug("Start NewCountryCodeCtrl.initSelectMenu");
       
       if (!target) {
-        target = "CountryCode";
+        target = "???";
         doBreak = false; 
       }
       
@@ -160,10 +119,10 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
       }
       
       switch (target) {
-        case "CountryCode":
+        case "???":
           //
-          var initCountryCodeValue = global.globalData.countryCode();
-          local.edtContryCode.setDisplayValue(initCountryCodeValue);
+          //var initCountryCodeValue = global.globalData.countryCode();
+          //local.edtContryCode.setDisplayValue(initCountryCodeValue);
           //
           break;
         default:
@@ -171,7 +130,7 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
           //
           break;    
       }
-      console.debug("End NewCatalogItemCtrl.initSelectMenu");
+      console.debug("End NewCountryCodeCtrl.initSelectMenu");
                   
       return true;
     } catch (e) {
@@ -185,15 +144,7 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
     
     var success = 0;
     try {           
-      if (!this.cclCon) {
-        this.cclCon = local.connect(global.countryCodeLookup, "onSuccess", this, "onInitCountryCode");
-      }
-     
-      if (global.countryCodeLookup.refresh() > 0) {
-        success = 1;
-      } else {
-        success = 0;
-      }    
+      success = 1;
 
       if (success == 1) {
         this.globalScope.globalData.tenantId(local.varTenantId);
@@ -209,12 +160,8 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
      * "parameter" ist ein JSON-String
      * Es muss immer die "kind"-Eigenschaft angegeben sein
      * "kind" gibt immer die Struktur des JSON-Strings vor          
-     * für "kind": 1001
-     *   "mode" unterscheiden zwischen Admin und Nicht-Admins
-     *   "mode": 0 -> ist nicht admin
-     *   "mode": 1 -> ist admin
-     *   "page": z.B. NewCatalogItem -> Name der Page     
-     *   "catalog": z.B. SALUATION -> Namer der Tabelle des Katalogs                             
+     * für "kind": 1002
+     *     "page": z.B. NewCountry -> Name der Page     
      */         
     var global = this.globalScope;
     var local = this.localScope;
@@ -226,8 +173,8 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
       if (kindFound != -1) {      
         this.catalogParameter = dojo.fromJson(parameter);
                  
-        console.debug('CatalogItemCtrl.initCatalogItemByParameter.sender: ' + sender.name);
-        console.debug('CatalogItemCtrl.initCatalogItemByParameter.katalogparameter:' + parameter);
+        console.debug('CountryCodeCtrl.initCatalogItemByParameter.sender: ' + sender.name);
+        console.debug('CountryCodeCtrl.initCatalogItemByParameter.katalogparameter:' + parameter);
              
         if (title) {
           global.dlgCatalogItem.setTitle(title);         
@@ -235,8 +182,8 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
         
         this.conHandle = local.connect(global.dlgCatalogItem, "onClose", this, "resetParameter");
         
-        global.dlgCatalogItem.setPageName(this.catalogParameter.page);
-        global.dlgCatalogItem.show();
+        global.dlgCountryCodes.setPageName(this.catalogParameter.page);
+        global.dlgCountryCodes.show();
       } else {
          throw this.getDictionaryItem("ERROR_MSG_BY_CONTROLLER_NO_KIND_FOUND");
       }                  

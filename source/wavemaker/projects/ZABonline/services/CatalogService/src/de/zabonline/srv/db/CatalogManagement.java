@@ -113,4 +113,102 @@ public class CatalogManagement extends JavaServiceSuperClass {
       throw new RuntimeException(errorMsg);
     }
   }
+  
+  @SuppressWarnings("unchecked") 
+  public List<Results.ProcResults> addCountryCodes(Integer aTenantId,
+    String aCountryCode,
+    String aCountryDesc,
+    String aCurrencyCode,
+    String aCurrencyDesc,
+    String aAreaCode,
+    String aDesc,
+    Boolean aDoNotDelete) {
+
+    List<Results.ProcResults> result = null;
+
+    String errorMsg;
+
+    Boolean isAuthentic = SessionManager.isAthenticated();
+    String sessionId = SessionManager.getSessionId();
+    String userName = SessionManager.getUserName();
+    String ipByRequest = SessionManager.getRemoteAddress();
+    
+    Short aDoNotDelete_smallint = (short) ((aDoNotDelete) ? 1 : 0);
+
+    ZABonlineDB dbService = ZABonlineDBService.getZABonlineDBService();
+    dbService.getDataServiceManager()
+        .begin();
+    session = dbService.getDataServiceManager()
+        .getSession();
+
+    try {
+      if (isAuthentic) {
+        result = session.createSQLQuery("select * from SP_ADDCOUNTRYCODE_BY_SRV(:SESSIONID, " 
+                                        + ":USERNAME, "
+                                        + ":IP, "
+                                        + ":TENANTID, "
+                                        + ":COUNTRYCODE, "
+                                        + ":COUNTRYDESC, "
+                                        + ":CURRENCYCODE, "
+                                        + ":CURRENCYDESC, "
+                                        + ":AREACODE, "
+                                        + ":DESC, "
+                                        + ":DONOTDELETE)")
+            .addScalar("success",
+              Hibernate.INTEGER)
+            .addScalar("code",
+              Hibernate.INTEGER)
+            .addScalar("info",
+              Hibernate.STRING)
+            .setParameter("SESSIONID",
+              sessionId)
+            .setParameter("USERNAME",
+              userName)
+            .setParameter("IP",
+              ipByRequest)
+            .setParameter("TENANTID",
+              aTenantId)
+            .setParameter("COUNTRYCODE",
+              aCountryCode)             
+            .setParameter("COUNTRYDESC",
+              aCountryDesc)
+            .setParameter("CURRENCYCODE",
+              aCurrencyCode)
+            .setParameter("CURRENCYDESC",
+              aCurrencyDesc)
+            .setParameter("AREACODE",
+              aDesc)              
+            .setParameter("DESC",
+              aDesc)
+            .setParameter("DONOTDELETE",
+              aDoNotDelete_smallint)              
+            .setResultTransformer(Transformers.aliasToBean(Results.ProcResults.class))
+            .list();
+
+        dbService.commit();
+      } else {
+        throw new RuntimeException(ZABonlineConstants.NO_VALID_AUTHENTIFICATION);
+      }
+
+      return result;
+    }
+
+    catch (RuntimeException ex) {
+      dbService.rollback();
+
+      if (ex.getCause() == null) {
+        errorMsg = ex.getMessage();
+      } else {
+        errorMsg = ex.getCause()
+            .getMessage();
+      }
+
+      if (errorMsg.trim()
+          .isEmpty()) {
+        errorMsg = ZABonlineConstants.UNKNOWN_ERROR_BY_DBSERVICE;
+      }
+
+      throw new RuntimeException(errorMsg);
+    }
+  }  
 }

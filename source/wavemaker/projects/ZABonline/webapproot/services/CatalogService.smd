@@ -22,6 +22,35 @@
 			"type": "java.lang.String"
 		}],
 		"returnType": "[de.zabonline.srv.Results.ProcResults]"
+	}, {
+		"name": "addCountryCodes",
+		"operationType": null,
+		"parameters": [{
+			"name": "aTenantId",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "aCountryCode",
+			"type": "java.lang.String"
+		}, {
+			"name": "aCountryDesc",
+			"type": "java.lang.String"
+		}, {
+			"name": "aCurrencyCode",
+			"type": "java.lang.String"
+		}, {
+			"name": "aCurrencyDesc",
+			"type": "java.lang.String"
+		}, {
+			"name": "aAreaCode",
+			"type": "java.lang.String"
+		}, {
+			"name": "aDesc",
+			"type": "java.lang.String"
+		}, {
+			"name": "aDoNotDelete",
+			"type": "java.lang.Boolean"
+		}],
+		"returnType": "[de.zabonline.srv.Results.ProcResults]"
 	}],
 	"serviceType": "JSON-RPC",
 	"serviceURL": "CatalogService.json"

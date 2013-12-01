@@ -9,5 +9,16 @@
         <parameter name="aDesc" typeRef="java.lang.String" isList="false"/>
         <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
     </operation>
+    <operation name="addCountryCodes">
+        <parameter name="aTenantId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="aCountryCode" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aCountryDesc" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aCurrencyCode" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aCurrencyDesc" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aAreaCode" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aDesc" typeRef="java.lang.String" isList="false"/>
+        <parameter name="aDoNotDelete" typeRef="java.lang.Boolean" isList="false"/>
+        <return typeRef="de.zabonline.srv.Results.ProcResults" isList="true"/>
+    </operation>
     <dataobjects/>
 </service>

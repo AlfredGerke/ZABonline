@@ -7,5 +7,8 @@
     <operation name="checkGrantAdmin">
         <return typeRef="de.zabonline.srv.Results.SuccessInfo" isList="true"/>
     </operation>
+    <operation name="checkGrantReferenceData">
+        <return typeRef="de.zabonline.srv.Results.SuccessInfo" isList="true"/>
+    </operation>
     <dataobjects/>
 </service>

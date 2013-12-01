@@ -92,5 +92,13 @@ dojo.declare("Controller", null, {
     } catch(e) {
       this.handleExceptionByCtrl(local.name + ".showCatalogItem() failed: " + e.toString(), e, -1);
     }
-  }  
+  },
+  showCountryCodes: function(sender, catalogParameter, callback, title) {
+    var local = this.localScope;
+    try {    
+      dojo.publish('init-countrycode-by-parameter', [sender, catalogParameter, callback, title]);
+    } catch(e) {
+      this.handleExceptionByCtrl(local.name + ".showCountryCodes() failed: " + e.toString(), e, -1);
+    }
+  }    
 });
