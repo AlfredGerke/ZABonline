@@ -235,7 +235,7 @@ NewAddress.widgets = {
 							btnAddContactType: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnAddContactTypeClick"}]
 						}],
 						cboAreaCodePanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboAreaCode: ["wm.SelectMenu", {"allowNone":true,"caption":"Gebietscode","dataField":"areacode","dataType":"com.zabonlinedb.data.output.GetLookupAreaCodeRtnType","displayField":"areacode","displayValue":""}, {}, {
+							cboAreaCode: ["wm.SelectMenu", {"allowNone":true,"caption":"Ländervorwahl","dataField":"areacode","dataType":"com.zabonlinedb.data.output.GetLookupAreaCodeRtnType","displayField":"areacode","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
 									wire: ["wm.Wire", {"expression":undefined,"source":"app.areaCodeData","targetProperty":"dataSet"}, {}],
 									wire1: ["wm.Wire", {"expression":undefined,"source":"app.areaCodeData.areacode","targetProperty":"dataValue"}, {}]

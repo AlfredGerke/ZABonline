@@ -143,13 +143,13 @@ COMMENT ON COLUMN COUNTRY.TAG_ID IS
 'Fremdschlüssel für Tags';
 
 COMMENT ON COLUMN COUNTRY.COUNTRY_CODE IS
-'Ländercode';
+'Ländercode (s. http://www.laenderdaten.de/kuerzel/iso_3166-1.aspx)';
 
 COMMENT ON COLUMN COUNTRY.COUNTRY_CAPTION IS
 'Name des Landes';
  
 COMMENT ON COLUMN COUNTRY.CURRENCY_CODE IS
-'Währungscode';
+'Währungscode (s. http://www.laenderdaten.de/kuerzel/waehrungscodes.aspx)';
 
 COMMENT ON COLUMN COUNTRY.CURRENCY_CAPTION IS
 'Name der Währung';

@@ -65,7 +65,8 @@ dojo.declare("ZABonline", wm.Application, {
 			input: ["wm.ServiceInput", {"type":"getLookupCountryInputs"}, {}]
 		}], 
 		dlgCatalogItem: ["wm.PageDialog", {"desktopHeight":"300px","height":"300px","pageName":"NewCatalogItem","title":"Katalog erweitern","width":"420px"}, {}], 
-		dlgConfirmDlg: ["wm.GenericDialog", {"button1Caption":"Ja","button1Close":true,"button2Caption":"Abbrechen","button2Close":true,"desktopHeight":"65px","height":"105px","title":"Titel","userPrompt":"asdfasdf"}, {"onButton1Click":"dlgConfirmDlgButton1Click"}], 
+		dlgConfirmDlg: ["wm.GenericDialog", {"button1Caption":"Ja","button1Close":true,"button2Caption":"Abbrechen","button2Close":true,"desktopHeight":"65px","height":"96px","title":"Titel","userPrompt":"asdfasdf"}, {"onButton1Click":"dlgConfirmDlgButton1Click"}], 
+		dlgCountryCodes: ["wm.PageDialog", {"desktopHeight":"300px","height":"300px","title":"Länderkennungen","width":"420px"}, {}], 
 		dlgLoading: ["wm.LoadingDialog", {}, {}], 
 		dlgSearchPage: ["wm.PageDialog", {"desktopHeight":"550px","height":"550px","pageName":"SearchPage","title":"Suchen","titlebarButtons":undefined,"width":"800px"}, {}], 
 		grantToCheck: ["wm.Variable", {"type":"StringData"}, {}], 

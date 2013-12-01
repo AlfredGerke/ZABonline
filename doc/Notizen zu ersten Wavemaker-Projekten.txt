@@ -84,4 +84,8 @@ Ergebnisstruktur für Service anlegen:
 5. in der Regel immer isList=True
 6. Data:
    - Bindings:
-     - dataSet=Name der ServiceVariable           
+     - dataSet=Name der ServiceVariable
+     
+Infos zur Tabelle: COUNTRY
+Währungscode: http://www.laenderdaten.de/kuerzel/waehrungscodes.aspx
+Länderkennung: http://www.laenderdaten.de/kuerzel/iso_3166-1.aspx                
