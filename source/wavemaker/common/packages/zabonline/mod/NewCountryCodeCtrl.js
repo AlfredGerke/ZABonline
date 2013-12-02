@@ -35,12 +35,15 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
   setByQuickSetup: function(target, doRequire, doClear) {
     var local = this.localScope;
     var ret = false;    
-    var no_reg_expr = local.getDictionaryItem("REG_EXPR_NO_EXPR"); 
+    var no_reg_expr = local.getDictionaryItem("REG_EXPR_NO_EXPR");
+     
     try {
       switch (target) {
         case "Catalog":  
-          //local.edtContryCode.quickSetup(doRequire, no_reg_expr, doClear);
-          //local.edtDescription.quickSetup(doRequire, no_reg_expr, doClear);
+          local.edtCountryCode.quickSetup(doRequire, no_reg_expr, doClear);
+          local.edtCurrencyCode.quickSetup(doRequire, no_reg_expr, doClear);
+          local.edtAreaCode.quickSetup(doRequire, no_reg_expr, doClear);
+          local.edtDescription.quickSetup(doRequire, no_reg_expr, doClear);
           //
           ret = true;          
           break;
@@ -59,8 +62,8 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
   clearData: function(target) {
     var global = this.globalScope;
     var local = this.localScope;    
-  
     var ret = false;
+    
     try {
       switch (target) {
         case "Catalog":
@@ -90,9 +93,15 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
         throw "Fehler beim Zurücksetzen der Katalogbezeichnung!";
       }
 
+      /* 
+       * Stand 2013-12-02: wird derzeit nicht benätigt
+       *       
       if (!this.initSelectMenu()) {
         global.toastWarning(local.getDictionaryItem("ERROR_MSG_BY_INIT_SELECTMENU"));
       }
+       *
+       *
+       */              
       
       return true;
     } catch (e) {    
@@ -105,7 +114,8 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
   initSelectMenu: function(target, idx) {  
     var global = this.globalScope;
     var local = this.localScope;
-    var doBreak = true;    
+    var doBreak = true;
+        
     try {
       console.debug("Start NewCountryCodeCtrl.initSelectMenu");
       
@@ -140,9 +150,9 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
   },    
   loadLookupData: function() {
     var local = this.localScope;
-    var global = this.globalScope;  
-    
+    var global = this.globalScope;      
     var success = 0;
+    
     try {           
       success = 1;
 
@@ -207,6 +217,9 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
     console.debug('Start Controller.subscribeForChannels.SubClass');
 
     dojo.subscribe('init-catalogitem-by-parameter', this, "initCatalogItemByParameter");
+    /*
+     *
+     *     
     this.handleSubscribeByResData("NO_MANDATORY_MANDANT_ID_BY_NEWCATALOGITEM");
     this.handleSubscribeByResData("NO_VALID_MANDANT_ID_BY_NEWCATALOGITEM");
     this.handleSubscribeByResData("NO_VALID_DONOTLOGIN_BY_NEWCATALOGITEM");
@@ -216,8 +229,11 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
     this.handleSubscribeByResData("NO_VALID_COUNTRY_ID_BY_NEWCATALOGITEM");
     this.handleSubscribeByResData("NO_MANDATORY_CAPTION_BY_NEWCATALOGITEM");
     this.handleSubscribeByResData("NO_MANDATORY_DESCRIPTION_BY_NEWCATALOGITEM");    
-    this.handleSubscribeByResData("INSERT_BY_CATALOGITEM_FAILD_BY_NEWCATLOGITEM");
-    this.handleSubscribeByResData("ADD_CATALOGITEM_SUCCEEDED");
+    this.handleSubscribeByResData("INSERT_BY_COUNTRYCODES_FAILD_BY_NEWCOUNTRY");
+    this.handleSubscribeByResData("ADD_COUNTRYCODES_SUCCEEDED");
+     *
+     *
+     */          
     this.handleSubscribeByResData("FAILD_BY_OBSCURE_PROCESSING");
     
     console.debug('End Controller.subscribeForChannels.SubClass');
@@ -228,12 +244,12 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
   handleSubscribeByResData: function(subscription) {
     this.inherited (arguments);
   },
-  checkGrantAddCatItem: function() {
+  checkGrantAdminAddCountry: function() {
     var local = this.localScope;
     var success = 0;
     
-    if (local.checkGrantAddCatItem.canUpdate()) {
-      local.checkGrantAddCatItem.update();
+    if (local.checkGrantAdmin.canUpdate()) {
+      local.checkGrantAdmin.update();
       success = 1;
     } else {
       success = 0;

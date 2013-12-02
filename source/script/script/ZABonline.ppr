@@ -17,7 +17,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\crypt\SHA512.js
 			-extend
 				..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js
-			+mod
+			-mod
 				..\..\wavemaker\common\packages\zabonline\mod\AddressTypeLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\ContactTypeLookup.js
@@ -42,9 +42,9 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\TitelLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\Utils.js
 				..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
-		+doc
+		-doc
 			..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
-		+hibernate_xml_anpassen
+		-hibernate_xml_anpassen
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\project-managers.xml
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\designtime\servicedef.xml
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
@@ -180,13 +180,12 @@ ZABonline
 6=..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
 7=create_db.sql
 8=..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js
-9=..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
 [Selected Project Files]
 Main=
 Selected=..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js
 [..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js]
-TopLine=201
-Caret=71,238
+TopLine=247
+Caret=5,300
 [..\..\wavemaker\common\packages\zabonline\mod\Controller.js]
 TopLine=61
 Caret=3,96
@@ -210,7 +209,4 @@ TopLine=126
 Caret=74,152
 [..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js]
 TopLine=1
-Caret=7,185
-[..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js]
-TopLine=1
-Caret=44,14
+Caret=5,1

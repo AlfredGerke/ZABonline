@@ -23,6 +23,7 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
   },  
   setCountryCodeControlByMode: function(mode){
     var local = this.localScope;
+    
     switch (mode) {
       case 0:
         local.btnFindCountry.setShowing(false);
@@ -75,6 +76,7 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
     var local = this.localScope;
     var ret = false;    
     var no_reg_expr = local.getDictionaryItem("REG_EXPR_NO_EXPR"); 
+    
     try {
       switch (target) {
         case "Catalog":  
@@ -99,8 +101,8 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
   clearData: function(target) {
     var global = this.globalScope;
     var local = this.localScope;    
-  
     var ret = false;
+    
     try {
       switch (target) {
         case "Catalog":
@@ -146,7 +148,8 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
   initSelectMenu: function(target, idx) {  
     var global = this.globalScope;
     var local = this.localScope;
-    var doBreak = true;    
+    var doBreak = true;
+        
     try {
       console.debug("Start NewCatalogItemCtrl.initSelectMenu");
       
@@ -182,8 +185,8 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
   loadLookupData: function() {
     var local = this.localScope;
     var global = this.globalScope;  
-    
     var success = 0;
+    
     try {           
       if (!this.cclCon) {
         this.cclCon = local.connect(global.countryCodeLookup, "onSuccess", this, "onInitCountryCode");

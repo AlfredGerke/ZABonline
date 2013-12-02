@@ -1,5 +1,5 @@
 NewCountry.widgets = {
-	addCountryCodes: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"addCountryCodes","service":"CatalogService"}, {}, {
+	addCountryCodes: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"addCountryCodes","service":"CatalogService"}, {"onError":"addCountryCodesError","onResult":"addCountryCodesResult","onSuccess":"addCountryCodesSuccess"}, {
 		input: ["wm.ServiceInput", {"type":"addCountryCodesInputs"}, {}, {
 			binding: ["wm.Binding", {}, {}, {
 				wire: ["wm.Wire", {"expression":undefined,"source":"varTenantId.dataValue","targetProperty":"aTenantId"}, {}],
@@ -19,10 +19,10 @@ NewCountry.widgets = {
 			wire: ["wm.Wire", {"expression":undefined,"source":"addCountryCodes","targetProperty":"dataSet"}, {}]
 		}]
 	}],
-	checkGrantAdmin: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"checkGrantAdmin","service":"ZABonlineGrantsService"}, {}, {
+	checkGrantAdmin: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"checkGrantAdmin","service":"ZABonlineGrantsService"}, {"onError":"checkGrantAdminError","onResult":"checkGrantAdminResult","onSuccess":"checkGrantAdminSuccess"}, {
 		input: ["wm.ServiceInput", {"type":"checkGrantAdminInputs"}, {}]
 	}],
-	varResultByCheckGrandAdmin: ["wm.Variable", {"isList":true,"type":"de.zabonline.srv.Results.SuccessInfo"}, {}, {
+	varResultByCheckGrantAdmin: ["wm.Variable", {"isList":true,"type":"de.zabonline.srv.Results.SuccessInfo"}, {}, {
 		binding: ["wm.Binding", {}, {}, {
 			wire: ["wm.Wire", {"expression":undefined,"source":"app.checkGrantAdmin","targetProperty":"dataSet"}, {}]
 		}]
@@ -40,7 +40,11 @@ NewCountry.widgets = {
 					cbxDoNotDelete: ["wm.Checkbox", {"caption":"Löschen sperren","captionSize":"110px","displayValue":false,"helpText":"Wenn ausgewählt kann der Eintrag nicht mehr gelöscht werden","width":"150px"}, {}]
 				}],
 				pnlBottom: ["wm.Panel", {"height":"33px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"bottom","width":"100%"}, {}, {
-					btnAddCatalogItem: ["wm.Button", {"caption":"Eintrag aufnehmen","margin":"4","width":"100%"}, {}]
+					btnAddCatalogItem: ["wm.Button", {"caption":"Eintrag aufnehmen","margin":"4","width":"100%"}, {"onclick":"btnAddCatalogItemClick"}, {
+						binding: ["wm.Binding", {}, {}, {
+							wire: ["wm.Wire", {"expression":"(${edtCountryCode.invalid} || ${edtCurrencyCode.invalid} || ${edtAreaCode.invalid} || ${edtDescription.invalid})","targetProperty":"disabled"}, {}]
+						}]
+					}]
 				}]
 			}]
 		}]

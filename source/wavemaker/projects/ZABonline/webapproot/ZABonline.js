@@ -213,5 +213,8 @@ ZABonline.extend({
     },
     closeCataloItem: function(controller){
         app.dlgCatalogItem.hide();
-    }    
+    },
+    closeCountryCodes: function(controller){
+        app.dlgCountryCodes.hide();        
+    }
 });
