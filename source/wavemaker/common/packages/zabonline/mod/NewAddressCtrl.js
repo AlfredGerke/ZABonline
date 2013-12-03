@@ -212,7 +212,9 @@ dojo.declare("NewAddressCtrl", Controller, {
       case "CONTACT_TYPE":
         success =  this.onRefreshLookup(this.globalScope.contactTypeLookup, force);
         //
-        break;  
+        break;
+      case "COUNTRY_CODES":
+        success = this.onRefreshLookup(this.globalScope.areaCodeLookup, force);    
       default:
           success = 0;
           //

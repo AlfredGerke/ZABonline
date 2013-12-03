@@ -39,7 +39,6 @@
   "CONFIRMATION_DO_CLOSE_ADD": "Soll die Neuaufnahme f&uuml;r eine Berechtigungsdaten beendet werden?",
   "CONFIRMATION_DLG_TITLE_FOR_CLOSE_ADD": "Neuaufnahme beenden?",
   "ERROR_MSG_ADD_TENANT_NO_SUCCESS_BY_EXECUTE": "Daten konnten nicht &uuml;bernommen werden. Bitte noch einmal versuchen!",
-  "ERROR_MSG_BY_CONTROLLER_CLEARWIZARD": "Fehler aus dem Modul: Daten im Assistenten nicht vollst&auml;ndig zur&uuml;ck gesetzt!",
   "ERROR_MSG_ERROR_BY_ADDTENANT": "Der Service wurde mit einem Fehler abgebrochen: ",
   "ERROR_MSG_BY_CONTROLLER_REFRESHWIZARD": "Fehler beim Aktualisieren des Assistenten!"
 }

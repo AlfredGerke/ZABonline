@@ -45,6 +45,5 @@
   "INSERT_BY_USER_FAILD": "Anlegen von Benutzerdaten nicht erfolgreich!",
   "ERROR_MSG_ADD_USER_NO_SUCCESS_BY_EXECUTE": "Daten konnten nicht &uuml;bernommen werden. Bitte noch einmal versuchen!",
   "ERROR_MSG_ERROR_BY_ADDUSER": "Der Service wurde mit einem Fehler abgebrochen: ",
-  "ERROR_MSG_BY_CONTROLLER_CLEARWIZARD": "Fehler aus dem Modul: Daten im Assistenten nicht vollst&auml;ndig zur&uuml;ck gesetzt!",
   "NO_GRANT_FOR_ADD_USER": "Bearbeiten von Benutzerdaten nicht erlaubt!"
 }

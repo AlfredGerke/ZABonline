@@ -3,6 +3,8 @@
   "CAPTION_ADDCATALOG_TITLE_TITLE": "Neuaufnahme Titel",
   "CAPTION_ADDCATALOG_TITLE_ADDRESS_TYPE": "Neuaufnahme Adresstyp",
   "CAPTION_ADDCATALOG_TITLE_CONTACT_TYPE": "Neuaufname Konakttyp",
+  "CAPTION_ADDCOUNTRY_TITLE": "L&auml;nderkennung",
+  "NO_GRANT_FOR_ADD_COUNTRYCODES": "Keine Autorisierung f&uuml;r diese Funktion!",
   "NO_GRANT_FOR_ADD_ROLE": "Bearbeiten von Berechtigungsdaten nicht erlaubt!",
   "NO_GRANT_FOR_START_FIND": "Erstellen einer Suchanfrage nicht erlaubt!",
   "NO_GRANT_FOR_ADD_USER": "Bearbeiten von Benutzerdaten nicht erlaubt!",

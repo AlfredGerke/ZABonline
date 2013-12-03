@@ -171,7 +171,8 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
      * Es muss immer die "kind"-Eigenschaft angegeben sein
      * "kind" gibt immer die Struktur des JSON-Strings vor          
      * für "kind": 1002
-     *     "page": z.B. NewCountry -> Name der Page     
+     *     "page": z.B. NewCountry -> Name der Page 
+     *     "catalog": COUNTRY_CODES         
      */         
     var global = this.globalScope;
     var local = this.localScope;
@@ -216,7 +217,7 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
   subscribeForChannels: function() {
     console.debug('Start Controller.subscribeForChannels.SubClass');
 
-    dojo.subscribe('init-catalogitem-by-parameter', this, "initCatalogItemByParameter");
+    dojo.subscribe('init-countrycode-by-parameter', this, "initCatalogItemByParameter");
     /*
      *
      *     

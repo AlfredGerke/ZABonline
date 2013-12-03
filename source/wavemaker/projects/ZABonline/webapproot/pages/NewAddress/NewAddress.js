@@ -440,8 +440,8 @@ dojo.declare("NewAddress", wm.Page, {
     btnFindAreaCodeClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'areaCode', callback: 'onGetResultBySearch'}");
     },
-    btnAddAreadCodeClick: function(inSender) {
-        //code kommt noch
+    btnAddAreaCodeClick: function(inSender) {
+        this.controller.showCountryCodes(this, "{kind: 1002, page: 'NewCountry', catalog: 'COUNTRY_CODES'}", this.refreshByAddCatalogItem(), app.getDictionaryItem("CAPTION_ADDCOUNTRY_TITLE"));
     },
     _end: 0
 });

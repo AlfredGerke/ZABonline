@@ -24,5 +24,6 @@
   "ERROR_MSG_BY_INIT_SELECTMENU": "Einige Auswahllisten besitzen unter Umst&auml;nden keine Startwerte!",
   "ERROR_MSG_BY_CONTROLLER_REFRESHWIZARD": "Fehler beim Aktualisieren des Assistenten!",
   "ERROR_MSG_ERROR_BY_ADD_CATALOGITEM": "Der Service wurde mit einem Fehler abgebrochen: ",
-  "NO_GRANT_FOR_ADD_CATALOGITEM": "Keine Autorisierung f&uuml;r diese Funktion!"
+  "NO_GRANT_FOR_ADD_CATALOGITEM": "Keine Autorisierung f&uuml;r diese Funktion!",
+  "ERROR_MSG_BY_CONTROLLER_CLEARWIZARD": "Fehler aus dem Modul: Daten im Assistenten nicht vollst&auml;ndig zur&uuml;ck gesetzt!"
 }
