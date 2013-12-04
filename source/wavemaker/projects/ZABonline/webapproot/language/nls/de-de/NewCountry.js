@@ -9,5 +9,8 @@
   "ERROR_MSG_BY_UNKNOWN_CONTROLLER": "Kein Zugriff auf das Modul m&ouml;glich!",
   "NO_GRANT_FOR_ADD_COUNTRYCODES": "Keine Autorisierung f&uuml;r diese Funktion!",
   "ERROR_MSG_ADD_COUNTRYCODES_NO_SUCCESS_BY_EXECUTE": "Daten konnten nicht &uuml;bernommen werden. Bitte noch einmal versuchen!",
-  "ERROR_MSG_BY_CONTROLLER_LOOUPDATA": "Fehler aus dem Modul: Lookup-Daten nicht vollst&auml;ndig!"
+  "ERROR_MSG_BY_CONTROLLER_LOOUPDATA": "Fehler aus dem Modul: Lookup-Daten nicht vollst&auml;ndig!",
+  "REG_EXPR_COUNTRY_CODE": ".*",
+  "REG_EXPR_CURRENCE_CODE": ".*",
+  "REG_EXPR_AREA_CODE": ".*"
 }

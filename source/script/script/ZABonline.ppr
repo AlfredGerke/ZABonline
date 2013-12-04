@@ -15,9 +15,9 @@ ZABonline
 		+common
 			-crypt
 				..\..\wavemaker\common\packages\zabonline\crypt\SHA512.js
-			-extend
+			+extend
 				..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js
-			-mod
+			+mod
 				..\..\wavemaker\common\packages\zabonline\mod\AddressTypeLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\ContactTypeLookup.js
@@ -49,7 +49,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\designtime\servicedef.xml
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\src\ZABonlineDB.spring.xml
-		+language
+		-language
 			-de
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\app.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\Login.js
@@ -182,9 +182,10 @@ ZABonline
 8=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCountry.js
 9=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js
 10=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\app.js
+11=..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js
+Selected=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCountry.js
 [..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js]
 TopLine=216
 Caret=9,241
@@ -192,8 +193,8 @@ Caret=9,241
 TopLine=60
 Caret=19,96
 [..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js]
-TopLine=187
-Caret=26,216
+TopLine=109
+Caret=1,120
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\Main.js]
 TopLine=1
 Caret=87,14
@@ -207,14 +208,17 @@ Caret=1,1
 TopLine=126
 Caret=74,152
 [..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js]
-TopLine=33
-Caret=36,175
+TopLine=8
+Caret=11,46
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCountry.js]
 TopLine=1
-Caret=100,12
+Caret=17,16
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js]
 TopLine=1
 Caret=1,1
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\app.js]
 TopLine=1
 Caret=38,6
+[..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js]
+TopLine=1
+Caret=1,1

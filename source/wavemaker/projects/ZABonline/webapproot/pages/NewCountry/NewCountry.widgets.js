@@ -24,7 +24,7 @@ NewCountry.widgets = {
 	}],
 	varResultByCheckGrantAdmin: ["wm.Variable", {"isList":true,"type":"de.zabonline.srv.Results.SuccessInfo"}, {}, {
 		binding: ["wm.Binding", {}, {}, {
-			wire: ["wm.Wire", {"expression":undefined,"source":"app.checkGrantAdmin","targetProperty":"dataSet"}, {}]
+			wire: ["wm.Wire", {"expression":undefined,"source":"checkGrantAdmin","targetProperty":"dataSet"}, {}]
 		}]
 	}],
 	lbxMain: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top"}, {}, {
@@ -35,7 +35,7 @@ NewCountry.widgets = {
 					edtCountryDesc: ["wm.Text", {"caption":"Beschreibung","captionSize":"110px","dataValue":undefined,"displayValue":""}, {}],
 					edtCurrencyCode: ["wm.Text", {"caption":"Währungskürzel","captionSize":"110px","dataValue":undefined,"displayValue":"","helpText":"Kürzel nach ISO 4217","maxChars":"3","required":true,"width":"185px"}, {}],
 					edtCurrencyDesc: ["wm.Text", {"caption":"Beschreibung","captionSize":"110px","dataValue":undefined,"displayValue":""}, {}],
-					edtAreaCode: ["wm.Number", {"caption":"Ländervorwahl","captionSize":"110px","dataValue":undefined,"displayValue":"","required":true,"width":"185px"}, {}],
+					edtAreaCode: ["wm.Text", {"caption":"Ländervorwahl","captionSize":"110px","dataValue":undefined,"displayValue":"","required":true,"width":"185px"}, {}],
 					edtDescription: ["wm.Text", {"caption":"Beschreibung","captionSize":"110px","dataValue":undefined,"displayValue":"","maxChars":"2000","required":true}, {}],
 					cbxDoNotDelete: ["wm.Checkbox", {"caption":"Löschen sperren","captionSize":"110px","displayValue":false,"helpText":"Wenn ausgewählt kann der Eintrag nicht mehr gelöscht werden","width":"150px"}, {}]
 				}],

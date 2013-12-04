@@ -36,13 +36,16 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
     var local = this.localScope;
     var ret = false;    
     var no_reg_expr = local.getDictionaryItem("REG_EXPR_NO_EXPR");
+    var reg_expr_country_code = local.getDictionaryItem("REG_EXPR_COUNTRY_CODE");
+    var reg_expr_currency_code = local.getDictionaryItem("REG_EXPR_CURRENCE_CODE");
+    var reg_expr_area_code = local.getDictionaryItem("REG_EXPR_AREA_CODE");
      
     try {
       switch (target) {
         case "Catalog":  
-          local.edtCountryCode.quickSetup(doRequire, no_reg_expr, doClear);
-          local.edtCurrencyCode.quickSetup(doRequire, no_reg_expr, doClear);
-          local.edtAreaCode.quickSetup(doRequire, no_reg_expr, doClear);
+          local.edtCountryCode.quickSetup(doRequire, reg_expr_country_code, doClear);
+          local.edtCurrencyCode.quickSetup(doRequire, reg_expr_currency_code, doClear);
+          local.edtAreaCode.quickSetup(doRequire, reg_expr_area_code, doClear);
           local.edtDescription.quickSetup(doRequire, no_reg_expr, doClear);
           //
           ret = true;          
