@@ -1,4 +1,6 @@
 {
+  "ADD_NEWCOUNTRYCODES_SUCCEEDED": "",
+  "INSERT_BY_NEWCOUNTRYCODES_FAILD": "",
   "CAPTION_CATALOG": "L&auml;nderkennung",
   "REG_EXPR_NO_EXPR": ".*",
   "ERROR_MSG_BY_INIT_SELECTMENU": "Einige Auswahllisten besitzen unter Umst&auml;nden keine Startwerte!",

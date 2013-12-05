@@ -2464,7 +2464,7 @@ end
 COMMENT ON PROCEDURE SP_ADDCATALOGITEM IS
 'Überprüft Eingaben und legt Katalogeintrag an'^
 
-execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADD_SP_ADDCATALOGITEM'^
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADDCATALOGITEM'^
 
 CREATE OR ALTER PROCEDURE SP_ADDCATALOGITEM_BY_SRV (
   ASESSION_ID VARCHAR(128),
@@ -2540,6 +2540,179 @@ COMMENT ON PROCEDURE SP_ADDCATALOGITEM_BY_SRV IS
 'Überprüft Sitzungsverwaltung und ruft SP_ADDCATALOGITEM auf'^
 
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADDCATALOGITEM_BY_SRV'^
+
+CREATE OR ALTER PROCEDURE SP_ADDCOUNTRYCODE (
+  ATENANT_ID integer,
+  ACOUNTRY_CODE varchar(3), /* Pflichtfeld */
+  ACOUNTRY_DESC varchar(254),
+  ACURRENCY_CODE varchar(3), /* Pflichtfeld */
+  ACURRENCY_DESC varchar(254),
+  AAREA_CODE varchar(5), /* Pflichtfeld */
+  ADESC varchar(2000), /* Pflichtfeld */ 
+  ADONOTDELETE smallint)
+RETURNS (
+  success smallint,
+  code smallint,
+  info varchar(2000))
+AS
+declare variable msg varchar(254);
+declare variable country_id integer;
+begin
+  success = 0;
+  code = 0;
+  info = '{"result": null}';
+  
+  /* Es werden alle Pflichtfelder überprüft */
+  select
+    success, 
+    code, 
+    info 
+  from 
+    SP_CHK_DATA_BY_ADD_COUNTRYCODES(:ATENANT_ID,
+      :ACOUNTRY_CODE,
+      :ACURRENCY_CODE,
+      :AAREA_CODE,
+      :ADESC,           
+      :ADONOTDELETE) 
+  into 
+    :success, 
+    :code, 
+    :info;
+
+  if (success = 1) then
+  begin
+    success = 0;
+    code = 0;
+    info = '{"result": null}';
+    
+    select
+      success,
+      message,
+      country_id      
+    from
+      SP_INSERT_COUNTRYCODES(:ATENANT_ID,
+        :ACOUNTRY_CODE,
+        :ACOUNTRY_DESC,
+        :ACURRENCY_CODE,
+        :ACURRENCY_DESC,
+        :AAREA_CODE,
+        :ADESC,           
+        :ADONOTDELETE)
+    into
+      :success,
+      :msg,
+      :country_id;
+      
+    /* Rückgabe auswerten */     
+    if (success = 0) then
+    begin
+      code = 1;
+      info = '{"kind": 2, "publish": "INSERT_BY_CATALOGITEM_FAILD_BY_NEWCOUNTRYCODES", "list": [{"message": "INSERT_BY_NEWCOUNTRYCODES_FAILD"}, {"message": "' || :msg || '"}]}';
+      suspend;
+      Exit;
+    end
+    
+    /* success = 1; -> success sollte nur durch die Insert-SPs auf 1 gesetzt werden */
+    code = 1;
+    if (success = 1) then
+    begin
+      info = '{"kind": 3, "publish": "ADD_NEWCOUNTRYCODES_SUCCEEDED", "message": "ADD_NEWCOUNTRYCODES_SUCCEEDED"}';
+    end  
+    else
+    begin
+      success = 0;
+      info = '{"kind": 1, "publish": "FAILD_BY_OBSCURE_PROCESSING", "message": "FAILD_BY_OBSCURE_PROCESSING"}';
+    end                                   
+  end  
+
+  suspend;  
+end
+^
+
+COMMENT ON PROCEDURE SP_ADDCOUNTRYCODE IS
+'Überprüft Eingaben und legt Katalogeintrag an'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADDCOUNTRYCODE'^
+
+CREATE OR ALTER PROCEDURE SP_ADDCOUNTRYCODE_BY_SRV (
+  ASESSION_ID VARCHAR(128),
+  AUSERNAME VARCHAR(256),
+  AIP VARCHAR(64),
+  ATENANT_ID integer,
+  ACOUNTRY_CODE varchar(3), /* Pflichtfeld */
+  ACOUNTRY_DESC varchar(254),
+  ACURRENCY_CODE varchar(3), /* Pflichtfeld */
+  ACURRENCY_DESC varchar(254),
+  AAREA_CODE varchar(5), /* Pflichtfeld */
+  ADESC varchar(2000), /* Pflichtfeld */ 
+  ADONOTDELETE smallint)
+RETURNS (
+  success smallint,
+  code smallint,
+  info varchar(2000))
+AS
+declare variable success_by_touchsession smallint;
+declare variable success_by_grant smallint;
+begin
+  success = 0;
+  code = 0;
+  info = '{"result": null}';
+
+  select success from SP_TOUCHSESSION(:ASESSION_ID, :AUSERNAME, :AIP) into :success_by_touchsession;
+  
+  if (success_by_touchsession = 1) then
+  begin
+    select success from SP_CHECKGRANT(:AUSERNAME, 'REFERENCE_DATA') into :success_by_grant;
+    
+    if (success_by_grant = 1) then
+    begin
+      /* Wenn der JSON-String im Feld INFO zu lang wird, wird von der SP zwei oder mehrere Datensätze erzeugt.
+         Aus diesem Grund wird die SP über eine FOR-Loop abgefragt
+      */
+      for 
+      select 
+        success, 
+        code, 
+        info 
+      from 
+        SP_ADDCOUNTRYCODE (:ATENANT_ID,
+          :ACOUNTRY_CODE,
+          :ACOUNTRY_DESC,
+          :ACURRENCY_CODE,
+          :ACURRENCY_DESC,
+          :AAREA_CODE,
+          :ADESC,           
+          :ADONOTDELETE) 
+      into 
+        :success, 
+        :code, 
+        :info 
+      do
+      begin
+        suspend;
+      end 
+    end
+    else
+    begin
+      info = '{"kind": 1, "publish": "NO_GRANT_FOR_ADD_COUNTRYCODES", "message": "NO_GRANT_FOR_ADD_COUNTRYCODES"}';
+      
+      suspend;
+    end
+  end
+  else
+  begin
+    info = '{"kind": 1, "publish": "CANCEL_PROCESS_BY_SESSIONMANAGEMENT", "message": "CANCEL_PROCESS_BY_SESSIONMANAGEMENT"}';
+    
+    suspend;
+  end
+end
+^
+
+COMMENT ON PROCEDURE SP_ADDCOUNTRYCODE_BY_SRV IS
+'Überprüft Sitzungsverwaltung und ruft SP_ADDCOUNTRYCODE auf'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADDCOUNTRYCODE_BY_SRV'^
+
 
 SET TERM ; ^
 
@@ -2887,11 +3060,13 @@ GRANT EXECUTE ON PROCEDURE SP_INSERT_CATALOGITEM TO PROCEDURE SP_ADDCATALOGITEM;
 
 GRANT SELECT ON V_ADM_CATALOGS TO PROCEDURE SP_CHK_DATA_BY_ADD_CATALOGITEM;
 
+GRANT EXECUTE ON PROCEDURE SP_TOUCHSESSION TO PROCEDURE SP_ADDCOUNTRYCODE_BY_SRV;
+GRANT EXECUTE ON PROCEDURE SP_CHECKGRANT TO PROCEDURE SP_ADDCOUNTRYCODE_BY_SRV;
+GRANT EXECUTE ON PROCEDURE SP_ADDCOUNTRYCODE TO PROCEDURE SP_ADDCOUNTRYCODE_BY_SRV;
 
-/*
-GRANT EXECUTE ON PROCEDURE SP_CREATE_SEQUENCE_GETTER TO PROCEDURE SP_CREATE_ZABCATALOG;
-GRANT EXECUTE ON PROCEDURE SP_CREATE_CATALOG_SETTER TO PROCEDURE SP_CREATE_ZABCATALOG;
- */
+GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_COUNTRYCODES TO PROCEDURE SP_ADDCOUNTRYCODE;
+GRANT EXECUTE ON PROCEDURE SP_INSERT_COUNTRYCODES TO PROCEDURE SP_ADDCOUNTRYCODE;
+
 
 /* Roles */
 /* zusätzliche Rechte um Zugriff auf das Sessionmanagement zu erlangen */
