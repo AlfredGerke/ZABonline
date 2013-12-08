@@ -738,7 +738,8 @@ COMMIT WORK;
 
 CREATE UNIQUE INDEX ALT_COUNTRY_CODE ON COUNTRY (COUNTRY_CODE);
 CREATE UNIQUE INDEX ALT_COURRENCY_CODE ON COUNTRY (CURRENCY_CODE);
-CREATE UNIQUE INDEX ALT_COUNTRY ON COUNTRY (COUNTRY_CODE, CURRENCY_CODE);
+CREATE UNIQUE INDEX ALT_AREA_CODE ON COUNTRY (AREA_CODE);
+CREATE UNIQUE INDEX ALT_COUNTRY ON COUNTRY (COUNTRY_CODE, CURRENCY_CODE, AREA_CODE);
 CREATE UNIQUE INDEX ALT_SESSION ON SESSION (USER_ID, SESSION_ID);
 CREATE UNIQUE INDEX ALT_USERNAME ON USERS (USERNAME);
 
@@ -2541,12 +2542,136 @@ COMMENT ON PROCEDURE SP_ADDCATALOGITEM_BY_SRV IS
 
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_ADDCATALOGITEM_BY_SRV'^
 
+CREATE OR ALTER PROCEDURE SP_CHK_DATA_BY_ADD_COUNTRYCODES (
+  ATENANT_ID integer,
+  ACOUNTRY_CODE varchar(3), /* Pflichtfeld */
+  ACOUNTRY_DESC varchar(254), /* Pflichtfeld */
+  ACURRENCY_CODE varchar(3), /* Pflichtfeld */
+  AAREA_CODE varchar(5), /* Pflichtfeld */
+  ADESC varchar(2000), /* Pflichtfeld */ 
+  ADONOTDELETE smallint)
+returns (
+    success smallint,
+    code smallint,
+    info varchar(2000))
+as
+begin 
+  success = 0;
+  code = 0;
+  info = '{"result": null}';
+  
+  if (ATENANT_ID is null) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_MANDANT_ID_BY_NEWCOUNTRY", "message": "NO_MANDATORY_MANDANT_ID"}';
+    suspend;
+    Exit;
+  end
+  else
+  begin  
+    if (not exists(select 1 from V_TENANT where ID=:ATENANT_ID)) then
+    begin
+      code = 1;
+      info = '{"kind": 1, "publish": "NO_VALID_MANDANT_ID_BY_NEWCOUNTRY", "message": "NO_VALID_MANDANT_ID"}';
+      suspend;
+      Exit;  
+    end
+  end
+
+  if ((ACOUNTRY_CODE is null) or (Trim(ACOUNTRY_CODE) = '')) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_COUNTRYCODE_BY_NEWCOUNTRY", "message": "NO_MANDATORY_COUNTRYCODE"}';
+    suspend;
+    Exit;    
+  end
+  else
+  begin
+    if (exists(select 1 from V_CONTRY WHERE Uppder(COUNTRY_CODE)=Uppder(:ACOUNTRY_CODE))) then
+    begin
+      code = 1;
+      info = '{"kind": 1, "publish": "NO_MANDATORY_COUNTRYDESC_BY_NEWCOUNTRY", "message": "NO_DUPLICATE_MANDATORY_COUNTRYDESC"}';
+      suspend;
+      Exit;    
+    end
+  end
+
+  if ((ACOUNTRY_DESC is null) or (Trim(ACOUNTRY_DESC) = '')) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_COUNTRYDESC_BY_NEWCOUNTRY", "message": "NO_MANDATORY_COUNTRYDESC"}';
+    suspend;
+    Exit;    
+  end
+  
+  if ((ACURRENCY_CODE is null) or (Trim(ACURRENCY_CODE) = '')) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_CURRENCYCODE_BY_NEWCOUNTRY", "message": "NO_MANDATORY_CURRENCYCODE"}';
+    suspend;
+    Exit;    
+  end
+  else
+  begin
+    if (exists(select 1 from V_CONTRY WHERE Uppder(CURRENCY_CODE)=Uppder(:ACURRENCY_CODE))) then
+    begin
+      code = 1;
+      info = '{"kind": 1, "publish": "NO_MANDATORY_CURRENCYCODE_BY_NEWCOUNTRY", "message": "NO_DUPLICATE_MANDATORY_CURRENCYCODE"}';
+      suspend;
+      Exit;    
+    end  
+  end  
+  
+  if ((AAREA_CODE is null) or (Trim(AAREA_CODE) = '')) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_AREACODE_BY_NEWCOUNTRY", "message": "NO_AREACODE_CAPTION"}';
+    suspend;
+    Exit;    
+  end  
+  else
+  begin
+    if (exists(select 1 from V_CONTRY WHERE Uppder(AREA_CODE)=Uppder(:AAREA_CODE))) then
+    begin
+      code = 1;
+      info = '{"kind": 1, "publish": "NO_MANDATORY_AREACODE_BY_NEWCOUNTRY", "message": "NO_DUPLICATE_AREACODE_CAPTION"}';
+      suspend;
+      Exit;    
+    end  
+  end
+  
+  if ((ADESC is null) or (Trim(ADESC) = '')) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_MANDATORY_DESCRIPTION_BY_NEWCOUNTRY", "message": "NO_MANDATORY_DESCRIPTION"}';
+    suspend;
+    Exit;    
+  end
+
+  if (ADONOTDELETE  not in (0,1)) then
+  begin
+    code = 1;
+    info = '{"kind": 1, "publish": "NO_VALID_DONOTLOGIN_BY_NEWCOUNTRY", "message": "NO_VALID_DONOTLOGIN"}';
+    suspend;
+    Exit;  
+  end  
+  
+  success = 1;
+  
+  suspend;
+end^
+
+COMMENT ON PROCEDURE SP_CHK_DATA_BY_ADD_COUNTRYCODES IS
+'Eingabedaten für einen Katalog überprüfen'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_CHK_DATA_BY_ADD_COUNTRYCODES'^
+
 CREATE OR ALTER PROCEDURE SP_ADDCOUNTRYCODE (
   ATENANT_ID integer,
   ACOUNTRY_CODE varchar(3), /* Pflichtfeld */
-  ACOUNTRY_DESC varchar(254),
+  ACOUNTRY_DESC varchar(254), /* Pflichtfeld */
   ACURRENCY_CODE varchar(3), /* Pflichtfeld */
-  ACURRENCY_DESC varchar(254),
+  ACURRENCY_DESC varchar(254), /* Pflichtfeld */
   AAREA_CODE varchar(5), /* Pflichtfeld */
   ADESC varchar(2000), /* Pflichtfeld */ 
   ADONOTDELETE smallint)
@@ -2570,6 +2695,7 @@ begin
   from 
     SP_CHK_DATA_BY_ADD_COUNTRYCODES(:ATENANT_ID,
       :ACOUNTRY_CODE,
+      :ACOUNTRY_DESC,
       :ACURRENCY_CODE,
       :AAREA_CODE,
       :ADESC,           
@@ -2640,7 +2766,7 @@ CREATE OR ALTER PROCEDURE SP_ADDCOUNTRYCODE_BY_SRV (
   AIP VARCHAR(64),
   ATENANT_ID integer,
   ACOUNTRY_CODE varchar(3), /* Pflichtfeld */
-  ACOUNTRY_DESC varchar(254),
+  ACOUNTRY_DESC varchar(254), /* Pflichtfeld */
   ACURRENCY_CODE varchar(3), /* Pflichtfeld */
   ACURRENCY_DESC varchar(254),
   AAREA_CODE varchar(5), /* Pflichtfeld */

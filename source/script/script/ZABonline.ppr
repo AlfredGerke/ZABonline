@@ -172,21 +172,21 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 [Open project files]
 0=..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js
-1=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCountry.js
+1=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js
 2=create_db.sql
 3=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\app.js
 [Selected Project Files]
 Main=
 Selected=create_db.sql
 [..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js]
-TopLine=216
-Caret=1,231
-[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCountry.js]
+TopLine=214
+Caret=2,226
+[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCatalogItem.js]
 TopLine=1
-Caret=39,2
+Caret=39,4
 [create_db.sql]
-TopLine=3031
-Caret=50,3067
+TopLine=2592
+Caret=89,2637
 [..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\app.js]
 TopLine=1
 Caret=1,1

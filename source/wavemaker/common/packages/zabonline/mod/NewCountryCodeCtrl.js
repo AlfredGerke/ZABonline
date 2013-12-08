@@ -44,6 +44,7 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
       switch (target) {
         case "Catalog":  
           local.edtCountryCode.quickSetup(doRequire, reg_expr_country_code, doClear);
+          local.edtCountryDesc.quickSetup(doRequire, reg_expr_country_code, doClear);
           local.edtCurrencyCode.quickSetup(doRequire, reg_expr_currency_code, doClear);
           local.edtAreaCode.quickSetup(doRequire, reg_expr_area_code, doClear);
           local.edtDescription.quickSetup(doRequire, no_reg_expr, doClear);
@@ -221,16 +222,18 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
     console.debug('Start Controller.subscribeForChannels.SubClass');
 
     dojo.subscribe('init-countrycode-by-parameter', this, "initCatalogItemByParameter");
+ 
     this.handleSubscribeByResData("NO_GRANT_FOR_ADD_COUNTRYCODES");
     this.handleSubscribeByResData("INSERT_BY_CATALOGITEM_FAILD_BY_NEWCOUNTRYCODES");
     this.handleSubscribeByResData("ADD_NEWCOUNTRYCODES_SUCCEEDED");
-    /*
-     *
-     *     
-    this.handleSubscribeByResData("NO_MANDATORY_MANDANT_ID_BY_NEWCATALOGITEM");
-     *
-     *
-     */          
+    this.handleSubscribeByResData("NO_MANDATORY_MANDANT_ID_BY_NEWCOUNTRY");
+    this.handleSubscribeByResData("NO_MANDATORY_COUNTRYCODE_BY_NEWCOUNTRY");
+    this.handleSubscribeByResData("NO_MANDATORY_COUNTRYDESC_BY_NEWCOUNTRY");
+    this.handleSubscribeByResData("NO_MANDATORY_CURRENCYCODE_BY_NEWCOUNTRY");
+    this.handleSubscribeByResData("NO_MANDATORY_AREACODE_BY_NEWCOUNTRY");
+    this.handleSubscribeByResData("NO_MANDATORY_DESCRIPTION_BY_NEWCOUNTRY");
+    this.handleSubscribeByResData("NO_VALID_DONOTLOGIN_BY_NEWCOUNTRY");
+
     this.handleSubscribeByResData("FAILD_BY_OBSCURE_PROCESSING");
     
     console.debug('End Controller.subscribeForChannels.SubClass');

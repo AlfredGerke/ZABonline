@@ -1,4 +1,11 @@
 {
+  "NO_DUPLICATE_MANDATORY_COUNTRYDESC": "",
+  "NO_DUPLICATE_MANDATORY_CURRENCYCODE": "",
+  "NO_DUPLICATE_AREACODE_CAPTION": "",
+  "NO_MANDATORY_COUNTRYCODE": "",
+  "NO_MANDATORY_COUNTRYDESC": "",
+  "NO_MANDATORY_CURRENCYCODE": "",
+  "NO_AREACODE_CAPTION": "",
   "NO_VALID_CATLOG_ITEM_ID": "Keine g&uuml;ltige Katalogidentifizierung gefunden!",
   "UNKNOWN_CATALOG": "Unbekannter Katalog!",
   "NO_MANDATORY_MANDANT_ID": "Keine g&uuml;ltige Mandantenidentifizierung gefunden!",
