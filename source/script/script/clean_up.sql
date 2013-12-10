@@ -8,7 +8,7 @@
 /*******************************************************************************
 /* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.5.x   
 /* - Das Script ist für die Ausführung im IBExpert erstellt worden              
-/* - Ein möglicher Connect zur Produktionsdatenbank sollte geschlossen werden 
+/* - Ein möglicher Connect zur ZABonline-DB sollte geschlossen werden 
 /* - Die Installationstools müssen installiert worden sein  
 /******************************************************************************/
 /* History: 2013-10-19

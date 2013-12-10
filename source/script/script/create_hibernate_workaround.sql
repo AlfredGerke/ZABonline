@@ -20,7 +20,7 @@
 /*******************************************************************************
 /* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.5.x   
 /* - Das Script ist für die Ausführung im IBExpert erstellt worden              
-/* - Ein möglicher Connect zur Produktionsdatenbank sollte geschlossen werden   
+/* - Ein möglicher Connect zur ZABonline-DB sollte geschlossen werden   
 /******************************************************************************/
 /* History: 2013-10-19
 /*          Workaround für das Hibernate-Interface von WaveMaker
@@ -44,6 +44,50 @@ CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey';
 
 SET TERM ^ ;
 
+CREATE OR ALTER PROCEDURE SP_GET_IDENTS (
+  ACOUNT smallint = 1,
+  AIDENTLEN smallint = 2)
+returns (
+  result varchar(128))
+as
+declare variable ident varchar(128))
+declare variable is_ready smallint;
+declare variable _count smallint;
+begin
+  result = '';
+  ident = '';
+  is_ready = 0;
+  _count = 1; 
+  
+  while (is_ready = 0) do
+  begin
+    ident = ident || ' ';
+    
+    if (_count = AIDENTLEN) then
+      is_ready = 1
+    else
+      _count = _count + 1;
+  end 
+  
+  is_ready = 0;
+  _count = 1;
+  
+  while (is_ready = 0) do
+  begin
+    result = result || ident;
+  
+    if (_count = ACOUNT) then
+      is_ready = 1
+    else
+      _count = _count + 1;  
+  end
+  
+  suspend;
+end^
+
+COMMENT ON PROCEDURE SP_GET_IDENTS IS
+'Idents für die Codegenerierung'^
+  
 CREATE OR ALTER PROCEDURE SP_CAPITALIZE (
   ASTRING varchar(2000),
   AINDEX integer,
@@ -864,6 +908,7 @@ declare variable data_type varchar(64);
 declare variable null_flag smallint;
 declare variable property_items varchar(64);
 declare variable pk_contraint_name varchar(32);
+declare variable valid_wm_version smallint;
 begin
   /*
    *
@@ -887,6 +932,11 @@ begin
   package_name = APACKAGE;
   db_name = ADBNAME;
   db_version = ADBVERSION;
+  
+  if ((AWMVERSION = '6.5.2') or (AWMVERSION = '6.5.3') or (AWMVERSION = '6.6.0')) then
+    valid_wm_version = 1
+  else
+    valid_wm_version = 0;
   
   if (ATABLE_AS_VIEW = 1) then
   begin
@@ -930,7 +980,7 @@ begin
       suspend;
       sourcecode = 'Datei: ' || class_name || '.hbm.xml';
       suspend;    
-      if ((AWMVERSION = '6.5.2') or (AWMVERSION = '6.5.3')) then
+      if (valid_wm_version = 1) then
       begin               
         sourcecode = 'Ordner: ' || APROJECTDIR || '\services\' || ADBSERVICE || '\src\' || replace(package_name, '.', '\');
         suspend;
@@ -955,7 +1005,7 @@ begin
     begin
       sourcecode = 'Datei: types.js';
       suspend;
-      if ((AWMVERSION = '6.5.2') or (AWMVERSION = '6.5.3')) then
+      if (valid_wm_version = 1) then
       begin      
         sourcecode = 'Ordner: ' || APROJECTDIR || '\webapproot\';
         suspend;
@@ -982,7 +1032,7 @@ begin
     begin
       sourcecode = 'Datei: servicedef.xml';
       suspend;
-      if ((AWMVERSION = '6.5.2') or (AWMVERSION = '6.5.3')) then
+      if (valid_wm_version = 1) then
       begin
         sourcecode = 'Ordner: ' || APROJECTDIR || '\services\' || ADBSERVICE || '\designtime\';
         suspend;
@@ -1005,7 +1055,7 @@ begin
     begin
       sourcecode = 'Datei: ' || ADBSERVICE || '.spring.xml';
       suspend;
-      if ((AWMVERSION = '6.5.2') or (AWMVERSION = '6.5.3')) then
+      if (valid_wm_version = 1) then
       begin      
         sourcecode = 'Ordner: ' || APROJECTDIR || '\services\' || ADBSERVICE || '\src\';
         suspend;
@@ -1034,7 +1084,7 @@ begin
     begin
       sourcecode = 'Datei: project-managers.xml';
       suspend;
-      if ((AWMVERSION = '6.5.2') or (AWMVERSION = '6.5.3')) then
+      if (valid_wm_version = 1) then
       begin      
         sourcecode = 'Ordner: ' || APROJECTDIR || '\webapproot\WEB-INF\';
         suspend;        
@@ -1220,7 +1270,7 @@ begin
     /* alles was zum Schluss gemacht werden soll */
     if (AFLAG = 'SERVICEDEF') then
     begin
-      if ((AWMVERSION = '6.5.2') or (AWMVERSION = '6.5.3')) then
+      if (valid_wm_version = 1) then
       begin
         sourcecode = indent_str || indent_str || '</dataobject>';
         suspend;
@@ -1293,7 +1343,7 @@ begin
   suspend;     
   sourcecode = '/* - Das Script ist für die Ausführung im IBExpert erstellt worden';
   suspend;                
-  sourcecode = '/* - Ein möglicher Connect zur Produktionsdatenbank sollte geschlossen werden';
+  sourcecode = '/* - Ein möglicher Connect zur ZABonline-DB sollte geschlossen werden';
   suspend;     
   sourcecode = '/******************************************************************************/';
   suspend;  

@@ -1,13 +1,13 @@
 /******************************************************************************/
 /* Author:  Alfred Gerke (AGE)
 /* Date:    2013-06-22
-/* Purpose: Dieses Script setzt eine neu erstellte Produktionsdatenbank Version 
-/*          2.0x voraus.
+/* Purpose: Dieses Script setzt eine neu erstellte ZABonline-DB Version 
+/*          2.5.x voraus.
 /*          Diese Scripte werden zum Testen von SPs verwendet                                                                                                       
 /******************************************************************************/
-/* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.0.6   
+/* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.5.x   
 /* - Das Script ist für die Ausführung im IBExpert erstellt worden            
-/* - Ein Connect zur Produktionsdatenbank muss hergestellt werden 
+/* - Ein Connect zur ZABonline-DB muss hergestellt werden 
 /* - Es müssen alle notwendigen Create- und Updatescripte eingespielt worden sein
 /******************************************************************************/
 /* History: 2013-06-22

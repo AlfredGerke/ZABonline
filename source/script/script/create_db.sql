@@ -6,7 +6,7 @@
 /*******************************************************************************
 /* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.5.x   
 /* - Das Script ist für die Ausführung im IBExpert erstellt worden              
-/* - Ein möglicher Connect zur Produktionsdatenbank sollte geschlossen werden   
+/* - Ein möglicher Connect zur ZABonline-DB sollte geschlossen werden   
 /******************************************************************************/
 /* History: 2012-03-17
 /*          Gründung des Datenmodelles
@@ -2666,6 +2666,89 @@ COMMENT ON PROCEDURE SP_CHK_DATA_BY_ADD_COUNTRYCODES IS
 
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_CHK_DATA_BY_ADD_COUNTRYCODES'^
 
+CREATE OR ALTER PROCEDURE SP_INSERT_COUNTRYCODES (
+  ATENANT_ID integer,
+  ACOUNTRY_CODE varchar(3), /* Pflichtfeld */
+  ACOUNTRY_DESC varchar(254), /* Pflichtfeld */
+  ACURRENCY_CODE varchar(3), /* Pflichtfeld */
+  ACURRENCY_DESC varchar(254), /* Pflichtfeld */
+  AAREA_CODE varchar(5), /* Pflichtfeld */
+  ADESC varchar(2000), /* Pflichtfeld */ 
+  ADONOTDELETE smallint)
+returns (
+    success smallint,
+    "MESSAGE" varchar(254),
+    country_id integer)
+as
+begin
+  success = 0;
+  message = 'FAILD_BY_UNKNOWN_REASON';
+  country_id = -1;
+
+  if (exists(select 
+               1 
+             from 
+               V_COUNTRY 
+            where 
+              (Upper(COUNTRY_CODE)=Upper(:ACOUNTRY_CODE)
+               or
+               Upper(CURRENCY_CODE)=Upper(:ACURRENCY_CODE)
+               or
+               Upper(AREA_CODE)=Upper(:AAREA_CODE)))) then
+  begin
+    message = 'NO_DUPLICATE_COUNTRYCODES_ALLOWED';
+    suspend;
+    Exit;    
+  end
+                                  
+  select SEQ_ID from SP_GET_SEQUENCEID_BY_IDENT('COUNTRY') into :country_id;
+  
+  if ((country_id <> -1) and (country_id is not null)) then
+  begin
+    insert
+    into
+      V_COUNTRY
+      (
+        ID,
+        COUNTRY_CODE,
+        COUNTRY_CAPTION,
+        CURRENCY_CODE,
+        CURRENCY_CAPTION,
+        AREA_CODE,
+        DESCRIPTION,
+        DONOTDELETE
+      )
+    values
+      (
+        :country_id,
+        :ACOUNTRY_CODE,
+        :ACOUNTRY_DESC,
+        :ACURRENCY_CODE,
+        :ACURRENCY_DESC,
+        :AAREA_CODE,
+        :ADESC, 
+        :ADONOTDELETE
+      );  
+
+    message = '';
+    success = 1;      
+  end  
+  else
+  begin
+    message = 'NO_VALID_COUNTRY_ID';
+    success = 0;
+    suspend;
+    Exit;     
+  end
+  
+  suspend;
+end^
+
+COMMENT ON PROCEDURE SP_INSERT_COUNTRYCODES IS
+'Katalogeintrag einfügen'^
+
+execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_INSERT_COUNTRYCODES'^
+
 CREATE OR ALTER PROCEDURE SP_ADDCOUNTRYCODE (
   ATENANT_ID integer,
   ACOUNTRY_CODE varchar(3), /* Pflichtfeld */
@@ -3193,6 +3276,11 @@ GRANT EXECUTE ON PROCEDURE SP_ADDCOUNTRYCODE TO PROCEDURE SP_ADDCOUNTRYCODE_BY_S
 GRANT EXECUTE ON PROCEDURE SP_CHK_DATA_BY_ADD_COUNTRYCODES TO PROCEDURE SP_ADDCOUNTRYCODE;
 GRANT EXECUTE ON PROCEDURE SP_INSERT_COUNTRYCODES TO PROCEDURE SP_ADDCOUNTRYCODE;
 
+GRANT SELECT ON V_TENANT TO PROCEDURE SP_CHK_DATA_BY_ADD_COUNTRYCODES;
+GRANT SELECT ON V_COUNTRY TO PROCEDURE SP_CHK_DATA_BY_ADD_COUNTRYCODES;
+
+GRANT EXECUTE ON PROCEDURE SP_GET_SEQUENCEID_BY_IDENT TO PROCEDURE SP_INSERT_COUNTRYCODES;
+GRANT SELECT ON V_COUNTRY TO PROCEDURE SP_INSERT_COUNTRYCODES;
 
 /* Roles */
 /* zusätzliche Rechte um Zugriff auf das Sessionmanagement zu erlangen */
