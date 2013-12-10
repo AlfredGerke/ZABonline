@@ -50,36 +50,44 @@ CREATE OR ALTER PROCEDURE SP_GET_IDENTS (
 returns (
   result varchar(128))
 as
-declare variable ident varchar(128))
+declare variable ident varchar(128);
 declare variable is_ready smallint;
-declare variable _count smallint;
+declare variable idx smallint;
 begin
   result = '';
   ident = '';
   is_ready = 0;
-  _count = 1; 
+  idx = 1;
   
   while (is_ready = 0) do
   begin
     ident = ident || ' ';
     
-    if (_count = AIDENTLEN) then
-      is_ready = 1
+    if (idx = AIDENTLEN) then
+    begin
+      is_ready = 1;
+    end
     else
-      _count = _count + 1;
+    begin
+      idx = idx + 1;
+    end
   end 
   
   is_ready = 0;
-  _count = 1;
+  idx = 1;
   
   while (is_ready = 0) do
   begin
     result = result || ident;
   
-    if (_count = ACOUNT) then
-      is_ready = 1
+    if (idx = ACOUNT) then
+    begin
+      is_ready = 1;
+    end
     else
-      _count = _count + 1;  
+    begin
+      idx = idx + 1;
+    end
   end
   
   suspend;
@@ -934,9 +942,13 @@ begin
   db_version = ADBVERSION;
   
   if ((AWMVERSION = '6.5.2') or (AWMVERSION = '6.5.3') or (AWMVERSION = '6.6.0')) then
-    valid_wm_version = 1
+  begin
+    valid_wm_version = 1;
+  end
   else
+  begin
     valid_wm_version = 0;
+  end
   
   if (ATABLE_AS_VIEW = 1) then
   begin

@@ -1536,56 +1536,6 @@ COMMIT WORK;
 
 SET TERM ^ ;
 
-CREATE OR ALTER PROCEDURE SP_GET_SEQUENCEID_BY_IDENT (
-  AIDENT varchar(32))
-RETURNS (
-    SEQ_ID integer)
-as
-begin                     
-  SEQ_ID = null;
- 
-  /* Allegmeine Generatoren */
- 
-  if (AIDENT = 'UNIQUENAMEIDX') then
-  begin
-    SEQ_ID = next value for SEQ_UNIQUENAME_IDX;
-  end
-  
-  /* Primay-Key Generatoren */
-  
-  if (AIDENT = 'PERSON') then
-  begin
-    SEQ_ID = next value for SEQ_PERSON_ID;
-  end
-  
-  if (AIDENT = 'ADDRESS') then
-  begin
-    SEQ_ID = next value for SEQ_ADDRESS_ID;
-  end
-  
-  if (AIDENT = 'CONTACT') then
-  begin
-    SEQ_ID = next value for SEQ_CONTACT_ID;
-  end  
-
-  if (AIDENT = 'BANK') then
-  begin
-    SEQ_ID = next value for SEQ_BANK_ID;
-  end
-    
-  if (AIDENT = 'DOCUMENT') then
-  begin
-    SEQ_ID = next value for SEQ_DOCUMENT_ID;
-  end    
-    
-  suspend;
-end^
-
-COMMENT ON PROCEDURE SP_GET_SEQUENCEID_BY_IDENT IS
-'Sequences-Values ermitteln'^
-
-execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_GET_SEQUENCEID_BY_IDENT'^
-
 CREATE OR ALTER PROCEDURE SP_UNIQUENAME (
   ATENANT_ID integer,
   ACUSTOM_EXT varchar(64))

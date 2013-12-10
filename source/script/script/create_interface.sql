@@ -1,7 +1,7 @@
 /*******************************************************************************
 /* Author:  Alfred Gerke (AGE)                                                  
-/* Date:    2013-11-25                                                          
-/* Purpose: Nachträgliche Bearbeitung von Katalogberechtigungen 
+/* Date:    2013-12-10                                                          
+/* Purpose: Nicht implementierbare Interfaces erstellen
 /*                                                                              
 /*******************************************************************************
 /* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.5.x   
@@ -9,8 +9,8 @@
 /* - Ein möglicher Connect zur ZABonline-DB sollte geschlossen werden 
 /* - Die Installationstools müssen installiert worden sein  
 /******************************************************************************/
-/* History: 2013-11-25
-/*          Katalogeigenschaften verschiedenen Datenbankobjekte granten 
+/* History: 2013-12-10
+/*          Interfaces ohne Implementation erstellen 
 /******************************************************************************/
 
 /******************************************************************************/
@@ -37,8 +37,8 @@ DECLARE description varchar(2000);
 BEGIN
   number = '0';
   subitem = '0';
-  script = 'create_grant_catalog_properties.sql';
-  description = 'Katalogeigenschaften verschiedenen Datenbankobjekte granten';
+  script = 'create_interface.sql';
+  description = 'Interfaces ohne Implementation erstellen';
   
   if (exists(select 1 from RDB$RELATIONS where RDB$RELATION_NAME='UPDATEHISTORY')) then
   begin   
@@ -50,10 +50,25 @@ SET TERM ; ^ /* definiert das Ende eines Ausführungsblockes */
 
 COMMIT WORK;
 /******************************************************************************/
-/*                                  Katalogeingeschaften zu granten                                   
+/*                             Stored Procedures                              
 /******************************************************************************/
 
-execute procedure SP_GRANT_CAT_PROPERTIES 'SP_INSERT_CATALOGITEM';
+SET TERM ^ ;
+
+CREATE OR ALTER PROCEDURE SP_GET_SEQUENCEID_BY_IDENT (
+  AIDENT varchar(32))
+RETURNS (
+    SEQ_ID integer)
+as
+begin                     
+  SEQ_ID = null;
+    
+  suspend;
+end^
+
+/* Kommentar und Grants werden in create_implemantation.sql vergeben */
+
+SET TERM ; ^
 
 COMMIT WORK;
 /******************************************************************************/

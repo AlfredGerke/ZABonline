@@ -2587,7 +2587,7 @@ begin
   end
   else
   begin
-    if (exists(select 1 from V_CONTRY WHERE Uppder(COUNTRY_CODE)=Uppder(:ACOUNTRY_CODE))) then
+    if (exists(select 1 from V_COUNTRY WHERE Upper(COUNTRY_CODE)=Upper(:ACOUNTRY_CODE))) then
     begin
       code = 1;
       info = '{"kind": 1, "publish": "NO_MANDATORY_COUNTRYDESC_BY_NEWCOUNTRY", "message": "NO_DUPLICATE_MANDATORY_COUNTRYDESC"}';
@@ -2613,7 +2613,7 @@ begin
   end
   else
   begin
-    if (exists(select 1 from V_CONTRY WHERE Uppder(CURRENCY_CODE)=Uppder(:ACURRENCY_CODE))) then
+    if (exists(select 1 from V_COUNTRY WHERE Upper(CURRENCY_CODE)=Upper(:ACURRENCY_CODE))) then
     begin
       code = 1;
       info = '{"kind": 1, "publish": "NO_MANDATORY_CURRENCYCODE_BY_NEWCOUNTRY", "message": "NO_DUPLICATE_MANDATORY_CURRENCYCODE"}';
@@ -2631,7 +2631,7 @@ begin
   end  
   else
   begin
-    if (exists(select 1 from V_CONTRY WHERE Uppder(AREA_CODE)=Uppder(:AAREA_CODE))) then
+    if (exists(select 1 from V_COUNTRY WHERE Upper(AREA_CODE)=Upper(:AAREA_CODE))) then
     begin
       code = 1;
       info = '{"kind": 1, "publish": "NO_MANDATORY_AREACODE_BY_NEWCOUNTRY", "message": "NO_DUPLICATE_AREACODE_CAPTION"}';
