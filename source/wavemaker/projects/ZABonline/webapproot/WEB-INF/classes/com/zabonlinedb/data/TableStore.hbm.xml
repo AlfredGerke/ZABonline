@@ -54,4 +54,4 @@
             <one-to-many class="com.zabonlinedb.data.Datasheet"/>
         </set>
     </class>
-</hibernate-mapping>  
+</hibernate-mapping>

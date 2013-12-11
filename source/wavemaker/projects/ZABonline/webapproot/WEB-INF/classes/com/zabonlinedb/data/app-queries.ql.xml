@@ -58,4 +58,4 @@
         <query-param name="label" type="java.lang.String"/>
         select ds.caption as caption, ds.id as id from Datasheet ds where ds.tableStore.label=:label
     </query>
-</hibernate-mapping>  
+</hibernate-mapping>

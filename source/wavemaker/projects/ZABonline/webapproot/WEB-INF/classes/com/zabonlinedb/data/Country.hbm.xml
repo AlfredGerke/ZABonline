@@ -84,4 +84,4 @@
             <one-to-many class="com.zabonlinedb.data.AreaCode"/>
         </set>
     </class>
-</hibernate-mapping>  
+</hibernate-mapping>
