@@ -44,26 +44,26 @@ CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey';
 
 SET TERM ^ ;
 
-CREATE OR ALTER PROCEDURE SP_GET_IDENTS (
-  ACOUNT smallint = 1,
-  AIDENTLEN smallint = 2)
+CREATE OR ALTER PROCEDURE SP_GET_INDENTS (
+  AINDENT smallint = 1,
+  AINDENTLEN smallint = 2)
 returns (
-  result varchar(128))
+  result varchar(254))
 as
-declare variable ident varchar(128);
+declare variable indent varchar(254);
 declare variable is_ready smallint;
 declare variable idx smallint;
 begin
   result = '';
-  ident = '';
+  indent = '';
   is_ready = 0;
   idx = 1;
   
   while (is_ready = 0) do
   begin
-    ident = ident || ' ';
+    indent = indent || ' ';
     
-    if (idx = AIDENTLEN) then
+    if (idx = AINDENTLEN) then
     begin
       is_ready = 1;
     end
@@ -78,9 +78,9 @@ begin
   
   while (is_ready = 0) do
   begin
-    result = result || ident;
+    result = result || indent;
   
-    if (idx = ACOUNT) then
+    if (idx = AINDENT) then
     begin
       is_ready = 1;
     end
@@ -93,7 +93,7 @@ begin
   suspend;
 end^
 
-COMMENT ON PROCEDURE SP_GET_IDENTS IS
+COMMENT ON PROCEDURE SP_GET_INDENTS IS
 'Idents für die Codegenerierung'^
   
 CREATE OR ALTER PROCEDURE SP_CAPITALIZE (
@@ -228,7 +228,8 @@ declare variable package_name varchar(254);
 declare variable db_name varchar(254);
 declare variable db_version varchar(64);
 declare variable method_name varchar(254);
-declare variable indent_str varchar(254);
+declare variable indent_x1 varchar(254);
+declare variable indent_x2 varchar(254);
 begin
   /*
    *
@@ -245,11 +246,13 @@ begin
 
   sourcecode = '';
   date_found = 0;
-  class_name = ATABLENAME;
-  indent_str = '  ';    
+  class_name = ATABLENAME;   
   package_name = APACKAGE;
   db_name = ADBNAME;
   db_version = ADBVERSION;
+  
+  select result from SP_GET_INDENTS(1) into :indent_x1;
+  select result from SP_GET_INDENTS(2) into :indent_x2;
     
   if (exists(select 1 from RDB$RELATIONS where UPPER(RDB$RELATION_NAME)=UPPER(:ATABLENAME) and UPPER(RDB$OWNER_NAME)=UPPER(:AINSTALL_USER))) then
   begin
@@ -338,31 +341,31 @@ begin
         begin
           if (field_type in (14, 37, 40, 261)) then
           begin
-            sourcecode = indent_str || 'private String ' || field_name || ';';
+            sourcecode = indent_x1 || 'private String ' || field_name || ';';
             suspend;
           end         
           
           if (field_type in (11, 27)) then
           begin
-            sourcecode = indent_str || 'private Double ' || field_name || ';';
+            sourcecode = indent_x1 || 'private Double ' || field_name || ';';
             suspend;
           end          
           
           if (field_type = 10) then
           begin
-            sourcecode = indent_str || 'private Float ' || field_name || ';';
+            sourcecode = indent_x1 || 'private Float ' || field_name || ';';
             suspend;
           end          
 
           if (field_type = 16) then
           begin
-            sourcecode = indent_str || 'private Long ' || field_name || ';';
+            sourcecode = indent_x1 || 'private Long ' || field_name || ';';
             suspend;
           end
 
           if (field_type = 8) then
           begin
-            sourcecode = indent_str || 'private Integer ' || field_name || ';';
+            sourcecode = indent_x1 || 'private Integer ' || field_name || ';';
             suspend;
           end          
 
@@ -374,13 +377,13 @@ begin
           
           if (field_type = 7) then
           begin
-            sourcecode = indent_str || 'private Short ' || field_name || ';';
+            sourcecode = indent_x1 || 'private Short ' || field_name || ';';
             suspend;
           end          
           
           if (field_type in (12, 13, 35)) then
           begin
-            sourcecode = indent_str || 'private Date ' || field_name || ';';
+            sourcecode = indent_x1 || 'private Date ' || field_name || ';';
             suspend;
           end                                                   
         end
@@ -389,19 +392,19 @@ begin
         begin
           if (field_type in (14, 37, 40, 261)) then
           begin
-            sourcecode = indent_str || 'public String get' || method_name || '(String '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public String get' || method_name || '(String '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'return ' || field_name || ';';
+            sourcecode = indent_x2 || 'return ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;
-            sourcecode = indent_str || 'public void set' || method_name || '(String '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public void set' || method_name || '(String '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'this.' || field_name || ' = ' || field_name || ';';
+            sourcecode = indent_x2 || 'this.' || field_name || ' = ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;               
@@ -409,19 +412,19 @@ begin
                    
           if (field_type in (11, 27)) then
           begin
-            sourcecode = indent_str || 'public Double get' || method_name || '(Double '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public Double get' || method_name || '(Double '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'return ' || field_name || ';';
+            sourcecode = indent_x2 || 'return ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;
-            sourcecode = indent_str || 'public void set' || method_name || '(Double '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public void set' || method_name || '(Double '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'this.' || field_name || ' = ' || field_name || ';';
+            sourcecode = indent_x2 || 'this.' || field_name || ' = ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;            
@@ -429,19 +432,19 @@ begin
           
           if (field_type = 10) then
           begin
-            sourcecode = indent_str || 'public Float get' || method_name || '(Float '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public Float get' || method_name || '(Float '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'return ' || field_name || ';';
+            sourcecode = indent_x2 || 'return ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;
-            sourcecode = indent_str || 'public void set' || method_name || '(Float '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public void set' || method_name || '(Float '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'this.' || field_name || ' = ' || field_name || ';';
+            sourcecode = indent_x2 || 'this.' || field_name || ' = ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;            
@@ -449,19 +452,19 @@ begin
 
           if (field_type = 16) then
           begin
-            sourcecode = indent_str || 'public Long get' || method_name || '(Long '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public Long get' || method_name || '(Long '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'return ' || field_name || ';';
+            sourcecode = indent_x2 || 'return ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;
-            sourcecode = indent_str || 'public void set' || method_name || '(Long '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public void set' || method_name || '(Long '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'this.' || field_name || ' = ' || field_name || ';';
+            sourcecode = indent_x2 || 'this.' || field_name || ' = ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;            
@@ -469,19 +472,19 @@ begin
 
           if (field_type = 8) then
           begin
-            sourcecode = indent_str || 'public Integer get' || method_name || '(Integer '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public Integer get' || method_name || '(Integer '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'return ' || field_name || ';';
+            sourcecode = indent_x2 || 'return ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;
-            sourcecode = indent_str || 'public void set' || method_name || '(Integer '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public void set' || method_name || '(Integer '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'this.' || field_name || ' = ' || field_name || ';';
+            sourcecode = indent_x2 || 'this.' || field_name || ' = ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;            
@@ -495,19 +498,19 @@ begin
           
           if (field_type = 7) then
           begin
-            sourcecode = indent_str || 'public Short get' || method_name || '(Short '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public Short get' || method_name || '(Short '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'return ' || field_name || ';';
+            sourcecode = indent_x2 || 'return ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;
-            sourcecode = indent_str || 'public void set' || method_name || '(Short '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public void set' || method_name || '(Short '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'this.' || field_name || ' = ' || field_name || ';';
+            sourcecode = indent_x2 || 'this.' || field_name || ' = ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;            
@@ -515,19 +518,19 @@ begin
           
           if (field_type in (12, 13, 35)) then
           begin
-            sourcecode = indent_str || 'public Date get' || method_name || '(Date '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public Date get' || method_name || '(Date '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'return ' || field_name || ';';
+            sourcecode = indent_x2 || 'return ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;
-            sourcecode = indent_str || 'public void set' || method_name || '(Date '|| field_name ||') {';
+            sourcecode = indent_x1 || 'public void set' || method_name || '(Date '|| field_name ||') {';
             suspend;
-            sourcecode = indent_str || indent_str || 'this.' || field_name || ' = ' || field_name || ';';
+            sourcecode = indent_x2 || 'this.' || field_name || ' = ' || field_name || ';';
             suspend;
-            sourcecode = indent_str || '}';
+            sourcecode = indent_x1 || '}';
             suspend;         
             sourcecode = '';
             suspend;            
@@ -601,7 +604,10 @@ declare variable package_name varchar(254);
 declare variable db_name varchar(254);
 declare variable db_version varchar(64);
 declare variable method_name varchar(254);
-declare variable indent_str varchar(254);
+declare variable indent_x1 varchar(254);
+declare variable indent_x2 varchar(254);
+declare variable indent_x3 varchar(254);
+declare variable indent_x4 varchar(254);
 declare variable hibernate_uri varchar(254);
 declare variable hibernate_map_dtd varchar(254);
 declare variable db_source varchar(32);
@@ -626,14 +632,17 @@ begin
    *
    */
   sourcecode = '';
-  class_name = ATABLENAME;
-  indent_str = '  ';    
-  
+  class_name = ATABLENAME;     
   package_name = APACKAGE;
   db_name = ADBNAME;
   db_version = ADBVERSION;
   hibernate_uri = AHIBERNATEURI;
   hibernate_map_dtd = AHIBERNATEMAPDTD;
+  
+  select result from SP_GET_INDENTS(1) into :indent_x1;
+  select result from SP_GET_INDENTS(2) into :indent_x2;
+  select result from SP_GET_INDENTS(3) into :indent_x3;
+  select result from SP_GET_INDENTS(4) into :indent_x4;
   
   if (ATABLE_AS_VIEW = 1) then
   begin
@@ -648,7 +657,7 @@ begin
   begin
     if (AFLAG = 'END') then
     begin     
-      sourcecode= indent_str || '</class>';
+      sourcecode= indent_x1 || '</class>';
       suspend;
       sourcecode = '</hibernate-mapping>';
       suspend;
@@ -670,7 +679,7 @@ begin
       suspend;
       sourcecode = '<hibernate-mapping>';
       suspend;
-      sourcecode= indent_str || '<class name="'|| package_name || '.' || class_name ||'" table="' || db_source ||'" dynamic-insert="false" dynamic-update="false">';
+      sourcecode= indent_x1 || '<class name="'|| package_name || '.' || class_name ||'" table="' || db_source ||'" dynamic-insert="false" dynamic-update="false">';
       suspend;
       Exit;
     end  
@@ -702,7 +711,7 @@ begin
       begin
         if (count_pk_fields > 1) then
         begin
-          sourcecode = indent_str || indent_str || '<composite-id name="' || AIDNAME || '" class="' || package_name || '.' || class_name ||'">';
+          sourcecode = indent_x2 || '<composite-id name="' || AIDNAME || '" class="' || package_name || '.' || class_name ||'">';
           suspend;
         end
       end
@@ -818,24 +827,24 @@ begin
           begin          
             if (count_pk_fields > 1) then
             begin
-              sourcecode = indent_str || indent_str || indent_str || '<key-property name="' || field_name || '" type="' || data_type || '">';
+              sourcecode = indent_x3 || '<key-property name="' || field_name || '" type="' || data_type || '">';
               suspend;
-              sourcecode = indent_str || indent_str || indent_str || indent_str || '<column name="' || original_field_name || '"/>';
+              sourcecode = indent_x4 || '<column name="' || original_field_name || '"/>';
               suspend;
-              sourcecode = indent_str || indent_str || indent_str || '</key-property>';
+              sourcecode = indent_x3 || '</key-property>';
               suspend;
             end
             else
             begin
               if (count_pk_fields = 1) then
               begin
-                sourcecode = indent_str || indent_str || indent_str || '<' || AIDNAME || ' name="' || field_name || '" type="' || data_type || '">';
+                sourcecode = indent_x3 || '<' || AIDNAME || ' name="' || field_name || '" type="' || data_type || '">';
                 suspend;
-                sourcecode = indent_str || indent_str || indent_str || indent_str || '<column name="' || original_field_name || '"/>';
+                sourcecode = indent_x4 || '<column name="' || original_field_name || '"/>';
                 suspend;
-                sourcecode = indent_str || indent_str || indent_str || indent_str || '<generator class="' || AGENERATORCLASS || '"/>';
+                sourcecode = indent_x4 || '<generator class="' || AGENERATORCLASS || '"/>';
                 suspend;
-                sourcecode = indent_str || indent_str || indent_str || '</' || AIDNAME || '>';
+                sourcecode = indent_x3 || '</' || AIDNAME || '>';
                 suspend;
               end 
               else
@@ -850,18 +859,18 @@ begin
         begin
           if (not exists(select 1 from RDB$INDEX_SEGMENTS where UPPER(RDB$INDEX_NAME)=UPPER(:pk_index_name) and UPPER(RDB$FIELD_NAME)=UPPER(:original_field_name))) then
           begin          
-            sourcecode = indent_str || indent_str || indent_str || '<property name="' || field_name || '" type="' || data_type || '">';
+            sourcecode = indent_x3 || '<property name="' || field_name || '" type="' || data_type || '">';
             suspend;
             if (property_items = '') then
             begin
-              sourcecode = indent_str || indent_str || indent_str || indent_str || '<column name="' || original_field_name || '"/>';
+              sourcecode = indent_x4 || '<column name="' || original_field_name || '"/>';
             end
             else
             begin
-              sourcecode = indent_str || indent_str || indent_str || indent_str || '<column name="' || original_field_name || '"'|| property_items ||'/>';
+              sourcecode = indent_x4 || '<column name="' || original_field_name || '"'|| property_items ||'/>';
             end  
             suspend;
-            sourcecode = indent_str || indent_str || indent_str || '</property>';
+            sourcecode = indent_x3 || '</property>';
             suspend;       
           end
         end
@@ -872,7 +881,7 @@ begin
     begin
       if (count_pk_fields > 1) then
       begin
-        sourcecode = indent_str || indent_str || '</composite-id>';
+        sourcecode = indent_x2 || '</composite-id>';
         suspend;
       end
     end      
@@ -908,7 +917,10 @@ declare variable package_name varchar(254);
 declare variable db_name varchar(254);
 declare variable db_version varchar(64);
 declare variable method_name varchar(254);
-declare variable indent_str varchar(254);
+declare variable indent_x1 varchar(254);
+declare variable indent_x2 varchar(254);
+declare variable indent_x3 varchar(254);
+declare variable indent_x4 varchar(254);
 declare variable db_source varchar(32);
 declare variable pk_index_name varchar(32);
 declare variable count_pk_fields integer;
@@ -934,12 +946,15 @@ begin
    */
                        
   sourcecode = '';
-  class_name = ATABLENAME;
-  indent_str = '  ';    
-  
+  class_name = ATABLENAME;     
   package_name = APACKAGE;
   db_name = ADBNAME;
   db_version = ADBVERSION;
+  
+  select result from SP_GET_INDENTS(1) into :indent_x1;
+  select result from SP_GET_INDENTS(2) into :indent_x2;
+  select result from SP_GET_INDENTS(3) into :indent_x3;
+  select result from SP_GET_INDENTS(4) into :indent_x4;
   
   if ((AWMVERSION = '6.5.2') or (AWMVERSION = '6.5.3') or (AWMVERSION = '6.6.0')) then
   begin
@@ -998,7 +1013,7 @@ begin
         suspend;
         sourcecode = '';
         suspend;
-        sourcecode = indent_str || 'Die beiden Dateien werden in den oben genannten Ordern kopiert.';
+        sourcecode = indent_x1 || 'Die beiden Dateien werden in den oben genannten Ordern kopiert.';
         suspend;
         sourcecode = '';        
         suspend;
@@ -1023,9 +1038,9 @@ begin
         suspend;
         sourcecode = '';
         suspend;
-        sourcecode = indent_str || 'Nach dem Einbinden der Dateien, Wavemaker starten und die Datenbankschnittstelle (' || ADBSERVICE || ') sichern (eventuell kleine Änderung vornehmen).';
+        sourcecode = indent_x1 || 'Nach dem Einbinden der Dateien, Wavemaker starten und die Datenbankschnittstelle (' || ADBSERVICE || ') sichern (eventuell kleine Änderung vornehmen).';
         suspend;
-        sourcecode = indent_str || 'Das Sichern der Datenbankschnittstelle (' || ADBSERVICE || ') wird die notwendigen Daten in die Datei: types.js einfügen.';
+        sourcecode = indent_x1 || 'Das Sichern der Datenbankschnittstelle (' || ADBSERVICE || ') wird die notwendigen Daten in die Datei: types.js einfügen.';
         suspend;
         sourcecode = '';        
         suspend;
@@ -1050,9 +1065,9 @@ begin
         suspend;
         sourcecode = '';
         suspend;        
-        sourcecode = indent_str || '<dataobjects>';
+        sourcecode = indent_x1 || '<dataobjects>';
         suspend;        
-        sourcecode = indent_str || indent_str || '<dataobject javaType="' || package_name || '.' || class_name || '" supportsQuickData="true">';
+        sourcecode = indent_x2 || '<dataobject javaType="' || package_name || '.' || class_name || '" supportsQuickData="true">';
         suspend;                
       end
       else
@@ -1073,11 +1088,11 @@ begin
         suspend;
         sourcecode = '';
         suspend;
-        sourcecode = indent_str || '<property name="mappingResources">';
+        sourcecode = indent_x1 || '<property name="mappingResources">';
         suspend;
-        sourcecode = indent_str || indent_str || '<list>';
+        sourcecode = indent_x2 || '<list>';
         suspend;
-        sourcecode = indent_str || indent_str || indent_str || '<value>' || replace(package_name, '.', '/') || '/' || class_name || '.hbm.xml</value>';
+        sourcecode = indent_x3 || '<value>' || replace(package_name, '.', '/') || '/' || class_name || '.hbm.xml</value>';
         suspend;
         sourcecode = '';        
         suspend;
@@ -1102,11 +1117,11 @@ begin
         suspend;        
         sourcecode = '';
         suspend;        
-        sourcecode = indent_str || '<entry key="' || ADBSERVICE || '">';
+        sourcecode = indent_x1 || '<entry key="' || ADBSERVICE || '">';
         suspend;        
-        sourcecode = indent_str || indent_str || '<list>';
+        sourcecode = indent_x2 || '<list>';
         suspend;        
-        sourcecode = indent_str || indent_str || indent_str || '<value>' || package_name || '.' || class_name || '</value>';
+        sourcecode = indent_x3 || '<value>' || package_name || '.' || class_name || '</value>';
         suspend;
         sourcecode = '';        
         suspend;
@@ -1252,28 +1267,28 @@ begin
         begin
           if (exists(select 1 from RDB$INDEX_SEGMENTS where UPPER(RDB$INDEX_NAME)=UPPER(:pk_index_name) and UPPER(RDB$FIELD_NAME)=UPPER(:original_field_name))) then
           begin
-            sourcecode = indent_str || indent_str || indent_str || '<element name="' || field_name || '"' || property_items || '>';
+            sourcecode = indent_x3 || '<element name="' || field_name || '"' || property_items || '>';
             suspend;
-            sourcecode = indent_str || indent_str || indent_str || indent_str || '<require>delete</require>';
+            sourcecode = indent_x4 || '<require>delete</require>';
             suspend;
-            sourcecode = indent_str || indent_str || indent_str || indent_str || '<require>read</require>';
+            sourcecode = indent_x4 || '<require>read</require>';
             suspend;
-            sourcecode = indent_str || indent_str || indent_str || indent_str || '<require>update</require>';
+            sourcecode = indent_x4 || '<require>update</require>';
             suspend;
-            sourcecode = indent_str || indent_str || indent_str || indent_str || '<require>insert</require>';
+            sourcecode = indent_x4 || '<require>insert</require>';
             suspend;
-            sourcecode = indent_str || indent_str || indent_str || indent_str || '<noChange>delete</noChange>';
+            sourcecode = indent_x4 || '<noChange>delete</noChange>';
             suspend;
-            sourcecode = indent_str || indent_str || indent_str || indent_str || '<noChange>read</noChange>';
+            sourcecode = indent_x4 || '<noChange>read</noChange>';
             suspend;
-            sourcecode = indent_str || indent_str || indent_str || indent_str || '<noChange>update</noChange>';
+            sourcecode = indent_x4 || '<noChange>update</noChange>';
             suspend;
-            sourcecode = indent_str || indent_str || indent_str || '</element>';
+            sourcecode = indent_x3 || '</element>';
             suspend;          
           end
           else
           begin
-            sourcecode = indent_str || indent_str || indent_str || '<element name="' || field_name || '"' || property_items || '/>';
+            sourcecode = indent_x3 || '<element name="' || field_name || '"' || property_items || '/>';
             suspend;
           end
         end
@@ -1284,7 +1299,7 @@ begin
     begin
       if (valid_wm_version = 1) then
       begin
-        sourcecode = indent_str || indent_str || '</dataobject>';
+        sourcecode = indent_x2 || '</dataobject>';
         suspend;
         sourcecode = '';        
         suspend;

@@ -176,15 +176,23 @@ ZABonline
 0=batch.sql
 1=create_implementation.sql
 2=create_interface.sql
+3=create_hibernate_workaround.sql
+4=create_tools.sql
 [Selected Project Files]
 Main=
-Selected=batch.sql
+Selected=create_hibernate_workaround.sql
 [batch.sql]
-TopLine=28
+TopLine=19
 Caret=25,50
 [create_implementation.sql]
 TopLine=30
 Caret=1,57
 [create_interface.sql]
-TopLine=39
-Caret=69,69
+TopLine=1
+Caret=77,27
+[create_hibernate_workaround.sql]
+TopLine=1
+Caret=72,40
+[create_tools.sql]
+TopLine=1
+Caret=80,26
