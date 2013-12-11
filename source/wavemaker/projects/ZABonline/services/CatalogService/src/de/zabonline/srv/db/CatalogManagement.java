@@ -120,7 +120,6 @@ public class CatalogManagement extends JavaServiceSuperClass {
     String aCountryDesc,
     String aCurrencyCode,
     String aCurrencyDesc,
-    String aAreaCode,
     String aDesc,
     Boolean aDoNotDelete) {
 
@@ -151,7 +150,6 @@ public class CatalogManagement extends JavaServiceSuperClass {
                                         + ":COUNTRYDESC, "
                                         + ":CURRENCYCODE, "
                                         + ":CURRENCYDESC, "
-                                        + ":AREACODE, "
                                         + ":DESC, "
                                         + ":DONOTDELETE)")
             .addScalar("success",
@@ -176,8 +174,6 @@ public class CatalogManagement extends JavaServiceSuperClass {
               aCurrencyCode)
             .setParameter("CURRENCYDESC",
               aCurrencyDesc)
-            .setParameter("AREACODE",
-              aDesc)              
             .setParameter("DESC",
               aDesc)
             .setParameter("DONOTDELETE",

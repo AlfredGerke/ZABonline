@@ -47,12 +47,6 @@
             </key>
             <one-to-many class="com.zabonlinedb.data.ContactType"/>
         </set>
-        <set name="countries" inverse="true" cascade="">
-            <key>
-                <column name="TAG_ID"/>
-            </key>
-            <one-to-many class="com.zabonlinedb.data.Country"/>
-        </set>
         <set name="persons" inverse="true" cascade="">
             <key>
                 <column name="TAG_ID"/>
@@ -118,6 +112,12 @@
                 <column name="TAG_ID"/>
             </key>
             <one-to-many class="com.zabonlinedb.data.Roles"/>
+        </set>
+        <set name="countries" inverse="true" cascade="">
+            <key>
+                <column name="TAG_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.Country"/>
         </set>
     </class>
 </hibernate-mapping>

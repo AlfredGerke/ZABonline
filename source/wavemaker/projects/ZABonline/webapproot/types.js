@@ -621,6 +621,123 @@ wm.types = {
 			"liveService": true,
 			"service": "ZABonlineDB"
 		},
+		"com.zabonlinedb.data.AreaCode": {
+			"fields": {
+				"caption": {
+					"exclude": [],
+					"fieldOrder": 2,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"chgDate": {
+					"exclude": [],
+					"fieldOrder": 9,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": false,
+					"type": "java.util.Date"
+				},
+				"chgUser": {
+					"exclude": [],
+					"fieldOrder": 8,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": false,
+					"type": "java.lang.String"
+				},
+				"country": {
+					"exclude": [],
+					"fieldOrder": 10,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": false,
+					"type": "com.zabonlinedb.data.Country"
+				},
+				"creDate": {
+					"exclude": [],
+					"fieldOrder": 7,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.util.Date"
+				},
+				"creUser": {
+					"exclude": [],
+					"fieldOrder": 6,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				},
+				"description": {
+					"exclude": [],
+					"fieldOrder": 3,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": false,
+					"type": "java.lang.String"
+				},
+				"donotdelete": {
+					"exclude": [],
+					"fieldOrder": 4,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": false,
+					"type": "java.lang.Short"
+				},
+				"id": {
+					"exclude": [],
+					"fieldOrder": 0,
+					"fieldSubType": null,
+					"include": ["delete", "read", "update", "insert"],
+					"isList": false,
+					"noChange": ["delete", "read", "update"],
+					"required": true,
+					"type": "java.lang.Integer"
+				},
+				"softdel": {
+					"exclude": [],
+					"fieldOrder": 5,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": false,
+					"type": "java.lang.Short"
+				},
+				"tagId": {
+					"exclude": [],
+					"fieldOrder": 1,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": false,
+					"type": "java.lang.Integer"
+				}
+			},
+			"internal": false,
+			"liveService": true,
+			"service": "ZABonlineDB"
+		},
 		"com.zabonlinedb.data.Bank": {
 			"fields": {
 				"bic": {
@@ -1283,7 +1400,7 @@ wm.types = {
 				},
 				"addressTypes": {
 					"exclude": [],
-					"fieldOrder": 15,
+					"fieldOrder": 14,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -1291,19 +1408,19 @@ wm.types = {
 					"required": false,
 					"type": "com.zabonlinedb.data.AddressType"
 				},
-				"areaCode": {
+				"areacodes": {
 					"exclude": [],
-					"fieldOrder": 5,
+					"fieldOrder": 19,
 					"fieldSubType": null,
 					"include": [],
-					"isList": false,
+					"isList": true,
 					"noChange": [],
-					"required": true,
-					"type": "java.lang.String"
+					"required": false,
+					"type": "com.zabonlinedb.data.AreaCode"
 				},
 				"categories": {
 					"exclude": [],
-					"fieldOrder": 19,
+					"fieldOrder": 18,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -1313,7 +1430,7 @@ wm.types = {
 				},
 				"chgDate": {
 					"exclude": [],
-					"fieldOrder": 12,
+					"fieldOrder": 11,
 					"fieldSubType": null,
 					"include": [],
 					"isList": false,
@@ -1323,7 +1440,7 @@ wm.types = {
 				},
 				"chgUser": {
 					"exclude": [],
-					"fieldOrder": 11,
+					"fieldOrder": 10,
 					"fieldSubType": null,
 					"include": [],
 					"isList": false,
@@ -1333,7 +1450,7 @@ wm.types = {
 				},
 				"contactTypes": {
 					"exclude": [],
-					"fieldOrder": 16,
+					"fieldOrder": 15,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -1363,7 +1480,7 @@ wm.types = {
 				},
 				"creDate": {
 					"exclude": [],
-					"fieldOrder": 10,
+					"fieldOrder": 9,
 					"fieldSubType": null,
 					"include": [],
 					"isList": false,
@@ -1373,7 +1490,7 @@ wm.types = {
 				},
 				"creUser": {
 					"exclude": [],
-					"fieldOrder": 9,
+					"fieldOrder": 8,
 					"fieldSubType": null,
 					"include": [],
 					"isList": false,
@@ -1393,7 +1510,7 @@ wm.types = {
 				},
 				"description": {
 					"exclude": [],
-					"fieldOrder": 6,
+					"fieldOrder": 5,
 					"fieldSubType": null,
 					"include": [],
 					"isList": false,
@@ -1403,7 +1520,7 @@ wm.types = {
 				},
 				"donotdelete": {
 					"exclude": [],
-					"fieldOrder": 7,
+					"fieldOrder": 6,
 					"fieldSubType": null,
 					"include": [],
 					"isList": false,
@@ -1423,7 +1540,7 @@ wm.types = {
 				},
 				"salutations": {
 					"exclude": [],
-					"fieldOrder": 17,
+					"fieldOrder": 16,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -1433,7 +1550,7 @@ wm.types = {
 				},
 				"softdel": {
 					"exclude": [],
-					"fieldOrder": 8,
+					"fieldOrder": 7,
 					"fieldSubType": null,
 					"include": [],
 					"isList": false,
@@ -1443,7 +1560,7 @@ wm.types = {
 				},
 				"tag": {
 					"exclude": [],
-					"fieldOrder": 13,
+					"fieldOrder": 12,
 					"fieldSubType": null,
 					"include": [],
 					"isList": false,
@@ -1453,7 +1570,7 @@ wm.types = {
 				},
 				"tenants": {
 					"exclude": [],
-					"fieldOrder": 18,
+					"fieldOrder": 17,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -1463,7 +1580,7 @@ wm.types = {
 				},
 				"titels": {
 					"exclude": [],
-					"fieldOrder": 14,
+					"fieldOrder": 13,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -3745,7 +3862,7 @@ wm.types = {
 				},
 				"addresses": {
 					"exclude": [],
-					"fieldOrder": 18,
+					"fieldOrder": 17,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -3765,7 +3882,7 @@ wm.types = {
 				},
 				"categories": {
 					"exclude": [],
-					"fieldOrder": 15,
+					"fieldOrder": 14,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -3815,7 +3932,7 @@ wm.types = {
 				},
 				"countries": {
 					"exclude": [],
-					"fieldOrder": 11,
+					"fieldOrder": 22,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -3845,7 +3962,7 @@ wm.types = {
 				},
 				"datasheets": {
 					"exclude": [],
-					"fieldOrder": 20,
+					"fieldOrder": 19,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -3855,7 +3972,7 @@ wm.types = {
 				},
 				"factories": {
 					"exclude": [],
-					"fieldOrder": 17,
+					"fieldOrder": 16,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -3865,7 +3982,7 @@ wm.types = {
 				},
 				"fieldstores": {
 					"exclude": [],
-					"fieldOrder": 16,
+					"fieldOrder": 15,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -3885,7 +4002,7 @@ wm.types = {
 				},
 				"persons": {
 					"exclude": [],
-					"fieldOrder": 12,
+					"fieldOrder": 11,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -3895,7 +4012,7 @@ wm.types = {
 				},
 				"roleses": {
 					"exclude": [],
-					"fieldOrder": 22,
+					"fieldOrder": 21,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -3905,7 +4022,7 @@ wm.types = {
 				},
 				"sessions": {
 					"exclude": [],
-					"fieldOrder": 13,
+					"fieldOrder": 12,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -3925,7 +4042,7 @@ wm.types = {
 				},
 				"tablestores": {
 					"exclude": [],
-					"fieldOrder": 21,
+					"fieldOrder": 20,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -3945,7 +4062,7 @@ wm.types = {
 				},
 				"tenants": {
 					"exclude": [],
-					"fieldOrder": 14,
+					"fieldOrder": 13,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,
@@ -3955,7 +4072,7 @@ wm.types = {
 				},
 				"userses": {
 					"exclude": [],
-					"fieldOrder": 19,
+					"fieldOrder": 18,
 					"fieldSubType": null,
 					"include": [],
 					"isList": true,

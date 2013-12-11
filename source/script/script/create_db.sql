@@ -123,7 +123,6 @@ CREATE TABLE COUNTRY (
   COUNTRY_CAPTION  VARCHAR(254),
   CURRENCY_CODE    VARCHAR(3) NOT NULL,
   CURRENCY_CAPTION VARCHAR(254),
-  AREA_CODE        VARCHAR(5) NOT NULL,
   DESCRIPTION      VARCHAR(2000),
   DONOTDELETE      BOOLEAN,
   SOFTDEL          BOOLEAN,   
@@ -153,9 +152,6 @@ COMMENT ON COLUMN COUNTRY.CURRENCY_CODE IS
 
 COMMENT ON COLUMN COUNTRY.CURRENCY_CAPTION IS
 'Name der Währung';
-
-COMMENT ON COLUMN COUNTRY.AREA_CODE IS
-'Ländervorwahl'; 
 
 COMMENT ON COLUMN COUNTRY.DESCRIPTION IS
 'Beschreibung';
@@ -738,8 +734,7 @@ COMMIT WORK;
 
 CREATE UNIQUE INDEX ALT_COUNTRY_CODE ON COUNTRY (COUNTRY_CODE);
 CREATE UNIQUE INDEX ALT_COURRENCY_CODE ON COUNTRY (CURRENCY_CODE);
-CREATE UNIQUE INDEX ALT_AREA_CODE ON COUNTRY (AREA_CODE);
-CREATE UNIQUE INDEX ALT_COUNTRY ON COUNTRY (COUNTRY_CODE, CURRENCY_CODE, AREA_CODE);
+CREATE UNIQUE INDEX ALT_COUNTRY ON COUNTRY (COUNTRY_CODE, CURRENCY_CODE);
 CREATE UNIQUE INDEX ALT_SESSION ON SESSION (USER_ID, SESSION_ID);
 CREATE UNIQUE INDEX ALT_USERNAME ON USERS (USERNAME);
 
@@ -2547,7 +2542,6 @@ CREATE OR ALTER PROCEDURE SP_CHK_DATA_BY_ADD_COUNTRYCODES (
   ACOUNTRY_CODE varchar(3), /* Pflichtfeld */
   ACOUNTRY_DESC varchar(254), /* Pflichtfeld */
   ACURRENCY_CODE varchar(3), /* Pflichtfeld */
-  AAREA_CODE varchar(5), /* Pflichtfeld */
   ADESC varchar(2000), /* Pflichtfeld */ 
   ADONOTDELETE smallint)
 returns (
@@ -2622,24 +2616,6 @@ begin
     end  
   end  
   
-  if ((AAREA_CODE is null) or (Trim(AAREA_CODE) = '')) then
-  begin
-    code = 1;
-    info = '{"kind": 1, "publish": "NO_MANDATORY_AREACODE_BY_NEWCOUNTRY", "message": "NO_AREACODE_CAPTION"}';
-    suspend;
-    Exit;    
-  end  
-  else
-  begin
-    if (exists(select 1 from V_COUNTRY WHERE Upper(AREA_CODE)=Upper(:AAREA_CODE))) then
-    begin
-      code = 1;
-      info = '{"kind": 1, "publish": "NO_MANDATORY_AREACODE_BY_NEWCOUNTRY", "message": "NO_DUPLICATE_AREACODE_CAPTION"}';
-      suspend;
-      Exit;    
-    end  
-  end
-  
   if ((ADESC is null) or (Trim(ADESC) = '')) then
   begin
     code = 1;
@@ -2672,7 +2648,6 @@ CREATE OR ALTER PROCEDURE SP_INSERT_COUNTRYCODES (
   ACOUNTRY_DESC varchar(254), /* Pflichtfeld */
   ACURRENCY_CODE varchar(3), /* Pflichtfeld */
   ACURRENCY_DESC varchar(254), /* Pflichtfeld */
-  AAREA_CODE varchar(5), /* Pflichtfeld */
   ADESC varchar(2000), /* Pflichtfeld */ 
   ADONOTDELETE smallint)
 returns (
@@ -2692,9 +2667,7 @@ begin
             where 
               (Upper(COUNTRY_CODE)=Upper(:ACOUNTRY_CODE)
                or
-               Upper(CURRENCY_CODE)=Upper(:ACURRENCY_CODE)
-               or
-               Upper(AREA_CODE)=Upper(:AAREA_CODE)))) then
+               Upper(CURRENCY_CODE)=Upper(:ACURRENCY_CODE)))) then
   begin
     message = 'NO_DUPLICATE_COUNTRYCODES_ALLOWED';
     suspend;
@@ -2714,7 +2687,6 @@ begin
         COUNTRY_CAPTION,
         CURRENCY_CODE,
         CURRENCY_CAPTION,
-        AREA_CODE,
         DESCRIPTION,
         DONOTDELETE
       )
@@ -2725,7 +2697,6 @@ begin
         :ACOUNTRY_DESC,
         :ACURRENCY_CODE,
         :ACURRENCY_DESC,
-        :AAREA_CODE,
         :ADESC, 
         :ADONOTDELETE
       );  
@@ -2755,7 +2726,6 @@ CREATE OR ALTER PROCEDURE SP_ADDCOUNTRYCODE (
   ACOUNTRY_DESC varchar(254), /* Pflichtfeld */
   ACURRENCY_CODE varchar(3), /* Pflichtfeld */
   ACURRENCY_DESC varchar(254), /* Pflichtfeld */
-  AAREA_CODE varchar(5), /* Pflichtfeld */
   ADESC varchar(2000), /* Pflichtfeld */ 
   ADONOTDELETE smallint)
 RETURNS (
@@ -2780,7 +2750,6 @@ begin
       :ACOUNTRY_CODE,
       :ACOUNTRY_DESC,
       :ACURRENCY_CODE,
-      :AAREA_CODE,
       :ADESC,           
       :ADONOTDELETE) 
   into 
@@ -2804,7 +2773,6 @@ begin
         :ACOUNTRY_DESC,
         :ACURRENCY_CODE,
         :ACURRENCY_DESC,
-        :AAREA_CODE,
         :ADESC,           
         :ADONOTDELETE)
     into
@@ -2852,7 +2820,6 @@ CREATE OR ALTER PROCEDURE SP_ADDCOUNTRYCODE_BY_SRV (
   ACOUNTRY_DESC varchar(254), /* Pflichtfeld */
   ACURRENCY_CODE varchar(3), /* Pflichtfeld */
   ACURRENCY_DESC varchar(254),
-  AAREA_CODE varchar(5), /* Pflichtfeld */
   ADESC varchar(2000), /* Pflichtfeld */ 
   ADONOTDELETE smallint)
 RETURNS (
@@ -2889,7 +2856,6 @@ begin
           :ACOUNTRY_DESC,
           :ACURRENCY_CODE,
           :ACURRENCY_DESC,
-          :AAREA_CODE,
           :ADESC,           
           :ADONOTDELETE) 
       into 
@@ -3111,6 +3077,9 @@ COMMIT WORK;
 
 /* Katalog: JSON_KIND komplett über SP erstellen */
 execute procedure SP_CREATE_ZABCATALOG 'JSON_KIND';
+
+/* Katalo: AREA_CODE komplett über SP erstellen */
+execute procedure SP_CREATE_ZABCATALOG 'AREA_CODE';
 
 SET TERM ^ ;
 

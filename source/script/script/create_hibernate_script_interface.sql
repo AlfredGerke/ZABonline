@@ -31,7 +31,7 @@ CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey';
 SHEll DEL C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\create_hibernate_interface.sql;
 
 OUTPUT 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\create_hibernate_interface.sql';
-select Trim(trailing from sourcecode) from SP_CREATE_HIBERNATE_SCRIPT('person', 0, 1, 'INSTALLER', 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\', 'masterkey');
+select Trim(trailing from sourcecode) from SP_CREATE_HIBERNATE_SCRIPT('area_code', 0, 1, 'INSTALLER', 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\', 'masterkey');
 OUTPUT; 
   
 COMMIT WORK;

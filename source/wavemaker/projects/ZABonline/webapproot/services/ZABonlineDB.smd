@@ -34,7 +34,10 @@
 	}, {
 		"name": "getLookupAreaCode",
 		"operationType": "hqlquery",
-		"parameters": null,
+		"parameters": [{
+			"name": "CountryId",
+			"type": "java.lang.Integer"
+		}],
 		"returnType": "[com.zabonlinedb.data.output.GetLookupAreaCodeRtnType]"
 	}, {
 		"name": "getLookupContactPartnerByTenant",

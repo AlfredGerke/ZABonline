@@ -4,7 +4,7 @@ package com.zabonlinedb.data.output;
 
 
 /**
- * Generated for query "getLookupTableStoreByLabel" on 11/10/2013 22:41:44
+ * Generated for query "getLookupTableStoreByLabel" on 12/11/2013 23:29:39
  * 
  */
 public class GetLookupTableStoreByLabelRtnType {

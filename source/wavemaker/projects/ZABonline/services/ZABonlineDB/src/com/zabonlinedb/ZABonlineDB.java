@@ -29,7 +29,7 @@ import com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType;
 
 /**
  *  Operations for service "ZABonlineDB"
- *  11/10/2013 22:41:59
+ *  12/11/2013 23:34:35
  * 
  */
 @SuppressWarnings("unchecked")
@@ -73,8 +73,8 @@ public class ZABonlineDB
         }
     }
 
-    public List<GetLookupAreaCodeRtnType> getLookupAreaCode(PagingOptions pagingOptions) {
-        return ((List<GetLookupAreaCodeRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupAreaCodeQueryName), pagingOptions));
+    public List<GetLookupAreaCodeRtnType> getLookupAreaCode(Integer CountryId, PagingOptions pagingOptions) {
+        return ((List<GetLookupAreaCodeRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupAreaCodeQueryName), CountryId, pagingOptions));
     }
 
     public List<GetLookupDataSheetByLabelRtnType> getLookupDataSheetByLabel(String label, PagingOptions pagingOptions) {

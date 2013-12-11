@@ -38,7 +38,6 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
     var no_reg_expr = local.getDictionaryItem("REG_EXPR_NO_EXPR");
     var reg_expr_country_code = local.getDictionaryItem("REG_EXPR_COUNTRY_CODE");
     var reg_expr_currency_code = local.getDictionaryItem("REG_EXPR_CURRENCE_CODE");
-    var reg_expr_area_code = local.getDictionaryItem("REG_EXPR_AREA_CODE");
      
     try {
       switch (target) {
@@ -46,7 +45,6 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
           local.edtCountryCode.quickSetup(doRequire, reg_expr_country_code, doClear);
           local.edtCountryDesc.quickSetup(doRequire, reg_expr_country_code, doClear);
           local.edtCurrencyCode.quickSetup(doRequire, reg_expr_currency_code, doClear);
-          local.edtAreaCode.quickSetup(doRequire, reg_expr_area_code, doClear);
           local.edtDescription.quickSetup(doRequire, no_reg_expr, doClear);
           //
           ret = true;          
@@ -230,7 +228,6 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
     this.handleSubscribeByResData("NO_MANDATORY_COUNTRYCODE_BY_NEWCOUNTRY");
     this.handleSubscribeByResData("NO_MANDATORY_COUNTRYDESC_BY_NEWCOUNTRY");
     this.handleSubscribeByResData("NO_MANDATORY_CURRENCYCODE_BY_NEWCOUNTRY");
-    this.handleSubscribeByResData("NO_MANDATORY_AREACODE_BY_NEWCOUNTRY");
     this.handleSubscribeByResData("NO_MANDATORY_DESCRIPTION_BY_NEWCOUNTRY");
     this.handleSubscribeByResData("NO_VALID_DONOTLOGIN_BY_NEWCOUNTRY");
 

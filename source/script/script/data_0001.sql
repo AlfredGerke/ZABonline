@@ -107,9 +107,13 @@ BEGIN
   default_for_ident = '';
   select RESULT from SP_READSTRING(:key_section, :section, :ident, :default_for_ident) into :value_by_ident;
   
-  INSERT INTO COUNTRY(COUNTRY_CODE, COUNTRY_CAPTION, CURRENCY_CODE, CURRENCY_CAPTION, AREA_CODE, DESCRIPTION, DONOTDELETE) values ('DEU', 'Deutschland', 'EUR', 'Euro', '+49', 'Installationsstandard', 1);
+  INSERT INTO COUNTRY(COUNTRY_CODE, COUNTRY_CAPTION, CURRENCY_CODE, CURRENCY_CAPTION, DESCRIPTION, DONOTDELETE) values ('DEU', 'Deutschland', 'EUR', 'Euro', 'Installationsstandard', 1);
   
-  select 1 from COUNTRY where COUNTRY_CODE=:value_by_ident into :default_country_id;
+  select ID from COUNTRY where COUNTRY_CODE=:value_by_ident into :default_country_id;
+  
+  code = '+49';
+  desc = 'Deutschland';
+  INSERT INTO AREA_CODE (COUNTRY_ID, CAPTION, DESCRIPTION, DONOTDELETE) VALUES (:default_country_id, :code, :desc, 1);
 
   /* Administrator */
   INSERT INTO ROLES (CAPTION, DESCRIPTION, IS_ADMIN, DONOTDELETE) VALUES ('Admin', 'Administrator', 1, 1);

@@ -2,19 +2,17 @@
 package com.zabonlinedb.data;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 
 /**
- *  ZABonlineDB.Category
- *  12/11/2013 23:29:34
+ *  ZABonlineDB.AreaCode
+ *  12/11/2013 23:29:35
  * 
  */
-public class Category {
+public class AreaCode {
 
     private Integer id;
-    private String label;
+    private Integer tagId;
     private String caption;
     private String description;
     private Short donotdelete;
@@ -23,11 +21,7 @@ public class Category {
     private Date creDate;
     private String chgUser;
     private Date chgDate;
-    private Tag tag;
     private Country country;
-    private Set<com.zabonlinedb.data.FieldStore> fieldstores = new HashSet<com.zabonlinedb.data.FieldStore>();
-    private Set<com.zabonlinedb.data.RelPersonCategory> relpersoncategories = new HashSet<com.zabonlinedb.data.RelPersonCategory>();
-    private Set<com.zabonlinedb.data.TableStore> tablestores = new HashSet<com.zabonlinedb.data.TableStore>();
 
     public Integer getId() {
         return id;
@@ -37,12 +31,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getLabel() {
-        return label;
+    public Integer getTagId() {
+        return tagId;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setTagId(Integer tagId) {
+        this.tagId = tagId;
     }
 
     public String getCaption() {
@@ -109,44 +103,12 @@ public class Category {
         this.chgDate = chgDate;
     }
 
-    public Tag getTag() {
-        return tag;
-    }
-
-    public void setTag(Tag tag) {
-        this.tag = tag;
-    }
-
     public Country getCountry() {
         return country;
     }
 
     public void setCountry(Country country) {
         this.country = country;
-    }
-
-    public Set<com.zabonlinedb.data.FieldStore> getFieldstores() {
-        return fieldstores;
-    }
-
-    public void setFieldstores(Set<com.zabonlinedb.data.FieldStore> fieldstores) {
-        this.fieldstores = fieldstores;
-    }
-
-    public Set<com.zabonlinedb.data.RelPersonCategory> getRelpersoncategories() {
-        return relpersoncategories;
-    }
-
-    public void setRelpersoncategories(Set<com.zabonlinedb.data.RelPersonCategory> relpersoncategories) {
-        this.relpersoncategories = relpersoncategories;
-    }
-
-    public Set<com.zabonlinedb.data.TableStore> getTablestores() {
-        return tablestores;
-    }
-
-    public void setTablestores(Set<com.zabonlinedb.data.TableStore> tablestores) {
-        this.tablestores = tablestores;
     }
 
 }

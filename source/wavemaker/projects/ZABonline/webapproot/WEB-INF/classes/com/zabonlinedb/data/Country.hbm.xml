@@ -17,9 +17,6 @@
         <property name="CURRENCY_CAPTION" type="string">
             <column name="CURRENCY_CAPTION" length="254"/>
         </property>
-        <property name="areaCode" type="string">
-            <column name="AREA_CODE" length="5" not-null="true"/>
-        </property>
         <property name="description" type="string">
             <column name="DESCRIPTION" length="2000"/>
         </property>
@@ -44,41 +41,47 @@
         <many-to-one name="tag" class="com.zabonlinedb.data.Tag" cascade="none">
             <column name="TAG_ID"/>
         </many-to-one>
-        <set name="titels" inverse="true" cascade="">
+        <set name="titels" inverse="true" cascade="none">
             <key>
                 <column name="COUNTRY_ID"/>
             </key>
             <one-to-many class="com.zabonlinedb.data.Titel"/>
         </set>
-        <set name="addressTypes" inverse="true" cascade="">
+        <set name="addressTypes" inverse="true" cascade="none">
             <key>
                 <column name="COUNTRY_ID"/>
             </key>
             <one-to-many class="com.zabonlinedb.data.AddressType"/>
         </set>
-        <set name="contactTypes" inverse="true" cascade="">
+        <set name="contactTypes" inverse="true" cascade="none">
             <key>
                 <column name="COUNTRY_ID"/>
             </key>
             <one-to-many class="com.zabonlinedb.data.ContactType"/>
         </set>
-        <set name="salutations" inverse="true" cascade="">
+        <set name="salutations" inverse="true" cascade="none">
             <key>
                 <column name="COUNTRY_ID"/>
             </key>
             <one-to-many class="com.zabonlinedb.data.Salutation"/>
         </set>
-        <set name="tenants" inverse="true" cascade="">
+        <set name="tenants" inverse="true" cascade="none">
             <key>
                 <column name="COUNTRY_ID"/>
             </key>
             <one-to-many class="com.zabonlinedb.data.Tenant"/>
         </set>
-        <set name="categories" inverse="true" cascade="">
+        <set name="categories" inverse="true" cascade="none">
             <key>
                 <column name="COUNTRY_ID"/>
             </key>
             <one-to-many class="com.zabonlinedb.data.Category"/>
+        </set>
+        <set name="areacodes" inverse="true" cascade="none">
+            <key>
+                <column name="COUNTRY_ID"/>
+            </key>
+            <one-to-many class="com.zabonlinedb.data.AreaCode"/>
         </set>
     </class>
 </hibernate-mapping>

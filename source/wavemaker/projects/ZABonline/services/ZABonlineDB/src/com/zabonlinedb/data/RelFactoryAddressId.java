@@ -6,10 +6,9 @@ import java.io.Serializable;
 
 /**
  *  ZABonlineDB.RelFactoryAddressId
- *  06/13/2013 22:11:54
+ *  12/11/2013 23:29:35
  * 
  */
-@SuppressWarnings("serial")
 public class RelFactoryAddressId
     implements Serializable
 {

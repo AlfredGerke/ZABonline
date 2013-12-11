@@ -30,7 +30,8 @@
         select c.caption as caption, c.id as id from ContactType c where c.country.id=:CountryId
     </query>
     <query name="getLookupAreaCode">
-        select distinct c.areaCode as areacode from Country c
+        <query-param name="CountryId" type="java.lang.Integer"/>
+        select distinct ac.caption as areacode from AreaCode ac where ac.country.id=:CountryId
     </query>
     <query name="getLookupContactPartnerByTenant">
         <query-param name="TenantId" type="java.lang.Integer"/>

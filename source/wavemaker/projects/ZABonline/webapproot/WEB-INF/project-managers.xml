@@ -40,6 +40,7 @@
                     <list>
                         <value>com.zabonlinedb.data.Address</value>
                         <value>com.zabonlinedb.data.AddressType</value>
+                        <value>com.zabonlinedb.data.AreaCode</value>
                         <value>com.zabonlinedb.data.Bank</value>
                         <value>com.zabonlinedb.data.Category</value>
                         <value>com.zabonlinedb.data.Contact</value>
@@ -67,13 +68,13 @@
                         <value>com.zabonlinedb.data.Titel</value>
                         <value>com.zabonlinedb.data.Updatehistory</value>
                         <value>com.zabonlinedb.data.Users</value>
-                        <value>com.zabonlinedb.data.RelPersonContactId</value>
-                        <value>com.zabonlinedb.data.RelPersonAddressId</value>
                         <value>com.zabonlinedb.data.RegistryId</value>
-                        <value>com.zabonlinedb.data.RelPersonCategoryId</value>
-                        <value>com.zabonlinedb.data.RelTableStoreFieldStoreId</value>
-                        <value>com.zabonlinedb.data.RelFactoryBankId</value>
                         <value>com.zabonlinedb.data.RelPersonBankId</value>
+                        <value>com.zabonlinedb.data.RelPersonCategoryId</value>
+                        <value>com.zabonlinedb.data.RelPersonContactId</value>
+                        <value>com.zabonlinedb.data.RelTableStoreFieldStoreId</value>
+                        <value>com.zabonlinedb.data.RelPersonAddressId</value>
+                        <value>com.zabonlinedb.data.RelFactoryBankId</value>
                         <value>com.zabonlinedb.data.RelFactoryAddressId</value>
                         <value>com.zabonlinedb.data.output.GetLookupRoleRtnType</value>
                         <value>com.zabonlinedb.data.output.GetLookupSalutationByCountryRtnType</value>

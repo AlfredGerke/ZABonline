@@ -41,9 +41,6 @@
 			"name": "aCurrencyDesc",
 			"type": "java.lang.String"
 		}, {
-			"name": "aAreaCode",
-			"type": "java.lang.String"
-		}, {
 			"name": "aDesc",
 			"type": "java.lang.String"
 		}, {

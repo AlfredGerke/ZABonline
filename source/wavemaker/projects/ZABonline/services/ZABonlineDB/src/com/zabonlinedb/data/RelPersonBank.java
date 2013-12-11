@@ -5,7 +5,7 @@ package com.zabonlinedb.data;
 
 /**
  *  ZABonlineDB.RelPersonBank
- *  06/13/2013 22:11:55
+ *  12/11/2013 23:29:34
  * 
  */
 public class RelPersonBank {

@@ -8,7 +8,7 @@ import java.util.Set;
 
 /**
  *  ZABonlineDB.Tag
- *  06/13/2013 22:11:56
+ *  12/11/2013 23:29:34
  * 
  */
 public class Tag {
@@ -24,7 +24,6 @@ public class Tag {
     private Set<com.zabonlinedb.data.Bank> banks = new HashSet<com.zabonlinedb.data.Bank>();
     private Set<com.zabonlinedb.data.Contact> contacts = new HashSet<com.zabonlinedb.data.Contact>();
     private Set<com.zabonlinedb.data.ContactType> contactTypes = new HashSet<com.zabonlinedb.data.ContactType>();
-    private Set<com.zabonlinedb.data.Country> countries = new HashSet<com.zabonlinedb.data.Country>();
     private Set<com.zabonlinedb.data.Person> persons = new HashSet<com.zabonlinedb.data.Person>();
     private Set<com.zabonlinedb.data.Session> sessions = new HashSet<com.zabonlinedb.data.Session>();
     private Set<com.zabonlinedb.data.Tenant> tenants = new HashSet<com.zabonlinedb.data.Tenant>();
@@ -36,6 +35,7 @@ public class Tag {
     private Set<com.zabonlinedb.data.Datasheet> datasheets = new HashSet<com.zabonlinedb.data.Datasheet>();
     private Set<com.zabonlinedb.data.TableStore> tablestores = new HashSet<com.zabonlinedb.data.TableStore>();
     private Set<com.zabonlinedb.data.Roles> roleses = new HashSet<com.zabonlinedb.data.Roles>();
+    private Set<com.zabonlinedb.data.Country> countries = new HashSet<com.zabonlinedb.data.Country>();
 
     public Integer getId() {
         return id;
@@ -125,14 +125,6 @@ public class Tag {
         this.contactTypes = contactTypes;
     }
 
-    public Set<com.zabonlinedb.data.Country> getCountries() {
-        return countries;
-    }
-
-    public void setCountries(Set<com.zabonlinedb.data.Country> countries) {
-        this.countries = countries;
-    }
-
     public Set<com.zabonlinedb.data.Person> getPersons() {
         return persons;
     }
@@ -219,6 +211,14 @@ public class Tag {
 
     public void setRoleses(Set<com.zabonlinedb.data.Roles> roleses) {
         this.roleses = roleses;
+    }
+
+    public Set<com.zabonlinedb.data.Country> getCountries() {
+        return countries;
+    }
+
+    public void setCountries(Set<com.zabonlinedb.data.Country> countries) {
+        this.countries = countries;
     }
 
 }

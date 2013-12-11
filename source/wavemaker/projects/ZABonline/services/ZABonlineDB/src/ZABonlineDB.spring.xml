@@ -49,6 +49,7 @@
                 <value>com/zabonlinedb/data/Address.hbm.xml</value>
                 <value>com/zabonlinedb/data/Address.ql.xml</value>
                 <value>com/zabonlinedb/data/AddressType.hbm.xml</value>
+                <value>com/zabonlinedb/data/AreaCode.hbm.xml</value>
                 <value>com/zabonlinedb/data/Bank.hbm.xml</value>     
                 <value>com/zabonlinedb/data/Category.hbm.xml</value>
                 <value>com/zabonlinedb/data/Contact.hbm.xml</value>

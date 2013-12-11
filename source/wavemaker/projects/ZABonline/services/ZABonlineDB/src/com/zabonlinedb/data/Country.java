@@ -8,7 +8,7 @@ import java.util.Set;
 
 /**
  *  ZABonlineDB.Country
- *  06/13/2013 22:11:58
+ *  12/11/2013 23:29:34
  * 
  */
 public class Country {
@@ -18,7 +18,6 @@ public class Country {
     private String countryCaption;
     private String currencyCode;
     private String CURRENCY_CAPTION;
-    private String areaCode;
     private String description;
     private Short donotdelete;
     private Short softdel;
@@ -33,6 +32,7 @@ public class Country {
     private Set<com.zabonlinedb.data.Salutation> salutations = new HashSet<com.zabonlinedb.data.Salutation>();
     private Set<com.zabonlinedb.data.Tenant> tenants = new HashSet<com.zabonlinedb.data.Tenant>();
     private Set<com.zabonlinedb.data.Category> categories = new HashSet<com.zabonlinedb.data.Category>();
+    private Set<com.zabonlinedb.data.AreaCode> areacodes = new HashSet<com.zabonlinedb.data.AreaCode>();
 
     public Integer getId() {
         return id;
@@ -72,14 +72,6 @@ public class Country {
 
     public void setCURRENCY_CAPTION(String CURRENCY_CAPTION) {
         this.CURRENCY_CAPTION = CURRENCY_CAPTION;
-    }
-
-    public String getAreaCode() {
-        return areaCode;
-    }
-
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode;
     }
 
     public String getDescription() {
@@ -192,6 +184,14 @@ public class Country {
 
     public void setCategories(Set<com.zabonlinedb.data.Category> categories) {
         this.categories = categories;
+    }
+
+    public Set<com.zabonlinedb.data.AreaCode> getAreacodes() {
+        return areacodes;
+    }
+
+    public void setAreacodes(Set<com.zabonlinedb.data.AreaCode> areacodes) {
+        this.areacodes = areacodes;
     }
 
 }
