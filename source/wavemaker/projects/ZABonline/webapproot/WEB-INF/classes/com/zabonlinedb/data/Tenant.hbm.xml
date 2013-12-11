@@ -90,4 +90,4 @@
             <one-to-many class="com.zabonlinedb.data.TableStore"/>
         </set>
     </class>
-</hibernate-mapping>
+</hibernate-mapping> 

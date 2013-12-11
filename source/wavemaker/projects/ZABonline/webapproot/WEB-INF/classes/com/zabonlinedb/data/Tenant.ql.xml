@@ -24,4 +24,4 @@ Queries for entity: Tenant.
 
     </query>
 
-</hibernate-mapping>
+</hibernate-mapping>  

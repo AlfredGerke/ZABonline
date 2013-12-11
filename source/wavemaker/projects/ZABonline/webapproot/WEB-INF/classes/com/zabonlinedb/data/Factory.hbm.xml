@@ -78,4 +78,4 @@
             <one-to-many class="com.zabonlinedb.data.RelFactoryBank"/>
         </set>
     </class>
-</hibernate-mapping>
+</hibernate-mapping>  

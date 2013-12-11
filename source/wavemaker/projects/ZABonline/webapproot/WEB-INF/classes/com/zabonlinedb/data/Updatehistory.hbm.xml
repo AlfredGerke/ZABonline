@@ -30,4 +30,4 @@
             <column name="CHG_DATE" length="19"/>
         </property>
     </class>
-</hibernate-mapping>
+</hibernate-mapping> 

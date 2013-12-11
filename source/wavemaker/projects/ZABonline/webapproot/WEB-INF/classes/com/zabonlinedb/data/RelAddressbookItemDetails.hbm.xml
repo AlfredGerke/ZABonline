@@ -21,4 +21,4 @@
             <column name="EMAIL" length="254"/>
         </property>
     </class>
-</hibernate-mapping>
+</hibernate-mapping>  

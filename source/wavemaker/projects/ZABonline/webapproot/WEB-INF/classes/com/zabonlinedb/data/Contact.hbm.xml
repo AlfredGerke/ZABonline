@@ -63,4 +63,4 @@
             <one-to-many class="com.zabonlinedb.data.RelPersonContact"/>
         </set>
     </class>
-</hibernate-mapping>
+</hibernate-mapping>  

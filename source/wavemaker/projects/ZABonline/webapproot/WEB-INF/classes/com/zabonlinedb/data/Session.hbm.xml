@@ -42,4 +42,4 @@
             <column name="USER_ID" not-null="true"/>
         </many-to-one>
     </class>
-</hibernate-mapping>
+</hibernate-mapping> 

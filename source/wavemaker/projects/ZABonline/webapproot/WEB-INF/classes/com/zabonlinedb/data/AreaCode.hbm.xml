@@ -36,4 +36,4 @@
             <column name="COUNTRY_ID"/>
         </many-to-one>
     </class>
-</hibernate-mapping>
+</hibernate-mapping>  

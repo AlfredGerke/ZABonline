@@ -16,4 +16,4 @@
             </key-property>
         </composite-id>
     </class>
-</hibernate-mapping>
+</hibernate-mapping>  

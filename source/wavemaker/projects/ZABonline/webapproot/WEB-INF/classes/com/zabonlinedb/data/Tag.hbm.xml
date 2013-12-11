@@ -120,4 +120,4 @@
             <one-to-many class="com.zabonlinedb.data.Country"/>
         </set>
     </class>
-</hibernate-mapping>
+</hibernate-mapping>  

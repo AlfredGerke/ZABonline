@@ -42,4 +42,4 @@
             <one-to-many class="com.zabonlinedb.data.Address"/>
         </set>
     </class>
-</hibernate-mapping>
+</hibernate-mapping>  
