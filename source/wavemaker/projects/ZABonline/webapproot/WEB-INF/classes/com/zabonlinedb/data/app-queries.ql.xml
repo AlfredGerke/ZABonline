@@ -30,8 +30,7 @@
         select c.caption as caption, c.id as id from ContactType c where c.country.id=:CountryId
     </query>
     <query name="getLookupAreaCode">
-        <query-param name="CountryId" type="java.lang.Integer"/>
-        select distinct ac.caption as areacode from AreaCode ac where ac.country.id=:CountryId
+        select distinct ac.caption as caption from AreaCode ac
     </query>
     <query name="getLookupContactPartnerByTenant">
         <query-param name="TenantId" type="java.lang.Integer"/>
@@ -57,5 +56,10 @@
     <query name="getLookupDataSheetByLabel">
         <query-param name="label" type="java.lang.String"/>
         select ds.caption as caption, ds.id as id from Datasheet ds where ds.tableStore.label=:label
+    </query>
+    <query name="getLookupAreaCodeByCountry">
+        <query-param name="CountryId" type="java.lang.Integer"/>
+        <query-param name="substitute" type="java.lang.Integer"/>
+        select distinct ac.caption as caption from AreaCode ac where ((ac.country.id=:CountryId) or 1=(:substitute))
     </query>
 </hibernate-mapping>

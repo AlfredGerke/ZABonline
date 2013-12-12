@@ -34,11 +34,19 @@
 	}, {
 		"name": "getLookupAreaCode",
 		"operationType": "hqlquery",
+		"parameters": null,
+		"returnType": "[com.zabonlinedb.data.output.GetLookupAreaCodeRtnType]"
+	}, {
+		"name": "getLookupAreaCodeByCountry",
+		"operationType": "hqlquery",
 		"parameters": [{
 			"name": "CountryId",
 			"type": "java.lang.Integer"
+		}, {
+			"name": "substitute",
+			"type": "java.lang.Integer"
 		}],
-		"returnType": "[com.zabonlinedb.data.output.GetLookupAreaCodeRtnType]"
+		"returnType": "[com.zabonlinedb.data.output.GetLookupAreaCodeByCountryRtnType]"
 	}, {
 		"name": "getLookupContactPartnerByTenant",
 		"operationType": "hqlquery",

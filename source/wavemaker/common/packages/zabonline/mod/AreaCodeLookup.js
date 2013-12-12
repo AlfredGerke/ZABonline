@@ -1,6 +1,14 @@
 dojo.provide("wm.packages.zabonline.mod.AreaCodeLookup");
 //
 dojo.declare("AreaCodeLookup", null, {
+  getCaption: function(index, ret) {
+    if (this.getCount() > index) {
+      var item = this.scope.areaCodeData.getItem(index);
+      return item.getValue("caption");
+    } else {
+      return ret;
+    }  
+  },
   getCount: function() {
     var count = 0;
 
@@ -10,14 +18,19 @@ dojo.declare("AreaCodeLookup", null, {
 
     return count;
   },
-  refresh: function(force) {
+  refresh: function(force, byCountrId) {
     if ((this.getCount() === 0) || (force == 1)) {
 
       var refresh_success = 0;
 
       this.scope.areaCodeData.clearData();
 
-      this.scope.areaCodeLookupData.input.setValue('CountryId', this.scope.globalData.countryId());
+      if (byCountrId==1) {
+        this.scope.areaCodeLookupData.input.setValue('CountryId', this.scope.globalData.countryId());        
+      } else {
+        this.scope.areaCodeLookupData.input.setValue('substitute', 1);
+      }
+      
       if (this.scope.areaCodeLookupData.canUpdate()) {
           this.scope.areaCodeLookupData.update();
           refresh_success = 1;

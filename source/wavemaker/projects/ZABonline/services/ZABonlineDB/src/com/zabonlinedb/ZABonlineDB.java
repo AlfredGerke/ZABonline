@@ -13,6 +13,7 @@ import com.wavemaker.runtime.service.TypedServiceReturn;
 import com.zabonlinedb.data.Country;
 import com.zabonlinedb.data.Users;
 import com.zabonlinedb.data.output.GetLookupAddressTypeByCountryRtnType;
+import com.zabonlinedb.data.output.GetLookupAreaCodeByCountryRtnType;
 import com.zabonlinedb.data.output.GetLookupAreaCodeRtnType;
 import com.zabonlinedb.data.output.GetLookupContactPartnerByTenantRtnType;
 import com.zabonlinedb.data.output.GetLookupContactTypeByCountryRtnType;
@@ -29,7 +30,7 @@ import com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType;
 
 /**
  *  Operations for service "ZABonlineDB"
- *  12/12/2013 00:36:12
+ *  12/12/2013 23:31:59
  * 
  */
 @SuppressWarnings("unchecked")
@@ -46,6 +47,10 @@ public class ZABonlineDB
 
     public List<GetLookupContactPartnerByTenantRtnType> getLookupContactPartnerByTenant(Integer TenantId, PagingOptions pagingOptions) {
         return ((List<GetLookupContactPartnerByTenantRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupContactPartnerByTenantQueryName), TenantId, pagingOptions));
+    }
+
+    public List<GetLookupAreaCodeByCountryRtnType> getLookupAreaCodeByCountry(Integer CountryId, Integer substitute, PagingOptions pagingOptions) {
+        return ((List<GetLookupAreaCodeByCountryRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupAreaCodeByCountryQueryName), CountryId, substitute, pagingOptions));
     }
 
     public List<GetLookupRoleRtnType> getLookupRole(PagingOptions pagingOptions) {
@@ -73,8 +78,8 @@ public class ZABonlineDB
         }
     }
 
-    public List<GetLookupAreaCodeRtnType> getLookupAreaCode(Integer CountryId, PagingOptions pagingOptions) {
-        return ((List<GetLookupAreaCodeRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupAreaCodeQueryName), CountryId, pagingOptions));
+    public List<GetLookupAreaCodeRtnType> getLookupAreaCode(PagingOptions pagingOptions) {
+        return ((List<GetLookupAreaCodeRtnType> ) dsMgr.invoke(taskMgr.getQueryTask(), (ZABonlineDBConstants.getLookupAreaCodeQueryName), pagingOptions));
     }
 
     public List<GetLookupDataSheetByLabelRtnType> getLookupDataSheetByLabel(String label, PagingOptions pagingOptions) {

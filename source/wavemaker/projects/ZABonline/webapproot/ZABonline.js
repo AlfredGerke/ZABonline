@@ -30,13 +30,13 @@ dojo.declare("ZABonline", wm.Application, {
 		addressTypeLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupAddressTypeByCountry","service":"ZABonlineDB"}, {}, {
 			input: ["wm.ServiceInput", {"type":"getLookupAddressTypeByCountryInputs"}, {}]
 		}], 
-		areaCodeData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupAreaCodeRtnType"}, {}, {
+		areaCodeData: ["wm.Variable", {"isList":true,"type":"com.zabonlinedb.data.output.GetLookupAreaCodeByCountryRtnType"}, {}, {
 			binding: ["wm.Binding", {}, {}, {
 				wire: ["wm.Wire", {"expression":undefined,"source":"app.areaCodeLookupData","targetProperty":"dataSet"}, {}]
 			}]
 		}], 
-		areaCodeLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupAreaCode","service":"ZABonlineDB"}, {}, {
-			input: ["wm.ServiceInput", {"type":"getLookupAreaCodeInputs"}, {}]
+		areaCodeLookupData: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"getLookupAreaCodeByCountry","service":"ZABonlineDB"}, {}, {
+			input: ["wm.ServiceInput", {"type":"getLookupAreaCodeByCountryInputs"}, {}]
 		}], 
 		checkGrant: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"checkGrant","service":"ZABonlineGrantsService"}, {"onError":"checkGrantError","onSuccess":"checkGrantSuccess"}, {
 			input: ["wm.ServiceInput", {"type":"checkGrantInputs"}, {}, {

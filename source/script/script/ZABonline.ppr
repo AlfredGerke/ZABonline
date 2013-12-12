@@ -49,7 +49,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\designtime\servicedef.xml
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\src\ZABonlineDB.spring.xml
-		-language
+		+language
 			-de
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\app.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\Login.js
@@ -113,7 +113,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\ShowAbout.js
 			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\ShowContact.js
 			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\ShowImpressum.js
-		-pages
+		+pages
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\AdminByAccordion\AdminByAccordion.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\FollowUp\FollowUp.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\GlobalSearch\GlobalSearch.js
@@ -176,15 +176,47 @@ ZABonline
 0=..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
 1=..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js
 2=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
+3=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\app.js
+4=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
+5=..\..\wavemaker\common\packages\zabonline\mod\ContactTypeLookup.js
+6=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewCatalogItem\NewCatalogItem.js
+7=data_0001.sql
+8=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js
+9=batch.sql
+10=create_db.sql
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
+Selected=data_0001.sql
 [..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js]
 TopLine=1
-Caret=26,13
+Caret=9,31
 [..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js]
 TopLine=62
 Caret=1,69
 [..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js]
-TopLine=228
-Caret=44,260
+TopLine=840
+Caret=78,222
+[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\app.js]
+TopLine=1
+Caret=1,7
+[..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js]
+TopLine=250
+Caret=65,212
+[..\..\wavemaker\common\packages\zabonline\mod\ContactTypeLookup.js]
+TopLine=1
+Caret=5,11
+[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewCatalogItem\NewCatalogItem.js]
+TopLine=206
+Caret=101,235
+[data_0001.sql]
+TopLine=223
+Caret=69,260
+[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js]
+TopLine=402
+Caret=1,1
+[batch.sql]
+TopLine=40
+Caret=1,1
+[create_db.sql]
+TopLine=2941
+Caret=1,1

@@ -226,5 +226,13 @@ dojo.declare("NewCatalogItem", wm.Page, {
             app.closeCataloItem(this.controller);            
         }
     },
-    _end: 0
+    refreshByAddCatalogItem: function() {
+        return function(scope, catalog) {
+            scope.controller.onRefreshLookupByTarget(catalog, 1);
+        };
+    },    
+    btnAddCountryCodeClick: function(inSender) {
+		this.controller.showCountryCodes(this, "{kind: 1002, page: 'NewCountry', catalog: 'COUNTRY_CODES'}", this.refreshByAddCatalogItem(), app.getDictionaryItem("CAPTION_ADDCOUNTRY_TITLE"));
+	},
+	_end: 0
 });

@@ -1,4 +1,5 @@
 {
+  "CAPTION_ADDCATALOG_TITLE_AREA_CODE": "Neuaufnahme Gebietskennung",
   "CAPTION_ADDCATALOG_TITLE_SALUTATION": "Neuaufnahme Anrede",
   "CAPTION_ADDCATALOG_TITLE_TITLE": "Neuaufnahme Titel",
   "CAPTION_ADDCATALOG_TITLE_ADDRESS_TYPE": "Neuaufnahme Adresstyp",

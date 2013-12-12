@@ -182,6 +182,44 @@ dojo.declare("NewCatalogItemCtrl", Controller, {
       return false;
     }     
   },    
+  onRefreshLookup: function(lookup, force) {
+    var local = this.localScope;
+    var succes = 0;
+    
+    try {
+      if (lookup) {
+        if (lookup.refresh(force) > 0) {
+          success = 1;
+        } else {
+          success = 0;
+        }
+      } else {
+        success = 0;
+      }
+      
+      return success;
+    } catch (e) {
+      this.handleExceptionByCtrl(local.name + ".onRefreshLookup() failed: " + e.toString(), e, -1);      
+      return false;      
+    }
+  },    
+  onRefreshLookupByTarget: function(target, force) {
+    var global = this.globalScope;
+    var success = 0;
+    
+    switch (target) {
+      case "COUNTRY_CODES":
+        success =  this.onRefreshLookup(global.countryCodeLookup, force);
+        //
+        break;   
+      default:
+        success = 0;
+        //
+        break;
+    }
+    
+    return success;
+  },  
   loadLookupData: function() {
     var local = this.localScope;
     var global = this.globalScope;  

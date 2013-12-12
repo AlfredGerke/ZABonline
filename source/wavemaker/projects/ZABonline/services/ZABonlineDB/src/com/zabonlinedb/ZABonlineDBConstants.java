@@ -5,13 +5,14 @@ package com.zabonlinedb;
 
 /**
  *  Query names for service "ZABonlineDB"
- *  12/12/2013 00:36:12
+ *  12/12/2013 23:31:59
  * 
  */
 public class ZABonlineDBConstants {
 
     public final static String getCountryByCodeQueryName = "getCountryByCode";
     public final static String getLookupContactPartnerByTenantQueryName = "getLookupContactPartnerByTenant";
+    public final static String getLookupAreaCodeByCountryQueryName = "getLookupAreaCodeByCountry";
     public final static String getLookupRoleQueryName = "getLookupRole";
     public final static String getLookupPersonByMarriageQueryName = "getLookupPersonByMarriage";
     public final static String getLookupTableStoreByLabelQueryName = "getLookupTableStoreByLabel";

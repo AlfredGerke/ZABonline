@@ -104,6 +104,11 @@ dojo.declare("NewAddressCtrl", Controller, {
            local.cboContactType.setDisplayValue(initContactValue);    
           //
           break;
+        case "AreaCode":
+          var initAreaCodeValue = global.areaCodeLookup.getCaption(idx, "");
+           local.cboContactType.setDisplayValue(initContactValue);    
+          //
+          break;          
         default:
           throw "NewAddressCtrl.initSelectMenu: keine gültige Auswahl";
           //
@@ -198,26 +203,28 @@ dojo.declare("NewAddressCtrl", Controller, {
     
     switch (target) {
       case "SALUTATION":
-        success =  this.onRefreshLookup(global.salutationLookup, force);
+        success = this.onRefreshLookup(global.salutationLookup, force);
         //
         break;
       case "TITEL":
-        success =  this.onRefreshLookup(this.globalScope.titelLookup, force);
+        success = this.onRefreshLookup(this.globalScope.titelLookup, force);
         //
         break;  
       case "ADDRESS_TYPE":
-        success =  this.onRefreshLookup(this.globalScope.addressTypeLookup, force);
+        success = this.onRefreshLookup(this.globalScope.addressTypeLookup, force);
         //
         break;        
       case "CONTACT_TYPE":
-        success =  this.onRefreshLookup(this.globalScope.contactTypeLookup, force);
+        success = this.onRefreshLookup(this.globalScope.contactTypeLookup, force);
         //
         break;
-      case "COUNTRY_CODES":
-        success = this.onRefreshLookup(this.globalScope.areaCodeLookup, force);    
+      case "AREA_CODE":
+        success = this.onRefreshLookup(this.globalScope.areaCodeLookup, force); 
+        //
+        break;   
       default:
-          success = 0;
-          //
+        success = 0;
+        //
         break;
     }
     

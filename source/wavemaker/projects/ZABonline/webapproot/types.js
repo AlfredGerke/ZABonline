@@ -4730,9 +4730,26 @@ wm.types = {
 			"liveService": false,
 			"service": "ZABonlineDB"
 		},
+		"com.zabonlinedb.data.output.GetLookupAreaCodeByCountryRtnType": {
+			"fields": {
+				"caption": {
+					"exclude": [],
+					"fieldOrder": 0,
+					"fieldSubType": null,
+					"include": [],
+					"isList": false,
+					"noChange": [],
+					"required": true,
+					"type": "java.lang.String"
+				}
+			},
+			"internal": false,
+			"liveService": false,
+			"service": "ZABonlineDB"
+		},
 		"com.zabonlinedb.data.output.GetLookupAreaCodeRtnType": {
 			"fields": {
-				"areacode": {
+				"caption": {
 					"exclude": [],
 					"fieldOrder": 0,
 					"fieldSubType": null,

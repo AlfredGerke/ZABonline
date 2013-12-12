@@ -40,7 +40,7 @@ NewCatalogItem.widgets = {
 							}]
 						}],
 						btnFindCountry: ["wm.Button", {"caption":undefined,"height":"100%","hint":"Sprachkennung suchen","imageIndex":48,"imageList":"app.silkIconList","margin":"1","padding":"1","width":"35px"}, {"onclick":"btnFindCountryClick"}],
-						btnAddCountryCode: ["wm.Button", {"caption":undefined,"height":"100%","hint":"Länderkennung einfügen","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","width":"35px"}, {}]
+						btnAddCountryCode: ["wm.Button", {"caption":undefined,"height":"100%","hint":"Länderkennung einfügen","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","width":"35px"}, {"onclick":"btnAddCountryCodeClick"}]
 					}],
 					edtCaption: ["wm.Text", {"caption":"Bezeichnung","captionSize":"110px","dataValue":undefined,"displayValue":"","maxChars":"254","required":true}, {}],
 					edtDescription: ["wm.Text", {"caption":"Beschreibung","captionSize":"110px","dataValue":undefined,"displayValue":"","maxChars":"2000","required":true}, {}],

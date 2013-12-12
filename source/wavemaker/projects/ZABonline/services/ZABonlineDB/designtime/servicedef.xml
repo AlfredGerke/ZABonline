@@ -8,6 +8,11 @@
         <parameter name="TenantId" typeRef="java.lang.Integer" isList="false"/>
         <return typeRef="com.zabonlinedb.data.output.GetLookupContactPartnerByTenantRtnType" isList="true"/>
     </operation>
+    <operation operationType="hqlquery" name="getLookupAreaCodeByCountry">
+        <parameter name="CountryId" typeRef="java.lang.Integer" isList="false"/>
+        <parameter name="substitute" typeRef="java.lang.Integer" isList="false"/>
+        <return typeRef="com.zabonlinedb.data.output.GetLookupAreaCodeByCountryRtnType" isList="true"/>
+    </operation>
     <operation operationType="hqlquery" name="getLookupRole">
         <return typeRef="com.zabonlinedb.data.output.GetLookupRoleRtnType" isList="true"/>
     </operation>
@@ -27,7 +32,6 @@
         <return typeRef="com.zabonlinedb.data.Address" isList="false"/>
     </operation>
     <operation operationType="hqlquery" name="getLookupAreaCode">
-        <parameter name="CountryId" typeRef="java.lang.Integer" isList="false"/>
         <return typeRef="com.zabonlinedb.data.output.GetLookupAreaCodeRtnType" isList="true"/>
     </operation>
     <operation operationType="hqlquery" name="getLookupDataSheetByLabel">
@@ -759,6 +763,46 @@
             <element name="sessions" typeRef="com.zabonlinedb.data.Session" isList="true" allowNull="true"/>
             <element name="person" typeRef="com.zabonlinedb.data.Person" isList="false" allowNull="true"/>
         </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelFactoryAddressId" name="id" supportsQuickData="false">
+            <element name="addressId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="factoryId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelPersonBankId" name="id" supportsQuickData="false">
+            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="bankId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
         <dataobject javaType="com.zabonlinedb.data.RegistryId" name="id" supportsQuickData="false">
             <element name="keyname" typeRef="java.lang.String" isList="false" allowNull="false">
                 <require>delete</require>
@@ -797,46 +841,6 @@
                 <noChange>update</noChange>
             </element>
         </dataobject>
-        <dataobject javaType="com.zabonlinedb.data.RelPersonBankId" name="id" supportsQuickData="false">
-            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false">
-                <require>delete</require>
-                <require>read</require>
-                <require>update</require>
-                <require>insert</require>
-                <noChange>delete</noChange>
-                <noChange>read</noChange>
-                <noChange>update</noChange>
-            </element>
-            <element name="bankId" typeRef="java.lang.Integer" isList="false" allowNull="false">
-                <require>delete</require>
-                <require>read</require>
-                <require>update</require>
-                <require>insert</require>
-                <noChange>delete</noChange>
-                <noChange>read</noChange>
-                <noChange>update</noChange>
-            </element>
-        </dataobject>
-        <dataobject javaType="com.zabonlinedb.data.RelPersonCategoryId" name="id" supportsQuickData="false">
-            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false">
-                <require>delete</require>
-                <require>read</require>
-                <require>update</require>
-                <require>insert</require>
-                <noChange>delete</noChange>
-                <noChange>read</noChange>
-                <noChange>update</noChange>
-            </element>
-            <element name="categoryId" typeRef="java.lang.Integer" isList="false" allowNull="false">
-                <require>delete</require>
-                <require>read</require>
-                <require>update</require>
-                <require>insert</require>
-                <noChange>delete</noChange>
-                <noChange>read</noChange>
-                <noChange>update</noChange>
-            </element>
-        </dataobject>
         <dataobject javaType="com.zabonlinedb.data.RelPersonContactId" name="id" supportsQuickData="false">
             <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false">
                 <require>delete</require>
@@ -848,46 +852,6 @@
                 <noChange>update</noChange>
             </element>
             <element name="contactId" typeRef="java.lang.Integer" isList="false" allowNull="false">
-                <require>delete</require>
-                <require>read</require>
-                <require>update</require>
-                <require>insert</require>
-                <noChange>delete</noChange>
-                <noChange>read</noChange>
-                <noChange>update</noChange>
-            </element>
-        </dataobject>
-        <dataobject javaType="com.zabonlinedb.data.RelTableStoreFieldStoreId" name="id" supportsQuickData="false">
-            <element name="tableId" typeRef="java.lang.Integer" isList="false" allowNull="false">
-                <require>delete</require>
-                <require>read</require>
-                <require>update</require>
-                <require>insert</require>
-                <noChange>delete</noChange>
-                <noChange>read</noChange>
-                <noChange>update</noChange>
-            </element>
-            <element name="fieldId" typeRef="java.lang.Integer" isList="false" allowNull="false">
-                <require>delete</require>
-                <require>read</require>
-                <require>update</require>
-                <require>insert</require>
-                <noChange>delete</noChange>
-                <noChange>read</noChange>
-                <noChange>update</noChange>
-            </element>
-        </dataobject>
-        <dataobject javaType="com.zabonlinedb.data.RelPersonAddressId" name="id" supportsQuickData="false">
-            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false">
-                <require>delete</require>
-                <require>read</require>
-                <require>update</require>
-                <require>insert</require>
-                <noChange>delete</noChange>
-                <noChange>read</noChange>
-                <noChange>update</noChange>
-            </element>
-            <element name="addressId" typeRef="java.lang.Integer" isList="false" allowNull="false">
                 <require>delete</require>
                 <require>read</require>
                 <require>update</require>
@@ -917,8 +881,8 @@
                 <noChange>update</noChange>
             </element>
         </dataobject>
-        <dataobject javaType="com.zabonlinedb.data.RelFactoryAddressId" name="id" supportsQuickData="false">
-            <element name="addressId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+        <dataobject javaType="com.zabonlinedb.data.RelTableStoreFieldStoreId" name="id" supportsQuickData="false">
+            <element name="tableId" typeRef="java.lang.Integer" isList="false" allowNull="false">
                 <require>delete</require>
                 <require>read</require>
                 <require>update</require>
@@ -927,7 +891,47 @@
                 <noChange>read</noChange>
                 <noChange>update</noChange>
             </element>
-            <element name="factoryId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+            <element name="fieldId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelPersonCategoryId" name="id" supportsQuickData="false">
+            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="categoryId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.RelPersonAddressId" name="id" supportsQuickData="false">
+            <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <require>insert</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+            </element>
+            <element name="addressId" typeRef="java.lang.Integer" isList="false" allowNull="false">
                 <require>delete</require>
                 <require>read</require>
                 <require>update</require>
@@ -952,13 +956,12 @@
             <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
             <element name="description" typeRef="java.lang.String" isList="false" allowNull="false"/>
         </dataobject>
-        <dataobject javaType="com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType" supportsQuickData="false">
-            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
-            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
-        </dataobject>
         <dataobject javaType="com.zabonlinedb.data.output.GetLookupContactTypeByCountryRtnType" supportsQuickData="false">
             <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
             <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupAreaCodeByCountryRtnType" supportsQuickData="false">
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
         </dataobject>
         <dataobject javaType="com.zabonlinedb.data.output.GetLookupContactPartnerByTenantRtnType" supportsQuickData="false">
             <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
@@ -968,26 +971,8 @@
             <element name="phoneFmt" typeRef="java.lang.String" isList="false" allowNull="false"/>
             <element name="email" typeRef="java.lang.String" isList="false" allowNull="false"/>
         </dataobject>
-        <dataobject javaType="com.zabonlinedb.data.output.GetLookupCountryRtnType" supportsQuickData="false">
-            <element name="countryCode" typeRef="java.lang.String" isList="false" allowNull="false"/>
-            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
-        </dataobject>
-        <dataobject javaType="com.zabonlinedb.data.output.GetLookupAddressTypeByCountryRtnType" supportsQuickData="false">
-            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
-            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
-        </dataobject>
-        <dataobject javaType="com.zabonlinedb.data.output.GetLookupDataSheetByLabelRtnType" supportsQuickData="false">
-            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
-            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
-        </dataobject>
         <dataobject javaType="com.zabonlinedb.data.output.GetLookupAreaCodeRtnType" supportsQuickData="false">
-            <element name="areacode" typeRef="java.lang.String" isList="false" allowNull="false"/>
-        </dataobject>
-        <dataobject javaType="com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType" supportsQuickData="false">
-            <element name="marriage_partner" typeRef="java.lang.String" isList="false" allowNull="false"/>
-            <element name="name1" typeRef="java.lang.String" isList="false" allowNull="false"/>
-            <element name="firstname" typeRef="java.lang.String" isList="false" allowNull="false"/>
-            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
         </dataobject>
         <dataobject javaType="com.zabonlinedb.data.output.GetLookupPersonByTenantRtnType" supportsQuickData="false">
             <element name="personId" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
@@ -998,6 +983,28 @@
         </dataobject>
         <dataobject javaType="com.zabonlinedb.data.output.GetLookupTableStoreByLabelRtnType" supportsQuickData="false">
             <element name="tableName" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType" supportsQuickData="false">
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupAddressTypeByCountryRtnType" supportsQuickData="false">
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupCountryRtnType" supportsQuickData="false">
+            <element name="countryCode" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupDataSheetByLabelRtnType" supportsQuickData="false">
+            <element name="caption" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+        <dataobject javaType="com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType" supportsQuickData="false">
+            <element name="marriage_partner" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="name1" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="firstname" typeRef="java.lang.String" isList="false" allowNull="false"/>
             <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
         </dataobject>
     </dataobjects>

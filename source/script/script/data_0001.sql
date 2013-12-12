@@ -250,8 +250,12 @@ BEGIN
   INSERT INTO JSON_KIND (COUNTRY_ID, CAPTION, DESCRIPTION, DONOTDELETE) VALUES (:default_country_id, :code, :desc, 1);
   
   code = '1001';
-  desc = 'count=5;; json={"kind": 1001, "mode": 0, "find": "<?>", "label": "<?>", "callback": "<?>"}';
-  INSERT INTO JSON_KIND (COUNTRY_ID, CAPTION, DESCRIPTION, DONOTDELETE) VALUES (:default_country_id, :code, :desc, 1);  
+  desc = 'count=5;; json={"kind": 1001, "mode": 0, "page": "<?>", "catalog": "<?>"}';
+  INSERT INTO JSON_KIND (COUNTRY_ID, CAPTION, DESCRIPTION, DONOTDELETE) VALUES (:default_country_id, :code, :desc, 1);
+  
+  code = '1002';
+  desc = 'count=3;; json={"kind": 1002, "page": "<?>", "catalog": "<?>"}';
+  INSERT INTO JSON_KIND (COUNTRY_ID, CAPTION, DESCRIPTION, DONOTDELETE) VALUES (:default_country_id, :code, :desc, 1);    
   
   code = 'SOFTDEL';
   desc = 'Deleteflag für Tabellen';  
