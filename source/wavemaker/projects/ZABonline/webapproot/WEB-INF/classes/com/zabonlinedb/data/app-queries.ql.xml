@@ -19,7 +19,7 @@
     </query>
     <query name="getLookupPersonByMarriage">
         <query-param name="TenantId" type="java.lang.Integer"/>
-        select (p.name1 || &apos;, &apos; || p.firstname) as marriage_partner, p.name1 as name1, p.firstname as firstname, p.id as id from Person p where p.married = 1 and p.tenant.id=:TenantId
+        select ((case when p.name1 is null then &apos;-&apos; else p.name1 end) || &apos;, &apos; || (case when p.firstname is null then &apos;-&apos; else p.firstname end)) as marriage_partner, p.name1 as name1, p.firstname as firstname, p.id as id from Person p where p.married = 1 and p.tenant.id=:TenantId
     </query>
     <query name="getLookupAddressTypeByCountry">
         <query-param name="CountryId" type="java.lang.Integer"/>
@@ -34,7 +34,7 @@
     </query>
     <query name="getLookupContactPartnerByTenant">
         <query-param name="TenantId" type="java.lang.Integer"/>
-        select rad.personId as personId, (rad.name1 || &apos;,  &apos; || rad.firstName) as contactPartner, rad.firstName as firstName, rad.name1 as name1, rad.phoneFmt as phoneFmt, rad.email as email from RelAddressbookItemDetails rad where tenantId=:TenantId
+        select rad.personId as personId, ((case when rad.name1 is null then &apos;-&apos; else rad.name1 end) || &apos;,  &apos; || (case when rad.firstName is null then &apos;-&apos; else rad.firstName end)) as contactPartner, rad.firstName as firstName, rad.name1 as name1, rad.phoneFmt as phoneFmt, rad.email as email from RelAddressbookItemDetails rad where tenantId=:TenantId
     </query>
     <query name="getLookupTenant">
         select t.id as pk, t.caption as caption, t.description as description from Tenant t
@@ -44,7 +44,7 @@
     </query>
     <query name="getLookupPersonByTenant">
         <query-param name="TenantId" type="java.lang.Integer"/>
-        select rad.personId as personId, (rad.name1 || &apos;,  &apos; || rad.firstName) as nameFirstname, rad.firstName as firstName, rad.name1 as name1, rad.email as email from RelAddressbookItemDetails rad where tenantId=:TenantId
+        select rad.personId as personId, ((case when rad.name1 is null then &apos;-&apos; else rad.name1 end) || &apos;,  &apos; || (case when rad.firstName is null then &apos;-&apos; else rad.firstName end)) as nameFirstname, rad.firstName as firstName, rad.name1 as name1, rad.email as email from RelAddressbookItemDetails rad where tenantId=:TenantId
     </query>
     <query name="getLookupCountry">
         select c.countryCode as countryCode,  c.id as id from Country c

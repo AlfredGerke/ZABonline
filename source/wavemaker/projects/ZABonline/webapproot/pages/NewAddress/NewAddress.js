@@ -285,6 +285,20 @@ dojo.declare("NewAddress", wm.Page, {
             this.controller.handleExceptionByCtrl(this.name + ".addAddressBookItemResult() failed: " + e.toString(), e);
         }
     },
+    refreshMarriagePartnerLookupData: function() {
+        try {        
+            if (this.marriagePartnerLookupData.canUpdate()) {
+                this.marriagePartnerLookupData.update();
+            } else {
+                throw this.getDictionaryItem("ERROR_MSG_BY_REFRESH_MARRIAGEPARTNER_LOOKUP_DATA");
+            }
+            
+            return true;
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".refreshMarriagePartnerLookupData() failed: " + e.toString(), e, -1);
+            return false;
+        }                    
+    },
     refreshOnAddAddressBookItemSuccess: function() {
         try {
             app.dummyServiceVar.doRequest();
@@ -295,11 +309,13 @@ dojo.declare("NewAddress", wm.Page, {
                 throw this.getDictionaryItem("ERROR_MSG_BY_CONTROLLER_CLEARWIZARD");
             }
 
-            if (this.marriagePartnerLookupData.canUpdate()) {
-                this.marriagePartnerLookupData.update();
-            } else {
-                throw this.getDictionaryItem("ERROR_MSG_BY_REFRESH_MARRIAGEPARTNER_LOOKUP_DATA");
-            }
+            this.refreshMarriagePartnerLookupData();
+            
+            //if (this.marriagePartnerLookupData.canUpdate()) {
+            //    this.marriagePartnerLookupData.update();
+            //} else {
+            //    throw this.getDictionaryItem("ERROR_MSG_BY_REFRESH_MARRIAGEPARTNER_LOOKUP_DATA");
+            //}
 
             app.dummyServiceVar.doResult();
             return true;
@@ -422,8 +438,15 @@ dojo.declare("NewAddress", wm.Page, {
     btnFindPersonClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'person', callback: 'onGetResultBySearch'}");
     },
+    refreshPerson: function() {
+        this.refreshMarriagePartnerLookupData();
+    },
     btnAddPersonClick: function(inSender) {
-        //code kommt noch
+        try {
+            app.controller.showWizard("NewAddress", "Neuaufnahme Adresse", true, this, "refreshPerson", "init-address-as-subdialog");
+        } catch (e) {
+            this.controller.handleExceptionByCtrl(this.name + ".btnAddPersonClick() failed: " + e.toString(), e);
+        }
     },
     btnFindAddressTypeClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'addressType', callback: 'onGetResultBySearch'}");

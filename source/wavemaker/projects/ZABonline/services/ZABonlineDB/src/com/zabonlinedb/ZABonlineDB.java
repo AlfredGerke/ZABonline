@@ -30,7 +30,7 @@ import com.zabonlinedb.data.output.GetLookupTitelByCountryRtnType;
 
 /**
  *  Operations for service "ZABonlineDB"
- *  12/12/2013 23:31:59
+ *  12/22/2013 00:52:48
  * 
  */
 @SuppressWarnings("unchecked")

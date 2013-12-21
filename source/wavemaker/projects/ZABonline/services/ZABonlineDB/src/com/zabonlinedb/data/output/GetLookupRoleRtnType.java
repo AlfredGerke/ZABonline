@@ -4,7 +4,7 @@ package com.zabonlinedb.data.output;
 
 
 /**
- * Generated for query "getLookupRole" on 12/12/2013 23:11:51
+ * Generated for query "getLookupRole" on 12/22/2013 00:52:26
  * 
  */
 public class GetLookupRoleRtnType {

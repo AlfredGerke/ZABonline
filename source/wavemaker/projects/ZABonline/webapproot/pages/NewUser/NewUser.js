@@ -134,9 +134,6 @@ dojo.declare("NewUser", wm.Page, {
             this.controller.handleExceptionByCtrl(this.name + ".btnAddRoleClick() failed: " + e.toString(), e);
         }
     },
-    btnAddPerson3Click: function(inSender) {
-        //code kommt noch
-    },
     btnFindMandantClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'tenant', callback: 'onGetResultBySearch'}");
     },
