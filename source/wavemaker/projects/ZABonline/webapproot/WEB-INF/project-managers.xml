@@ -101,10 +101,7 @@
                     <list/>
                 </entry>
                 <entry key="ZABonlineSessionMgrService">
-                    <list>
-                        <value>javax.servlet.http.HttpServletRequest</value>
-                        <value>com.wavemaker.runtime.security.SecurityService</value>
-                    </list>
+                    <list/>
                 </entry>
                 <entry key="addressBookService">
                     <list>

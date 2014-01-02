@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2008-2013 VMware, Inc. All rights reserved.
+ *  Copyright (C) 2012-2013 CloudJee, Inc. All rights reserved.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ if (location.search.indexOf("dojo.locale=") != -1) {
 }
     } catch(e) {}
 wm = window["wm"] || {};
-wm.version = '6.5.3.Release';
+wm.version = '6.6.0.RELEASE';
 
 wm.isMobile = navigator.userAgent.match(/mobile|android/i) || "onorientationchange" in window || navigator.msMaxTouchPoints > 0;
 if (location.search.match(/(\?|\&)wmmobile=(.)/)) {
@@ -109,7 +109,7 @@ wm.loadScript = function(inUrl, inPreferHeadLoad) {
 	// FIXME: FF 3 appears to load script tags appended to head asynchronously
 	// and potentially after dojo.addOnLoad is fired. Therefore not using this method for FF3.
 	// NOTE: argh! FF3 requires head mode for files that rely on script tag inspection (EditArea)
-	if (wm.isMoz && (wm.isFF < 3 || inPreferHeadLoad))
+	if (wm.isMoz && wm.isFF < 3 || inPreferHeadLoad)
 		wm.headAppend(wm.createElement("script", { type: "text/javascript", src: inUrl }));
 	else
 		wm.writeJsTag(inUrl);

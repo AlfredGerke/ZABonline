@@ -12,7 +12,7 @@ ProjectFilesOnly=0
 [Project tree]
 ZABonline
 	+Ordner
-		+common
+		-common
 			-crypt
 				..\..\wavemaker\common\packages\zabonline\crypt\SHA512.js
 			-extend
@@ -44,12 +44,12 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
 		-doc
 			..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
-		+hibernate_xml_anpassen
+		-hibernate_xml_anpassen
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\project-managers.xml
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\designtime\servicedef.xml
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\src\ZABonlineDB.spring.xml
-		+language
+		-language
 			-de
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\app.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\Login.js
@@ -179,9 +179,9 @@ ZABonline
 3=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
+Selected=data_0001.sql
 [data_0001.sql]
-TopLine=223
+TopLine=1
 Caret=69,260
 [batch.sql]
 TopLine=40
@@ -190,5 +190,5 @@ Caret=1,1
 TopLine=2941
 Caret=1,1
 [..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js]
-TopLine=203
+TopLine=179
 Caret=1,179

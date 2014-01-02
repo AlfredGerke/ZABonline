@@ -5,20 +5,10 @@
 		"parameters": null,
 		"returnType": "[de.zabonline.srv.Results.SuccessInfo]"
 	}, {
-		"name": "getHttpServletRequest",
-		"operationType": null,
-		"parameters": null,
-		"returnType": "javax.servlet.http.HttpServletRequest"
-	}, {
 		"name": "getRemoteAddress",
 		"operationType": null,
 		"parameters": null,
 		"returnType": "java.lang.String"
-	}, {
-		"name": "getSecurityService",
-		"operationType": null,
-		"parameters": null,
-		"returnType": "com.wavemaker.runtime.security.SecurityService"
 	}, {
 		"name": "getSessionId",
 		"operationType": null,

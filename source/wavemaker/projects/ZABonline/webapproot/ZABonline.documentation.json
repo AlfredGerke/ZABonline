@@ -6,7 +6,7 @@
 		"service_invalid_SessionManager": true, 
 		"service_invalid_ResultStructs": false, 
 		"service_invalid_ZABonlineDBService": false, 
-		"service_invalid_ZABonlineSessionMgrService": false, 
+		"service_invalid_ZABonlineSessionMgrService": true, 
 		"service_invalid_RegistryService": false, 
 		"service_invalid_FactoryService": false, 
 		"service_invalid_MiscellaneousAnonym": false, 

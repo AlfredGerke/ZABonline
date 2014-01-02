@@ -162,14 +162,6 @@
 		}],
 		"returnType": null
 	}, {
-		"name": "shiftDeserializedProperties",
-		"operationType": null,
-		"parameters": [{
-			"name": "index",
-			"type": "int"
-		}],
-		"returnType": null
-	}, {
 		"name": "update",
 		"operationType": null,
 		"parameters": [{

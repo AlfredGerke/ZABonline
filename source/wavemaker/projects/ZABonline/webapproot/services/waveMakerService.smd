@@ -29,22 +29,6 @@
 		"parameters": null,
 		"returnType": "java.lang.String"
 	}, {
-		"name": "hostToDomain",
-		"operationType": null,
-		"parameters": [{
-			"name": "host",
-			"type": "java.lang.String"
-		}],
-		"returnType": "java.lang.String"
-	}, {
-		"name": "proxyCheck",
-		"operationType": null,
-		"parameters": [{
-			"name": "remoteURL",
-			"type": "java.lang.String"
-		}],
-		"returnType": null
-	}, {
 		"name": "remoteRESTCall",
 		"operationType": null,
 		"parameters": [{

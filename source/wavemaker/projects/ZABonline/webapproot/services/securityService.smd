@@ -1,5 +1,18 @@
 {
 	"methods": [{
+		"name": "getCASProxyTicket",
+		"operationType": null,
+		"parameters": [{
+			"name": "serviceUrl",
+			"type": "java.lang.String"
+		}],
+		"returnType": "java.lang.String"
+	}, {
+		"name": "getTenantId",
+		"operationType": null,
+		"parameters": null,
+		"returnType": "int"
+	}, {
 		"name": "getUserId",
 		"operationType": null,
 		"parameters": null,

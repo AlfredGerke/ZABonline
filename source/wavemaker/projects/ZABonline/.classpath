@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="services/addressBookService/src"/>
-  <classpathentry kind="src" path="services/CatalogService/src"/>
+	<classpathentry kind="src" path="services/CatalogService/src"/>
 	<classpathentry kind="src" path="services/RegistryService/src"/>
 	<classpathentry kind="src" path="services/ZABonlineSessionMgrService/src"/>
 	<classpathentry kind="src" path="services/ZABonlineDBService/src"/>
@@ -15,7 +15,6 @@
 	<classpathentry kind="src" path="services/MiscellaneousAnonym/src"/>
 	<classpathentry kind="src" path="services/ZABonlineAdminService/src"/>
 	<classpathentry kind="src" path="services/ZABonlineGrantsService/src"/>
-	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/acegi-security-1.0.7.jar"/>
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/activation-1.1.jar"/>
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/ant-1.8.2.jar"/>
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/ant-launcher-1.8.2.jar"/>
@@ -53,7 +52,6 @@
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/mimepull-1.3.jar"/>
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/mongo-java-driver-2.7.2.jar"/>
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/mysql-connector-java-5.1.17.jar"/>
-	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/oro-2.0.8.jar"/>
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/paranamer-2.3.jar"/>
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/postgresql-9.0-801.jdbc4.jar"/>
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/resolver-20050927.jar"/>
@@ -79,11 +77,11 @@
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/stax-ex-1.4.jar"/>
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/streambuffer-1.2.jar"/>
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/stringtemplate-3.2.jar"/>
-	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/wavemaker-common-6.5.3.Release.jar"/>
-	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/wavemaker-json-6.5.3.Release.jar"/>
-	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/wavemaker-runtime-6.5.3.Release.jar"/>
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/wstx-asl-3.2.3.jar"/>
 	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/XmlSchema-1.3.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/wavemaker-common-6.6.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/wavemaker-json-6.6.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapproot/WEB-INF/lib/wavemaker-runtime-6.6.0.RELEASE.jar"/>
 	<classpathentry kind="output" path="webapproot/WEB-INF/classes"/>
 </classpath>

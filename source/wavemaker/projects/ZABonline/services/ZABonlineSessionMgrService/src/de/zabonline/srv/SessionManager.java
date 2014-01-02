@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
 
 import com.wavemaker.runtime.RuntimeAccess;
+import com.wavemaker.runtime.WMAppContext;
 import com.zabonlinedb.ZABonlineDB;
 import com.wavemaker.runtime.security.SecurityService;
 
@@ -57,8 +58,8 @@ public class SessionManager extends com.wavemaker.runtime.javaservice.JavaServic
 
   public static Integer getTenantId() {
 
-    Integer tenantId = RuntimeAccess.getInstance()
-        .getTenantId();
+    Integer tenantId = WMAppContext.getInstance()
+        .getDefaultTenantID();
 
     return tenantId;
   }
