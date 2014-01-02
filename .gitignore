@@ -12,3 +12,4 @@ timestamp.txt
 log4j.properties
 *.jar
 *.bak
+*.zip
