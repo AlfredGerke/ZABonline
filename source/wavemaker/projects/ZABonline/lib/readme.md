@@ -1,8 +1,8 @@
-## jaybird-full-2.2.3.jar:
-* jdbc für firebird
-* gehört auch zum Auslieferumfang
+## jaybird-full-2.2.4.jar:
+* jdbc fï¿½r firebird
+* gehï¿½rt auch zum Auslieferumfang
 
 ## servlet-api-2.5.jar:
-* Serverlt-Api für Tomcat
-* wird nur benötigt um das Projekt in Eclipse laufähig zu halten
-* gehört NICHT zum Auslieferumfang, wird automatisch von Studio zur Auslieferung hinzu gefügt    
+* Serverlt-Api fï¿½r Tomcat
+* wird nur benï¿½tigt um das Projekt in Eclipse laufï¿½hig zu halten
+* gehï¿½rt NICHT zum Auslieferumfang, wird automatisch von Studio zur Auslieferung hinzu gefï¿½gt    
