@@ -464,7 +464,7 @@ dojo.declare("NewAddress", wm.Page, {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'areaCode', callback: 'onGetResultBySearch'}");
     },
     btnAddAreaCodeClick: function(inSender) {
-        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'AREA_CODE'}", this.refreshByAddCatalogItem(), app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_AREA_CODE"));
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 1, page: 'NewCatalogItem', catalog: 'AREA_CODE'}", this.refreshByAddCatalogItem(), app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_AREA_CODE"));
     },
     _end: 0
 });

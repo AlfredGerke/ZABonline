@@ -164,6 +164,52 @@ dojo.declare("NewFactoryCtrl", Controller, {
       return false;
     }
   },  
+  onRefreshLookup: function(lookup, force) {
+    var local = this.localScope;
+    var succes = 0;
+    
+    try {
+      if (lookup) {
+        if (lookup.refresh(force) > 0) {
+          success = 1;
+        } else {
+          success = 0;
+        }
+      } else {
+        success = 0;
+      }
+      
+      return success;
+    } catch (e) {
+      this.handleExceptionByCtrl(local.name + ".onRefreshLookup() failed: " + e.toString(), e, -1);      
+      return false;      
+    }
+  },    
+  onRefreshLookupByTarget: function(target, force) {
+    var global = this.globalScope;
+    var success = 0;
+    
+    switch (target) {
+      case "ADDRESS_TYPE":
+        success = this.onRefreshLookup(this.globalScope.addressTypeLookup, force);
+        //
+        break;        
+      case "CONTACT_TYPE":
+        success = this.onRefreshLookup(this.globalScope.contactTypeLookup, force);
+        //
+        break;
+      case "AREA_CODE":
+        success = this.onRefreshLookup(this.globalScope.areaCodeLookup, force); 
+        //
+        break;   
+      default:
+        success = 0;
+        //
+        break;
+    }
+    
+    return success;
+  },  
   loadLookupData: function() {
     var success = 0;
     try {                                               

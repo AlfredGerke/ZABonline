@@ -34,12 +34,13 @@ dojo.declare("NewTenant", wm.Page, {
     refreshCountryCode: function() {
         app.toastInfo("Länderkennungen aktualisieren!");
     },
+    refreshByAddCatalogItem: function() {
+        return function(scope, catalog) {
+            scope.controller.onRefreshLookupByTarget(catalog, 1);
+        };
+    },    
     btnAddAreaCodeClick: function(inSender) {
-        try {
-            // hier wird der Katalog für die Länderkennung für eine Neuaufnahme geöffenet: Code kommt noch
-        } catch (e) {
-            this.controller.handleExceptionByCtrl(this.name + ".btnAddAreaCodeClick() failed: " + e.toString(), e);
-        }
+        this.controller.showCountryCodes(this, "{kind: 1002, page: 'NewCountry', catalog: 'COUNTRY_CODES'}", this.refreshByAddCatalogItem(), app.getDictionaryItem("CAPTION_ADDCOUNTRY_TITLE"));
     },
     refreshTable: function() {
         app.toastInfo("Verknüpfungen für Tabellen aktualisieren!");

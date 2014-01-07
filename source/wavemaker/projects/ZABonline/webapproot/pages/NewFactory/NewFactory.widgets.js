@@ -95,7 +95,7 @@ NewFactory.widgets = {
 						}]
 					}],
 					pnlNoContactPartner: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
-						cbxNoContactPartner: ["wm.Checkbox", {"caption":"kein Ansprechpartner","captionAlign":"left","captionPosition":"right","captionSize":"150px","displayValue":false,"emptyValue":"false","height":"100%","width":"160px"}, {"onchange":"cbxNoContactPartnerChange"}]
+						cbxNoContactPartner: ["wm.Checkbox", {"caption":"kein Ansprechpartner","captionAlign":"left","captionPosition":"right","captionSize":"150px","dataValue":false,"displayValue":false,"emptyValue":"false","height":"100%","width":"160px"}, {"onchange":"cbxNoContactPartnerChange"}]
 					}],
 					pnlContactPerson: ["wm.FancyPanel", {"freeze":false,"title":"Ansprechpartner"}, {}, {
 						pnlBasisContactPersonData: ["wm.Panel", {"height":"100%","horizontalAlign":"left","verticalAlign":"top","width":"100%"}, {}, {
@@ -118,7 +118,7 @@ NewFactory.widgets = {
 			}],
 			layDatasheet: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Betriebsdaten","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 				pnlNoDatasheet: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
-					cbxNoDatasheet: ["wm.Checkbox", {"caption":"kein Datenblatt","captionAlign":"left","captionPosition":"right","captionSize":"150px","displayValue":false,"emptyValue":"false","height":"100%","width":"150px"}, {"onchange":"cbxNoDatasheetChange"}]
+					cbxNoDatasheet: ["wm.Checkbox", {"caption":"kein Datenblatt","captionAlign":"left","captionPosition":"right","captionSize":"150px","dataValue":false,"displayValue":false,"emptyValue":"false","height":"100%","width":"150px"}, {"onchange":"cbxNoDatasheetChange"}]
 				}],
 				pnlDatasheetLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","verticalAlign":"top","width":"100%"}, {}, {
 					pnlFactoryDatasheet: ["wm.FancyPanel", {"freeze":false,"height":"107px","title":"Datenblatt"}, {}, {
@@ -137,7 +137,7 @@ NewFactory.widgets = {
 			}],
 			layAddress: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Adressdaten","horizontalAlign":"left","margin":"5","padding":"5","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 				pnlNoAddressData: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
-					cbxNoAddressData: ["wm.Checkbox", {"caption":"keine Adressdaten","captionAlign":"left","captionPosition":"right","captionSize":"150px","displayValue":false,"emptyValue":"false","height":"100%","width":"150px"}, {"onchange":"cbxNoAddressDataChange"}]
+					cbxNoAddressData: ["wm.Checkbox", {"caption":"keine Adressdaten","captionAlign":"left","captionPosition":"right","captionSize":"150px","dataValue":false,"displayValue":false,"emptyValue":"false","height":"100%","width":"150px"}, {"onchange":"cbxNoAddressDataChange"}]
 				}],
 				pnlAddressLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlBasicAddressData: ["wm.FancyPanel", {"freeze":false,"title":"Adresse"}, {}, {
@@ -162,14 +162,14 @@ NewFactory.widgets = {
 							edtStreetAddressFrom: ["wm.Text", {"caption":"von","captionSize":"50px","dataValue":undefined,"displayValue":"","required":true,"width":"100px"}, {}],
 							edtStreetAddressTo: ["wm.Text", {"caption":"bis","captionSize":"50px","dataValue":undefined,"displayValue":"","width":"100px"}, {}]
 						}],
-						cbxIsPostOfficeAddress: ["wm.Checkbox", {"caption":"Postanschrift","displayValue":false,"emptyValue":"false"}, {}],
-						cbxIsPrivateAddress: ["wm.Checkbox", {"caption":"Privat","displayValue":false,"emptyValue":"false"}, {}]
+						cbxIsPostOfficeAddress: ["wm.Checkbox", {"caption":"Postanschrift","dataValue":false,"displayValue":false,"emptyValue":"false"}, {}],
+						cbxIsPrivateAddress: ["wm.Checkbox", {"caption":"Privat","dataValue":false,"displayValue":false,"emptyValue":"false"}, {}]
 					}]
 				}]
 			}],
 			layContact: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Kontaktdaten","horizontalAlign":"left","margin":"5","padding":"5","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 				pnlNoContactData: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
-					cbxNoContactData: ["wm.Checkbox", {"caption":"keine Kontaktdaten","captionAlign":"left","captionPosition":"right","captionSize":"150px","displayValue":false,"emptyValue":"false","height":"100%","width":"150px"}, {"onchange":"cbxNoContactDataChange"}]
+					cbxNoContactData: ["wm.Checkbox", {"caption":"keine Kontaktdaten","captionAlign":"left","captionPosition":"right","captionSize":"150px","dataValue":false,"displayValue":false,"emptyValue":"false","height":"100%","width":"150px"}, {"onchange":"cbxNoContactDataChange"}]
 				}],
 				pnlContactLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlBasicContactData: ["wm.FancyPanel", {"title":"Kontakt"}, {}, {
@@ -184,7 +184,7 @@ NewFactory.widgets = {
 							btnAddContactType: ["wm.Button", {"caption":undefined,"height":"100%","imageIndex":1,"imageList":"app.silkIconList","margin":"1","padding":"1","styles":{"fontStyle":"","fontSize":"12px","fontWeight":""},"width":"35px"}, {"onclick":"btnAddContactTypeClick"}]
 						}],
 						cboAreaCodePanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-							cboAreaCode: ["wm.SelectMenu", {"allowNone":true,"caption":"Gebietscode","dataField":"areacode","dataType":"com.zabonlinedb.data.output.GetLookupAreaCodeRtnType","displayField":"areacode","displayValue":""}, {}, {
+							cboAreaCode: ["wm.SelectMenu", {"allowNone":true,"caption":"Gebietscode","dataField":"areacode","dataType":"com.zabonlinedb.data.output.GetLookupAreaCodeByCountryRtnType","displayField":"caption","displayValue":""}, {}, {
 								binding: ["wm.Binding", {}, {}, {
 									wire: ["wm.Wire", {"expression":undefined,"source":"app.areaCodeData","targetProperty":"dataSet"}, {}],
 									wire1: ["wm.Wire", {"expression":undefined,"source":"app.areaCodeData.areacode","targetProperty":"dataValue"}, {}]
@@ -204,7 +204,7 @@ NewFactory.widgets = {
 			}],
 			layBank: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Bankinformationen","horizontalAlign":"left","margin":"5","padding":"5","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 				pnlNoBankInfo: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
-					cbxNoBankInfo: ["wm.Checkbox", {"caption":"keine Bankinformationen","captionAlign":"left","captionPosition":"right","captionSize":"170px","displayValue":false,"emptyValue":"false","height":"100%","width":"170px"}, {"onchange":"cbxNoBankInfoChange"}]
+					cbxNoBankInfo: ["wm.Checkbox", {"caption":"keine Bankinformationen","captionAlign":"left","captionPosition":"right","captionSize":"170px","dataValue":false,"displayValue":false,"emptyValue":"false","height":"100%","width":"170px"}, {"onchange":"cbxNoBankInfoChange"}]
 				}],
 				pnlBankLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlBasicBankData: ["wm.FancyPanel", {"title":"Bank"}, {}, {
@@ -218,7 +218,7 @@ NewFactory.widgets = {
 			}],
 			layInfo: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Information","horizontalAlign":"left","margin":"5","padding":"5","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 				pnlNoInfo: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
-					cbxNoInfo: ["wm.Checkbox", {"caption":"keine Informationen","captionAlign":"left","captionPosition":"right","captionSize":"170px","displayValue":false,"emptyValue":"false","height":"100%","width":"170px"}, {"onchange":"cbxNoInfoChange"}]
+					cbxNoInfo: ["wm.Checkbox", {"caption":"keine Informationen","captionAlign":"left","captionPosition":"right","captionSize":"170px","dataValue":false,"displayValue":false,"emptyValue":"false","height":"100%","width":"170px"}, {"onchange":"cbxNoInfoChange"}]
 				}],
 				pnlInfoLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
 					pnlFreeText: ["wm.FancyPanel", {"title":"Freitext"}, {}, {
@@ -228,7 +228,7 @@ NewFactory.widgets = {
 			}],
 			layPhoto: ["wm.Layer", {"border":"1","borderColor":"#333333","caption":"Bildmaterial","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 				pnlNoPhoto: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
-					cbxNoPhoto: ["wm.Checkbox", {"caption":"kein Bildmaterial","captionAlign":"left","captionPosition":"right","captionSize":"170px","displayValue":false,"emptyValue":"false","height":"100%","width":"170px"}, {"onchange":"cbxNoPhotoChange"}]
+					cbxNoPhoto: ["wm.Checkbox", {"caption":"kein Bildmaterial","captionAlign":"left","captionPosition":"right","captionSize":"170px","dataValue":false,"displayValue":false,"emptyValue":"false","height":"100%","width":"170px"}, {"onchange":"cbxNoPhotoChange"}]
 				}],
 				pnlPhotoLayout: ["wm.Panel", {"height":"100%","horizontalAlign":"left","verticalAlign":"top","width":"100%"}, {}, {
 					pnlChoosePhoto: ["wm.FancyPanel", {"innerHorizontalAlign":"center","title":"Datei auswählen"}, {}, {

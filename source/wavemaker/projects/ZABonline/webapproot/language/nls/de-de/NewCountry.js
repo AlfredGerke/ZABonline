@@ -1,6 +1,6 @@
 {
-  "ADD_NEWCOUNTRYCODES_SUCCEEDED": "",
-  "INSERT_BY_NEWCOUNTRYCODES_FAILD": "",
+  "ADD_NEWCOUNTRYCODES_SUCCEEDED": "Anlegen von L&auml;nderkennungen erfolgreich durchgef&uuml;hrt!",
+  "INSERT_BY_NEWCOUNTRYCODES_FAILD": "Anlegen von L&auml;nderkennungen nicht erfolgreich!",
   "CAPTION_CATALOG": "L&auml;nderkennung",
   "REG_EXPR_NO_EXPR": ".*",
   "ERROR_MSG_BY_INIT_SELECTMENU": "Einige Auswahllisten besitzen unter Umst&auml;nden keine Startwerte!",

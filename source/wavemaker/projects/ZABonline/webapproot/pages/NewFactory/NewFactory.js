@@ -340,23 +340,28 @@ dojo.declare("NewFactory", wm.Page, {
     btnAddDatasheetClick: function(inSender) {
         //code kommt noch
     },
+    refreshByAddCatalogItem: function() {
+        return function(scope, catalog) {
+            scope.controller.onRefreshLookupByTarget(catalog, 1);
+        };
+    },
     btnAddAddressTypeClick: function(inSender) {
-        //code kommt noch
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'ADDRESS_TYPE'}", this.refreshByAddCatalogItem(), app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_ADDRESS_TYPE"));
     },
     btnFindAddresstypeClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'addressType', callback: 'onGetResultBySearch'}");
     },
     btnFindContactTypeClick: function(inSender) {
-        //code kommt noch
+        this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'areaCode', callback: 'onGetResultBySearch'}");
     },
     btnFindAreaCodeClick: function(inSender) {
         this.controller.showSearch(this, "{kind: 1000,  mode: 0, find: 'areaCode', callback: 'onGetResultBySearch'}");
     },
     btnAddContactTypeClick: function(inSender) {
-        //code kommt noch
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 0, page: 'NewCatalogItem', catalog: 'CONTACT_TYPE'}", this.refreshByAddCatalogItem(), app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_CONTACT_TYPE"));
     },
     btnAddAreaCodeClick: function(inSender) {
-        //code kommt noch
+        this.controller.showCatalogItem(this, "{kind: 1001, mode: 1, page: 'NewCatalogItem', catalog: 'AREA_CODE'}", this.refreshByAddCatalogItem(), app.getDictionaryItem("CAPTION_ADDCATALOG_TITLE_AREA_CODE"));
     },
     _end: 0
 });
