@@ -14,7 +14,7 @@ Main.widgets = {
 	invalidateSessionVar: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"invalidateSession","service":"MiscellaneousAnonym"}, {"onError":"invalidateSessionVarError"}, {
 		input: ["wm.ServiceInput", {"type":"invalidateSessionInputs"}, {}]
 	}],
-	dlgWarningOnStart: ["wm.GenericDialog", {"button1Caption":"Beenden","button1Close":true,"button2Caption":"Einrichten","desktopHeight":"107px","height":"107px","title":"Warnung","userPrompt":"ZABonline läßt sich nicht einrichten..."}, {"onButton2Click":"dlgWarningOnStartButton2Click","onClose":"dlgWarningOnStartClose"}],
+	dlgWarningOnStart: ["wm.GenericDialog", {"button1Caption":"Beenden","button1Close":true,"button2Caption":"Einrichten","desktopHeight":"107px","height":"96px","title":"Warnung","userPrompt":"ZABonline läßt sich nicht einrichten..."}, {"onButton2Click":"dlgWarningOnStartButton2Click","onClose":"dlgWarningOnStartClose"}],
 	dlgWarningOnConnect: ["wm.GenericDialog", {"desktopHeight":"75px","height":"74px","noEscape":false,"title":"Warnung","userPrompt":"Keine Berechtigung für eine Anmeldung vorhanden!"}, {"onClose":"dlgWarningOnConnectClose"}],
 	dlgErrorOnLogout: ["wm.GenericDialog", {"button1Caption":"Abmelden","button1Close":true,"button2Caption":"Abbruch","button2Close":true,"desktopHeight":"65px","enterKeyIsButton":"1","height":"107px","title":"titel"}, {"onButton1Click":"closeSessionVar","onButton2Click":"templateLogoutVar","onClose":"dlgErrorOnLogout.hide"}],
 	lbxMain: ["wm.Layout", {"autoScroll":false,"disabled":true,"horizontalAlign":"left","verticalAlign":"top","width":"1434px"}, {}, {
@@ -76,25 +76,25 @@ Main.widgets = {
 				btnLogout: ["wm.Button", {"_classes":{"domNode":["wm_FontSizePx_10px"]},"caption":"Abmelden","height":"100%","margin":"2"}, {"onclick":"closeSessionVar"}]
 			}]
 		}],
-		pnlDesctop: ["wm.Panel", {"disabled":true,"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
-			pnlOutline: ["wm.EmphasizedContentPanel", {"disabled":true,"height":"100%","horizontalAlign":"left","margin":"2","verticalAlign":"top","width":"200px"}, {}, {
-				grpLayers: ["wm.AccordionLayers", {"clientBorderColor":"#ffffff","defaultLayer":0,"disabled":true}, {}, {
+		pnlDesctop: ["wm.Panel", {"height":"100%","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}, {
+			pnlOutline: ["wm.EmphasizedContentPanel", {"height":"100%","horizontalAlign":"left","margin":"2","verticalAlign":"top","width":"200px"}, {}, {
+				grpLayers: ["wm.AccordionLayers", {"autoScroll":true,"clientBorderColor":"#ffffff","defaultLayer":0}, {}, {
 					layMember: ["wm.Layer", {"autoScroll":true,"borderColor":"#ffffff","caption":"Mitglieder","horizontalAlign":"center","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 						conFileAccordionPage: ["wm.PageContainer", {"deferLoad":true,"pageName":"MemberByAccordion","subpageEventlist":{},"subpageMethodlist":{},"subpageProplist":{}}, {}]
 					}],
-					layFile: ["wm.Layer", {"borderColor":"#ffffff","caption":"Akten","horizontalAlign":"left","margin":"0","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
+					layFile: ["wm.Layer", {"autoScroll":true,"borderColor":"#ffffff","caption":"Akten","horizontalAlign":"left","margin":"0","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 						conFile: ["wm.PageContainer", {"deferLoad":true}, {}]
 					}],
-					layBilling: ["wm.Layer", {"borderColor":"#ffffff","caption":"Faktura","horizontalAlign":"left","margin":"0","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
+					layBilling: ["wm.Layer", {"autoScroll":true,"borderColor":"#ffffff","caption":"Faktura","horizontalAlign":"left","margin":"0","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 						conBilling: ["wm.PageContainer", {"deferLoad":true}, {}]
 					}],
-					layMasterData: ["wm.Layer", {"borderColor":"#ffffff","caption":"Stammdaten","horizontalAlign":"left","margin":"0","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
+					layMasterData: ["wm.Layer", {"autoScroll":true,"borderColor":"#ffffff","caption":"Stammdaten","horizontalAlign":"left","margin":"0","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 						conMasterData: ["wm.PageContainer", {"deferLoad":true}, {}]
 					}],
-					layMisc: ["wm.Layer", {"borderColor":"#ffffff","caption":"Verschiedenes","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
+					layMisc: ["wm.Layer", {"autoScroll":true,"borderColor":"#ffffff","caption":"Verschiedenes","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 						conMisc: ["wm.PageContainer", {"deferLoad":true}, {}]
 					}],
-					layAdmin: ["wm.Layer", {"borderColor":"#ffffff","caption":"Administrator","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
+					layAdmin: ["wm.Layer", {"autoScroll":true,"borderColor":"#ffffff","caption":"Administrator","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 						conAdmin: ["wm.PageContainer", {"deferLoad":true,"pageName":"AdminByAccordion","subpageEventlist":{},"subpageMethodlist":{},"subpageProplist":{}}, {}]
 					}],
 					layBottomDoNotShow: ["wm.Layer", {"borderColor":"#ffffff","caption":undefined,"horizontalAlign":"left","showing":false,"themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {

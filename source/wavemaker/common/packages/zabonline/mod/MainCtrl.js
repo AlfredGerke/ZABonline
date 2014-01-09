@@ -18,7 +18,7 @@ dojo.declare("MainCtrl", Controller, {
       console.error('ERROR IN showWarningOnConnect:' + e);
     }    
   },
-  enableGUI: function () {    
+  enableGUI: function() {    
     try {
       if (this.globalScope.globalData.globalDataFound()) {
         this.localScope.lbxMain.setDisabled(false);

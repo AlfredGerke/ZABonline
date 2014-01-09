@@ -193,7 +193,7 @@ dojo.declare("NewCountryCodeCtrl", Controller, {
           global.dlgCatalogItem.setTitle(title);         
         }
         
-        this.conHandle = local.connect(global.dlgCatalogItem, "onClose", this, "resetParameter");
+        this.conHandle = local.connect(global.dlgCountryCodes, "onClose", this, "resetParameter");
         
         global.dlgCountryCodes.setPageName(this.catalogParameter.page);
         global.dlgCountryCodes.show();
