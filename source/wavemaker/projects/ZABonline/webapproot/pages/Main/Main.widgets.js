@@ -14,7 +14,7 @@ Main.widgets = {
 	invalidateSessionVar: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"invalidateSession","service":"MiscellaneousAnonym"}, {"onError":"invalidateSessionVarError"}, {
 		input: ["wm.ServiceInput", {"type":"invalidateSessionInputs"}, {}]
 	}],
-	dlgWarningOnStart: ["wm.GenericDialog", {"button1Caption":"Beenden","button1Close":true,"button2Caption":"Einrichten","desktopHeight":"107px","height":"96px","title":"Warnung","userPrompt":"ZABonline läßt sich nicht einrichten..."}, {"onButton2Click":"dlgWarningOnStartButton2Click","onClose":"dlgWarningOnStartClose"}],
+	dlgWarningOnStart: ["wm.GenericDialog", {"button1Caption":"Beenden","button1Close":true,"button2Caption":"Einrichten","desktopHeight":"107px","height":"107px","title":"Warnung","userPrompt":"ZABonline läßt sich nicht einrichten..."}, {"onButton2Click":"dlgWarningOnStartButton2Click","onClose":"dlgWarningOnStartClose"}],
 	dlgWarningOnConnect: ["wm.GenericDialog", {"desktopHeight":"75px","height":"74px","noEscape":false,"title":"Warnung","userPrompt":"Keine Berechtigung für eine Anmeldung vorhanden!"}, {"onClose":"dlgWarningOnConnectClose"}],
 	dlgErrorOnLogout: ["wm.GenericDialog", {"button1Caption":"Abmelden","button1Close":true,"button2Caption":"Abbruch","button2Close":true,"desktopHeight":"65px","enterKeyIsButton":"1","height":"107px","title":"titel"}, {"onButton1Click":"closeSessionVar","onButton2Click":"templateLogoutVar","onClose":"dlgErrorOnLogout.hide"}],
 	lbxMain: ["wm.Layout", {"autoScroll":false,"disabled":true,"horizontalAlign":"left","verticalAlign":"top","width":"1434px"}, {}, {

@@ -108,9 +108,9 @@ Tabelle in eine Java-Entität zu übersetzen.
 Versionen
 ---------
 
-* Wavemaker 6.5.3
+* Wavemaker 6.6.0
 * Firebird 2.5
-* JayBird 2.2.3 (jdbc)
+* JayBird 2.2.4 (jdbc)
 * Java 1.6 (von Wavemaker vorgegeben)
 * Dojo 1.6 (von Wavemaker vorgegeben)
 * Eclipse (JUNO) (Entwicklung des Servers)

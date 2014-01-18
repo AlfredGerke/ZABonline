@@ -16,7 +16,7 @@ import de.zabonline.srv.ZABonlineConstants;
 
 @ExposeToClient
 public class CatalogManagement extends JavaServiceSuperClass {
-
+ 
   private Session session;
 
   public CatalogManagement() {
