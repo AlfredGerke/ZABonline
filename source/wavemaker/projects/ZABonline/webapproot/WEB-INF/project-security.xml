@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:cloud="http://schema.cloudfoundry.org/spring" xmlns:security="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <security:global-method-security pre-post-annotations="enabled"/>
-    <security:http auto-config="false" entry-point-ref="WMSecAuthEntryPoint" use-expressions="true">
-        <security:intercept-url access="isAuthenticated()" pattern="/services/zabonlinedb.json"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/services/addressbookservice.json"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/services/zabonlinesessionmgrservice.json"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/services/zabonlinedbservice.json"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/services/resultstructs.json"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/services/registryservice.json"/>
-        <security:intercept-url access="permitAll" pattern="/services/miscellaneousanonym.json"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/services/miscellaneous.json"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/services/fileuploaddownload.json"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/services/factoryservice.json"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/services/runtimeservice.json"/>
+    <security:http auto-config="false" use-expressions="true" entry-point-ref="WMSecAuthEntryPoint">
+        <security:intercept-url pattern="/**/*" requires-channel="http"/>
+        <security:intercept-url pattern="/services/zabonlinedb.json" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/services/addressbookservice.json" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/services/zabonlinesessionmgrservice.json" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/services/zabonlinedbservice.json" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/services/resultstructs.json" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/services/registryservice.json" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/services/miscellaneousanonym.json" access="permitAll"/>
+        <security:intercept-url pattern="/services/miscellaneous.json" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/services/fileuploaddownload.json" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/services/factoryservice.json" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/services/runtimeservice.json" access="isAuthenticated()"/>
         <security:custom-filter position="FORM_LOGIN_FILTER" ref="WMSecAuthFilter"/>
-        <security:intercept-url access="permitAll" pattern="/app.css"/>
-        <security:intercept-url access="permitAll" pattern="/config.js"/>
-        <security:intercept-url access="permitAll" pattern="/types.js"/>
-        <security:intercept-url access="permitAll" pattern="/login.html"/>
-        <security:intercept-url access="permitAll" pattern="/pages/login/**"/>
-        <security:intercept-url access="permitAll" pattern="/securityservice.json"/>
-        <security:intercept-url access="permitAll" pattern="/j_spring_security_check"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/*.upload"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/*.download"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/index.html"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/pages/**"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/*.json"/>
-        <security:intercept-url access="isAuthenticated()" pattern="/*/*.json"/>
+        <security:intercept-url pattern="/app.css" access="permitAll"/>
+        <security:intercept-url pattern="/config.js" access="permitAll"/>
+        <security:intercept-url pattern="/types.js" access="permitAll"/>
+        <security:intercept-url pattern="/login.html" access="permitAll"/>
+        <security:intercept-url pattern="/pages/login/**" access="permitAll"/>
+        <security:intercept-url pattern="/securityservice.json" access="permitAll"/>
+        <security:intercept-url pattern="/j_spring_security_check" access="permitAll"/>
+        <security:intercept-url pattern="/*.upload" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/*.download" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/index.html" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/pages/**" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/*.json" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/*/*.json" access="isAuthenticated()"/>
     </security:http>
     <bean class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" id="WMSecAuthFilter">
         <property name="authenticationSuccessHandler" ref="successHandler"/>
@@ -44,19 +45,19 @@
     <security:authentication-manager>
         <security:authentication-provider>
             <security:user-service>
-                <security:user authorities="ROLE_dummy" name="dummy" password="dummy"/>
+                <security:user name="dummy" password="dummy" authorities="ROLE_dummy"/>
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>
-    <security:authentication-manager alias="authenticationManagerDemo" id="authenticationManagerDemo">
+    <security:authentication-manager id="authenticationManagerDemo" alias="authenticationManagerDemo">
         <security:authentication-provider>
             <security:user-service>
-                <security:user authorities="ROLE_admin" name="admin" password="admin"/>
-                <security:user authorities="ROLE_user" name="user" password="user"/>
+                <security:user name="admin" password="admin" authorities="ROLE_admin"/>
+                <security:user name="user" password="user" authorities="ROLE_user"/>
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>
-    <security:authentication-manager alias="authenticationManagerDB" id="authenticationManagerDB">
+    <security:authentication-manager id="authenticationManagerDB" alias="authenticationManagerDB">
         <security:authentication-provider user-service-ref="jdbcDaoImpl"/>
     </security:authentication-manager>
     <bean class="com.wavemaker.runtime.security.EnhancedJdbcDaoImpl" id="jdbcDaoImpl">
@@ -95,14 +96,14 @@
         <constructor-arg value="ldap://adserver.wavemaker.com/"/>
         <property name="convertSubErrorCodesToExceptions" value="true"/>
     </bean>
-    <security:authentication-manager alias="authenticationManagerAD" id="authenticationManagerAD">
+    <security:authentication-manager id="authenticationManagerAD" alias="authenticationManagerAD">
         <security:authentication-provider ref="adAuthProvider"/>
     </security:authentication-manager>
     <security:ldap-server url="ldap://localhost:389/dc=wavemaker,dc=vmware,dc=com"/>
-    <security:authentication-manager alias="authenticationManagerLDAP" id="authenticationManagerLDAP">
-        <security:ldap-authentication-provider role-prefix="ROLE_" user-search-filter="(cn={0})"/>
+    <security:authentication-manager id="authenticationManagerLDAP" alias="authenticationManagerLDAP">
+        <security:ldap-authentication-provider user-search-filter="(cn={0})" role-prefix="ROLE_"/>
     </security:authentication-manager>
-    <security:authentication-manager alias="authenticationManagerLDAPwithDB" id="authenticationManagerLDAPwithDB">
+    <security:authentication-manager id="authenticationManagerLDAPwithDB" alias="authenticationManagerLDAPwithDB">
         <security:authentication-provider ref="ldapAuthProvider"/>
     </security:authentication-manager>
     <bean class="org.springframework.security.ldap.DefaultSpringSecurityContextSource" id="contextSource">

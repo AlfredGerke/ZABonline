@@ -42,7 +42,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\TitelLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\Utils.js
 				..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
-		-doc
+		+doc
 			..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
 		-hibernate_xml_anpassen
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\project-managers.xml
@@ -184,9 +184,10 @@ ZABonline
 8=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js
 9=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewUser.js
 10=..\..\wavemaker\common\packages\zabonline\mod\MainCtrl.js
+11=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\MainCtrl.js
+Selected=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
 [..\..\wavemaker\common\packages\zabonline\mod\Controller.js]
 TopLine=71
 Caret=13,80
@@ -220,3 +221,6 @@ Caret=72,45
 [..\..\wavemaker\common\packages\zabonline\mod\MainCtrl.js]
 TopLine=1
 Caret=49,4
+[..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt]
+TopLine=7
+Caret=10,38

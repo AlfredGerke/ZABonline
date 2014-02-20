@@ -33,7 +33,14 @@ Hibernate-Dateien:
 6. trunk\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\WEB-INF\classes\com\zabonlinedb\data\app-queries.ql.xml
   Eintrag für Queries (Services) (s. Struktur für Details) kann über Wavemaker problemlos erstellt werden wenn Entität (Java-Source) korrekt von WaveMaker erkannt
   
-  
+THE O.A.S.I.S. M.U.D.
+Url: mud.enter-the-oasis.com
+Port: 256
+User: Rubens
+Pass: _1aAbdD@#$%_
+
+
+                     http://goo.gl/7tWwA
 Notizen zum Code:
 1. RegExpression
 1.1 Password
