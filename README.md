@@ -172,7 +172,8 @@ zusätzliche Entwicklungsumgebungen
 
 * [Eclipse](http://www.eclipse.org/webtools/ "Eclipse - Java EE IDE for Web Developers")
 * [PSPad](http://http://www.pspad.com/de/ "PSPad – der ultimative Editor für Softwareentwickler")
-* [IBExpert](http://ibexpert.net/ibe/ "IBExpert - the database experts")
+* [ISQL](http://www.firebirdsql.org/manual/isql-interactive.html/ "ISQL-Commandlinetool")
+* [FlameRobin](http://www.flamerobin.org/ "GUI für Datenbankentwruft/-entwicklung")
 
 ## Eclipse
 Die Java-Sourcen können in einem eigenen Editor von Wavemaker bearbeitet werden. Je 
@@ -191,8 +192,14 @@ gute Alternative angeboten. Der Texteditor ist speziell für Softwareentwickler
 geeignet und unterstützt diverse Programmiersprachen. Natürlich kann jeder andere 
 Editor ebenfalls zur Anwendung kommen.   
 
-## IBExpert
-IBExpert ist ein ideales Entwicklungswerkzeug für die Firebird-Datenbank. Der Editor
-bietet ausnahmslos alle notwendigen Werkzeuge zur Bearbeitung der Datenbank und zur 
-Entwicklung von SQL und PSQL an. So nutzt zum Beispiel der WorkAround für Hibernate-Entities
-den IBExpert um Ergebnismengen in eine separate Textdatei zu sichern.  
+## ISQL
+ISQL ist Teil der Firebird-Installation und dient der Administration der Datenbank. 
+ISQL ist ein Commandlinetool, welches für Einzel- und/oder Batchoperationen verwendet werden kann.
+Besonders die Verarbeitung von Scripten als Batch lässt sich gut mit ISQL realiseren.
+
+## FlameRobin     
+Wenn man auf ein Commandlinetool für die Entwicklung der Datenbank verzichten will, bietet sich
+FlameRobin an. Es ist ein Plattform übergreifendes Tool, welches (fast) alle Befehle, welche über den
+ISQL verarbeitet werden können, in einer GUI anbietet. FlameRobin ist OpenSource und kann ohne Bedenken 
+eingesetzt werden.
+
