@@ -20,8 +20,8 @@ SET SQL DIALECT 3;
 
 SET NAMES WIN1252;
 
-/* An dieser Stelle muss die Client-DLL (Pfad und Name) überprüft werden      */
-SET CLIENTLIB 'C:\Users\Alfred\Programme\Firebird_2_5\bin\fbclient.dll';
+/* An dieser Stelle muss die Client-DLL (Pfad und Name) überprüft werden      
+SET CLIENTLIB 'C:\Users\Alfred\Programme\Firebird_2_5\bin\fbclient.dll';      */
 
 /* An dieser Stelle muss die IP, der Datenbankpfad, Name der Datanbank sowie Benutzerinformationen (User/Password) überführt werden */
 CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'INSTALLER' PASSWORD 'installer';

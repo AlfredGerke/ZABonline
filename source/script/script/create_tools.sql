@@ -19,8 +19,8 @@ SET SQL DIALECT 3;
 
 SET NAMES WIN1252;
 
-/* An dieser Stelle muss die Client-DLL (Pfad und Name) überprüft werden      */
-SET CLIENTLIB 'C:\Users\Alfred\Programme\Firebird_2_5\bin\fbclient.dll';
+/* An dieser Stelle muss die Client-DLL (Pfad und Name) überprüft werden      
+SET CLIENTLIB 'C:\Users\Alfred\Programme\Firebird_2_5\bin\fbclient.dll';      */
 
 /* An dieser Stelle muss die IP, der Datenbankpfad, Name der Datanbank sowie Benutzerinformationen (User/Password) überführt werden */
 CREATE DATABASE '127.0.0.1:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey' PAGE_SIZE 4096 DEFAULT CHARACTER SET WIN1252 COLLATION WIN1252;
@@ -341,6 +341,10 @@ COMMENT ON PROCEDURE SP_CREATE_SIMPLE_INDEX IS
 /* Katalog: ADM_COMMON_IDX_COLUMNS komplett über SP erstellen */
 execute procedure SP_CREATE_ADMIN_CATALOG_TABLE 'ADM_COMMON_IDX_COLUMNS'^
 
+SET TERM ; ^
+COMMIT WORK;
+SET TERM ^ ;
+
 CREATE OR ALTER PROCEDURE SP_CREATE_ALL_SIMPLE_INDEX (
     aownername varchar(31) = 'INSTALLER')
 returns (
@@ -394,6 +398,10 @@ COMMENT ON PROCEDURE SP_CREATE_ALL_SIMPLE_INDEX IS
 
 /* Katalog: ADM_USERVIEW_SOURCES komplett über SP erstellen */
 execute procedure SP_CREATE_ADMIN_CATALOG_TABLE 'ADM_USERVIEW_SOURCES'^
+
+SET TERM ; ^
+COMMIT WORK;
+SET TERM ^ ;
                           
 CREATE OR ALTER PROCEDURE SP_CREATE_USER_VIEW(
   ATABLENAME VARCHAR(32),

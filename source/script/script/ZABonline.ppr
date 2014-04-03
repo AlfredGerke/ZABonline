@@ -12,12 +12,12 @@ ProjectFilesOnly=0
 [Project tree]
 ZABonline
 	+Ordner
-		+common
+		-common
 			-crypt
 				..\..\wavemaker\common\packages\zabonline\crypt\SHA512.js
 			-extend
 				..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js
-			+mod
+			-mod
 				..\..\wavemaker\common\packages\zabonline\mod\AddressTypeLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\ContactTypeLookup.js
@@ -42,14 +42,14 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\TitelLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\Utils.js
 				..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
-		+doc
+		-doc
 			..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
 		-hibernate_xml_anpassen
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\project-managers.xml
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\designtime\servicedef.xml
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\src\ZABonlineDB.spring.xml
-		+language
+		-language
 			-de
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\app.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\Login.js
@@ -139,7 +139,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\ShowImpressum\ShowImpressum.js
 		-ressourcen
 			-javascript
-		-SQL
+		+SQL
 			-Data
 				data_0001.sql
 				data_0002.sql
@@ -173,54 +173,26 @@ ZABonline
 		-WEB-INF
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 [Open project files]
-0=..\..\wavemaker\common\packages\zabonline\mod\Controller.js
-1=..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js
-2=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
-3=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js
-4=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
-5=..\..\wavemaker\common\packages\zabonline\mod\NewTenantCtrl.js
-6=..\..\wavemaker\common\packages\zabonline\mod\NewFactoryCtrl.js
-7=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCountry.js
-8=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js
-9=..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewUser.js
-10=..\..\wavemaker\common\packages\zabonline\mod\MainCtrl.js
-11=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
+0=batch.sql
+1=create_tools.sql
+2=create_hibernate_workaround.sql
+3=make.bat
+4=create_db.sql
 [Selected Project Files]
 Main=
-Selected=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
-[..\..\wavemaker\common\packages\zabonline\mod\Controller.js]
-TopLine=71
-Caret=13,80
-[..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js]
-TopLine=157
-Caret=62,196
-[..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js]
-TopLine=240
-Caret=95,277
-[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js]
-TopLine=450
-Caret=114,464
-[..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js]
-TopLine=199
-Caret=5,232
-[..\..\wavemaker\common\packages\zabonline\mod\NewTenantCtrl.js]
-TopLine=236
-Caret=64,242
-[..\..\wavemaker\common\packages\zabonline\mod\NewFactoryCtrl.js]
-TopLine=168
-Caret=57,168
-[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewCountry.js]
+Selected=batch.sql
+[batch.sql]
 TopLine=1
-Caret=71,3
-[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewAddress.js]
-TopLine=67
-Caret=84,95
-[..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\NewUser.js]
-TopLine=31
-Caret=72,45
-[..\..\wavemaker\common\packages\zabonline\mod\MainCtrl.js]
+Caret=18,39
+[create_tools.sql]
+TopLine=250
+Caret=1,153
+[create_hibernate_workaround.sql]
+TopLine=1463
+Caret=60,39
+[make.bat]
 TopLine=1
-Caret=49,4
-[..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt]
-TopLine=7
-Caret=10,38
+Caret=13,1
+[create_db.sql]
+TopLine=44
+Caret=33,176
