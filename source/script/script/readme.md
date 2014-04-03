@@ -1,12 +1,12 @@
 Datenbank
 =========
 
-Aufbau des Datenmodelles über SQL-Scripte und dem IBExpert
+Aufbau des Datenmodelles über SQL-Scripte und ISQL / FlameRobin
 
 **Inhaltsübersicht:**
 
 - Firebird
-- IBExpert
+- ISQL / FlameRobin
 - Scripte
 - Hibernate
 - Zugriffrechte     
