@@ -19,20 +19,20 @@ Scripten Sprachelemente verwendet werden, die zum Teil erst mit der Version 2.5
 eingeführt wurden. (z.B.: `CREATE USER`)
 
 
-IBExpert
---------
-Die Scripte sind für das Script-Interface für IBExpert optimiert.      
+ISQL / FlameRobin
+-----------------
+Die Scripte werde für ISQL und FlameRobin optimiert.      
 Folgende Befehle werden immer zu Anfang in jedem Script aufgeführt:
 
 * `SET SQL DIALECT 3`
 * `SET NAMES WIN1252`
-* `SET CLIENTLIB '<Pfadeangabe>\fbclient.dll';` 
 * `CREATE DATABASE '<IP des Servers>:<Alias>' USER '<Benutzer>' PASSWORD '<Password>' PAGE_SIZE <Size> DEFAULT CHARACTER SET WIN1252 COLLATION WIN1252;`
 * `CONNECT '<IP des Servers>:<Alias>' USER '<Benutzer>' PASSWORD '<Password>';` 
 
+Die Befehle `CREATE DATABASE` und `CONNECT` werden natürlich niemals gemeinsam in einem Script stehen, sondern nur entweder/oder. Tatsächlich wird `CREATE DATABASE` nur ein einzieges Mal verwendet, danach wird nur noch `CONNECT` eingesetzt.
+
 Bestimmte Angaben wie IP des Servers oder DB-Alias müssen natürlich beim klonen 
 auf die lokale Umgebung angepasst werden.
-
 
 Scripte
 -------
