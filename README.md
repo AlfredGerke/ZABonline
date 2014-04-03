@@ -171,8 +171,8 @@ zusätzliche Entwicklungsumgebungen
 ----------------------------------
 
 * [Eclipse](http://www.eclipse.org/webtools/ "Eclipse - Java EE IDE for Web Developers")
-* [PSPad](http://http://www.pspad.com/de/ "PSPad – der ultimative Editor für Softwareentwickler")
-* [ISQL](http://www.firebirdsql.org/manual/isql-interactive.html/ "ISQL-Commandlinetool")
+* [PSPad](http://www.pspad.com/de/ "PSPad – der ultimative Editor für Softwareentwickler")
+* [ISQL](http://www.firebirdsql.org/manual/isql-interactive.html "ISQL-Commandlinetool")
 * [FlameRobin](http://www.flamerobin.org/ "GUI für Datenbankentwruft/-entwicklung")
 
 ## Eclipse
