@@ -19,7 +19,7 @@
 /*                                                                               
 /*******************************************************************************
 /* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.5.x   
-/* - Das Script ist für die Ausführung im IBExpert erstellt worden              
+/* - Das Script ist für die Ausführung im ISQL erstellt worden              
 /* - Ein möglicher Connect zur ZABonline-DB sollte geschlossen werden   
 /******************************************************************************/
 /* History: 2013-10-19
@@ -33,8 +33,7 @@ SET SQL DIALECT 3;
 
 SET NAMES WIN1252;
 
-/* An dieser Stelle muss die Client-DLL (Pfad und Name) überprüft werden      
-SET CLIENTLIB 'C:\Users\Alfred\Programme\Firebird_2_5\bin\fbclient.dll';      */
+SET AUTODDL;
 
 /* An dieser Stelle muss die IP, der Datenbankpfad, Name der Datanbank sowie Benutzerinformationen (User/Password) überführt werden */
 CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey';
@@ -1368,7 +1367,7 @@ begin
   suspend;
   sourcecode = '/* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.5.x';
   suspend;     
-  sourcecode = '/* - Das Script ist für die Ausführung im IBExpert erstellt worden';
+  sourcecode = '/* - Das Script ist für die Ausführung im ISQL erstellt worden';
   suspend;                
   sourcecode = '/* - Ein möglicher Connect zur ZABonline-DB sollte geschlossen werden';
   suspend;     

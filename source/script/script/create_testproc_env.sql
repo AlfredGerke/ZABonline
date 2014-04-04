@@ -5,7 +5,7 @@
 /*                                                                              
 /*******************************************************************************
 /* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.5.x   
-/* - Das Script ist für die Ausführung im IBExpert erstellt worden              
+/* - Das Script ist für die Ausführung im ISQL erstellt worden              
 /* - Ein möglicher Connect zur ZABonline-DB sollte geschlossen werden   
 /******************************************************************************/
 /* History: 2012-05-06
@@ -19,8 +19,7 @@ SET SQL DIALECT 3;
 
 SET NAMES WIN1252;
 
-/* An dieser Stelle muss die Client-DLL (Pfad und Name) überprüft werden      
-SET CLIENTLIB 'C:\Users\Alfred\Programme\Firebird_2_5\bin\fbclient.dll';      */
+SET AUTODDL;
 
 /* An dieser Stelle muss die IP, der Datenbankpfad, Name der Datanbank sowie Benutzerinformationen (User/Password) überführt werden */
 CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'INSTALLER' PASSWORD 'installer'; 
@@ -139,6 +138,8 @@ COMMENT ON COLUMN DATA_BY_TESTPROC.CHG_USER IS
 
 COMMENT ON COLUMN DATA_BY_TESTPROC.CHG_DATE IS
 'Geändert am';
+
+COMMIT WORK;
 
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'DATA_BY_TESTPROC';

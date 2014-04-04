@@ -49,14 +49,14 @@ input 'create_json.sql';
 
 input 'create_interface.sql';
 
-/*input 'create_db.sql';
+input 'create_db.sql';
 input 'create_person.sql';
 input 'create_testproc_env.sql';
 input 'create_factory.sql';
 input 'create_admin.sql';
 input 'create_find.sql';
 
-input 'create_implementation.sql';*/
+input 'create_implementation.sql';
 
 /******************************************************************************/
 /*                                  Modify Schema
@@ -65,7 +65,7 @@ input 'create_implementation.sql';*/
 /* Datenmodell per SP durchführen. z.B.: SP_CREATE_ALL_SIMPLE_INDEXE
 /******************************************************************************/
 
-/*input 'create_simple_indexe.sql';
+input 'create_simple_indexe.sql';
 /*
  * 
  * bis auf weiteres zurückgestellt
@@ -74,7 +74,7 @@ input 'recreate_user_views.sql';
 *
 */
 
-/*input 'create_grant_catalog_properties.sql';
+input 'create_grant_catalog_properties.sql';
 
 /******************************************************************************/
 /*                                  Clean up
@@ -83,7 +83,7 @@ input 'recreate_user_views.sql';
 /* Datenbankobjekte, welche nur für die Installation verwendet werden, entfernen
 /******************************************************************************/
 
-/*input 'clean_up.sql';
+input 'clean_up.sql';
 
 /******************************************************************************/
 /******************************************************************************/

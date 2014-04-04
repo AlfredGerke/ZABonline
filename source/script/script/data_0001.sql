@@ -6,7 +6,7 @@
 /*          Diese Scripte werden zum Testen von SPs verwendet                                                                                                       
 /******************************************************************************/
 /* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.5.x   
-/* - Das Script ist für die Ausführung im IBExpert erstellt worden            
+/* - Das Script ist für die Ausführung im ISQL erstellt worden            
 /* - Ein Connect zur ZABonline-DB muss hergestellt werden 
 /* - Es müssen alle notwendigen Create- und Updatescripte eingespielt worden sein
 /******************************************************************************/

@@ -5,7 +5,7 @@
 /*                                                                              
 /*******************************************************************************
 /* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.5.x   
-/* - Das Script ist für die Ausführung im IBExpert erstellt worden              
+/* - Das Script ist für die Ausführung im ISQL erstellt worden              
 /* - Ein möglicher Connect zur ZABonline-DB sollte geschlossen werden   
 /******************************************************************************/
 /* History: 2012-05-06
@@ -19,8 +19,7 @@ SET SQL DIALECT 3;
 
 SET NAMES WIN1252;
 
-/* An dieser Stelle muss die Client-DLL (Pfad und Name) überprüft werden      
-SET CLIENTLIB 'C:\Users\Alfred\Programme\Firebird_2_5\bin\fbclient.dll';      */
+SET AUTODDL;
 
 /* An dieser Stelle muss die IP, der Datenbankpfad, Name der Datanbank sowie Benutzerinformationen (User/Password) überführt werden */
 CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'INSTALLER' PASSWORD 'installer'; 
@@ -192,6 +191,8 @@ COMMENT ON COLUMN DOCUMENT.CHG_USER IS
 
 COMMENT ON COLUMN DOCUMENT.CHG_DATE IS
 'Geändert am';
+/* Das Erstellen von Tabellen immer committen */
+COMMIT WORK;
 
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'DOCUMENT';
@@ -310,6 +311,8 @@ COMMENT ON COLUMN PERSON.CHG_USER IS
 
 COMMENT ON COLUMN PERSON.CHG_DATE IS
 'Geändert am';
+/* Das Erstellen von Tabellen immer committen */
+COMMIT WORK;
 
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'PERSON';
@@ -321,139 +324,13 @@ execute procedure SP_CREATE_TRIGGER_BU 'PERSON';
 
 /* Katalog: TITEL komplett über SP erstellen */
 execute procedure SP_CREATE_ZABCATALOG 'TITEL';
-
-/*
- *
- * 
-CREATE TABLE TITEL (
-  ID               INTEGER NOT NULL,
-  TAG_ID           INTEGER,  
-  COUNTRY_ID       INTEGER,  
-  CAPTION          VARCHAR(254) NOT NULL,
-  DESCRIPTION      VARCHAR(2000),
-  DONOTDELETE      BOOLEAN,
-  SOFTDEL          BOOLEAN,    
-  CRE_USER         VARCHAR(32) NOT NULL,
-  CRE_DATE         TIMESTAMP NOT NULL,
-  CHG_USER         VARCHAR(32),
-  CHG_DATE         TIMESTAMP    
-);
-
-COMMENT ON TABLE TITEL IS
-'Titelbezeichnungen'; 
-
-COMMENT ON COLUMN TITEL.ID IS
-'Primärschlüssel';
-
-COMMENT ON COLUMN TITEL.TAG_ID IS
-'Fremdschlüssel für Tags';
-
-COMMENT ON COLUMN TITEL.COUNTRY_ID IS
-'Fremdschlüssel für Ländercodes';
-
-COMMENT ON COLUMN TITEL.CAPTION IS
-'Bezeichnung';
-
-COMMENT ON COLUMN TITEL.DESCRIPTION IS
-'Beschreibung';
-
-COMMENT ON COLUMN TITEL.DONOTDELETE IS
-'Löschflag ignorieren';
-
-COMMENT ON COLUMN TITEL.SOFTDEL IS
-'Löschflag';
-
-COMMENT ON COLUMN TITEL.CRE_USER IS
-'Erstellt von';
-
-COMMENT ON COLUMN TITEL.CRE_DATE IS
-'Erstellt am';
-
-COMMENT ON COLUMN TITEL.CHG_USER IS
-'Geändert von';
-
-COMMENT ON COLUMN TITEL.CHG_DATE IS
-'Geändert am';
-
-* Userview anlegen *
-execute procedure SP_CREATE_USER_VIEW 'TITEL';
-* Sequence anlegen *
-execute procedure SP_CREATE_SEQUNECE 'TITEL';
-* Trigger anlegen *
-execute procedure SP_CREATE_TRIGGER_BI 'TITEL';
-execute procedure SP_CREATE_TRIGGER_BU 'TITEL';
-execute procedure SP_CREATE_TRIGGER_BD 'TITEL', 'DONOTDELETE';
-*
-*
-*/
+/* Das Erstellen von Tabellen immer committen */
+COMMIT WORK;
 
 /* Katalog: SALUTATION komplett über SP erstellen */
 execute procedure SP_CREATE_ZABCATALOG 'SALUTATION';
-
-/*
- *
- * 
-CREATE TABLE SALUTATION (
-  ID               INTEGER NOT NULL,
-  TAG_ID           INTEGER,
-  COUNTRY_ID       INTEGER,    
-  CAPTION          VARCHAR(254) NOT NULL,
-  DESCRIPTION      VARCHAR(2000),
-  DONOTDELETE      BOOLEAN,    
-  SOFTDEL          BOOLEAN,    
-  CRE_USER         VARCHAR(32) NOT NULL,
-  CRE_DATE         TIMESTAMP NOT NULL,
-  CHG_USER         VARCHAR(32),
-  CHG_DATE         TIMESTAMP    
-);
-
-COMMENT ON TABLE SALUTATION IS
-'Anredeformen'; 
-
-COMMENT ON COLUMN SALUTATION.ID IS
-'Primärschlüssel';
-
-COMMENT ON COLUMN SALUTATION.TAG_ID IS
-'Fremdschlüssel für Tags';
-
-COMMENT ON COLUMN SALUTATION.COUNTRY_ID IS
-'Fremdschlüssel für Ländercodes';
-
-COMMENT ON COLUMN SALUTATION.CAPTION IS
-'Bezeichnung';
-
-COMMENT ON COLUMN SALUTATION.DESCRIPTION IS
-'Beschreibung';
-
-COMMENT ON COLUMN SALUTATION.DONOTDELETE IS
-'Löschflag ignorieren';
-
-COMMENT ON COLUMN SALUTATION.SOFTDEL IS
-'Löschflag';
-
-COMMENT ON COLUMN SALUTATION.CRE_USER IS
-'Erstellt von';
-
-COMMENT ON COLUMN SALUTATION.CRE_DATE IS
-'Erstellt am';
-
-COMMENT ON COLUMN SALUTATION.CHG_USER IS
-'Geändert von';
-
-COMMENT ON COLUMN SALUTATION.CHG_DATE IS
-'Geändert am';
-
-* Userview anlegen *
-execute procedure SP_CREATE_USER_VIEW 'SALUTATION';
-* Sequence anlegen *
-execute procedure SP_CREATE_SEQUNECE 'SALUTATION';
-* Trigger anlegen *
-execute procedure SP_CREATE_TRIGGER_BI 'SALUTATION';
-execute procedure SP_CREATE_TRIGGER_BU 'SALUTATION';
-execute procedure SP_CREATE_TRIGGER_BD 'SALUTATION', 'DONOTDELETE';
-*
-*
-*/
+/* Das Erstellen von Tabellen immer committen */
+COMMIT WORK;
 
 CREATE TABLE CONTACT (
   ID               INTEGER NOT NULL,
@@ -532,6 +409,8 @@ COMMENT ON COLUMN CONTACT.CHG_USER IS
 
 COMMENT ON COLUMN CONTACT.CHG_DATE IS
 'Geändert am';
+/* Das Erstellen von Tabellen immer committen */
+COMMIT WORK;
 
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'CONTACT';
@@ -543,71 +422,8 @@ execute procedure SP_CREATE_TRIGGER_BU 'CONTACT';
 
 /* Katalog: CONTACT_TYPE komplett über SP erstellen */
 execute procedure SP_CREATE_ZABCATALOG 'CONTACT_TYPE';
-
-/*
- *
- * 
-CREATE TABLE CONTACT_TYPE (
-  ID           INTEGER NOT NULL,
-  TAG_ID       INTEGER,
-  COUNTRY_ID   INTEGER,    
-  CAPTION      VARCHAR(254) NOT NULL,    
-  DESCRIPTION  VARCHAR(2000),
-  DONOTDELETE  BOOLEAN,
-  SOFTDEL      BOOLEAN,    
-  CRE_USER     VARCHAR(32) NOT NULL,
-  CRE_DATE     TIMESTAMP NOT NULL,
-  CHG_USER     VARCHAR(32),
-  CHG_DATE     TIMESTAMP    
-);
-
-COMMENT ON TABLE CONTACT_TYPE IS
-'Typebezeichnung für Kontakte'; 
-
-COMMENT ON COLUMN CONTACT_TYPE.ID IS
-'Primärschlüssel';
-
-COMMENT ON COLUMN CONTACT_TYPE.TAG_ID IS
-'Fremdschlüssel für Tags';
-
-COMMENT ON COLUMN CONTACT_TYPE.COUNTRY_ID IS
-'Fremdschlüssel für Ländercodes';
-
-COMMENT ON COLUMN CONTACT_TYPE.CAPTION IS
-'Typkurzbezeichnung';
-
-COMMENT ON COLUMN CONTACT_TYPE.DESCRIPTION IS
-'Typlangbezeichnung';
-
-COMMENT ON COLUMN CONTACT_TYPE.DONOTDELETE IS
-'Löschflag ignorieren';
-
-COMMENT ON COLUMN CONTACT_TYPE.SOFTDEL IS
-'Löschflag';
-
-COMMENT ON COLUMN CONTACT_TYPE.CRE_USER IS
-'Erstellt von';
-
-COMMENT ON COLUMN CONTACT_TYPE.CRE_DATE IS
-'Erstellt am';
-
-COMMENT ON COLUMN CONTACT_TYPE.CHG_USER IS
-'Geändert von';
-
-COMMENT ON COLUMN CONTACT_TYPE.CHG_DATE IS
-'Geändert am';
-
-* Userview anlegen *
-execute procedure SP_CREATE_USER_VIEW 'CONTACT_TYPE';
-* Sequence anlegen *
-execute procedure SP_CREATE_SEQUNECE 'CONTACT_TYPE';
-* Trigger anlegen *
-execute procedure SP_CREATE_TRIGGER_BI 'CONTACT_TYPE';
-execute procedure SP_CREATE_TRIGGER_BU 'CONTACT_TYPE';
-execute procedure SP_CREATE_TRIGGER_BD 'CONTACT_TYPE', 'DONOTDELETE';
-*
-*
-*/
+/* Das Erstellen von Tabellen immer committen */
+COMMIT WORK;
 
 CREATE TABLE ADDRESS (
   ID                  INTEGER NOT NULL,
@@ -686,6 +502,8 @@ COMMENT ON COLUMN ADDRESS.CHG_USER IS
 
 COMMENT ON COLUMN ADDRESS.CHG_DATE IS
 'Geändert am';
+/* Das Erstellen von Tabellen immer committen */
+COMMIT WORK;
 
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'ADDRESS';
@@ -697,71 +515,8 @@ execute procedure SP_CREATE_TRIGGER_BU 'ADDRESS';
 
 /* Katalog: ADDRESS_TYPE komplett über SP erstellen */
 execute procedure SP_CREATE_ZABCATALOG 'ADDRESS_TYPE';
-
-/*
- *
- * 
-CREATE TABLE ADDRESS_TYPE (
-  ID           INTEGER NOT NULL,
-  TAG_ID       INTEGER,
-  COUNTRY_ID   INTEGER,    
-  CAPTION      VARCHAR(254) NOT NULL,    
-  DESCRIPTION  VARCHAR(2000),
-  DONOTDELETE  BOOLEAN,    
-  SOFTDEL      BOOLEAN,    
-  CRE_USER     VARCHAR(32) NOT NULL,
-  CRE_DATE     TIMESTAMP NOT NULL,
-  CHG_USER     VARCHAR(32),
-  CHG_DATE     TIMESTAMP    
-);
-
-COMMENT ON TABLE ADDRESS_TYPE IS
-'Typbezeichnung für Adressen'; 
-
-COMMENT ON COLUMN ADDRESS_TYPE.ID IS
-'Primärschlüssel';
-
-COMMENT ON COLUMN ADDRESS_TYPE.TAG_ID IS
-'Fremdschlüssel für Tags';
-
-COMMENT ON COLUMN ADDRESS_TYPE.COUNTRY_ID IS
-'Fremdschlüssel für Ländercodes';
-
-COMMENT ON COLUMN ADDRESS_TYPE.CAPTION IS
-'Typkurzbezeichnung';
-
-COMMENT ON COLUMN ADDRESS_TYPE.DESCRIPTION IS
-'Typlangbezeichnung';
-
-COMMENT ON COLUMN ADDRESS_TYPE.DONOTDELETE IS
-'Löschflag ignorieren';
-
-COMMENT ON COLUMN ADDRESS_TYPE.SOFTDEL IS
-'Löschflag';
-
-COMMENT ON COLUMN ADDRESS_TYPE.CRE_USER IS
-'Erstellt von';
-
-COMMENT ON COLUMN ADDRESS_TYPE.CRE_DATE IS
-'Erstellt am';
-
-COMMENT ON COLUMN ADDRESS_TYPE.CHG_USER IS
-'Geändert von';
-
-COMMENT ON COLUMN ADDRESS_TYPE.CHG_DATE IS
-'Geändert am';
-
-* Userview anlegen *
-execute procedure SP_CREATE_USER_VIEW 'ADDRESS_TYPE';
-* Sequence anlegen *
-execute procedure SP_CREATE_SEQUNECE 'ADDRESS_TYPE';
-* Trigger anlegen *
-execute procedure SP_CREATE_TRIGGER_BI 'ADDRESS_TYPE';
-execute procedure SP_CREATE_TRIGGER_BU 'ADDRESS_TYPE';
-execute procedure SP_CREATE_TRIGGER_BD 'ADDRESS_TYPE', 'DONOTDELETE';
-*
-*
-*/
+/* Das Erstellen von Tabellen immer committen */
+COMMIT WORK;
 
 CREATE TABLE BANK (
   ID           INTEGER NOT NULL,
@@ -828,6 +583,8 @@ COMMENT ON COLUMN BANK.CHG_USER IS
 
 COMMENT ON COLUMN BANK.CHG_DATE IS
 'Geändert am';
+/* Das Erstellen von Tabellen immer committen */
+COMMIT WORK;
 
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'BANK';
@@ -836,84 +593,6 @@ execute procedure SP_CREATE_SEQUNECE 'BANK';
 /* Trigger anlegen */
 execute procedure SP_CREATE_TRIGGER_BI 'BANK';
 execute procedure SP_CREATE_TRIGGER_BU 'BANK';
-
-/* Relation zwischen PERSON und CONTACT komplett über SP_CREATE_ZABRELATION erstellen */
-
-/*
- *
- * 
-CREATE TABLE REL_PERSON_CONTACT (
-     PERSON_ID     INTEGER NOT NULL,
-     CONTACT_ID    INTEGER NOT NULL
-);
-
-COMMENT ON TABLE REL_PERSON_CONTACT IS
-'Relation zwischen Personen- und Kontaktdaten';
-
-COMMENT ON COLUMN REL_PERSON_CONTACT.PERSON_ID IS
-'Fremschlüssel aus Person';
-
-COMMENT ON COLUMN REL_PERSON_CONTACT.CONTACT_ID IS
-'Fremschlüssel aus Contact';
-
-* Userview anlegen *
-execute procedure SP_CREATE_USER_VIEW 'REL_PERSON_CONTACT';
-* Relationen haben keine Standardsequence und -trigger *
-*
-*
-*/
-
-/* Relation zwischen PERSON und ADDRESS komplett über SP_CREATE_ZABRELATION erstellen */
-
-/*
- *
- * 
-CREATE TABLE REL_PERSON_ADDRESS (
-     PERSON_ID     INTEGER NOT NULL,
-     ADDRESS_ID    INTEGER NOT NULL
-);
-
-COMMENT ON TABLE REL_PERSON_ADDRESS IS
-'Relation zwischen Personen- und Adressdaten';
-
-COMMENT ON COLUMN REL_PERSON_ADDRESS.PERSON_ID IS
-'Fremschlüssel aus Person';
-
-COMMENT ON COLUMN REL_PERSON_ADDRESS.ADDRESS_ID IS
-'Fremschlüssel aus Address';
-
-* Userview anlegen *
-execute procedure SP_CREATE_USER_VIEW 'REL_PERSON_ADDRESS';
-* Relationen haben keine Standardsequence und -trigger *
-*
-*
-*/
-
-/* Relation zwischen PERSON und BANK komplett über SP_CREATE_ZABRELATION erstellen */
-
-/*
- *
- * 
-CREATE TABLE REL_PERSON_BANK (
-     PERSON_ID     INTEGER NOT NULL,
-     BANK_ID       INTEGER NOT NULL
-);
-
-COMMENT ON TABLE REL_PERSON_BANK IS
-'Relation zwischen Personen- und Bankdaten';
-
-COMMENT ON COLUMN REL_PERSON_BANK.PERSON_ID IS
-'Fremdschlüssel aus Person';
-
-COMMENT ON COLUMN REL_PERSON_BANK.BANK_ID IS
-'Fremschlüssel aus Bank';
-
-* Userview anlegen *
-execute procedure SP_CREATE_USER_VIEW 'REL_PERSON_BANK';
-* Relationen haben keine Standardsequence und -trigger *
-*
-*
-*/
 
 CREATE TABLE CATEGORY (
   ID               INTEGER NOT NULL,
@@ -968,6 +647,8 @@ COMMENT ON COLUMN CATEGORY.CHG_USER IS
 
 COMMENT ON COLUMN CATEGORY.CHG_DATE IS
 'Geändert am';
+/* Das Erstellen von Tabellen immer committen */
+COMMIT WORK;
 
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'CATEGORY';
@@ -977,32 +658,6 @@ execute procedure SP_CREATE_SEQUNECE 'CATEGORY';
 execute procedure SP_CREATE_TRIGGER_BI 'CATEGORY';
 execute procedure SP_CREATE_TRIGGER_BU 'CATEGORY';
 execute procedure SP_CREATE_TRIGGER_BD 'CATEGORY', 'DONOTDELETE';
-
-/* Relation zwischen PERSON und CATEGORY komplett über SP_CREATE_ZABRELATION erstellen */
-
-/*
- *
- * 
-CREATE TABLE REL_PERSON_CATEGORY (
-     PERSON_ID     INTEGER NOT NULL,
-     CATEGORY_ID   INTEGER NOT NULL
-);
-
-COMMENT ON TABLE REL_PERSON_CATEGORY IS
-'Relation zwischen Personen- und Kategiredaten';
-
-COMMENT ON COLUMN REL_PERSON_CATEGORY.PERSON_ID IS
-'Fremdschlüssel aus Person';
-
-COMMENT ON COLUMN REL_PERSON_CATEGORY.CATEGORY_ID IS
-'Fremdschlüssel aus Category';
-
-* Userview anlegen *
-execute procedure SP_CREATE_USER_VIEW 'REL_PERSON_CATEGORY';
-* Relationen haben keine Standardsequence und -trigger *
-*
-*
-*/
 
 COMMIT WORK;
 /******************************************************************************/
@@ -1065,68 +720,8 @@ ALTER TABLE ADDRESS ADD CONSTRAINT FK_ADDRESS_TAG FOREIGN KEY (TAG_ID) REFERENCE
 ALTER TABLE BANK ADD CONSTRAINT FK_BANK_TENANT FOREIGN KEY (TENANT_ID) REFERENCES TENANT(ID) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE BANK ADD CONSTRAINT FK_BANK_TAG FOREIGN KEY (TAG_ID) REFERENCES TAG(ID) ON DELETE SET NULL ON UPDATE CASCADE;
 
-/*
- * wird von SP_CREATE_ZABCATALOG erstellt
- * 
-ALTER TABLE CONTACT_TYPE ADD CONSTRAINT FK_CONTACT_TYPE_TAG FOREIGN KEY (TAG_ID) REFERENCES TAG(ID) ON DELETE SET NULL ON UPDATE CASCADE;
-ALTER TABLE CONTACT_TYPE ADD CONSTRAINT FK_CONTACT_TYPE_COUNTRY FOREIGN KEY (COUNTRY_ID) REFERENCES COUNTRY(ID) ON DELETE SET NULL ON UPDATE CASCADE;
-*
-*
-*/
-
-/*
- * wird von SP_CREATE_ZABCATALOG erstellt
- * 
-ALTER TABLE ADDRESS_TYPE ADD CONSTRAINT FK_ADDRESS_TYPE_TAG FOREIGN KEY (TAG_ID) REFERENCES TAG(ID) ON DELETE SET NULL ON UPDATE CASCADE;
-ALTER TABLE ADDRESS_TYPE ADD CONSTRAINT FK_ADDRESS_TYPE_COUNTRY FOREIGN KEY (COUNTRY_ID) REFERENCES COUNTRY(ID) ON DELETE SET NULL ON UPDATE CASCADE;
-*
-*
-*/
-
-/*
- * wird von SP_CREATE_ZABCATALOG erstellt
- * 
-ALTER TABLE REL_PERSON_CONTACT ADD CONSTRAINT FK_REL_PC_PERSON FOREIGN KEY (PERSON_ID) REFERENCES PERSON(ID) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE REL_PERSON_CONTACT ADD CONSTRAINT FK_REL_PC_CONTACT FOREIGN KEY (CONTACT_ID) REFERENCES CONTACT(ID) ON DELETE CASCADE ON UPDATE CASCADE;
-*
-ALTER TABLE REL_PERSON_ADDRESS ADD CONSTRAINT FK_REL_PA_PERSON FOREIGN KEY (PERSON_ID) REFERENCES PERSON(ID) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE REL_PERSON_ADDRESS ADD CONSTRAINT FK_REL_PA_ADDRESS FOREIGN KEY (ADDRESS_ID) REFERENCES ADDRESS(ID) ON DELETE CASCADE ON UPDATE CASCADE;
-*
-ALTER TABLE REL_PERSON_BANK ADD CONSTRAINT FK_REL_PB_PERSON FOREIGN KEY (PERSON_ID) REFERENCES PERSON(ID) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE REL_PERSON_BANK ADD CONSTRAINT FK_REL_PB_BANK FOREIGN KEY (BANK_ID) REFERENCES BANK(ID) ON DELETE CASCADE ON UPDATE CASCADE;
-*
-*
-*/
-
-/*
- * wird von SP_CREATE_ZABCATALOG erstellt
- * 
-ALTER TABLE TITEL ADD CONSTRAINT FK_TITEL_COUNTRY FOREIGN KEY (COUNTRY_ID) REFERENCES COUNTRY(ID) ON DELETE SET NULL ON UPDATE CASCADE;
-ALTER TABLE TITEL ADD CONSTRAINT FK_TITEL_TAG FOREIGN KEY (TAG_ID) REFERENCES TAG(ID) ON DELETE SET NULL ON UPDATE CASCADE;
-*
-*
-*/
-
-/*
- * wird von SP_CREATE_ZABCATALOG erstellt
- * 
-ALTER TABLE SALUTATION ADD CONSTRAINT FK_SALUTATION_COUNTRY FOREIGN KEY (COUNTRY_ID) REFERENCES COUNTRY(ID) ON DELETE SET NULL ON UPDATE CASCADE;
-ALTER TABLE SALUTATION ADD CONSTRAINT FK_SALUTATION_TAG FOREIGN KEY (TAG_ID) REFERENCES TAG(ID) ON DELETE SET NULL ON UPDATE CASCADE;
-*
-*
-*/
-
 ALTER TABLE CATEGORY ADD CONSTRAINT FK_CATEGORY_COUNTRY FOREIGN KEY (COUNTRY_ID) REFERENCES COUNTRY(ID) ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE CATEGORY ADD CONSTRAINT FK_CATEGORY_TAG FOREIGN KEY (TAG_ID) REFERENCES TAG(ID) ON DELETE SET NULL ON UPDATE CASCADE;
-
-/*
- * wird von SP_CREATE_ZABRELATION erstellen
- * 
-ALTER TABLE REL_PERSON_CATEGORY ADD CONSTRAINT FK_REL_PCA_PERSON FOREIGN KEY (PERSON_ID) REFERENCES PERSON(ID) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE REL_PERSON_CATEGORY ADD CONSTRAINT FK_REL_PCA_CATEGORY FOREIGN KEY (CATEGORY_ID) REFERENCES CATEGORY(ID) ON DELETE CASCADE ON UPDATE CASCADE;
-*
-*
-*/
 
 ALTER TABLE USERS ADD CONSTRAINT FK_USERS_PERSON FOREIGN KEY (PERSON_ID) REFERENCES PERSON(ID) ON DELETE SET NULL ON UPDATE CASCADE;
                                                                                                                                  
@@ -1136,35 +731,6 @@ COMMIT WORK;
 /******************************************************************************/
 
 CREATE UNIQUE INDEX ALT_DOCUMENT ON DOCUMENT(UNIQUE_NAME);
-
-/*
- * wird von SP_CREATE_ZABCATALOG erstellt
- * 
-CREATE UNIQUE INDEX ALT_PERSON_CONTACT ON REL_PERSON_CONTACT (PERSON_ID, CONTACT_ID);
-CREATE UNIQUE INDEX ALT_PERSON_ADDRESS ON REL_PERSON_ADDRESS (PERSON_ID, ADDRESS_ID);
-CREATE UNIQUE INDEX ALT_PERSON_BANK ON REL_PERSON_BANK (PERSON_ID, BANK_ID);
-*
-*
-*/
-
-/* 
- * wird von SP_CREATE_ZABCATALOG erstellt
- *  
- CREATE UNIQUE INDEX ALT_SALUTATION ON SALUTATION(CAPTION);
- CREATE UNIQUE INDEX ALT_TITEL ON TITEL(CAPTION);
- CREATE UNIQUE INDEX ALT_CONTACT_TYPE ON CONTACT_TYPE(CAPTION);
- CREATE UNIQUE INDEX ALT_ADDRESS_TYPE ON ADDRESS_TYPE(CAPTION);
-*
-*
-*/
- 
-/*
- * wird von SP_CREATE_ZABRELATION erstellen
- *  
-CREATE UNIQUE INDEX ALT_PERSON_CATEGORY ON REL_PERSON_CATEGORY (PERSON_ID, CATEGORY_ID);
-*
-*
-*/
 
 COMMIT WORK;
 /******************************************************************************/

@@ -5,7 +5,7 @@
 /*                                                                              
 /*******************************************************************************
 /* - Das Script arbeitet mit Befehlen der SQL-Erweiterung für FireBird 2.5.x   
-/* - Das Script ist für die Ausführung im IBExpert erstellt worden              
+/* - Das Script ist für die Ausführung im ISQL erstellt worden              
 /* - Ein möglicher Connect zur ZABonline-DB sollte geschlossen werden   
 /******************************************************************************/
 /* History: 2012-03-17
@@ -19,8 +19,7 @@ SET SQL DIALECT 3;
 
 SET NAMES WIN1252;
 
-/* An dieser Stelle muss die Client-DLL (Pfad und Name) überprüft werden      
-SET CLIENTLIB 'C:\Users\Alfred\Programme\Firebird_2_5\bin\fbclient.dll';      */
+SET AUTODDL;
 
 /* An dieser Stelle muss die IP, der Datenbankpfad, Name der Datanbank sowie Benutzerinformationen (User/Password) überführt werden */
 CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'INSTALLER' PASSWORD 'installer';
@@ -174,14 +173,18 @@ COMMENT ON COLUMN COUNTRY.CHG_USER IS
 COMMENT ON COLUMN COUNTRY.CHG_DATE IS
 'Geändert am';
 
+COMMIT WORK;
+
 /* Userview anlegen */
-execute procedure SP_CREATE_USER_VIEW 'COUNTRY';                    
+execute procedure SP_CREATE_USER_VIEW 'COUNTRY';
 /* Sequence anlegen */
 execute procedure SP_CREATE_SEQUNECE 'COUNTRY';
 /* Trigger anlegen */
 execute procedure SP_CREATE_TRIGGER_BI 'COUNTRY';
 execute procedure SP_CREATE_TRIGGER_BU 'COUNTRY';
-execute procedure SP_CREATE_TRIGGER_BD 'COUNTRY', 'DONOTDELETE'; 
+execute procedure SP_CREATE_TRIGGER_BD 'COUNTRY', 'DONOTDELETE';
+
+COMMIT WORK;
 
 CREATE TABLE TAG (
   ID           INTEGER NOT NULL,
@@ -217,6 +220,8 @@ COMMENT ON COLUMN TAG.CHG_USER IS
 COMMENT ON COLUMN TAG.CHG_DATE IS
 'Geändert am';
 
+COMMIT WORK;
+
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'TAG';
 /* Sequence anlegen */
@@ -224,6 +229,8 @@ execute procedure SP_CREATE_SEQUNECE 'TAG';
 /* Trigger anlegen */
 execute procedure SP_CREATE_TRIGGER_BI 'TAG';
 execute procedure SP_CREATE_TRIGGER_BU 'TAG';
+
+COMMIT WORK;
 
 CREATE TABLE UPDATEHISTORY (
   ID           INTEGER NOT NULL,   
@@ -267,6 +274,8 @@ COMMENT ON COLUMN UPDATEHISTORY.CHG_USER IS
 COMMENT ON COLUMN UPDATEHISTORY.CHG_DATE IS
 'Geändert am';
 
+COMMIT WORK;
+
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'UPDATEHISTORY';
 /* Sequence anlegen */
@@ -274,6 +283,8 @@ execute procedure SP_CREATE_SEQUNECE 'UPDATEHISTORY';
 /* Trigger anlegen */
 execute procedure SP_CREATE_TRIGGER_BI 'UPDATEHISTORY';
 execute procedure SP_CREATE_TRIGGER_BU 'UPDATEHISTORY';
+
+COMMIT WORK;
 
 CREATE TABLE TENANT (
   ID                   INTEGER NOT NULL,
@@ -333,6 +344,8 @@ COMMENT ON COLUMN TENANT.CHG_USER IS
 COMMENT ON COLUMN TENANT.CHG_DATE IS
 'Geändert am';
 
+COMMIT WORK;
+
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'TENANT';
 /* Sequence anlegen */
@@ -341,6 +354,8 @@ execute procedure SP_CREATE_SEQUNECE 'TENANT';
 execute procedure SP_CREATE_TRIGGER_BI 'TENANT';
 execute procedure SP_CREATE_TRIGGER_BU 'TENANT';
 execute procedure SP_CREATE_TRIGGER_BD 'TENANT', 'DONOTDELETE';
+
+COMMIT WORK;
 
 CREATE TABLE ROLES (
   ID                  INTEGER NOT NULL,
@@ -444,6 +459,8 @@ COMMENT ON COLUMN ROLES.CHG_USER IS
 COMMENT ON COLUMN ROLES.CHG_DATE IS
 'Geändert am';
 
+COMMIT WORK;
+
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'ROLES';
 /* Sequence anlegen */
@@ -452,6 +469,8 @@ execute procedure SP_CREATE_SEQUNECE 'ROLES';
 execute procedure SP_CREATE_TRIGGER_BI 'ROLES';
 execute procedure SP_CREATE_TRIGGER_BU 'ROLES';
 execute procedure SP_CREATE_TRIGGER_BD 'ROLES', 'DONOTDELETE';
+
+COMMIT WORK;
 
 CREATE TABLE REGISTRY (
   KEYNAME  VARCHAR(256) NOT NULL,    
@@ -475,9 +494,13 @@ COMMENT ON COLUMN REGISTRY.IDENT IS
 COMMENT ON COLUMN REGISTRY."VALUE" IS
 'Datenwert';
 
+COMMIT WORK;
+
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'REGISTRY';
 /* Die Registry hat keine Standardsequence und -trigger */
+
+COMMIT WORK;
 
 CREATE TABLE SESSION (
   ID            INTEGER NOT NULL,        
@@ -541,6 +564,8 @@ COMMENT ON COLUMN SESSION.CHG_USER IS
 COMMENT ON COLUMN SESSION.CHG_DATE IS
 'Geändert am';
 
+COMMIT WORK;
+
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'SESSION';
 /* Sequence anlegen */
@@ -548,6 +573,8 @@ execute procedure SP_CREATE_SEQUNECE 'SESSION';
 /* Trigger anlegen */
 execute procedure SP_CREATE_TRIGGER_BI 'SESSION';
 execute procedure SP_CREATE_TRIGGER_BU 'SESSION';
+
+COMMIT WORK;
 
 CREATE TABLE USERS (
   ID           INTEGER NOT NULL,
@@ -619,6 +646,8 @@ COMMENT ON COLUMN USERS.CHG_USER IS
 COMMENT ON COLUMN USERS.CHG_DATE IS
 'Geändert am';
 
+COMMIT WORK;
+
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'USERS';
 /* Sequence anlegen */
@@ -627,6 +656,8 @@ execute procedure SP_CREATE_SEQUNECE 'USERS';
 execute procedure SP_CREATE_TRIGGER_BI 'USERS';
 execute procedure SP_CREATE_TRIGGER_BU 'USERS';
 execute procedure SP_CREATE_TRIGGER_BD 'USERS', 'DONOTDELETE';
+
+COMMIT WORK;
 
 CREATE TABLE DATATYPE(
   ID           INTEGER NOT NULL,
@@ -673,6 +704,8 @@ COMMENT ON COLUMN DATATYPE.CHG_USER IS
 
 COMMENT ON COLUMN DATATYPE.CHG_DATE IS
 'Geändert am';
+
+COMMIT WORK;
 
 /* Userview anlegen */
 execute procedure SP_CREATE_USER_VIEW 'DATATYPE';
