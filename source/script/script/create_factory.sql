@@ -845,6 +845,8 @@ end^
 COMMENT ON PROCEDURE SP_GET_FIX_TABLENAME_BY_IDENT IS
 'Ermittelt den festen Namensanteil einer zu generierenden Tabelle'^
 
+COMMIT WORK^
+
 execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN', 'EXECUTE', 'SP_GET_FIX_TABLENAME_BY_IDENT'^
 
 SET TERM ; ^

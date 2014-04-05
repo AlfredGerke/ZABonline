@@ -16,7 +16,7 @@ dojo.declare("ZABonline", wm.Application, {
 	"projectSubVersion": "Alpha1", 
 	"projectVersion": 1, 
 	"promptChromeFrame": "chromeframe.html", 
-	"sessionExpirationHandler": undefined, 
+	"sessionExpirationHandler": "nothing", 
 	"studioVersion": "6.6.0.RELEASE", 
 	"tabletMain": "", 
 	"theme": "common.themes.sae_wireframe_1", 

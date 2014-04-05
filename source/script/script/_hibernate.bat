@@ -1,0 +1,1 @@
+isql input create_hibernate_script_interface.sql;
