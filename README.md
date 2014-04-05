@@ -24,10 +24,10 @@ Aufbau einer Web-Anwendung zu sammeln.
     
 Folgende Punkte sind dabei besonders zu beachten:
 
-* ZABonline solle eine klassische J2EE-Anwendung werden 
+* ZABonline sollte eine klassische J2EE-Anwendung werden 
 * Client-Code soll browser-zentriert ablaufen 
 * Der Browser ist immer Plattform für die Anwendung
-* Es sollen hosted Code und packaged Code zum Einsatz kommen
+* Es soll hosted Code und packaged Code zum Einsatz kommen
 * Es soll ein Mobile-Interface geben (7- und 10-Zoll)
 * Am Ende soll eine funktionsfähige Mitgliederverwaltung stehen   
 
@@ -41,7 +41,7 @@ Wavemaker
 Als zentrales Werkzeug für die Entwicklung des Clients und der Einbindung von 
 Webservices sowie dem Aufbau des Servers wird [Wavemaker](http://http://www.wavemaker.com/ "WaveMaker") verwendet. Beim Server handelt es sich 
 um einen Tomcat-Server. Allerdings unterstützt Wavemaker auch andere Server. 
-Anwendung welche mit Wavemaker erstellt werden sind grundsätzlich in jeder Standard J2EE-Umgebung lauffähig.
+Anwendung welche mit Wavemaker erstellt werden, sind grundsätzlich in jeder Standard J2EE-Umgebung lauffähig.
 Um die Entwicklung des Servers zu vereinfachen wird Eclipse (JUNO) eingesetzt.   
 
 Hauptgründe warum Wavemaker gewählt wurde:
@@ -49,7 +49,7 @@ Hauptgründe warum Wavemaker gewählt wurde:
 * Wird kontinuierlich weiterentwickelt
 * Mobile Interfaces können entwickelt werden
 * Drag und Drop für die Erstellung des Clients
-* Weitestgehende automatisierung der Kommunikation zwischen Client und Browser
+* Weitestgehende automatisierung der Kommunikation zwischen Client(Browser) und Server
 * Dojo wird als JavaScript-Library eingesetzt
 * Unterstützt sehr gut browser-zentrierten Code
  
@@ -82,7 +82,7 @@ Folgende primäre Einschränkungen sind zu beachten:
 * Kein Löschrecht
 * Keinen Zugriff auf DDL
  
-Daten werden über speziellen Views, Standard-Views genannt, bearbeitet. Standardviews 
+Daten werden über spezielle Views, Standard-Views genannt, bearbeitet. Standardviews 
 bieten die Möglichkeit auf ein Select, Update und Insert. Es wird kein Delete
 zugelassen, vielmehr besitzt jedes Schema ein Deleteflag.         
   
@@ -97,7 +97,7 @@ einzelnen Tabellen separat übersetzen. Es gibt zwar die Möglichkeit eine Entit
 von Hand zu erstellen, dies kann aber je nach Umfang der Tabelle erheblich an Zeit 
 kosten.    
 Um das Problem zu lösen wird eine Sammlung von SPs (StoredProcedures) eingeführt,
-die es ermöglichen über einen SQL-Script-Editor aus der Datenbank eine beliebige
+die es ermöglichen über den ISQL aus der Datenbank eine beliebige
 Tabelle in eine Java-Entität zu übersetzen.  
 
 Über folgendes Script kann eine Java-Entität erstellt werden:  
@@ -189,7 +189,7 @@ Die JavaScript-Sourcen können wie die Java-Sourcen in einem eigenen Editor von 
 bearbeitet werden. Allerdings hat es sich gezeigt das die Anwendung eines externen 
 Editors für JavaScript-Sourcen von Vorteil ist. Dabei hat sich der PSPad als eine 
 gute Alternative angeboten. Der Texteditor ist speziell für Softwareentwickler 
-geeignet und unterstützt diverse Programmiersprachen. Natürlich kann jeder andere 
+entworfen worden und unterstützt diverse Programmiersprachen. Natürlich kann jeder andere 
 Editor ebenfalls zur Anwendung kommen.   
 
 ## ISQL
@@ -198,8 +198,8 @@ ISQL ist ein Commandlinetool, welches für Einzel- und/oder Batchoperationen ver
 Besonders die Verarbeitung von Scripten als Batch lässt sich gut mit ISQL realiseren.
 
 ## FlameRobin     
-Wenn man auf ein Commandlinetool für die Entwicklung der Datenbank verzichten will, bietet sich
-FlameRobin an. Es ist ein Plattform übergreifendes Tool, welches (fast) alle Befehle, welche über den
-ISQL verarbeitet werden können, in einer GUI anbietet. FlameRobin ist OpenSource und kann ohne Bedenken 
-eingesetzt werden.
+Wenn man zum Commandlinetool für die Entwicklung der Datenbank eine Alternative sucht, bietet sich
+FlameRobin an. Es ist ein plattformübergreifendes Administrationstool für FireBird, welches (fast) alle Befehle, 
+welche über den ISQL verarbeitet werden können, in einer GUI anbietet. FlameRobin ist OpenSource und kann ohne
+Bedenken eingesetzt werden.
 
