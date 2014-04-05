@@ -83,12 +83,38 @@ Folgende DB-Objekte werden immer automatisch erstellt:
 * Standard Grants (Zugriffsrechte für DB-Objekte)
 * Standard Trigger (Before-Update, Before-Insert, Before-Delete)
 * Einspalten-Indexe (z.B. für die Spalte `SOFTDEL`)
+* Getter- und Setter für Standard-Kataloge
 * Hibernate-Entities (Sorucen für die WaveMaker-Schnittstelle)
 
   
 Hibernate
 ---------
-???
+Um einzelne JAVA-Entitäten erzeugen zu können, wurde der Hibernate-Workaround eingeführt. 
+Zwar kann man über einen Editor in WaveMaker jede beliebige JAVA-Entität erstellen, das kann aber
+je nach Umfang des Schemas recht aufwendig werden. Der Workaround soll hier Abhilfe schaffen.
+
+Mit diesem Verfahren kann ein Datenmodell Stück für Stück in das WaveMaker-Projekt eingeführt werden, ohne das ein kompetter Import eines Datenmodelles und die damit verbundene Neubildung von z.B. XML-Mapper notwendig werden.
+
+Das Einführen einer neuen Entität ist nach spätestens 2 Minuten vollzogen.
+
+Der Hibernate-Workaround ist eine Sammlung von SPs (StoredProcedures) die alle notwendigen Metadaten zu einem
+Schema sammeln und einer Standardausgabe zur Verfügung stellen. 
+
+Der Workaround wird über das Script `makehib.bat` erstellt. `makehib.bat` arbeitet mit dem ISQL.
+
+Das Zielverzeichnis der JAVA-Entität sowie das zugrundeliegende Schema wird von Hand in das Script `???` eingetragen. 
+Es ist unbedingt darauf zu achten, das man nicht direkt in das DATA-Verzeichnis von ZABonlineDB die Entität erstellt. 
+
+Mit `makehib.bat` wird ein auf das Schema passendes Script-Interface erstellt, welches automatisch gestartet wird und die JAVA-Entität, sowie den zugehörigen XML-Mapper und eine Checkliste erstellt.
+
+Die JAVA- und XML-Datei müssen von Hand in den DATA-Ordner von ZABonlineDB verschoben werden. Dies lässt sich am besten über einen Batch erledigen.
+
+In der Checkliste wird aufgeführt, welche Schritte von Hand erledigt werden müssen.
+
+Bei diesem Verfahren handelt es sich nicht um eine Hibernate-Schnittstelle für Firebird, sondern nur um einen Workaround der das Formulieren von JAVA-Entäten erleichtern soll. Aus diesem Grund ist es auch notwendig die Checkliste von Hand abzuarbeiten und Abschlussarbeiten in WaveMaker vorzunehmen.
+
+Wenn diese Schritte vollzogen wurden, wird WaveMaker gestartet und die Entität sollte zur Verfügung stehen. Im Anschluss werden nur noch die Verknüpfungen erstellt und das Schema einmal über WaveMaker gesichert. Erst mit dem Sichern über WaveMaker ist die Entität vollständig registriert.
+
 
 Zugriffrechte
 -------------     
