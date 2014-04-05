@@ -3,7 +3,7 @@
 /* Date:    2013-10-19                                                          
 /* Purpose: Workaround für das Hibernate-Interface von WaveMaker
 /*
-/*          In WaveMaker Stand 6.5.3 ist es nicht möglich einzelne Entitäten
+/*          In WaveMaker Stand 6.x.x ist es nicht möglich einzelne Entitäten
 /*          aus einer Datenbank zu erstellen. Es wird immer nur die gesamte Datenbank
 /*          generiert. Einzelne Tabellen lassen sich nicht auswählen.          
 /*          Mit diesem Workaround lassen sich für ausgwählte Tabellen Entitäten 
@@ -24,10 +24,8 @@
 /******************************************************************************/
 /* History: 2013-10-19
 /*          Workaround für das Hibernate-Interface von WaveMaker
-/******************************************************************************/
-
-/******************************************************************************/
-/*        Following SET SQL DIALECT is just for the Database Comparer         
+/*          2014-04-05
+/*          Scripte auf ISQL optimiert
 /******************************************************************************/
 SET SQL DIALECT 3;
 
@@ -900,7 +898,7 @@ CREATE OR ALTER PROCEDURE SP_METADATA_FOR_CHECKLIST(
   ADBNAME varchar(254) DEFAULT 'ZABonline [WaveMaker]',
   ADBVERSION varchar(64) DEFAULT '000.000.00000',
   APROJECTDIR varchar(254) DEFAULT '\GitHub\ZABonline\source\wavemaker\projects\ZABonline',
-  AWMVERSION varchar(10) DEFAULT '6.5.3',
+  AWMVERSION varchar(10) DEFAULT '6.6.0',
   ADBSERVICE varchar(64) DEFAULT 'ZABonlineDB')
 returns(
   sourcecode varchar(2000))
@@ -931,9 +929,13 @@ declare variable valid_wm_version smallint;
 begin
   /*
    *
-   *   
+   *  
+  SET ECHO OFF;
+   *
+  SET HEADING OFF;
+   *       
   OUTPUT 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\datasheet.checklist.txt';
-  select Trim(sourcecode) from SP_METADATA_FOR_CHECKLIST('DATASHEET', 0, 1, 'INSTALLER', 'BEGIN', 'com.zabonlinedb.data', 'ZABonline [WaveMaker]', '000.000.00000', '\GitHub\ZABonline\source\wavemaker\projects\ZABonline', '6.5.3');
+  select Trim(sourcecode) from SP_METADATA_FOR_CHECKLIST('DATASHEET', 0, 1, 'INSTALLER', 'BEGIN', 'com.zabonlinedb.data', 'ZABonline [WaveMaker]', '000.000.00000', '\GitHub\ZABonline\source\wavemaker\projects\ZABonline', '6.6.0');
   select Trim(sourcecode) from SP_METADATA_FOR_CHECKLIST('DATASHEET', 0, 1, 'INSTALLER', 'SERVICEDEF');
   select Trim(sourcecode) from SP_METADATA_FOR_CHECKLIST('DATASHEET', 0, 1, 'INSTALLER', 'DBSERVICE.SPRING');
   select Trim(sourcecode) from SSP_METADATA_FOR_CHECKLIST('DATASHEET', 0, 1, 'INSTALLER', 'PROJECT-MANAGERS');
@@ -1320,7 +1322,6 @@ CREATE OR ALTER PROCEDURE SP_CREATE_HIBERNATE_SCRIPT(
   AINSTALL_USER varchar(32),
   ATARGETDIR varchar(254),
   ADBCONNECTPASS varchar(512),
-  ACLIENTLIB varchar(254) DEFAULT 'C:\Users\Alfred\Programme\Firebird_2_5\bin\fbclient.dll',
   ACONNECTTO varchar(254) DEFAULT '127.0.0.1:ZABONLINEEMBEDDED',
   ADBCONNECTUSER varchar(32) DEFAULT 'SYSDBA',
   APACKAGE varchar(254) DEFAULT 'com.zabonlinedb.data',
@@ -1331,7 +1332,7 @@ CREATE OR ALTER PROCEDURE SP_CREATE_HIBERNATE_SCRIPT(
   AIDNAME varchar(264) DEFAULT 'id',
   AGENERATORCLASS varchar(64) DEFAULT 'assigned',
   APROJECTDIR varchar(254) DEFAULT '\GitHub\ZABonline\source\wavemaker\projects\ZABonline',
-  AWMVERSION varchar(10) DEFAULT '6.5.3',
+  AWMVERSION varchar(10) DEFAULT '6.6.0',
   ADBSERVICE varchar(64) DEFAULT 'ZABonlineDB') 
 returns (
   sourcecode varchar(2000))
@@ -1340,6 +1341,10 @@ declare variable class_name varchar(2000);
 begin
   /*
    *
+   *
+  SET ECHO OFF;
+   *   
+  SET HEADING OFF;
    *
   OUTPUT 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\create_hibernate_interface.sql';
   select Trim(trailing from sourcecode) from SP_CREATE_HIBERNATE_SCRIPT('DATASHEET', 0, 1, 'INSTALLER', 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\model2hibernate\', 'masterkey');
@@ -1379,14 +1384,6 @@ begin
   suspend;  
   sourcecode = '/******************************************************************************/';
   suspend;  
-  sourcecode = '';
-  suspend;  
-  sourcecode = '/******************************************************************************/';
-  suspend;  
-  sourcecode = '/*        Following SET SQL DIALECT is just for the Database Comparer         */';
-  suspend;  
-  sourcecode = '/******************************************************************************/';
-  suspend;  
   sourcecode = 'SET SQL DIALECT 3;';
   suspend;  
   sourcecode = '';
@@ -1395,9 +1392,11 @@ begin
   suspend;  
   sourcecode = '';
   suspend;  
-  sourcecode = '/* An dieser Stelle muss die Client-DLL (Pfad und Name) überprüft werden      */';
+  sourcecode = 'SET ECHO OFF;';
   suspend;  
-  sourcecode = 'SET CLIENTLIB ''' || ACLIENTLIB || ''';';
+  sourcecode = '';
+  suspend;  
+  sourcecode = 'SET HEADING OFF;';
   suspend;  
   sourcecode = '';
   suspend;  

@@ -14,6 +14,7 @@ oder
 SELECT VU.ID, VR.CAPTION FROM V_USERS VU, V_ROLES VR WHERE ((VU.ID = ?) and (VU.ALLOW_LOGIN = 1) and (VR.ID = VU.ROLE_ID)) -> wenn User WEBCONNECT gewählt
 
 Hibernate-Dateien:
+==================
 - die folgenden Dateien müssen min. angepasst werden wenn neue Entitäten von Hand eingefügt werden (s. Problem Views)
 1. trunk/WaveMaker 6.4.5GA/projects/ZABonline/services/ZABonlineDB/designtime/servicedef.xml
   Eintrag im Knoten: <dataobjects> als <dataobject> mit allen Eigenschaften der Entität (Java-Source) (s. Struktur für Details)
@@ -32,16 +33,19 @@ Hibernate-Dateien:
  
 6. trunk\WaveMaker 6.4.5GA\projects\ZABonline\webapproot\WEB-INF\classes\com\zabonlinedb\data\app-queries.ql.xml
   Eintrag für Queries (Services) (s. Struktur für Details) kann über Wavemaker problemlos erstellt werden wenn Entität (Java-Source) korrekt von WaveMaker erkannt
-  
-THE O.A.S.I.S. M.U.D.
-Url: mud.enter-the-oasis.com
-Port: 256
-User: Rubens
-Pass: _1aAbdD@#$%_
 
-
-                     http://goo.gl/7tWwA
+Einfach mal etwas für Neerds:
+============================  
+  http://goo.gl/7tWwA
+    
+  THE O.A.S.I.S. M.U.D.
+  Url: mud.enter-the-oasis.com
+  Port: 256
+  User: Rubens
+  Pass: _1aAbdD@#$%_
+                     
 Notizen zum Code:
+=================
 1. RegExpression
 1.1 Password
   ^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$
@@ -56,6 +60,7 @@ Notizen zum Code:
   Testpasswort: _1aAbdD@#$%_  
   
 Servicevariable für Webservice einrichten:
+==========================================
 1. wm.ServiceVariable
 2. Name der Servicevariable gleich dem Namen des Webservice setzen
 3. In der Regel die Page als Eigentümer setzen
@@ -84,6 +89,7 @@ Servicevariable für Webservice einrichten:
    -->
 
 Ergebnisstruktur für Service anlegen:
+=====================================
 1. wm.Variable
 2. Name z.B.: varResultByInsert
 3. in der Regel die Page als Eigentümer setzen

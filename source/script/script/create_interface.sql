@@ -10,11 +10,9 @@
 /* - Die Installationstools müssen installiert worden sein  
 /******************************************************************************/
 /* History: 2013-12-10
-/*          Interfaces ohne Implementation erstellen 
-/******************************************************************************/
-
-/******************************************************************************/
-/*        Following SET SQL DIALECT is just for the Database Comparer         
+/*          Interfaces ohne Implementation erstellen
+/*          2014-04-05
+/*          Scripte auf ISQL optimiert 
 /******************************************************************************/
 SET SQL DIALECT 3;
 

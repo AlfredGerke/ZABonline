@@ -10,10 +10,8 @@
 /******************************************************************************/
 /* History: 2013-04-13
 /*          Diverse Werkzeug für die Installation
-/******************************************************************************/
-
-/******************************************************************************/
-/*        Following SET SQL DIALECT is just for the Database Comparer         
+/*          2014-04-05
+/*          Scripte auf ISQL optimiert
 /******************************************************************************/
 SET SQL DIALECT 3;
 
@@ -162,6 +160,7 @@ declare variable columnlist varchar(2000);
 declare variable interfacelist varchar(2000);
 declare variable implementationlist varchar(2000);
 BEGIN
+  success = 0;
   relation_name = Upper(ATABLENAME);
   cat_comment = ACOMMENT;
   interfacelist = '';
@@ -311,6 +310,7 @@ declare variable sql_stmt varchar(2000);
 declare variable table_name varchar(31);
 declare variable indexed_column varchar(31);
 BEGIN
+  success = 0;
   table_name = Trim(ATABLENAME);
   indexed_column = Trim(AINDEXEDCOLUMN);
 

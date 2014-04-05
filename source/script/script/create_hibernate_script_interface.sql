@@ -10,16 +10,16 @@
 /******************************************************************************/
 /* History: 2013-04-16
 /*          Erstellt ein Script-Inteface für Hibernate und führt das Script-Interface aus
-/******************************************************************************/
-
-/******************************************************************************/
-/*        Following SET SQL DIALECT is just for the Database Comparer         */
+/*          2014-04-05
+/*          Scripte auf ISQL optimiert
 /******************************************************************************/
 SET SQL DIALECT 3;
 
 SET NAMES WIN1252;
 
-SET AUTODDL;
+SET ECHO OFF;
+
+SET HEADING OFF;
 
 /* An dieser Stelle muss die IP, der Datenbankpfad, Name der Datanbank sowie Benutzerinformationen (User/Password) überführt werden */
 CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey';

@@ -10,11 +10,9 @@
 /* - Die Installationstools müssen installiert worden sein  
 /******************************************************************************/
 /* History: 2013-11-25
-/*          Katalogeigenschaften verschiedenen Datenbankobjekte granten 
-/******************************************************************************/
-
-/******************************************************************************/
-/*        Following SET SQL DIALECT is just for the Database Comparer         
+/*          Katalogeigenschaften verschiedenen Datenbankobjekte granten
+/*          2014-04-05
+/*          Scripte auf ISQL optimiert 
 /******************************************************************************/
 SET SQL DIALECT 3;
 

@@ -1,1 +1,1 @@
-isql input create_hibernate_script_interface.sql;
+isql -i create_hibernate_script_interface.sql

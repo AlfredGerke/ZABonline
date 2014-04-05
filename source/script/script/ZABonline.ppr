@@ -42,7 +42,7 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\TitelLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\Utils.js
 				..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
-		-doc
+		+doc
 			..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
 		-hibernate_xml_anpassen
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\project-managers.xml
@@ -178,30 +178,46 @@ ZABonline
 		-WEB-INF
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 [Open project files]
-0=_make.bat
-1=makehib.bat
-2=_hibernate.bat
-3=makedb.bat
-4=create_db.sql
-5=create_hibernate_script_interface.sql
+0=batch.sql
+1=create_tools.sql
+2=create_admin.sql
+3=create_db.sql
+4=create_factory.sql
+5=create_find.sql
+6=create_person.sql
+7=create_testproc_env.sql
+8=create_json.sql
+9=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
 [Selected Project Files]
 Main=
-Selected=create_hibernate_script_interface.sql
-[_make.bat]
-TopLine=1
-Caret=1,5
-[makehib.bat]
-TopLine=1
+Selected=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
+[batch.sql]
+TopLine=55
 Caret=1,1
-[_hibernate.bat]
-TopLine=1
-Caret=144,1
-[makedb.bat]
-TopLine=1
-Caret=16,7
+[create_tools.sql]
+TopLine=392
+Caret=1,405
+[create_admin.sql]
+TopLine=63
+Caret=1,76
 [create_db.sql]
+TopLine=124
+Caret=1,177
+[create_factory.sql]
+TopLine=157
+Caret=1,170
+[create_find.sql]
+TopLine=109
+Caret=1,131
+[create_person.sql]
+TopLine=575
+Caret=38,588
+[create_testproc_env.sql]
+TopLine=130
+Caret=1,143
+[create_json.sql]
+TopLine=76
+Caret=1,81
+[..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt]
 TopLine=1
-Caret=1,1
-[create_hibernate_script_interface.sql]
-TopLine=6
-Caret=1,30
+Caret=38,92
