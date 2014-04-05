@@ -102,7 +102,7 @@ Schema sammeln und einer Standardausgabe zur Verfügung stellen.
 
 Der Workaround wird über das Script `makehib.bat` erstellt. `makehib.bat` arbeitet mit dem ISQL.
 
-Das Zielverzeichnis der JAVA-Entität sowie das zugrundeliegende Schema wird von Hand in das Script `???` eingetragen. 
+Das Zielverzeichnis der JAVA-Entität sowie das zugrundeliegende Schema wird von Hand in das Script `create_hibernate_script_interface.sql` eingetragen. 
 Es ist unbedingt darauf zu achten, das man nicht direkt in das DATA-Verzeichnis von ZABonlineDB die Entität erstellt. 
 
 Mit `makehib.bat` wird ein auf das Schema passendes Script-Interface erstellt, welches automatisch gestartet wird und die JAVA-Entität, sowie den zugehörigen XML-Mapper und eine Checkliste erstellt.
