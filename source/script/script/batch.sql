@@ -21,15 +21,13 @@
  * 
   Userscript nur einmal einspielen.
   User werden in der Sicherheitsdatenbank angelegt.
-  WICHTIG: Am Ende des Scriptes wird über einen Shell-Befehl eine bestehende
-           Datenbank gelöscht. Dieser Vorgang kann im weiteren Verlauf zu Fehlern
-           führen. In dem Fall die Datenbank von Hand löschen und erneut die
-           Datenbank aufbauen beginnent mit create_tools.sql.
-           Da im ersten Durchlauf die User über create_user.sql angelegt wurden,
-           braucht dieses Script nicht mehr gestartet zu werden
+  WICHTIG: Das Script erstellt eine Datenbank. Wenn dieses Script über das 
+    batch.sql-Script aufgerufen wird, muss im create_tools.sql-Script anstatt der
+    create database eine connect-Anweisung ausgeführt werden. 
+    Es empfiehlt sich das create_user.sql-Script separat auszuführen.
 
 input 'create_user.sql';
-*
+
 *
 */
 /******************************************************************************/
@@ -45,7 +43,6 @@ input 'create_json.sql';
 *
 *
 */ 
-
 
 input 'create_interface.sql';
 

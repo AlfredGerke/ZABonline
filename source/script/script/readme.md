@@ -29,7 +29,9 @@ Folgende Befehle werden immer zu Anfang in jedem Script aufgeführt:
 * `CREATE DATABASE '<IP des Servers>:<Alias>' USER '<Benutzer>' PASSWORD '<Password>' PAGE_SIZE <Size> DEFAULT CHARACTER SET WIN1252 COLLATION WIN1252;`
 * `CONNECT '<IP des Servers>:<Alias>' USER '<Benutzer>' PASSWORD '<Password>';` 
 
-Die Befehle `CREATE DATABASE` und `CONNECT` werden natürlich niemals gemeinsam in einem Script stehen, sondern nur entweder/oder. Tatsächlich wird `CREATE DATABASE` nur ein einzieges Mal verwendet, danach wird nur noch `CONNECT` eingesetzt.
+Die Befehle `CREATE DATABASE` und `CONNECT` werden natürlich niemals gemeinsam in 
+einem Script stehen, sondern nur entweder/oder. Tatsächlich wird `CREATE DATABASE` 
+nur ein einzieges Mal verwendet, danach wird nur noch `CONNECT` eingesetzt.
 
 Bestimmte Angaben wie IP des Servers oder DB-Alias müssen natürlich beim klonen 
 auf die lokale Umgebung angepasst werden.
@@ -90,31 +92,60 @@ Folgende DB-Objekte werden immer automatisch erstellt:
 Hibernate
 ---------
 Um einzelne JAVA-Entitäten erzeugen zu können, wurde der Hibernate-Workaround eingeführt. 
-Zwar kann man über einen Editor in WaveMaker jede beliebige JAVA-Entität erstellen, das kann aber
-je nach Umfang des Schemas recht aufwendig werden. Der Workaround soll hier Abhilfe schaffen.
+Zwar kann man über einen Editor in WaveMaker jede beliebige JAVA-Entität erstellen, das 
+kann aber je nach Umfang des Schemas recht aufwendig werden. Der Workaround soll hier 
+Abhilfe schaffen.
 
-Mit diesem Verfahren kann ein Datenmodell Stück für Stück in das WaveMaker-Projekt eingeführt werden, ohne das ein kompetter Import eines Datenmodelles und die damit verbundene Neubildung von z.B. XML-Mapper notwendig werden.
+Mit diesem Verfahren kann ein Datenmodell Stück für Stück in das WaveMaker-Projekt 
+eingeführt werden, ohne das ein kompetter Import eines Datenmodelles und die damit 
+verbundene Neubildung von z.B. XML-Mapper notwendig werden.
 
 Das Einführen einer neuen Entität ist nach spätestens 2 Minuten vollzogen.
 
-Der Hibernate-Workaround ist eine Sammlung von SPs (StoredProcedures) die alle notwendigen Metadaten zu einem
-Schema sammeln und einer Standardausgabe zur Verfügung stellen. 
+Der Hibernate-Workaround ist eine Sammlung von SPs (StoredProcedures) die alle 
+notwendigen Metadaten zu einem Schema sammeln und einer Standardausgabe zur Verfügung 
+stellen. 
 
-Der Workaround wird über das Script `makehib.bat` erstellt. `makehib.bat` arbeitet mit dem ISQL.
+Der Workaround wird über das Script `makehib.bat` erstellt. `makehib.bat` arbeitet 
+mit dem ISQL.
 
-Das Zielverzeichnis der JAVA-Entität sowie das zugrundeliegende Schema wird von Hand in das Script `create_hibernate_script_interface.sql` eingetragen. 
-Es ist unbedingt darauf zu achten, das man nicht direkt in das DATA-Verzeichnis von ZABonlineDB die Entität erstellt. 
+Das Zielverzeichnis der JAVA-Entität sowie das zugrundeliegende Schema wird von 
+Hand in das Script [create_hibernate_script_interface.sql](create_hibernate_script_interface.sql "Script-Inteface - Erstellt eine beliebige Java-Entität") 
+eingetragen. Es ist unbedingt darauf zu achten, das man nicht direkt in das DATA-Verzeichnis 
+von ZABonlineDB die Entität erstellt. Über den WorkAround lässt sich immer nur
+ein Schema pro Durchführung in eine JAVA-Entität übersetzen. 
 
-Mit `makehib.bat` wird ein auf das Schema passendes Script-Interface erstellt, welches automatisch gestartet wird und die JAVA-Entität, sowie den zugehörigen XML-Mapper und eine Checkliste erstellt.
+Mit `makehib.bat` startet [create_hibernate_script_interface.sql](create_hibernate_script_interface.sql "Script-Inteface - Erstellt eine beliebige Java-Entität") 
+und erstellt ein für das Schema passendes Script-Interface, welches automatisch 
+gestartet wird und die JAVA-Entität, sowie den zugehörigen XML-Mapper und eine 
+Checkliste erstellt.
 
-Die JAVA- und XML-Datei müssen von Hand in den DATA-Ordner von ZABonlineDB verschoben werden. Dies lässt sich am besten über einen Batch erledigen.
-
+Die JAVA- und XML-Datei müssen von Hand in den DATA-Ordner von ZABonlineDB verschoben werden. 
+Dies lässt sich am besten über einen Batch erledigen:    
+       
+        move /-Y *.java "<..>\ZABonline\services\ZABonlineDB\src\com\zabonlinedb\data"  
+        move /-Y *.hbm.xml "<..>\ZABonline\services\ZABonlineDB\src\com\zabonlinedb\data"
+        
+        
 In der Checkliste wird aufgeführt, welche Schritte von Hand erledigt werden müssen.
 
-Bei diesem Verfahren handelt es sich nicht um eine Hibernate-Schnittstelle für Firebird, sondern nur um einen Workaround der das Formulieren von JAVA-Entäten erleichtern soll. Aus diesem Grund ist es auch notwendig die Checkliste von Hand abzuarbeiten und Abschlussarbeiten in WaveMaker vorzunehmen.
+Bei diesem Verfahren handelt es sich nicht um eine Hibernate-Schnittstelle für Firebird, 
+sondern nur um einen WorkAround der das Formulieren von JAVA-Entäten erleichtern soll. 
+Aus diesem Grund ist es auch notwendig die Checkliste von Hand abzuarbeiten und 
+Abschlussarbeiten in WaveMaker vorzunehmen.
 
-Wenn diese Schritte vollzogen wurden, wird WaveMaker gestartet und die Entität sollte zur Verfügung stehen. Im Anschluss werden nur noch die Verknüpfungen erstellt und das Schema einmal über WaveMaker gesichert. Erst mit dem Sichern über WaveMaker ist die Entität vollständig registriert.
+Wenn alle Schritte des Workariund vollzogen wurden, wird WaveMaker gestartet und 
+die Entität sollte zur Verfügung stehen. Im Anschluss werden nur noch die Verknüpfungen 
+erstellt und das Schema einmal über WaveMaker gesichert. Erst mit dem Sichern über 
+WaveMaker ist die Entität vollständig registriert.
 
+Hibernate-WorkAround:    
+
+1. Zielverzeichnis und Schema in `create_hibernate_script_interface.sql` festlegen
+2. makehib.bat starten
+3. <Schema>.java und <Schema>.hbm.xml nach `<..>\ZABonline\services\ZABonlineDB\src\com\zabonlinedb\data` verschieben
+4. Checkliste abarbeiten
+5. Wavemaker starten und Abschlussarbeiten an der neuen Entität durchführen und sichern
 
 Zugriffrechte
 -------------     

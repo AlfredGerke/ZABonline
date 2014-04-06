@@ -51,17 +51,13 @@ COMMIT WORK;
 /******************************************************************************/
 /*                                  Einspalten-Indexe                                   
 /******************************************************************************/
-/* Wenn Log vorhanden, dann zurerst löschen */
-SHEll DEL C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\log\alterusrviews.log;
 
-OUTPUT 'C:\Users\Alfred\Sourcen\GitHub\ZABonline\source\script\log\alterusrviews.log';
   select
     success, 
     tablename, 
     userview 
   from
-    SP_CREATE_ALL_USER_VIEWS(1);
-OUTPUT;   
+    SP_CREATE_ALL_USER_VIEWS(1);  
 
 COMMIT WORK;
 /******************************************************************************/
