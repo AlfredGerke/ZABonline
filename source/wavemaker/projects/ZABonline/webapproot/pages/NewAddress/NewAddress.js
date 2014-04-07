@@ -286,18 +286,18 @@ dojo.declare("NewAddress", wm.Page, {
         }
     },
     refreshMarriagePartnerLookupData: function() {
-        try {        
+        try {
             if (this.marriagePartnerLookupData.canUpdate()) {
                 this.marriagePartnerLookupData.update();
             } else {
                 throw this.getDictionaryItem("ERROR_MSG_BY_REFRESH_MARRIAGEPARTNER_LOOKUP_DATA");
             }
-            
+
             return true;
         } catch (e) {
             this.controller.handleExceptionByCtrl(this.name + ".refreshMarriagePartnerLookupData() failed: " + e.toString(), e, -1);
             return false;
-        }                    
+        }
     },
     refreshOnAddAddressBookItemSuccess: function() {
         try {
@@ -310,7 +310,7 @@ dojo.declare("NewAddress", wm.Page, {
             }
 
             this.refreshMarriagePartnerLookupData();
-            
+
             //if (this.marriagePartnerLookupData.canUpdate()) {
             //    this.marriagePartnerLookupData.update();
             //} else {
