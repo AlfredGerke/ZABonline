@@ -14,9 +14,9 @@ Main.widgets = {
 	invalidateSessionVar: ["wm.ServiceVariable", {"inFlightBehavior":"executeLast","operation":"invalidateSession","service":"MiscellaneousAnonym"}, {"onError":"invalidateSessionVarError"}, {
 		input: ["wm.ServiceInput", {"type":"invalidateSessionInputs"}, {}]
 	}],
-	dlgWarningOnStart: ["wm.GenericDialog", {"button1Caption":"Beenden","button1Close":true,"button2Caption":"Einrichten","desktopHeight":"107px","height":"107px","title":"Warnung","userPrompt":"ZABonline läßt sich nicht einrichten..."}, {"onButton2Click":"dlgWarningOnStartButton2Click","onClose":"dlgWarningOnStartClose"}],
-	dlgWarningOnConnect: ["wm.GenericDialog", {"desktopHeight":"75px","height":"74px","noEscape":false,"title":"Warnung","userPrompt":"Keine Berechtigung für eine Anmeldung vorhanden!"}, {"onClose":"dlgWarningOnConnectClose"}],
-	dlgErrorOnLogout: ["wm.GenericDialog", {"button1Caption":"Abmelden","button1Close":true,"button2Caption":"Abbruch","button2Close":true,"desktopHeight":"65px","enterKeyIsButton":"1","height":"107px","title":"titel"}, {"onButton1Click":"closeSessionVar","onButton2Click":"templateLogoutVar","onClose":"dlgErrorOnLogout.hide"}],
+	dlgWarningOnStart: ["wm.GenericDialog", {"button1Caption":"Beenden","button1Close":true,"button2Caption":"Einrichten","desktopHeight":"107px","height":"106px","title":"Warnung","userPrompt":"ZABonline läßt sich nicht einrichten..."}, {"onButton2Click":"dlgWarningOnStartButton2Click","onClose":"dlgWarningOnStartClose"}],
+	dlgWarningOnConnect: ["wm.GenericDialog", {"desktopHeight":"75px","height":"73px","noEscape":false,"title":"Warnung","userPrompt":"Keine Berechtigung für eine Anmeldung vorhanden!"}, {"onClose":"dlgWarningOnConnectClose"}],
+	dlgErrorOnLogout: ["wm.GenericDialog", {"button1Caption":"Abmelden","button1Close":true,"button2Caption":"Abbruch","button2Close":true,"desktopHeight":"65px","enterKeyIsButton":"1","height":"106px","title":"titel"}, {"onButton1Click":"closeSessionVar","onButton2Click":"templateLogoutVar","onClose":"dlgErrorOnLogout.hide"}],
 	lbxMain: ["wm.Layout", {"autoScroll":false,"disabled":true,"horizontalAlign":"left","verticalAlign":"top","width":"1434px"}, {}, {
 		pnlTop: ["wm.HeaderContentPanel", {"border":"0,0,2,0","height":"29px","horizontalAlign":"left","layoutKind":"left-to-right","margin":"0","padding":"2","verticalAlign":"top","width":"100%"}, {}, {
 			pnlMain: ["wm.Panel", {"disabled":true,"height":"100%","horizontalAlign":"left","verticalAlign":"top","width":"470px"}, {}, {
