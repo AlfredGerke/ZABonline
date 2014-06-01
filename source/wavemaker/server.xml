@@ -101,6 +101,6 @@
 
         </Engine>
 
-    </Service>
+    <Connector SSLEnabled="true" clientAuth="false" keystoreFile="conf/keyStores/wmKeyStore" keystorePass="wavemaker" port="8443" protocol="org.apache.coyote.http11.Http11Protocol" sslProtocol="TLS"/></Service>
 
 </Server>

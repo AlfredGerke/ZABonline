@@ -16,4 +16,6 @@
 * In diesem Beispiel wird folgender Installationspfad für Wavmakter angenommen:    
   C:\Users\Alfred\Programme\WaveMaker\6.5.2.Release\  
 * Nach Umstellung auf 6.5.3:
-  Originalversion von lib_build_de-de.js unter lib_build_de-de.js.original_6.5.3 in den Trunk aufgenommen        
+  Originalversion von lib_build_de-de.js unter lib_build_de-de.js.original_6.5.3 in den Trunk aufgenommen 
+* Gleiches Vorgehen mit 6.6.x
+* Gleiches Vorgehen mit 6.7.x          
