@@ -1,8 +1,9 @@
 {
 	"projectDeployments": {
 		"Workbench": [],
+		"Project": [],
+		"ZABonline": [],
 		"Workbench1": [],
-        "ZABonline": [],
-        "ZABonline1": []
+		"ZABonline1": []
 	}
 }

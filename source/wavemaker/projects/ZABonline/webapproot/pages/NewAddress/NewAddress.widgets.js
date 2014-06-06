@@ -172,7 +172,7 @@ NewAddress.widgets = {
 						pnlMarriagePartnerData: ["wm.Panel", {"disabled":true,"height":"100%","horizontalAlign":"left","verticalAlign":"top","width":"100%"}, {}, {
 							edtMarriedSince: ["wm.Date", {"caption":"verheiratet seit","dataValue":undefined,"displayValue":""}, {}],
 							cboMarrigePartnerIdPanel: ["wm.Panel", {"height":"24px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"380px"}, {}, {
-								cboMarrigePartnerId: ["wm.SelectMenu", {"allowNone":true,"caption":"Ehepartner","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType","displayField":"marriage_partner","displayValue":"","emptyValue":"null"}, {"onchange":"cboMarrigePartnerIdChange"}, {
+								cboMarrigePartnerId: ["wm.SelectMenu", {"allowNone":true,"caption":"Ehepartner","dataField":"id","dataType":"com.zabonlinedb.data.output.GetLookupPersonByMarriageRtnType","dataValue":undefined,"displayField":"marriage_partner","displayValue":"","emptyValue":"null"}, {"onchange":"cboMarrigePartnerIdChange"}, {
 									binding: ["wm.Binding", {}, {}, {
 										wire: ["wm.Wire", {"expression":undefined,"source":"marriagePartnerLookupData","targetProperty":"dataSet"}, {}]
 									}]

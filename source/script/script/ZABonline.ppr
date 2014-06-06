@@ -11,13 +11,13 @@ FileFormat=0
 ProjectFilesOnly=0
 [Project tree]
 ZABonline
-	-Ordner
+	+Ordner
 		+common
 			-crypt
 				..\..\wavemaker\common\packages\zabonline\crypt\SHA512.js
 			-extend
 				..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js
-			+mod
+			-mod
 				..\..\wavemaker\common\packages\zabonline\mod\AddressTypeLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\ContactTypeLookup.js
@@ -178,30 +178,10 @@ ZABonline
 		-WEB-INF
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 [Open project files]
-0=..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js
-1=..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js
-2=..\..\wavemaker\common\packages\zabonline\mod\Controller.js
-3=..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js
-4=create_db.sql
-5=Neu1.sql
+0=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
 [Selected Project Files]
 Main=
-Selected=Neu1.sql
-[..\..\wavemaker\common\packages\zabonline\mod\NewCatalogItemCtrl.js]
-TopLine=248
-Caret=29,248
-[..\..\wavemaker\common\packages\zabonline\mod\NewAddressCtrl.js]
-TopLine=15
-Caret=59,21
-[..\..\wavemaker\common\packages\zabonline\mod\Controller.js]
-TopLine=73
-Caret=50,91
-[..\..\wavemaker\common\packages\zabonline\mod\NewCountryCodeCtrl.js]
-TopLine=155
-Caret=25,176
-[create_db.sql]
-TopLine=2556
-Caret=1,2556
-[Neu1.sql]
+Selected=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
+[..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt]
 TopLine=1
-Caret=54,1
+Caret=1,1
