@@ -179,9 +179,13 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 [Open project files]
 0=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
+1=..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js
 [Selected Project Files]
 Main=
-Selected=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
+Selected=..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js
 [..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt]
-TopLine=1
-Caret=1,1
+TopLine=48
+Caret=15,88
+[..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js]
+TopLine=134
+Caret=112,141
