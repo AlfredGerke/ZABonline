@@ -139,7 +139,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\ShowImpressum\ShowImpressum.js
 		-ressourcen
 			-javascript
-		+SQL
+		-SQL
 			-make
 				makedb.bat
 				_make.bat
@@ -171,21 +171,41 @@ ZABonline
 			test_hibernate_interface_1.sql
 			create_implementation.sql
 			create_interface.sql
-		-webapproot
+		+webapproot
 			..\..\wavemaker\projects\ZABonline\webapproot\config.js
 			..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
-		-WEB-INF
+		+WEB-INF
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 [Open project files]
 0=..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
-1=..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js
+1=..\..\wavemaker\common\packages\zabonline\mod\Controller.js
+2=..\..\..\..\WaveMaker\projects\Intraship\webapproot\lib_project.js
+3=..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
+4=..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
+5=..\..\wavemaker\projects\ZABonline\webapproot\ZABonline.js
+6=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js
 [Selected Project Files]
 Main=
-Selected=..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js
+Selected=..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js
 [..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt]
-TopLine=48
+TopLine=1
 Caret=15,88
-[..\..\wavemaker\common\packages\zabonline\mod\GlobalData.js]
-TopLine=134
-Caret=112,141
+[..\..\wavemaker\common\packages\zabonline\mod\Controller.js]
+TopLine=1
+Caret=14,1
+[..\..\..\..\WaveMaker\projects\Intraship\webapproot\lib_project.js]
+TopLine=1
+Caret=56,1
+[..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js]
+TopLine=1
+Caret=50,3
+[..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js]
+TopLine=1
+Caret=18,5
+[..\..\wavemaker\projects\ZABonline\webapproot\ZABonline.js]
+TopLine=90
+Caret=1,1
+[..\..\wavemaker\projects\ZABonline\webapproot\pages\NewAddress\NewAddress.js]
+TopLine=144
+Caret=66,186
