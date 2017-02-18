@@ -23,7 +23,7 @@ SET NAMES WIN1252;
 SET AUTODDL;
 
 /* An dieser Stelle muss die IP, der Datenbankpfad, Name der Datanbank sowie Benutzerinformationen (User/Password) überführt werden */
-CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'INSTALLER' PASSWORD 'installer';
+CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey';
 /******************************************************************************/
 /*                                 Insert into UPDATEHISTORY                                  
 /******************************************************************************/

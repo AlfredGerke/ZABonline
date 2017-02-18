@@ -31,12 +31,6 @@ FIRSTNAME 'Online'
 MIDDLENAME 'Mitglieder' 
 LASTNAME 'Verwaltung';
     
-CREATE USER INSTALLER
-PASSWORD 'installer' 
-FIRSTNAME 'Application' 
-MIDDLENAME 'Database' 
-LASTNAME 'Model';
-
 COMMIT WORK;
 /******************************************************************************/
 /******************************************************************************/

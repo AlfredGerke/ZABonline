@@ -1,8 +1,11 @@
 cls
 
-if "%1"=="" goto Anwendung
+del %2
 
-isql -b -e -i batch.sql -o %1
+if "%1"=="" goto Anwendung
+if "%2"=="" goto Anwendung
+
+%1 -q -b -e -i batch.sql -m -o %2
 
 goto ENDE1
 
@@ -10,7 +13,7 @@ goto ENDE1
 echo.
 echo    Das Batchprogramm zur Erstellung einer Datenbank wird wie folgt aufgerufen:  
 echo.
-echo    makedb {Ziel der Logdatei}
+echo    makedb {isql} {Ziel der Logdatei}
 echo.
 
 :ENDE1
