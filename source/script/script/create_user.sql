@@ -13,6 +13,9 @@
 /*          2014-04-05
 /*          Scripte auf ISQL optimiert
 /******************************************************************************/
+/* Vorhandene Datenbank löschen: Pfad anpassen! */
+SHEll DEL C:\Users\Alfred\Sourcen\db\firebird\zabonline\ZAB_ONLINE.FDB;
+
 SET SQL DIALECT 3;
 
 SET NAMES WIN1252;
@@ -25,11 +28,18 @@ CREATE DATABASE '127.0.0.1:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey'
 /*                                   User                                   
 /******************************************************************************/
 
-CREATE USER WEBCONNECT
-PASSWORD 'webconnect' 
-FIRSTNAME 'Online' 
-MIDDLENAME 'Mitglieder' 
-LASTNAME 'Verwaltung';
+SET TERM ^ ;
+EXECUTE BLOCK 
+AS
+begin
+  if (not exists(select 1 from SEC$USERS where SEC$USER_NAME='WEBCONNECT')) then
+    CREATE USER WEBCONNECT
+    PASSWORD 'webconnect' 
+    FIRSTNAME 'Online' 
+    MIDDLENAME 'Mitglieder' 
+    LASTNAME 'Verwaltung';
+end^
+SET TERM ; ^
     
 COMMIT WORK;
 /******************************************************************************/

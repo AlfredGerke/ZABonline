@@ -76,7 +76,7 @@ CREATE TABLE DATA_BY_TESTPROC (
   DATE_BY_PARAM         DATE,
   TRIGGERT_BY_PROC      VARCHAR(2000),
   DESCRIPTION           VARCHAR(2000),
-  SOFTDEL               BOOLEAN,    
+  SOFTDEL               DN_BOOLEAN,    
   CRE_USER              VARCHAR(32) NOT NULL,
   CRE_DATE              TIMESTAMP NOT NULL,
   CHG_USER              VARCHAR(32),

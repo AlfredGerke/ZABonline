@@ -98,7 +98,7 @@ DECLARE value_by_ident varchar(255);
 DECLARE default_country_id integer;
 DECLARE code DBOBJECTNAME32;
 DECLARE desc varchar(2000);
-DECLARE do_not_delete BOOLEAN;
+DECLARE do_not_delete DN_BOOLEAN;
 BEGIN
 
   key_section = 'GENERAL';
@@ -191,7 +191,7 @@ BEGIN
   INSERT INTO DATATYPE (CODE, DESCRIPTION, DONOTDELETE) VALUES(:code, :desc, :do_not_delete);
   
   desc = 'Domaine: 0 = False / 1 = True / Default 0';
-  code = 'BOOLEAN';
+  code = 'DN_BOOLEAN';
   do_not_delete = 0;
   INSERT INTO DATATYPE (CODE, DESCRIPTION, DONOTDELETE) VALUES(:code, :desc, :do_not_delete);
   

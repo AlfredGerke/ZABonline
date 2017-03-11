@@ -69,7 +69,7 @@ DECLARE person_id integer;
 DECLARE bank_id integer;
 DECLARE code DBOBJECTNAME32;
 DECLARE desc varchar(2000);
-DECLARE do_not_delete BOOLEAN;
+DECLARE do_not_delete DN_BOOLEAN;
 BEGIN
   key_section = 'GENERAL';
   section = 'DEFAULT';

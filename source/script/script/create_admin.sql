@@ -108,7 +108,7 @@ CREATE OR ALTER PROCEDURE SP_CHK_DATA_BY_ADD_USER (
   AFIRSTNAME varchar(256),  /* Pflichtfeld */
   ANAME varchar(256),  /* Pflichtfeld */
   AEMAIL varchar(127), /* Pflichtfeld */
-  AALLOW_LOGIN BOOLEAN)  /* Pflichtfeld */
+  AALLOW_LOGIN DN_BOOLEAN)  /* Pflichtfeld */
 RETURNS (
   success smallint,
   code smallint,
@@ -241,7 +241,7 @@ CREATE OR ALTER PROCEDURE SP_INSERT_USER (
   AFIRSTNAME varchar(256),  /* Pflichtfeld */
   ANAME varchar(256),  /* Pflichtfeld */
   AEMAIL varchar(127), /* Pflichtfeld */
-  AALLOW_LOGIN BOOLEAN)  /* Pflichtfeld */
+  AALLOW_LOGIN DN_BOOLEAN)  /* Pflichtfeld */
 RETURNS (
   success smallint,
   message varchar(254),
@@ -322,7 +322,7 @@ CREATE OR ALTER PROCEDURE SP_ADD_USER (
   AFIRSTNAME varchar(256),  /* Pflichtfeld */
   ANAME varchar(256),  /* Pflichtfeld */
   AEMAIL varchar(127), /* Pflichtfeld */
-  AALLOW_LOGIN BOOLEAN)  /* Pflichtfeld */
+  AALLOW_LOGIN DN_BOOLEAN)  /* Pflichtfeld */
 RETURNS (
   success smallint,
   code smallint,
@@ -425,7 +425,7 @@ CREATE OR ALTER PROCEDURE SP_ADD_USER_BY_SRV (
   AFIRSTNAME varchar(256),  /* Pflichtfeld */
   ANAME varchar(256),  /* Pflichtfeld */
   AEMAIL varchar(127), /* Pflichtfeld */
-  AALLOW_LOGIN BOOLEAN)  /* Pflichtfeld */
+  AALLOW_LOGIN DN_BOOLEAN)  /* Pflichtfeld */
 RETURNS (
   success smallint,
   code smallint,
@@ -527,18 +527,18 @@ execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN'
 CREATE OR ALTER PROCEDURE SP_INSERT_ROLE (
   ACAPTION varchar(64), /* Pflichtfeld */
   ADESCRIPTION varchar(2000),
-  AISADMIN Boolean,
-  ASETUP Boolean,
-  AMEMBERS Boolean,
-  AACTIVITYRECORDING Boolean,
-  ASEPA Boolean,
-  ABILLING Boolean,
-  AIMPORT Boolean,
-  AEXPORT Boolean,
-  AREFERENCEDATA Boolean,
-  AREPORTING Boolean,
-  AMISC Boolean,
-  AFILERESOURCE Boolean)
+  AISADMIN DN_BOOLEAN,
+  ASETUP DN_BOOLEAN,
+  AMEMBERS DN_BOOLEAN,
+  AACTIVITYRECORDING DN_BOOLEAN,
+  ASEPA DN_BOOLEAN,
+  ABILLING DN_BOOLEAN,
+  AIMPORT DN_BOOLEAN,
+  AEXPORT DN_BOOLEAN,
+  AREFERENCEDATA DN_BOOLEAN,
+  AREPORTING DN_BOOLEAN,
+  AMISC DN_BOOLEAN,
+  AFILERESOURCE DN_BOOLEAN)
 RETURNS (
   success smallint,
   message varchar(254),
@@ -623,18 +623,18 @@ execute procedure SP_GRANT_ROLE_TO_OBJECT 'R_ZABGUEST, R_WEBCONNECT, R_ZABADMIN'
 CREATE OR ALTER PROCEDURE SP_ADD_ROLE (
   ACAPTION varchar(64), /* Pflichtfeld */
   ADESCRIPTION varchar(2000),
-  AISADMIN Boolean,
-  ASETUP Boolean,
-  AMEMBERS Boolean,
-  AACTIVITYRECORDING Boolean,
-  ASEPA Boolean,
-  ABILLING Boolean,
-  AIMPORT Boolean,
-  AEXPORT Boolean,
-  AREFERENCEDATA Boolean,
-  AREPORTING Boolean,
-  AMISC Boolean,
-  AFILERESOURCE Boolean)
+  AISADMIN DN_BOOLEAN,
+  ASETUP DN_BOOLEAN,
+  AMEMBERS DN_BOOLEAN,
+  AACTIVITYRECORDING DN_BOOLEAN,
+  ASEPA DN_BOOLEAN,
+  ABILLING DN_BOOLEAN,
+  AIMPORT DN_BOOLEAN,
+  AEXPORT DN_BOOLEAN,
+  AREFERENCEDATA DN_BOOLEAN,
+  AREPORTING DN_BOOLEAN,
+  AMISC DN_BOOLEAN,
+  AFILERESOURCE DN_BOOLEAN)
 RETURNS (
   success smallint,
   code smallint,
