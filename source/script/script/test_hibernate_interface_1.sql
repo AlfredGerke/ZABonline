@@ -20,7 +20,7 @@ SET NAMES WIN1252;
 SET HEADING OFF;
 
 /* An dieser Stelle muss die IP, der Datenbankpfad, Name der Datanbank sowie Benutzerinformationen (User/Password) überführt werden */
-CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey';
+CONNECT '127.0.0.1/32258:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey';
 /******************************************************************************/
 /*                                 Hibernate-Interface                                  
 /******************************************************************************/

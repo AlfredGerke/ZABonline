@@ -25,10 +25,11 @@
     batch.sql-Script aufgerufen wird, muss im create_tools.sql-Script anstatt der
     create database eine connect-Anweisung ausgeführt werden. 
     Es empfiehlt sich das create_user.sql-Script separat auszuführen.
- */  
+ *  
 input 'create_user.sql';
 
- /*
+ 
+ *
  *
  */
 /******************************************************************************/

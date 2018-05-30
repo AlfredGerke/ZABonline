@@ -12,12 +12,12 @@ ProjectFilesOnly=0
 [Project tree]
 ZABonline
 	+Ordner
-		-common
-			-crypt
+		+common
+			+crypt
 				..\..\wavemaker\common\packages\zabonline\crypt\SHA512.js
-			-extend
+			+extend
 				..\..\wavemaker\common\packages\zabonline\extend\ZabExtender.js
-			-mod
+			+mod
 				..\..\wavemaker\common\packages\zabonline\mod\AddressTypeLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\AreaCodeLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\ContactTypeLookup.js
@@ -42,14 +42,14 @@ ZABonline
 				..\..\wavemaker\common\packages\zabonline\mod\TitelLookup.js
 				..\..\wavemaker\common\packages\zabonline\mod\Utils.js
 				..\..\wavemaker\common\packages\zabonline\mod\ZabonlineCtrl.js
-		-doc
+		+doc
 			..\..\..\doc\Notizen zu ersten Wavemaker-Projekten.txt
-		-hibernate_xml_anpassen
+		+hibernate_xml_anpassen
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\project-managers.xml
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\designtime\servicedef.xml
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
 			..\..\wavemaker\projects\ZABonline\services\ZABonlineDB\src\ZABonlineDB.spring.xml
-		-language
+		+language
 			-de
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\app.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\Login.js
@@ -72,7 +72,7 @@ ZABonline
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\ShowAbout.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\ShowContact.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de\ShowImpressum.js
-			+de-de
+			-de-de
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\app.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\Login.js
 				..\..\wavemaker\projects\ZABonline\webapproot\language\nls\de-de\Main.js
@@ -113,7 +113,7 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\ShowAbout.js
 			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\ShowContact.js
 			..\..\wavemaker\projects\ZABonline\webapproot\language\nls\ShowImpressum.js
-		-pages
+		+pages
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\AdminByAccordion\AdminByAccordion.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\FollowUp\FollowUp.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\GlobalSearch\GlobalSearch.js
@@ -137,10 +137,10 @@ ZABonline
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\ShowAbout\ShowAbout.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\ShowContact\ShowContact.js
 			..\..\wavemaker\projects\ZABonline\webapproot\pages\ShowImpressum\ShowImpressum.js
-		-ressourcen
+		+ressourcen
 			-javascript
 		+SQL
-			-make
+			+make
 				makedb.bat
 				_make.bat
 				_hibernate.bat
@@ -172,29 +172,33 @@ ZABonline
 			test_hibernate_interface_1.sql
 			create_implementation.sql
 			create_interface.sql
-		-webapproot
+		+webapproot
 			..\..\wavemaker\projects\ZABonline\webapproot\config.js
 			..\..\wavemaker\projects\ZABonline\webapproot\lib_project.js
 			..\..\wavemaker\projects\ZABonline\webapproot\types.js
-		-WEB-INF
+		+WEB-INF
 			..\..\wavemaker\projects\ZABonline\webapproot\WEB-INF\user-web.xml
 [Open project files]
-0=batch.sql
-1=create_user.sql
-2=_make.log
-3=data_0001.sql
+0=..\..\wavemaker\projects\ZABonline\webapproot\ZABonline.js
+1=..\..\wavemaker\projects\ZABonline\webapproot\project.a.js
+2=..\..\wavemaker\projects\ZABonline\webapproot\login.html
+3=..\..\wavemaker\projects\ZABonline\webapproot\index.html
+4=..\..\wavemaker\common\packages\zabonline\mod\MainCtrl.js
 [Selected Project Files]
 Main=
-Selected=_make.log
-[batch.sql]
+Selected=..\..\wavemaker\projects\ZABonline\webapproot\login.html
+[..\..\wavemaker\projects\ZABonline\webapproot\ZABonline.js]
+TopLine=3
+Caret=1,14
+[..\..\wavemaker\projects\ZABonline\webapproot\project.a.js]
+TopLine=5733
+Caret=1,5744
+[..\..\wavemaker\projects\ZABonline\webapproot\login.html]
+TopLine=28
+Caret=20,55
+[..\..\wavemaker\projects\ZABonline\webapproot\index.html]
+TopLine=39
+Caret=67,90
+[..\..\wavemaker\common\packages\zabonline\mod\MainCtrl.js]
 TopLine=1
 Caret=1,1
-[create_user.sql]
-TopLine=1
-Caret=76,35
-[_make.log]
-TopLine=42
-Caret=6,64
-[data_0001.sql]
-TopLine=3
-Caret=64,20

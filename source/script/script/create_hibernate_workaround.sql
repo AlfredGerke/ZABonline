@@ -34,7 +34,7 @@ SET NAMES WIN1252;
 SET AUTODDL;
 
 /* An dieser Stelle muss die IP, der Datenbankpfad, Name der Datanbank sowie Benutzerinformationen (User/Password) überführt werden */
-CONNECT '127.0.0.1:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey';
+CONNECT '127.0.0.1/32258:ZABONLINEEMBEDDED' USER 'SYSDBA' PASSWORD 'masterkey';
 /******************************************************************************/
 /*                                  Hibernate-Workaround                                   
 /******************************************************************************/
@@ -1322,7 +1322,7 @@ CREATE OR ALTER PROCEDURE SP_CREATE_HIBERNATE_SCRIPT(
   AINSTALL_USER varchar(32),
   ATARGETDIR varchar(254),
   ADBCONNECTPASS varchar(512),
-  ACONNECTTO varchar(254) DEFAULT '127.0.0.1:ZABONLINEEMBEDDED',
+  ACONNECTTO varchar(254) DEFAULT '127.0.0.1/32258:ZABONLINEEMBEDDED',
   ADBCONNECTUSER varchar(32) DEFAULT 'SYSDBA',
   APACKAGE varchar(254) DEFAULT 'com.zabonlinedb.data',
   ADBNAME varchar(254) DEFAULT 'ZABonline [WaveMaker]',
